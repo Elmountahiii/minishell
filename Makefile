@@ -2,7 +2,7 @@ NAME = minishell
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 READLINE = -lreadline -lncurses
-SRC = *.c
+SRC = *.c utils/ft_lexical_spliter.c
 OBJ = $(SRC:.c=.o)
 HEADR = minishell.h
 
