@@ -1,0 +1,26 @@
+echo 'Single quotes $HOME' > file1.txt | echo "Double quotes $HOME" >> file2.txt ; cat < file1.txt | grep 'quotes' | sed 's/Single/Simple/' > file3.txt << EOF
+------
+tokes :
+echo - command
+'Single quotes $HOME' - argument (single-quoted string)
+> - output redirection operator
+file1.txt - argument (file name)
+| - pipe operator
+echo - command
+"Double quotes $HOME" - argument (double-quoted string)
+>> - append redirection operator
+file2.txt - argument (file name)
+; - command separator
+cat - command
+< - input redirection operator
+file1.txt - argument (file name)
+| - pipe operator
+grep - command
+'quotes' - argument (single-quoted string)
+| - pipe operator
+sed - command
+'s/Single/Simple/' - argument (single-quoted string)
+> - output redirection operator
+file3.txt - argument (file name)
+<< - here-document operator
+EOF - argument (delimiter for the here-document)
