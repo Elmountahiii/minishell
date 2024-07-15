@@ -1,9 +1,0 @@
-echo 'Single quotes $HOME'>file1.txt | echo \"Double quotes $HOME\" >> file2.txt ; cat < file1.txt | grep 'quotes' | sed 's/Single/Simple/' > file3.txt << EOF
-
-1- echo
-2 - 'Single quotes $HOME'
-3- >
-4- file1.txt
-5- |
-6- echo
-7- "Double quotes $HOME"

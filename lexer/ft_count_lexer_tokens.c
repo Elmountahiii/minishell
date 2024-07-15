@@ -1,0 +1,97 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_count_lexer_tokens.c                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/07/15 10:48:16 by yel-moun          #+#    #+#             */
+/*   Updated: 2024/07/15 13:13:20 by yel-moun         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../minishell.h"
+
+int	ft_skip_spaces(char *str)
+{
+	int i;
+	
+	if (!str)
+		return (0);
+	i = 0;
+	while (str[i] && ft_check_space(str[i]))
+		i++;
+	return (i);
+}
+
+int	ft_skip_special(char *str)
+{
+	int i;
+	char special;
+
+	if (!str)
+		return (0);
+	special = str[0];
+	i = 0;
+	if (ft_check_space(special))
+		return (ft_skip_spaces(str));
+	i = 1;
+	if (special == '<' || special == '>')
+	{
+		if (str[i])
+		{
+			if (str[i] == special)
+				i = 2;
+		}
+	}
+	return (i);
+}
+
+int	ft_skip(char *str)
+{
+	int i;
+	
+	if (!str)
+		return (0);
+	i = 0;
+	while (str[i])
+	{
+		if (ft_is_special_char(str[i]))
+			break ;
+		i ++;
+	}
+	return (i);
+}
+
+int	ft_count_skip(char *str)
+{
+	int i;
+	
+	if (!str)
+		return (0);
+	i = 0;
+	if (!ft_is_special_char(str[i]))
+		i += ft_skip(str + i);
+	else
+		i+= ft_skip_special(str + i);
+	return (i);
+}
+
+int	ft_count_lexer_tokens(char *str)
+{
+	int tokens;
+	int	i;
+	if (!str)
+		return (0);
+	i = 0;
+	tokens = 0;	
+	while (str[i])
+	{
+		if (!ft_is_special_char(str[i]))
+			i += ft_skip(str + i);
+		else
+			i+= ft_skip_special(str + i);	
+		tokens++;
+	}
+	return (tokens);
+}

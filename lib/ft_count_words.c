@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 15:32:25 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/07/14 14:15:11 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/07/15 09:58:02 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,17 +53,19 @@ int	ft_count_words_v2(char *str)
 		{ 
 			i += ft_count_metachar(&str[i]);
 			words ++;
-		} else if (ft_is_quote(str[i]))
-		{
-			i += ft_count_quotes(&str[i]);
-			words ++;
-		}else if (!ft_is_space(str[i]))
+		}
+		else if (!ft_is_space_v2(str[i]))
 		{
 			i += ft_count_space(&str[i]);
 			words ++;
 		}
 		else
 			i ++;
+		//  else if (ft_is_quote(str[i]))
+		// {
+		// 	i += ft_count_quotes(&str[i]);
+		// 	words ++;
+		// }
 	}
 	return (words);
 }

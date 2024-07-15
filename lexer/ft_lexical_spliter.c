@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 19:29:26 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/07/14 13:03:27 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/07/15 09:58:57 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,6 @@ char *ft_substr_v2(char *str, int i)
 	if (!str)
 		return (NULL);
 	allocate = ft_count_alloc(str,i);
-	// printf("allocate = %d - for: %s \n", allocate, &str[i]);
 	sub = malloc(sizeof(char) * (allocate + 1));
 	if (!sub)
 		return (NULL);
