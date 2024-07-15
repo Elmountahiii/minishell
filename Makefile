@@ -1,8 +1,8 @@
 NAME = minishell
 CC = cc
-CFLAGS = -Wall -Wextra -Werror 
+CFLAGS = -Wall -Wextra -Werror  -g -fsanitize=address
 READLINE = -lreadline -lncurses
-SRC = *.c lexer/ft_lexical_spliter.c lexer/ft_special_char.c lexer/ft_count_lexer_tokens.c lexer/ft_extract.c
+SRC = *.c lexer/ft_lexical_spliter.c lexer/ft_special_char.c lexer/ft_count_lexer_tokens.c lexer/ft_extract.c lexer/ft_init_token_list.c lexer/ft_print_tokens_info.c
 OBJ = $(SRC:.c=.o)
 HEADR = minishell.h
 

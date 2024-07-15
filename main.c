@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 09:30:38 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/07/15 13:16:27 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/07/15 16:01:53 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,9 @@ void	ft_check_leaks(void)
 int main(void)
 {
 	atexit(ft_check_leaks);
+	t_tokens_list *tokens_list;
 	char *line;
-	char **tokens;
-	int i;
-
-	i = 0;
+	
 	while (1)
 	{
 		line = readline("minishell$ ");
@@ -36,13 +34,8 @@ int main(void)
 			break;
 		}
 		add_history(line);
-		tokens = ft_extract(line);
-		while (tokens[i])
-		{
-			printf("token[%d]: '%s'\n", i, tokens[i]);
-			i++;
-		}
-		ft_free_split(tokens, i);
+		tokens_list = ft_init_token_list(line);
+		ft_print_tokens_info(tokens_list);
 		if (ft_strlen(line) > 0 && ft_strncmp(line, "exit", ft_strlen(line)) == 0)
 		{
 			printf("exit\n");
@@ -50,7 +43,6 @@ int main(void)
 			break;
 		}
 		free(line);
-		i = 0;
 	}
 	return 0;
 }
