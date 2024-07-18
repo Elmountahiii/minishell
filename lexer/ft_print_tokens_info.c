@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 15:56:02 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/07/15 16:49:12 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/07/18 15:41:13 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,15 +61,20 @@ char* get_word_type(t_word_type word_type)
 void print_table_row(t_tokens_list *head) {
 	if (head == NULL || head->token == NULL)
 		return;
-	printf("|   '%s'    |    %s   |   %s    |\n",head->token->value,get_word_type(head->token->word_type),ft_print_token_type(head->token->token_type));
+	printf("'%s'    ->  %s   ->    %s\n",head->token->value,get_word_type(head->token->word_type),ft_print_token_type(head->token->token_type));
 }
 void	ft_print_tokens_info(t_tokens_list *head)
 {
-	print_table_header();
+	//print_table_header();
+	int i = 0;
+	printf("value -> word_type -> token_type\n");
+	// printf("=================================\n");
 	while (head)
 	{
 		print_table_row(head);
+		printf("=================================%i\n", i);
 		head = head->next;
+		i++;
 	}
-	print_table_footer();
+	//print_table_footer();
 }

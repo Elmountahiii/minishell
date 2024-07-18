@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 09:30:52 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/07/15 16:01:48 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/07/18 16:20:51 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 #include <stdlib.h>
+#include <string.h>
 #include "./lib/lib.h"
 
 typedef enum {
@@ -45,10 +46,15 @@ typedef struct s_token {
 } t_token;
 
 typedef  struct e_tokens_list {
-	t_token				*token;
+	t_token					*token;
 	struct e_tokens_list	*next;
 } t_tokens_list;
 
+typedef struct s_command {
+	char	**command_args;
+	int		command_type;
+	struct s_command	*next;
+} t_command;
 
 int		ft_sub_alloc(char *str);
 int		ft_shift_quotes(char *str);
@@ -66,4 +72,7 @@ char	*ft_lexer_substr(char *line);
 char	**ft_extract(char *line);
 t_tokens_list	*ft_init_token_list(char *line);
 void	ft_print_tokens_info(t_tokens_list *head);
+t_command  *ft_split_to_command(t_tokens_list *tokens_list);
+void	until_pipe(t_command *node,t_tokens_list *tokens);
+char **ft_append_to_list(char **list,char *command);
 #endif 
