@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aet-tale <aet-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 09:30:52 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/07/18 16:20:51 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/07/19 18:19:33 by aet-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,4 +75,26 @@ void	ft_print_tokens_info(t_tokens_list *head);
 t_command  *ft_split_to_command(t_tokens_list *tokens_list);
 void	until_pipe(t_command *node,t_tokens_list *tokens);
 char **ft_append_to_list(char **list,char *command);
-#endif 
+
+
+typedef struct t_env_list
+{
+	char		*variable;
+	struct t_env_list	*next;
+}t_env_list;
+
+// builtins funcs and structs
+char		*our_pwd(char **env);
+int			our_env(char    **envp);
+int			our_cd(char *path);
+void		our_echo(char *str);
+int			ft_strlen(char *s);
+void		add_back_for_env(t_env_list **list, char *str);
+t_env_list	*get_env_list(char **env);
+void		print_env_list(t_env_list* list);
+void		our_export(char	*var, t_env_list	*env_list);
+
+
+// end of builtins
+
+#endif

@@ -4,7 +4,7 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror   -g -fsanitize=address
 READLINE = -lreadline -lncurses
 SRC = *.c lexer/ft_lexical_spliter.c lexer/ft_special_char.c lexer/ft_count_lexer_tokens.c lexer/ft_extract.c lexer/ft_init_token_list.c lexer/ft_print_tokens_info.c lexer/ft_split_to_command.c
-bSRC = builtins/main.c
+bSRC = builtins/main.c builtins/env.c builtins/pwd.c builtins/cd.c builtins/echo.c builtins/print_env_list.c builtins/add_back_for_env.c builtins/get_env_list.c builtins/export.c	
 OBJ = $(SRC:.c=.o)
 HEADR = minishell.h
 
@@ -17,7 +17,7 @@ mc : all clean
 	./minishell
 
 $(minibuiltins): $(bSRC)
-	$(CC) $(CFLAGS) $(bSRC) -o $(minibuiltins)
+	$(CC) $(CFLAGS) lib/lib.a $(bSRC) -o $(minibuiltins)
 
 $(NAME): $(OBJ)
 	@cd lib && make
@@ -30,6 +30,7 @@ clean:
 fclean: clean
 	@cd lib && make fclean
 	@rm -f $(NAME)
+	@rm -f $(miniBuiltIns)
 
 re: fclean all 
 

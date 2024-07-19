@@ -1,7 +1,13 @@
 #include "../minishell.h"
 
-int main()
+int main(int argc, char* argv[], char* envp[])
 {
-	printf("Hello, World!\n");
-	return 0;
+    (void)argc;
+    (void)argv;
+    t_env_list *list = get_env_list(envp);
+	print_env_list(list);
+    printf("\n");
+    our_export("USER= anwar ettaleb", list);
+	print_env_list(list);
+    // (void)list; 
 }
