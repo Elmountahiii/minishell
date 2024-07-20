@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aet-tale <aet-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 09:30:38 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/07/18 16:50:37 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/07/20 11:37:04 by aet-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ void	ft_check_leaks(void)
 {
 	system("leaks minishell");
 }
-
 
 int main(void)
 {
@@ -37,22 +36,10 @@ int main(void)
 		add_history(line);
 		tokens_list = ft_init_token_list(line);
 	
-		ft_print_tokens_info(tokens_list);
+		//ft_print_tokens_info(tokens_list);
+		printf("--------------------\n");
 		commands_list = ft_split_to_command(tokens_list);
-		int i = 0;
-		while (commands_list)
-		{
-			printf("command N : %d\n", i);
-			while (commands_list->command_args[i] != NULL)
-			{
-				printf("command arg : %s\n", commands_list->command_args[i]);
-				i++;
-			}
-			i = 0;
-			commands_list = commands_list->next;
-		}
-		
-		
+		ft_print_command_info(commands_list);
 		if (ft_strlen(line) > 0 && ft_strncmp(line, "exit", ft_strlen(line)) == 0)
 		{
 			printf("exit\n");

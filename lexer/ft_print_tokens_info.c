@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 15:56:02 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/07/18 15:41:13 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/07/19 10:30:48 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void print_table_header() {
     printf("|----------------------|----------------------|----------------------|\n");
-    printf("|       value          |        word_type     |        token_type    |\n");
     printf("|----------------------|----------------------|----------------------|\n");
 }
 
@@ -31,10 +30,10 @@ char* ft_print_token_type(t_token_type token_type)
 		return ("SPACE");
 	if (token_type == PIPE)
 		return ("PIPE");
-	if (token_type == SINGLE_QUOTE)
-		return ("SINGLE_QUOTE");
-	if (token_type == DOUBLE_QUOTE)
-		return ("DOUBLE_QUOTE");
+	if (token_type == SINGLE_QUOTE_WORD)
+		return ("SINGLE_QUOTE_WORD");
+	if (token_type == DOUBLE_QUOTE_WORD)
+		return ("DOUBLE_QUOTE_WORD");
 	if (token_type == REDIRECTION_IN)
 		return ("REDIRECTION_IN");
 	if (token_type == REDIRECTION_OUT)
@@ -48,33 +47,22 @@ char* ft_print_token_type(t_token_type token_type)
 	return ("UNKNOWN");
 }
 
-char* get_word_type(t_word_type word_type)
-{
-	if (word_type == NORMAL)
-		return "NORMAL";
-	if (word_type == IN_SINGLE_QUOTE)
-		return "IN_SINGLE_QUOTE";
-	if (word_type == IN_DOUBLE_QUOTE)
-		return "IN_DOUBLE_QUOTE";
-	return "UNKNOWN";
-}
-void print_table_row(t_tokens_list *head) {
-	if (head == NULL || head->token == NULL)
-		return;
-	printf("'%s'    ->  %s   ->    %s\n",head->token->value,get_word_type(head->token->word_type),ft_print_token_type(head->token->token_type));
+void print_table_row(t_tokens_list *token) {
+	printf("|   '%s'    ->    %s   |\n",token->value,ft_print_token_type(token->type));
 }
 void	ft_print_tokens_info(t_tokens_list *head)
 {
-	//print_table_header();
+
 	int i = 0;
-	printf("value -> word_type -> token_type\n");
-	// printf("=================================\n");
+	printf("|--------------------------|\n");
+	printf("|   value   -> token_type  |\n");
+	printf("|--------------------------|\n");
+	
 	while (head)
 	{
 		print_table_row(head);
-		printf("=================================%i\n", i);
+		printf("|--------------------------|\n");
 		head = head->next;
 		i++;
 	}
-	//print_table_footer();
 }

@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 10:48:16 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/07/15 13:13:20 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/07/19 10:12:32 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,36 @@ int	ft_skip_special(char *str)
 	return (i);
 }
 
+int ft_skip_until_quote(char *str)
+{
+	int i;
+	char quote;
+	if (!str || !ft_is_quote(str[0]))
+		return (0);
+	i = 0;
+	quote = str[0];
+	i++;
+	while (str[i])
+	{
+		if (str[i] == quote)
+			break ;
+		i++;
+	}
+	if (str[i] == quote)
+		i++;
+	return (i);	
+}
+
 int	ft_skip(char *str)
 {
 	int i;
 	
+	
 	if (!str)
 		return (0);
 	i = 0;
+	if (ft_is_quote(str[i]))
+		return (ft_skip_until_quote(str));
 	while (str[i])
 	{
 		if (ft_is_special_char(str[i]))

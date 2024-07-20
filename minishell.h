@@ -6,9 +6,10 @@
 /*   By: aet-tale <aet-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 09:30:52 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/07/19 18:19:33 by aet-tale         ###   ########.fr       */
+/*   Updated: 2024/07/20 14:27:04 by aet-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
@@ -24,8 +25,8 @@ typedef enum {
 	WORD,
 	SPACE,
 	PIPE,
-	SINGLE_QUOTE,
-	DOUBLE_QUOTE,
+	SINGLE_QUOTE_WORD,
+	DOUBLE_QUOTE_WORD,
 	REDIRECTION_IN,
 	REDIRECTION_OUT,
 	APPEND,
@@ -33,26 +34,23 @@ typedef enum {
 	ENV,
 } t_token_type;
 
-typedef enum {
-	NORMAL,
-	IN_SINGLE_QUOTE,
-	IN_DOUBLE_QUOTE,
-} t_word_type;
-
-typedef struct s_token {
-	t_token_type	token_type;
-	t_word_type		word_type;
-	char			*value;
-} t_token;
+typedef enum { STDIN_IO, STDOUT_IO, FILE_IO, PIPE_IO } IOType;
 
 typedef  struct e_tokens_list {
-	t_token					*token;
+	t_token_type	type;
+	char			*value;
 	struct e_tokens_list	*next;
 } t_tokens_list;
 
 typedef struct s_command {
-	char	**command_args;
-	int		command_type;
+	char	**command_args; 
+	char 	*path;
+	IOType	in_type;
+	IOType	out_type;
+	char	*in_file;
+	char	*out_file;
+	bool	is_append;
+	bool	is_heredoc;
 	struct s_command	*next;
 } t_command;
 
@@ -79,7 +77,8 @@ char **ft_append_to_list(char **list,char *command);
 
 typedef struct t_env_list
 {
-	char		*variable;
+	char				*key;
+	char				*value;
 	struct t_env_list	*next;
 }t_env_list;
 
@@ -92,9 +91,11 @@ int			ft_strlen(char *s);
 void		add_back_for_env(t_env_list **list, char *str);
 t_env_list	*get_env_list(char **env);
 void		print_env_list(t_env_list* list);
-void		our_export(char	*var, t_env_list	*env_list);
+void		our_export(char	*var,char *value, t_env_list	*env_list);
+void		our_unset(char *var, t_env_list   **list);
 
 
 // end of builtins
 
 #endif
+void	ft_print_command_info(t_command *command);

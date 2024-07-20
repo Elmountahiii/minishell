@@ -1,27 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_special_char.c                                  :+:      :+:    :+:   */
+/*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aet-tale <aet-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/15 10:38:17 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/07/19 09:33:44 by yel-moun         ###   ########.fr       */
+/*   Created: 2024/07/20 14:53:57 by aet-tale          #+#    #+#             */
+/*   Updated: 2024/07/20 14:55:38 by aet-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
-
-int	ft_check_space(char c)
+void our_exit(int last_proccess_status)
 {
-	if (c == ' ' || c == '\t' || c == '\n')
-		return (1);
-	return (0);
-}
-
-int	ft_is_special_char(char c)
-{
-	if (c == '>' || c == '<' || c == '|'  || ft_check_space(c))
-		return (1);
-	return (0);
+    exit(last_proccess_status);
 }

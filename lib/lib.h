@@ -53,9 +53,11 @@ int		ft_is_metachar(char c);
 int		ft_is_append(char c, char *str);
 int		ft_is_heredoc(char c, char *str);
 int		ft_shift_space(char *str, int index);
-int	ft_count_alloc(char *str, int index);
-int ft_count_space(char *str);
-int	ft_count_metachar(char *str);
-int	ft_count_quotes(char * str);
+int     ft_count_alloc(char *str, int index);
+int     ft_count_space(char *str);
+int     ft_count_metachar(char *str);
+int     ft_count_quotes(char * str);
+char	*ft_substr_orig(char *s, unsigned int start, size_t len);
+
 
 #endif
