@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 12:31:21 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/07/19 16:18:06 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/07/21 15:38:17 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ char	*ft_get_file_type(IOType type)
 		return ("FILE_IO\n");
 	else if (type == PIPE_IO)
 		return ("PIPE_IO\n");
+	// else if (type == DEFAULT_IO)
+	// 	return ("DEFAULT_IO\n");
 	return ("UNKNOWN\n");
 }
 

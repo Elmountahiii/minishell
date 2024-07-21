@@ -44,6 +44,8 @@ void	ft_error_exit(char *message, char *error);
 void	ft_command_not_found(char *command);
 int		ft_strncmp(char *s1, char *s2, int n);
 int		ft_strcmp(char *s1, char *s2);
+void	*ft_calloc(size_t count, size_t size);
+void	ft_bzero(void *s, size_t n);
 // v2
 char	**ft_super_split(char *str);
 int		ft_count_words_v2(char *str);

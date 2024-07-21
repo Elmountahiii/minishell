@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 11:06:51 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/07/19 16:39:47 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/07/21 15:39:23 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,6 +133,11 @@ void	until_pipe(t_command *node,t_tokens_list *tokens)
 		if (tokens && tokens->type == SPACE)
 			tokens = tokens->next;
 	}
+	if (node->out_type == STDIN_IO)
+	{
+		node->out_type = STDOUT_IO;
+		node->out_file = NULL;
+	}
 }
 
 
@@ -168,6 +173,7 @@ t_command  *ft_split_to_command(t_tokens_list *tokens_list)
 		if (!commands_list->next)
 			return (NULL);
 		commands_list = commands_list->next;
+		commands_list->in_type = PIPE_IO;
 	}
 	return (head);
 }

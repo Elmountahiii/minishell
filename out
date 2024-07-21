@@ -1,14 +1,21 @@
-
-
-
-
-
-
-
-
-
-
-
-
-
-      13
+total 208
+-rw-r--r--   1 yel-moun  candidates   7196 Jul 21 15:39 *.o
+drwxr-xr-x  21 yel-moun  candidates    714 Jul 21 15:44 .
+drwxr-xr-x  16 yel-moun  candidates    544 Jul 11 10:26 ..
+drwxr-xr-x  14 yel-moun  candidates    476 Jul 21 10:18 .git
+drwxr-xr-x   3 yel-moun  candidates    102 Jul 21 10:47 .vscode
+-rw-r--r--   1 yel-moun  candidates      0 Jul 21 14:34 1
+-rw-r--r--   1 yel-moun  candidates      0 Jul 21 14:35 2
+-rw-r--r--   1 yel-moun  candidates      0 Jul 21 14:35 3
+-rw-r--r--   1 yel-moun  candidates   1074 Jul 21 10:49 Makefile
+-rwxr-xr-x   1 yel-moun  candidates  13700 Jul 18 12:47 built
+drwxr-xr-x  13 yel-moun  candidates    442 Jul 21 08:56 builtins
+-rw-r--r--   1 yel-moun  candidates    330 Jul 21 10:08 file.txt
+drwxr-xr-x  22 yel-moun  candidates    748 Jul 21 15:39 lexer
+drwxr-xr-x  70 yel-moun  candidates   2380 Jul 21 15:39 lib
+-rw-r--r--   1 yel-moun  candidates   1875 Jul 21 15:18 main.c
+drwxr-xr-x   3 yel-moun  candidates    102 Jul 21 08:56 miniBuiltIns.dSYM
+-rwxr-xr-x   1 yel-moun  candidates  59236 Jul 21 15:39 minishell
+-rw-r--r--   1 yel-moun  candidates   3118 Jul 21 15:38 minishell.h
+-rw-r--r--   1 yel-moun  candidates      0 Jul 21 15:44 out
+-rw-r--r--   1 yel-moun  candidates    330 Jul 21 14:29 outtttt
