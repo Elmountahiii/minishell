@@ -4,7 +4,7 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror   -g -fsanitize=address
 READLINE = -lreadline -lncurses
 bSRC = builtins/main.c builtins/env.c builtins/pwd.c builtins/cd.c builtins/echo.c builtins/print_env_list.c builtins/add_back_for_env.c builtins/get_env_list.c builtins/export.c builtins/unset.c
-SRC = *.c lexer/ft_lexical_spliter.c lexer/ft_special_char.c lexer/ft_count_lexer_tokens.c lexer/ft_extract.c lexer/ft_init_token_list.c lexer/ft_print_tokens_info.c lexer/ft_split_to_command.c lexer/ft_print_command_info.c
+SRC = *.c lexer/ft_lexical_spliter.c lexer/ft_special_char.c lexer/ft_count_lexer_tokens.c lexer/ft_extract.c lexer/ft_init_token_list.c lexer/ft_print_tokens_info.c lexer/ft_split_to_command.c lexer/ft_print_command_info.c lexer/ft_lstadd_back.c
 OBJ = $(SRC:.c=.o)
 HEADR = minishell.h
 

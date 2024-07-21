@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aet-tale <aet-tale@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 09:30:52 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/07/20 14:27:04 by aet-tale         ###   ########.fr       */
+/*   Updated: 2024/07/21 10:16:48 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,8 @@ void	ft_print_tokens_info(t_tokens_list *head);
 t_command  *ft_split_to_command(t_tokens_list *tokens_list);
 void	until_pipe(t_command *node,t_tokens_list *tokens);
 char **ft_append_to_list(char **list,char *command);
+void	ft_tokens_add_back(t_tokens_list **tokens, t_tokens_list *new);
+void	ft_commands_add_back(t_command **commands, t_command *new);
 
 
 typedef struct t_env_list
