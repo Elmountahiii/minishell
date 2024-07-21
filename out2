@@ -1,0 +1,14 @@
+total 200
+-rw-r--r--   1 aet-tale  candidates   7564 Jul 21 13:44 *.o
+-rw-r--r--   1 aet-tale  candidates   1033 Jul 20 14:28 Makefile
+-rwxr-xr-x   1 aet-tale  candidates  13700 Jul 19 11:32 built
+drwxr-xr-x  13 aet-tale  candidates    442 Jul 20 14:45 builtins
+-rw-r--r--   1 aet-tale  candidates    329 Jul 19 20:45 file.txt
+drwxr-xr-x  18 aet-tale  candidates    612 Jul 21 13:44 lexer
+drwxr-xr-x  66 aet-tale  candidates   2244 Jul 21 13:44 lib
+-rw-r--r--   1 aet-tale  candidates   1873 Jul 20 11:37 main.c
+drwxr-xr-x   3 aet-tale  candidates    102 Jul 19 15:07 miniBuiltIns.dSYM
+-rwxr-xr-x   1 aet-tale  candidates  54196 Jul 21 13:44 minishell
+-rw-r--r--   1 aet-tale  candidates   2910 Jul 20 14:27 minishell.h
+-rw-r--r--   1 aet-tale  candidates    330 Jul 21 13:48 out
+-rw-r--r--   1 aet-tale  candidates      0 Jul 21 13:48 out2

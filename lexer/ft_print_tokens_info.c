@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_print_tokens_info.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aet-tale <aet-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 15:56:02 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/07/19 10:30:48 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/07/21 15:23:30 by aet-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ char* ft_print_token_type(t_token_type token_type)
 }
 
 void print_table_row(t_tokens_list *token) {
-	printf("|   '%s'    ->    %s   |\n",token->value,ft_print_token_type(token->type));
+	printf("|   '%s'    ->    %s   |\n", token->value, ft_print_token_type(token->type));
 }
 void	ft_print_tokens_info(t_tokens_list *head)
 {

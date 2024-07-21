@@ -6,11 +6,11 @@
 /*   By: aet-tale <aet-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 14:53:57 by aet-tale          #+#    #+#             */
-/*   Updated: 2024/07/20 14:55:38 by aet-tale         ###   ########.fr       */
+/*   Updated: 2024/07/20 15:48:09 by aet-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 void our_exit(int last_proccess_status)
 {
-    exit(last_proccess_status);
+	exit(last_proccess_status);
 }
