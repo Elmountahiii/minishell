@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_init_token_list.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aet-tale <aet-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 14:53:54 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/07/19 12:50:57 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/07/21 18:12:58 by aet-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ t_tokens_list	*ft_fill_tokens_list(char **tokens_words)
         tmp = token;
         i++;
     }
-	
     return (head);
 }
 

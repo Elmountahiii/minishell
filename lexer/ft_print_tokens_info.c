@@ -6,7 +6,7 @@
 /*   By: aet-tale <aet-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 15:56:02 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/07/21 15:23:30 by aet-tale         ###   ########.fr       */
+/*   Updated: 2024/07/21 18:33:34 by aet-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	ft_print_tokens_info(t_tokens_list *head)
 
 	int i = 0;
 	printf("|--------------------------|\n");
-	printf("|   value   -> token_type  |\n");
+	printf("|** value  -> token_type **|\n");
 	printf("|--------------------------|\n");
 	
 	while (head)

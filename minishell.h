@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aet-tale <aet-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 09:30:52 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/07/21 15:38:07 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/07/21 19:44:57 by aet-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 #include <readline/history.h>
 #include <stdlib.h>
 #include <string.h>
+#include <fcntl.h>
 #include "./lib/lib.h"
 
 typedef enum {
@@ -77,6 +78,8 @@ void	ft_tokens_add_back(t_tokens_list **tokens, t_tokens_list *new);
 void	ft_commands_add_back(t_command **commands, t_command *new);
 t_tokens_list	*ft_tokens_new(t_token_type type, char *value);
 
+// builtins funcs and structs
+
 typedef struct t_env_list
 {
 	char				*key;
@@ -84,7 +87,7 @@ typedef struct t_env_list
 	struct t_env_list	*next;
 }t_env_list;
 
-// builtins funcs and structs
+
 char		*our_pwd(char **env);
 int			our_env(char    **envp);
 int			our_cd(char *path);
@@ -95,6 +98,20 @@ t_env_list	*get_env_list(char **env);
 void		print_env_list(t_env_list* list);
 void		our_export(char	*var,char *value, t_env_list	*env_list);
 void		our_unset(char *var, t_env_list   **list);
+
+// end of builtins
+
+
+// function for list of files
+
+typedef struct t_list_files
+{
+	int					fd;
+	char				*name;
+	struct t_list_files	*next;
+}t_list_files;
+void			print_list_files(t_list_files  *list_files);
+t_list_files	*give_list_files(t_tokens_list	*list_tokens);
 
 
 // end of builtins
