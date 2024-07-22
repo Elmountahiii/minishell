@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 09:30:38 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/07/21 15:18:21 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/07/21 18:50:51 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,13 @@ int main(void)
 		}
 		add_history(line);
 		tokens_list = ft_init_token_list(line);
-	
-		//ft_print_tokens_info(tokens_list);
-		//printf("--------------------\n");
-		commands_list = ft_split_to_command(tokens_list);
+		if (ft_check_syntax(tokens_list))
+		{
+			free(line);
+			continue;
+		}
+		else{
+			commands_list = ft_split_to_command(tokens_list);
 		ft_print_command_info(commands_list);
 		if (ft_strlen(line) > 0 && ft_strncmp(line, "exit", ft_strlen(line)) == 0)
 		{
@@ -47,6 +50,10 @@ int main(void)
 			break;
 		}
 		free(line);
+		}
+		//ft_print_tokens_info(tokens_list);
+		//printf("--------------------\n");
+		
 	}
 	return 0;
 }

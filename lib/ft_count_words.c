@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 15:32:25 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/07/15 09:58:02 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/07/21 18:22:24 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,10 @@ int	ft_count_words_v2(char *str)
 {
 	int words;
 	int i;
-	char quote;
 	
 
 	i = 0;
 	words = 0;
-	quote = 0;
 	while (str && str[i])
 	{
 		if (ft_is_metachar(str[i]))

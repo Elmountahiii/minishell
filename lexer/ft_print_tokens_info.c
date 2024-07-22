@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 15:56:02 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/07/19 10:30:48 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/07/21 18:22:11 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ void print_table_row(t_tokens_list *token) {
 void	ft_print_tokens_info(t_tokens_list *head)
 {
 
-	int i = 0;
 	printf("|--------------------------|\n");
 	printf("|   value   -> token_type  |\n");
 	printf("|--------------------------|\n");
@@ -63,6 +62,5 @@ void	ft_print_tokens_info(t_tokens_list *head)
 		print_table_row(head);
 		printf("|--------------------------|\n");
 		head = head->next;
-		i++;
 	}
 }

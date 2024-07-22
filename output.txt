@@ -1,0 +1,9 @@
+Makefile
+builtins
+file.txt
+lexer
+lib
+main.c
+minishell
+minishell.h
+output.txt

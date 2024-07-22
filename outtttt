@@ -1,2 +1,0 @@
-This behavior 
-is part of how bash handles I/O redirection. It's worth noting that while this command creates or truncates all the intermediate files, it's generally not a recommended practice, as it can be confusing and may have unintended side effects. Typically, you'd just use a single redirection to the desired output file.

@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 09:30:52 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/07/21 15:38:07 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/07/21 18:38:13 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,8 @@ char **ft_append_to_list(char **list,char *command);
 void	ft_tokens_add_back(t_tokens_list **tokens, t_tokens_list *new);
 void	ft_commands_add_back(t_command **commands, t_command *new);
 t_tokens_list	*ft_tokens_new(t_token_type type, char *value);
+int		ft_check_syntax(t_tokens_list *list);
+void	ft_skip_tokens_spaces(t_tokens_list **tokens);
 
 typedef struct t_env_list
 {
