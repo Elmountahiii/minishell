@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 18:24:42 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/07/21 20:01:58 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/07/22 18:09:46 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,15 +97,11 @@ int ft_check_redout_syntax(t_tokens_list *list)
 			{
 				printf("syntax error near unexpected token `>>'\n");
 				return (1);
-			}else
-			{
-				printf("syntax error near unexpected token `|'\n");
-				return (1);
 			}
 		}
 		else
 		{
-			printf("syntax error near unexpected token `>'\n");
+			printf("syntax error near unexpected token `newline'\n");
 			return (1);
 		}	
 	}
@@ -174,10 +170,6 @@ int ft_check_herdoc_syntax(t_tokens_list *list)
 			{
 				printf("syntax error near unexpected token `>>'\n");
 				return (1);
-			}else
-			{
-				printf("syntax error near unexpected token `|'\n");
-				return (1);
 			}
 		}else
 		{
@@ -194,7 +186,8 @@ int ft_check_syntax(t_tokens_list *list)
 	t_tokens_list *tmp;
 
 	tmp = list;
-	if (list->type == PIPE)
+	ft_skip_tokens_spaces(&tmp);
+	if (tmp && tmp->type == PIPE)
 	{
 		printf("syntax error near unexpected token `|'\n");
 		return (1);

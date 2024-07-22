@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 15:56:02 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/07/21 18:22:11 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/07/22 16:11:53 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,13 +48,13 @@ char* ft_print_token_type(t_token_type token_type)
 }
 
 void print_table_row(t_tokens_list *token) {
-	printf("|   '%s'    ->    %s   |\n",token->value,ft_print_token_type(token->type));
+	printf("|   '%s'    ->    %s   |\n", token->value, ft_print_token_type(token->type));
 }
 void	ft_print_tokens_info(t_tokens_list *head)
 {
 
 	printf("|--------------------------|\n");
-	printf("|   value   -> token_type  |\n");
+	printf("|** value  -> token_type **|\n");
 	printf("|--------------------------|\n");
 	
 	while (head)

@@ -9,5 +9,5 @@ int main(int argc, char* argv[], char* envp[])
     printf("\n");
     // our_export("USER", "anwar ettaleb", list);
     our_unset("_", &list);
-    print_env_list(list); 
+    print_env_list(list);
 }

@@ -1,16 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit.c                                             :+:      :+:    :+:   */
+/*   print_list_files.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aet-tale <aet-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/20 14:53:57 by aet-tale          #+#    #+#             */
-/*   Updated: 2024/07/20 15:48:09 by aet-tale         ###   ########.fr       */
+/*   Created: 2024/07/21 18:16:34 by aet-tale          #+#    #+#             */
+/*   Updated: 2024/07/21 19:55:51 by aet-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void our_exit(int last_proccess_status)
+#include "../minishell.h"
+
+void print_list_files(t_list_files  *list_files)
 {
-	exit(last_proccess_status);
+    while (list_files)
+    {
+        printf("fd : %i ",list_files->fd);
+        printf("name :%s\n",list_files->name);
+        list_files = list_files->next;
+    }
 }

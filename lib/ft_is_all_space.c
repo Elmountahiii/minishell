@@ -1,16 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit.c                                             :+:      :+:    :+:   */
+/*   ft_is_all_space.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aet-tale <aet-tale@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/20 14:53:57 by aet-tale          #+#    #+#             */
-/*   Updated: 2024/07/20 15:48:09 by aet-tale         ###   ########.fr       */
+/*   Created: 2024/07/22 16:41:30 by yel-moun          #+#    #+#             */
+/*   Updated: 2024/07/22 16:42:26 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void our_exit(int last_proccess_status)
+#include "../minishell.h"
+
+int	ft_is_all_space(char *str)
 {
-	exit(last_proccess_status);
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] != ' ' && str[i] != '\t' && str[i] != '\n')
+			return (0);
+		i++;
+	}
+	return (1);
 }
