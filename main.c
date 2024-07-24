@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 09:30:38 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/07/24 11:25:26 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/07/24 21:12:06 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ void	ft_check_leaks(void)
 int main(void)
 {
 	atexit(ft_check_leaks);
-	t_tokens_list	*tokens_list;
+	char **split;
+	// t_tokens_list	*tokens_list;
 	// t_list_files	*list_of_files;
 	//t_command	*commands_list;
 	char			*line;
@@ -34,21 +35,41 @@ int main(void)
 			break;
 		}
 		add_history(line);
-		tokens_list = ft_init_token_list(line);
-		if (ft_check_syntax(tokens_list))
-			continue;
-		else
+		// printf("line = %s\n", line);
+		// printf("line words  = %d\n", ft_count_split_clean(line));
+		
+		split = ft_split_clean(line);
+		int i = 0;
+		while (split[i])
 		{
-		ft_print_tokens_info(tokens_list);
-			//printf("Syntax correct\n");
-			if (ft_strlen(line) > 0 && ft_strncmp(line, "exit", ft_strlen(line)) == 0)
-			{
-				printf("exit\n");
-				free(line);
-				break;
-			}
+			printf("split[%d] = %s\n", i, split[i]);
+			i++;
 		}
+		// tokens_list = ft_init_token_list(line);
+		// if (ft_check_syntax(tokens_list))
+		// 	continue;
+		// else
+		// {
+		// ft_print_tokens_info(tokens_list);
+		// 	//printf("Syntax correct\n");
+		// 	if (ft_strlen(line) > 0 && ft_strncmp(line, "exit", ft_strlen(line)) == 0)
+		// 	{
+		// 		printf("exit\n");
+		// 		free(line);
+		// 		break;
+		// 	}
+		// }
 		free(line);
 	}
 	return 0;
 }
+
+// int main()
+// {
+// 	char *str = "ls \"-       \"l\"a\"";
+// 	// char *clean = ft_clean_string(str,SINGLE_QUOTE_WORD, ft_strlen(str));
+// 	// printf("clean: %s\n", clean);
+// 	printf("str = %s\n", str);
+// 	printf("len = %d\n", ft_count_clean_string(str,SINGLE_QUOTE_WORD, ft_strlen(str)));
+// 	return 0;
+// }
