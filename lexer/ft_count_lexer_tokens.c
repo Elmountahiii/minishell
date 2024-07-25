@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 10:48:16 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/07/25 13:28:21 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/07/25 16:13:38 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,10 @@ int ft_skip_until_quote(char *str)
 	while (str[i])
 	{
 		
+		while (str[i] &&ft_check_space(str[i]))
+			i++;
+		if (!str[i])
+			break ;
 		if (str[i] == quote)
 			break ;
 		i++;

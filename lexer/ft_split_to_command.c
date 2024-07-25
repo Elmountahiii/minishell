@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 11:06:51 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/07/25 14:32:22 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/07/25 15:39:08 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,8 +140,6 @@ void	until_pipe(t_command *node,t_tokens_list *tokens)
 	}
 }
 
-
-
 t_command  *ft_split_to_command(t_tokens_list *tokens_list)
 {
 	t_command *commands_list;
@@ -156,8 +154,6 @@ t_command  *ft_split_to_command(t_tokens_list *tokens_list)
 		return (NULL);
 	while (tokens_list)
 	{
-		// joining the tokens into commands
-	
 		until_pipe(commands_list, tokens_list);
 		while (tokens_list && tokens_list->type != PIPE)
 				tokens_list = tokens_list->next;

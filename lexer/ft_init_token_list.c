@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 14:53:54 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/07/25 11:28:58 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/07/25 16:23:05 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,11 @@ t_tokens_list	*ft_fill_tokens_list(char **tokens_words)
         else
             tmp->next = token;
         token->type = ft_token_analyzer(tokens_words[i]);
-        token->value = ft_strdup(tokens_words[i]);
+		if (token->type == SINGLE_QUOTE_WORD || token->type == DOUBLE_QUOTE_WORD || token->type == WORD)
+        token->value =ft_clean_string(ft_split_clean(tokens_words[i]));
+		else
+		token->value = ft_strdup(tokens_words[i]);
+		
         token->next = NULL;
         tmp = token;
         i++;
