@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 11:06:51 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/07/21 15:39:23 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/07/25 14:32:22 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,7 +162,11 @@ t_command  *ft_split_to_command(t_tokens_list *tokens_list)
 		while (tokens_list && tokens_list->type != PIPE)
 				tokens_list = tokens_list->next;
 		if (tokens_list && tokens_list->type == PIPE)
+		{
+			if (commands_list->out_type == STDOUT_IO)
+				commands_list->out_type = PIPE_IO;
 			tokens_list = tokens_list->next;
+		}
 		else
 		{
 			commands_list->next = NULL;

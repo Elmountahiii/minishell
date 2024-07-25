@@ -6,11 +6,32 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 11:36:44 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/07/25 10:02:04 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/07/25 10:42:29 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+int	ft_count_all_lines(char **split)
+{
+	int i;
+	int j;
+	int len;
+
+	i= 0;
+	len = 0;
+	while (split && split[i])
+	{
+		j = 0;
+		while (split[i] &&split[i][j])
+			j++;	
+		len += j;
+		i ++;
+	}
+
+	return (len);
+}
+
 int	ft_skip_clean_spaces(char *str, int i)
 {
 	while (str[i] && (str[i] == ' ' || str[i] == '\t'))
@@ -76,23 +97,30 @@ char *ft_clean_supstr(char *str, int i)
 	int		len;
 	char	*sub;
 	int		j;
-
-	len = ft_count_substr(str, i);
-	printf("len = %d\n", len);
+	// printf("###############\n");
+	// printf("at start i = %d\n", i);
+	len = ft_count_substr(str, i) - i;
+	// printf("len = %d\n", len);
 	j = 0;
 	sub = malloc(sizeof(char) * (len + 1));
 	if (!sub)
 		return (NULL);
-	while (str[j + i] && i < len )
+	// printf("!!!!!!!!!!!!!!!!!!\n");
+	while (str[j + i] && j < len  )
 	{
 		if (str[j + i] == '\''  || str[j + i] == '\"')
+		{
+			len --;
 			i ++;
+		}
 		else
 		{
 			sub[j] = str[j + i];
 			j ++;
 		}
+		// printf("j = %d | i = %d\n", j, j + i );
 	}
+	// printf("###############\n");
 	sub[j] = '\0';
 	return (sub);
 }
@@ -117,9 +145,29 @@ char **ft_split_clean(char *str)
 	}
 	return (split[index] = NULL, split);
 }
-char	*ft_clean_string(char *str, t_token_type type, int len)
+char	*ft_clean_string(char **split)
 {
-	(void) type;
-	(void) len;
-	return (str);
+	char *clean;
+	int i;
+	int j;
+	int index;
+
+	i = 0;
+	clean = malloc(sizeof(char) * (ft_count_all_lines(split) + 1));
+	if (!clean)
+		return (NULL);
+	index = 0;
+	while (split && split[i])
+	{
+		j = 0;
+		while (split[i] && split[i][j])
+		{
+			clean[index] = split[i][j];
+			j++;
+			index++;
+		}
+		i++;
+	}
+	clean[index] = '\0';
+	return (clean);
 }

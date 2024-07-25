@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 18:24:42 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/07/22 18:09:46 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/07/25 14:25:43 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,6 +181,23 @@ int ft_check_herdoc_syntax(t_tokens_list *list)
 
 }
 
+
+int	ft_check_word_syntax(t_tokens_list *list)
+{
+	int len;
+
+	len = ft_strlen(list->value);
+	if (list->type == WORD)
+	{
+		if (list->value[len -1] == '\'' || list->value[len-1] == '\"')
+		{
+			printf("syntax error near unexpected token `%c'\n", list->value[len]);
+			return (1);
+		}
+	}
+	return (0);
+}
+
 int ft_check_syntax(t_tokens_list *list)
 {
 	t_tokens_list *tmp;
@@ -194,6 +211,8 @@ int ft_check_syntax(t_tokens_list *list)
 	}
 	while (tmp)
 	{
+		if (ft_check_word_syntax(tmp))
+			return (1);
 		if (ft_check_pipe_syntax(tmp))
 				return (1);
 		if (ft_check_redin_syntax(tmp))
