@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 11:36:44 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/07/24 21:11:45 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/07/25 10:02:04 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,12 +83,11 @@ char *ft_clean_supstr(char *str, int i)
 	sub = malloc(sizeof(char) * (len + 1));
 	if (!sub)
 		return (NULL);
-	while (str[j + i] && i < len -1)
+	while (str[j + i] && i < len )
 	{
 		if (str[j + i] == '\''  || str[j + i] == '\"')
-		{
 			i ++;
-		}else
+		else
 		{
 			sub[j] = str[j + i];
 			j ++;

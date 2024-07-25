@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 10:48:16 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/07/24 11:27:14 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/07/25 10:18:21 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,8 @@ int ft_skip_until_quote(char *str)
 	i++;
 	while (str[i])
 	{
-		if (str[i] == ' ')
-			break ;
+		// if (str[i] == ' ')
+		// 	break ;
 		i++;
 	}
 	// if (str[i] == quote)
