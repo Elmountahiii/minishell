@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 14:53:54 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/07/25 16:23:05 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/07/26 11:04:04 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,14 +55,18 @@ t_tokens_list	*ft_fill_tokens_list(char **tokens_words)
         else
             tmp->next = token;
         token->type = ft_token_analyzer(tokens_words[i]);
-		if (token->type == SINGLE_QUOTE_WORD || token->type == DOUBLE_QUOTE_WORD || token->type == WORD)
-        token->value =ft_clean_string(ft_split_clean(tokens_words[i]));
-		else
-		token->value = ft_strdup(tokens_words[i]);
-		
+		if (token->type == SINGLE_QUOTE_WORD || token->type == DOUBLE_QUOTE_WORD || token->type == WORD || token->type == ENV)
+		{
+			token->value = ft_join_until_space(tokens_words, i);
+			i = ft_list_skip_spaces(tokens_words, i);
+			
+		}else 
+		{
+			token->value = ft_strdup(tokens_words[i]);
+			i ++;
+		}
         token->next = NULL;
         tmp = token;
-        i++;
     }
     return (head);
 }
@@ -73,6 +77,14 @@ t_tokens_list	*ft_init_token_list(char *line)
 	t_tokens_list *tokens_list;
 
 	tokens_words = ft_extract(line);
+
+	// int i = 0;
+	// while (tokens_words[i])
+	// {
+	// 	printf("tokens_words[%d] = %s\n", i, tokens_words[i]);
+	// 	i++;
+	// }
+	// exit(0);
 	if (!tokens_words)
 		return (NULL);
 	tokens_list =ft_fill_tokens_list(tokens_words);

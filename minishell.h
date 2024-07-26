@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 09:30:52 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/07/25 10:44:42 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/07/26 11:24:14 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ typedef struct s_command {
 	IOType	out_type;
 	char	*in_file;
 	char	*out_file;
+	int      fd_in;
+	int      fd_out;
 	bool	is_append;
 	bool	is_heredoc;
 	struct s_command	*next;
@@ -83,6 +85,8 @@ char	*ft_clean_string(char **split);
 int	ft_count_clean_string(char *str, t_token_type type, int len);
 char **ft_split_clean(char *str);
 int ft_count_split_clean(char *str);
+char *ft_join_until_space(char **tokens, int index);
+int ft_list_skip_spaces(char **tokens,int index);
 // builtins funcs and structs
 
 typedef struct t_env_list
@@ -91,6 +95,7 @@ typedef struct t_env_list
 	char				*value;
 	struct t_env_list	*next;
 }t_env_list;
+
 
 
 char		*our_pwd(char **env);
@@ -115,6 +120,13 @@ typedef struct t_list_files
 	char				*name;
 	struct t_list_files	*next;
 }t_list_files;
+
+typedef struct s_pipe
+{
+	int		fd[2];
+	struct s_pipe	*next;
+}	t_pipe;
+
 void			print_list_files(t_list_files  *list_files);
 t_list_files	*give_list_files(t_tokens_list	*list_tokens);
 

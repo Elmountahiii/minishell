@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 09:30:38 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/07/25 16:30:45 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/07/26 09:57:31 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	ft_check_leaks(void)
 
 int main(void)
 {
-	atexit(ft_check_leaks);
+	//atexit(ft_check_leaks);
 	//char **split;
 	t_tokens_list	*tokens_list;
 	// t_list_files	*list_of_files;
@@ -38,7 +38,7 @@ int main(void)
 		// printf("line = %s\n", line);
 		// printf("line words  = %d\n", ft_count_split_clean(line));
 		tokens_list = ft_init_token_list(line);
-		//ft_print_tokens_info(tokens_list);
+		ft_print_tokens_info(tokens_list);
 
 		if (ft_check_syntax(tokens_list))
 			continue;
