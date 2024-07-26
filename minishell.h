@@ -6,7 +6,7 @@
 /*   By: aet-tale <aet-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 09:30:52 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/07/26 18:17:48 by aet-tale         ###   ########.fr       */
+/*   Updated: 2024/07/26 18:50:55 by aet-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,11 @@ typedef struct s_command {
 	IOType	out_type;
 	char	*in_file;
 	char	*out_file;
-	int      fd_in;
-	int      fd_out;
+	int		fd_in;
+	int		fd_out;
 	bool	is_append;
 	bool	is_heredoc;
+	int		index;
 	struct s_command	*next;
 } t_command;
 
@@ -74,7 +75,7 @@ char	**ft_extract(char *line);
 t_tokens_list	*ft_init_token_list(char *line);
 void	ft_print_tokens_info(t_tokens_list *head);
 t_command  *ft_split_to_command(t_tokens_list *tokens_list);
-void	until_pipe(t_command *node,t_tokens_list *tokens);
+void	until_pipe(t_command *node,t_tokens_list *tokens, int index);
 char **ft_append_to_list(char **list,char *command);
 void	ft_tokens_add_back(t_tokens_list **tokens, t_tokens_list *new);
 void	ft_commands_add_back(t_command **commands, t_command *new);

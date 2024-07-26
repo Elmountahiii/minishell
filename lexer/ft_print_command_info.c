@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_print_command_info.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aet-tale <aet-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 12:31:21 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/07/21 15:38:17 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/07/26 18:48:44 by aet-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ void	ft_print_command_info(t_command *command)
 		printf("out_file : %s\n", command->out_file);
 		printf("is_append : %d\n", command->is_append);
 		printf("is_heredoc : %d\n", command->is_heredoc);
+		printf("index : %d\n", command->index);
 		while (command->command_args[i] != NULL)
 		{
 			printf("command arg : %s\n", command->command_args[i]);

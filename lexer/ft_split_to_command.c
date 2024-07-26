@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split_to_command.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aet-tale <aet-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 11:06:51 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/07/26 11:35:15 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/07/26 18:51:07 by aet-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,7 @@ void	ft_handle_heredoc(t_command *node, t_tokens_list **tokens)
 		}
 	}
 }
-void	until_pipe(t_command *node,t_tokens_list *tokens)
+void	until_pipe(t_command *node, t_tokens_list *tokens, int	index)
 {
 	
 	while (tokens &&tokens->type != PIPE)
@@ -139,13 +139,16 @@ void	until_pipe(t_command *node,t_tokens_list *tokens)
 		node->out_type = STDOUT_IO;
 		node->out_file = NULL;
 	}
+	node->index = index;
 }
 
 t_command  *ft_split_to_command(t_tokens_list *tokens_list)
 {
-	t_command *commands_list;
-	t_command *head;
+	t_command	*commands_list;
+	t_command	*head;
+	int			index;
 
+	index = 0;
 	commands_list = calloc(1, sizeof(t_command));
 	head = commands_list;
 	if (!commands_list)
@@ -155,7 +158,7 @@ t_command  *ft_split_to_command(t_tokens_list *tokens_list)
 		return (NULL);
 	while (tokens_list)
 	{
-		until_pipe(commands_list, tokens_list);
+		until_pipe(commands_list, tokens_list, index);
 		while (tokens_list && tokens_list->type != PIPE)
 				tokens_list = tokens_list->next;
 		if (tokens_list && tokens_list->type == PIPE)
@@ -175,6 +178,7 @@ t_command  *ft_split_to_command(t_tokens_list *tokens_list)
 			return (NULL);
 		commands_list = commands_list->next;
 		commands_list->in_type = PIPE_IO;
+		index++;
 	}
 	return (head);
 }

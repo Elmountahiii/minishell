@@ -6,7 +6,7 @@
 /*   By: aet-tale <aet-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/26 17:39:02 by aet-tale          #+#    #+#             */
-/*   Updated: 2024/07/26 18:23:18 by aet-tale         ###   ########.fr       */
+/*   Updated: 2024/07/26 18:27:48 by aet-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ void	add_new_node(t_pipe	**list)
 		tmp = tmp->next;
 	tmp->next = give_node_pipe();
 }
-
 
 t_pipe	*give_list_pipes(t_tokens_list	*tokens_list)
 {
