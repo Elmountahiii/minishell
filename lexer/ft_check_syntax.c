@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 18:24:42 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/07/25 16:23:13 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/07/26 16:29:56 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,10 +129,6 @@ int	ft_check_append_syntax(t_tokens_list *list)
 			}else if (list->type == REDIRECTION_OUT)
 			{
 				printf("syntax error near unexpected token `>'\n");
-				return (1);
-			}else
-			{
-				printf("syntax error near unexpected token `|'\n");
 				return (1);
 			}
 		}else
