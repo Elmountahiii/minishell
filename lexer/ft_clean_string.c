@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 11:36:44 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/07/25 10:42:29 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/07/26 15:46:52 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,18 +97,23 @@ char *ft_clean_supstr(char *str, int i)
 	int		len;
 	char	*sub;
 	int		j;
-	// printf("###############\n");
-	// printf("at start i = %d\n", i);
+	char  	is_quote;
+	char     quote;
+	
+	is_quote = ft_is_quote(str[i]);
+	if (is_quote)
+		quote = str[i];
+	else
+		quote = 0;
+	
 	len = ft_count_substr(str, i) - i;
-	// printf("len = %d\n", len);
 	j = 0;
 	sub = malloc(sizeof(char) * (len + 1));
 	if (!sub)
 		return (NULL);
-	// printf("!!!!!!!!!!!!!!!!!!\n");
 	while (str[j + i] && j < len  )
 	{
-		if (str[j + i] == '\''  || str[j + i] == '\"')
+		if (is_quote && quote == str[j + i])
 		{
 			len --;
 			i ++;
@@ -118,9 +123,7 @@ char *ft_clean_supstr(char *str, int i)
 			sub[j] = str[j + i];
 			j ++;
 		}
-		// printf("j = %d | i = %d\n", j, j + i );
 	}
-	// printf("###############\n");
 	sub[j] = '\0';
 	return (sub);
 }
@@ -151,6 +154,7 @@ char	*ft_clean_string(char **split)
 	int i;
 	int j;
 	int index;
+	
 
 	i = 0;
 	clean = malloc(sizeof(char) * (ft_count_all_lines(split) + 1));

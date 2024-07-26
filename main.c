@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 09:30:38 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/07/26 09:57:31 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/07/26 11:38:15 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,18 +35,21 @@ int main(void)
 			break;
 		}
 		add_history(line);
-		// printf("line = %s\n", line);
-		// printf("line words  = %d\n", ft_count_split_clean(line));
+		
 		tokens_list = ft_init_token_list(line);
-		ft_print_tokens_info(tokens_list);
+		// init  redirections = done 
+		// init  pipes 
+		// fill the fds
+		//ft_print_tokens_info(tokens_list);
 
 		if (ft_check_syntax(tokens_list))
 			continue;
 		else
 		{
 		commands_list = ft_split_to_command(tokens_list);
+		
+		
 		ft_print_command_info(commands_list);
-		//printf("Syntax correct\n");
 		if (ft_strlen(line) > 0 && ft_strncmp(line, "exit", ft_strlen(line)) == 0)
 		{
 			printf("exit\n");
