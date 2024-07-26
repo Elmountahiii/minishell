@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_list_files.c                                 :+:      :+:    :+:   */
+/*   print_list_pipes.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aet-tale <aet-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/21 18:16:34 by aet-tale          #+#    #+#             */
-/*   Updated: 2024/07/26 18:18:42 by aet-tale         ###   ########.fr       */
+/*   Created: 2024/07/26 18:11:14 by aet-tale          #+#    #+#             */
+/*   Updated: 2024/07/26 18:13:36 by aet-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void    print_list_files(t_list_files  *list_files)
+void	print_list_pipes(t_pipe	*pipes)
 {
-    while (list_files)
-    {
-        printf("fd : %i ",list_files->fd);
-        printf("name :%s\n",list_files->name);
-        list_files = list_files->next;
-    }
+	while (pipes)
+	{
+		printf("pipe: %d ", pipes->fd[0]);
+		printf("pipe: %d\n", pipes->fd[1]);
+		pipes = pipes->next;
+	}
 }

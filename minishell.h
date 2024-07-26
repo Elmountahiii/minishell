@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aet-tale <aet-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 09:30:52 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/07/26 15:40:25 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/07/26 18:17:48 by aet-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,6 @@ typedef struct t_env_list
 }t_env_list;
 
 
-
 char		*our_pwd(char **env);
 int			our_env(char    **envp);
 int			our_cd(char *path);
@@ -121,17 +120,21 @@ typedef struct t_list_files
 	struct t_list_files	*next;
 }t_list_files;
 
-typedef struct s_pipe
-{
-	int		fd[2];
-	struct s_pipe	*next;
-}	t_pipe;
-
 void			print_list_files(t_list_files  *list_files);
 t_list_files	*give_list_files(t_tokens_list	*list_tokens);
 
-
 // end of builtins
+
+typedef struct s_pipe
+{
+	int				fd[2];
+	struct s_pipe	*next;
+}	t_pipe;
+
+// void			print_pipe_files(t_pipe 		*list_pipes);
+// t_pipe		*init_pipe_list(t_tokens_list	*t_tokens_list);
+t_pipe			*give_list_pipes(t_tokens_list	*tokens_list);
+void			print_list_pipes(t_pipe	*pipes);
 
 #endif
 void	ft_print_command_info(t_command *command);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   give_list_files.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aet-tale <aet-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 18:22:42 by aet-tale          #+#    #+#             */
-/*   Updated: 2024/07/26 15:54:31 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/07/26 17:23:58 by aet-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ t_list_files	*give_list_files(t_tokens_list	*list_tokens)
 			list_tokens  = list_tokens->next;
 			if (list_tokens && list_tokens->type == SPACE)
 				list_tokens = list_tokens->next;
-			if (list_tokens && list_tokens->type == WORD && list_tokens->type == SINGLE_QUOTE_WORD && list_tokens->type == DOUBLE_QUOTE_WORD )
+			if (list_tokens && (list_tokens->type == WORD || list_tokens->type == SINGLE_QUOTE_WORD || list_tokens->type == DOUBLE_QUOTE_WORD ))
 			{
 				// printf("list_tokens->value: %s\n", list_tokens->value);
 				add_file(&list_files, list_tokens->value , type);
