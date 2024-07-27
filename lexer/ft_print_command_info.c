@@ -6,7 +6,7 @@
 /*   By: aet-tale <aet-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 12:31:21 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/07/26 18:48:44 by aet-tale         ###   ########.fr       */
+/*   Updated: 2024/07/27 14:16:29 by aet-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ char	*ft_get_file_type(IOType type)
 	return ("UNKNOWN\n");
 }
 
-void	ft_print_command_info(t_command *command)
+void	ft_print_command_info(t_command	*command)
 {
 	int i = 0;
 	
@@ -41,6 +41,8 @@ void	ft_print_command_info(t_command *command)
 		printf("is_append : %d\n", command->is_append);
 		printf("is_heredoc : %d\n", command->is_heredoc);
 		printf("index : %d\n", command->index);
+		printf("fd_in : %d\n", command->fd_in);
+		printf("fd_out : %d\n", command->fd_out);
 		while (command->command_args[i] != NULL)
 		{
 			printf("command arg : %s\n", command->command_args[i]);

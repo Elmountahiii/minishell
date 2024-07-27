@@ -6,7 +6,7 @@
 /*   By: aet-tale <aet-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 09:30:52 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/07/26 18:50:55 by aet-tale         ###   ########.fr       */
+/*   Updated: 2024/07/27 14:17:54 by aet-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ typedef enum {
 	ENV,
 } t_token_type;
 
+
 typedef enum {  STDIN_IO, STDOUT_IO, FILE_IO, PIPE_IO } IOType;
 //DEFAULT_IO
 typedef  struct e_tokens_list {
@@ -43,9 +44,18 @@ typedef  struct e_tokens_list {
 	struct e_tokens_list	*next;
 } t_tokens_list;
 
+typedef struct s_pipe
+{
+	int				fd[2];
+	struct s_pipe	*next;
+}	t_pipe;
+
+t_pipe			*give_list_pipes(t_tokens_list	*tokens_list);
+void			print_list_pipes(t_pipe	*pipes);
+
 typedef struct s_command {
-	char	**command_args; 
-	char 	*path;
+	char	**command_args;
+	// char 	*path;
 	IOType	in_type;
 	IOType	out_type;
 	char	*in_file;
@@ -55,8 +65,10 @@ typedef struct s_command {
 	bool	is_append;
 	bool	is_heredoc;
 	int		index;
+	t_pipe	*list_pipes;
 	struct s_command	*next;
 } t_command;
+
 
 int		ft_sub_alloc(char *str);
 int		ft_shift_quotes(char *str);
@@ -74,8 +86,8 @@ char	*ft_lexer_substr(char *line);
 char	**ft_extract(char *line);
 t_tokens_list	*ft_init_token_list(char *line);
 void	ft_print_tokens_info(t_tokens_list *head);
-t_command  *ft_split_to_command(t_tokens_list *tokens_list);
-void	until_pipe(t_command *node,t_tokens_list *tokens, int index);
+t_command  *ft_split_to_command(t_tokens_list *tokens_list, t_pipe *list_pipes);
+void	until_pipe(t_command *node, t_tokens_list *tokens, int	index, t_pipe *list_pipes);
 char **ft_append_to_list(char **list,char *command);
 void	ft_tokens_add_back(t_tokens_list **tokens, t_tokens_list *new);
 void	ft_commands_add_back(t_command **commands, t_command *new);
@@ -83,11 +95,11 @@ t_tokens_list	*ft_tokens_new(t_token_type type, char *value);
 int		ft_check_syntax(t_tokens_list *list);
 void	ft_skip_tokens_spaces(t_tokens_list **tokens);
 char	*ft_clean_string(char **split);
-int	ft_count_clean_string(char *str, t_token_type type, int len);
-char **ft_split_clean(char *str);
-int ft_count_split_clean(char *str);
-char *ft_join_until_space(char **tokens, int index);
-int ft_list_skip_spaces(char **tokens,int index);
+int		ft_count_clean_string(char *str, t_token_type type, int len);
+char	**ft_split_clean(char *str);
+int		ft_count_split_clean(char *str);
+char	*ft_join_until_space(char **tokens, int index);
+int		ft_list_skip_spaces(char **tokens,int index);
 // builtins funcs and structs
 
 typedef struct t_env_list
@@ -125,17 +137,8 @@ void			print_list_files(t_list_files  *list_files);
 t_list_files	*give_list_files(t_tokens_list	*list_tokens);
 
 // end of builtins
-
-typedef struct s_pipe
-{
-	int				fd[2];
-	struct s_pipe	*next;
-}	t_pipe;
-
-// void			print_pipe_files(t_pipe 		*list_pipes);
-// t_pipe		*init_pipe_list(t_tokens_list	*t_tokens_list);
-t_pipe			*give_list_pipes(t_tokens_list	*tokens_list);
-void			print_list_pipes(t_pipe	*pipes);
+void assign_in(t_command *commands_list, t_list_files *list_of_files, t_pipe *list_pipes);
+void assign_out(t_command *commands_list, t_list_files *list_of_files, t_pipe *list_pipes);
 
 #endif
 void	ft_print_command_info(t_command *command);

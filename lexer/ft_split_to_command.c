@@ -6,7 +6,7 @@
 /*   By: aet-tale <aet-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 11:06:51 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/07/26 18:51:07 by aet-tale         ###   ########.fr       */
+/*   Updated: 2024/07/27 11:26:33 by aet-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,10 +122,9 @@ void	ft_handle_heredoc(t_command *node, t_tokens_list **tokens)
 		}
 	}
 }
-void	until_pipe(t_command *node, t_tokens_list *tokens, int	index)
+void	until_pipe(t_command *node, t_tokens_list *tokens, int	index, t_pipe *list_pipes)
 {
-	
-	while (tokens &&tokens->type != PIPE)
+	while (tokens && tokens->type != PIPE)
 	{
 		ft_handle_redirection(node, &tokens);
 		ft_handle_append(node, &tokens);
@@ -140,9 +139,10 @@ void	until_pipe(t_command *node, t_tokens_list *tokens, int	index)
 		node->out_file = NULL;
 	}
 	node->index = index;
+	node->list_pipes = list_pipes;
 }
 
-t_command  *ft_split_to_command(t_tokens_list *tokens_list)
+t_command  *ft_split_to_command(t_tokens_list *tokens_list, t_pipe *list_pipes)
 {
 	t_command	*commands_list;
 	t_command	*head;
@@ -158,7 +158,7 @@ t_command  *ft_split_to_command(t_tokens_list *tokens_list)
 		return (NULL);
 	while (tokens_list)
 	{
-		until_pipe(commands_list, tokens_list, index);
+		until_pipe(commands_list, tokens_list, index, list_pipes);
 		while (tokens_list && tokens_list->type != PIPE)
 				tokens_list = tokens_list->next;
 		if (tokens_list && tokens_list->type == PIPE)
