@@ -6,7 +6,7 @@
 /*   By: aet-tale <aet-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 09:30:38 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/07/27 16:24:07 by aet-tale         ###   ########.fr       */
+/*   Updated: 2024/07/28 10:27:47 by aet-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	fill_in_out(t_command *commands_list, t_list_files *list_of_files, t_pipe *
 {
 	while (commands_list)
 	{
+		// printf("in file : %s\n", commands_list->in_file);
 		assign_in(commands_list, list_of_files, list_pipes);
 		assign_out(commands_list, list_of_files, list_pipes);
 		commands_list = commands_list->next;
@@ -54,7 +55,7 @@ int	main(void)
 		commands_list = ft_split_to_command(tokens_list, list_pipes);
 		fill_in_out(commands_list, list_of_files, list_pipes);
 		ft_print_command_info(commands_list);
-		print_list_pipes(list_pipes);
+		// print_list_pipes(list_pipes);
 		if (ft_strlen(line) > 0 && ft_strncmp(line, "exit", ft_strlen(line)) == 0)
 		{
 			printf("exit\n");
