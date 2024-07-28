@@ -6,7 +6,7 @@
 /*   By: aet-tale <aet-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 11:35:05 by aet-tale          #+#    #+#             */
-/*   Updated: 2024/07/28 16:27:11 by aet-tale         ###   ########.fr       */
+/*   Updated: 2024/07/28 16:50:15 by aet-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,38 @@ void execute_one_command(t_command *command, t_list_files *list_of_files)
 {
 	(void)command;
 	(void)list_of_files;
-	return;
+	
+	return ;
+}
+
+char **give_array_str(t_env_list *env_list)
+{
+	char **env;
+	char *line;
+
+	env = NULL;
+	line = NULL;
+	while (env_list)
+	{
+		line = ft_strjoin(env_list->key, env_list->value);
+		ft_append_to_list(env, line);
+		// don't forget to free the array
+		free(line);
+		env_list = env_list->next;
+	}
+	return (env);
 }
 
 void execute_command(t_command *command, t_list_files *list_of_files)
 {
-	(void)command;
+	// (void)command;
 	(void)list_of_files;
-	// change the stdin to command->fd_in
-	// change the stdout to command->fd_out
-	execve(command->path, command->command_args, NULL);
+	char **env = give_array_str(command->env_list);
+	// dup2(command->fd_in, 0);
+	// dup2(command->fd_out, 1);
+	// check if builtin
+	// close pipes 
+	execve(command->path, command->command_args, env);
 	return;
 }
 
@@ -61,12 +83,9 @@ void execute_things(t_command *command_list, t_list_files *list_of_files)
 	while (tmp)
 	{
 		if (pid != 0)
-		{
 			pid = fork();
-		}else
-		{
+		else
 			execute_command(tmp, list_of_files);
-		}
 		tmp = tmp->next;
 	}
 }

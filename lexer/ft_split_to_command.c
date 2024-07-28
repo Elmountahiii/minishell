@@ -6,7 +6,7 @@
 /*   By: aet-tale <aet-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 11:06:51 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/07/28 16:26:00 by aet-tale         ###   ########.fr       */
+/*   Updated: 2024/07/28 16:47:19 by aet-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ void	ft_skip_tokens_spaces(t_tokens_list **tokens)
 		*tokens = (*tokens)->next;
 }
 
-char **ft_append_to_list(char **list,char *command)
+char **ft_append_to_list(char **list, char *command)
 {
-	int len;
-	char **new_list;
+	int		len;
+	char	**new_list;
 	
 	if (!command)
 		return (list);

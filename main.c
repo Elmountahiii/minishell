@@ -6,7 +6,7 @@
 /*   By: aet-tale <aet-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 09:30:38 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/07/28 16:23:35 by aet-tale         ###   ########.fr       */
+/*   Updated: 2024/07/28 16:30:48 by aet-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	main(int argc, char const *argv[], char *envp[])
 		fill_in_out(commands_list, list_of_files, list_pipes);
 		fill_command_paths(commands_list, env_list);
 		ft_print_command_info(commands_list);
-		// execute_things(commands_list, list_of_files);
+		execute_things(commands_list, list_of_files);
 		// print_list_pipes(list_pipes);
 		if (ft_strlen(line) > 0 && ft_strncmp(line, "exit", ft_strlen(line)) == 0)
 		{

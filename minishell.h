@@ -6,7 +6,7 @@
 /*   By: aet-tale <aet-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 09:30:52 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/07/28 16:25:16 by aet-tale         ###   ########.fr       */
+/*   Updated: 2024/07/28 16:33:54 by aet-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ typedef struct t_env_list
 typedef struct s_command {
 	char				**command_args;
 	char 				*path;
-	t_env_list 			*env;
+	t_env_list 			*env_list;
 	IOType				in_type;
 	IOType				out_type;
 	char				*in_file;
