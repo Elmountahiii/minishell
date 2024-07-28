@@ -6,7 +6,7 @@
 /*   By: aet-tale <aet-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 11:06:51 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/07/27 11:26:33 by aet-tale         ###   ########.fr       */
+/*   Updated: 2024/07/28 16:26:00 by aet-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,8 @@ void	ft_handle_heredoc(t_command *node, t_tokens_list **tokens)
 }
 void	until_pipe(t_command *node, t_tokens_list *tokens, int	index, t_pipe *list_pipes)
 {
+	(void)index;
+	(void)list_pipes;
 	while (tokens && tokens->type != PIPE)
 	{
 		ft_handle_redirection(node, &tokens);
@@ -138,8 +140,6 @@ void	until_pipe(t_command *node, t_tokens_list *tokens, int	index, t_pipe *list_
 		node->out_type = STDOUT_IO;
 		node->out_file = NULL;
 	}
-	node->index = index;
-	node->list_pipes = list_pipes;
 }
 
 t_command  *ft_split_to_command(t_tokens_list *tokens_list, t_pipe *list_pipes)
@@ -159,6 +159,8 @@ t_command  *ft_split_to_command(t_tokens_list *tokens_list, t_pipe *list_pipes)
 	while (tokens_list)
 	{
 		until_pipe(commands_list, tokens_list, index, list_pipes);
+		commands_list->index = index;
+		commands_list->list_pipes = list_pipes;
 		while (tokens_list && tokens_list->type != PIPE)
 				tokens_list = tokens_list->next;
 		if (tokens_list && tokens_list->type == PIPE)

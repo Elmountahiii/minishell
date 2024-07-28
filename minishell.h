@@ -6,7 +6,7 @@
 /*   By: aet-tale <aet-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 09:30:52 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/07/28 14:59:34 by aet-tale         ###   ########.fr       */
+/*   Updated: 2024/07/28 16:25:16 by aet-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,19 +53,27 @@ typedef struct s_pipe
 t_pipe			*give_list_pipes(t_tokens_list	*tokens_list);
 void			print_list_pipes(t_pipe	*pipes);
 
+typedef struct t_env_list
+{
+	char				*key;
+	char				*value;
+	struct t_env_list	*next;
+}t_env_list;
+
 typedef struct s_command {
-	char	**command_args;
-	char 	*path;
-	IOType	in_type;
-	IOType	out_type;
-	char	*in_file;
-	char	*out_file;
-	int		fd_in;
-	int		fd_out;
-	bool	is_append;
-	bool	is_heredoc;
-	int		index;
-	t_pipe	*list_pipes;
+	char				**command_args;
+	char 				*path;
+	t_env_list 			*env;
+	IOType				in_type;
+	IOType				out_type;
+	char				*in_file;
+	char				*out_file;
+	int					fd_in;
+	int					fd_out;
+	bool				is_append;
+	bool				is_heredoc;
+	int					index;
+	t_pipe				*list_pipes;
 	struct s_command	*next;
 } t_command;
 
@@ -102,12 +110,6 @@ char	*ft_join_until_space(char **tokens, int index);
 int		ft_list_skip_spaces(char **tokens,int index);
 // builtins funcs and structs
 
-typedef struct t_env_list
-{
-	char				*key;
-	char				*value;
-	struct t_env_list	*next;
-}t_env_list;
 
 
 char		*our_pwd(char **env);
