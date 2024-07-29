@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_things.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aet-tale <aet-tale@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 11:35:05 by aet-tale          #+#    #+#             */
-/*   Updated: 2024/07/28 16:50:15 by aet-tale         ###   ########.fr       */
+/*   Updated: 2024/07/29 13:23:22 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ char **give_array_str(t_env_list *env_list)
 	while (env_list)
 	{
 		line = ft_strjoin(env_list->key, env_list->value);
+		// 
 		ft_append_to_list(env, line);
 		// don't forget to free the array
 		free(line);

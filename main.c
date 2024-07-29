@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 09:30:38 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/07/29 10:57:17 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/07/29 14:15:37 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ int	main(int argc, char const *argv[], char *envp[])
 		}
 		add_history(line);
 		tokens_list = ft_init_token_list(line);
+		//ft_print_tokens_info(tokens_list);
 		if (ft_check_syntax(tokens_list))
 			continue ;
 		list_of_files = give_list_files(tokens_list);

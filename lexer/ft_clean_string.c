@@ -6,61 +6,13 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 11:36:44 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/07/26 15:46:52 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/07/29 12:43:56 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	ft_count_all_lines(char **split)
-{
-	int i;
-	int j;
-	int len;
-
-	i= 0;
-	len = 0;
-	while (split && split[i])
-	{
-		j = 0;
-		while (split[i] &&split[i][j])
-			j++;	
-		len += j;
-		i ++;
-	}
-
-	return (len);
-}
-
-int	ft_skip_clean_spaces(char *str, int i)
-{
-	while (str[i] && (str[i] == ' ' || str[i] == '\t'))
-		i++;
-	return (i);
-}
-
-int	ft_skip_quotes(char *str, int i)
-{
-	if (str[i] == '\'')
-	{
-		i++;
-		while (str[i] && str[i] != '\'')
-			i++;
-		if (str[i] == '\'')
-			i++;
-	}
-	else if (str[i] == '\"')
-	{
-		i++;
-		while (str[i] && str[i] != '\"')
-			i++;
-		if (str[i] == '\"')
-			i++;
-	}
-	return (i);
-}
-
-int ft_count_substr(char *str, int i)
+int	ft_count_substr(char *str, int i)
 {
 	if (str[i] && (str[i] == '\'' || str[i] == '\"'))
 		i = ft_skip_quotes(str, i);
@@ -71,6 +23,7 @@ int ft_count_substr(char *str, int i)
 	}
 	return (i);
 }
+
 int ft_count_split_clean(char *str)
 {
     int words;
@@ -105,13 +58,12 @@ char *ft_clean_supstr(char *str, int i)
 		quote = str[i];
 	else
 		quote = 0;
-	
 	len = ft_count_substr(str, i) - i;
 	j = 0;
 	sub = malloc(sizeof(char) * (len + 1));
 	if (!sub)
 		return (NULL);
-	while (str[j + i] && j < len  )
+	while (str[j + i] && j < len)
 	{
 		if (is_quote && quote == str[j + i])
 		{
@@ -124,9 +76,10 @@ char *ft_clean_supstr(char *str, int i)
 			j ++;
 		}
 	}
-	sub[j] = '\0';
-	return (sub);
+	return (sub[j] = '\0' , sub);
 }
+
+
 char **ft_split_clean(char *str)
 {
 	char	**split;
@@ -150,11 +103,10 @@ char **ft_split_clean(char *str)
 }
 char	*ft_clean_string(char **split)
 {
-	char *clean;
-	int i;
-	int j;
-	int index;
-	
+	char	*clean;
+	int		i;
+	int		j;
+	int		index;
 
 	i = 0;
 	clean = malloc(sizeof(char) * (ft_count_all_lines(split) + 1));

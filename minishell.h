@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aet-tale <aet-tale@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 09:30:52 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/07/28 16:33:54 by aet-tale         ###   ########.fr       */
+/*   Updated: 2024/07/29 13:32:38 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,14 @@ char	**ft_split_clean(char *str);
 int		ft_count_split_clean(char *str);
 char	*ft_join_until_space(char **tokens, int index);
 int		ft_list_skip_spaces(char **tokens,int index);
+int		ft_check_redout_syntax(t_tokens_list *list);
+int		ft_check_redin_syntax(t_tokens_list *list);
+int		ft_check_pipe_syntax(t_tokens_list *list);
+int		syntax_error(char token);
+int		ft_count_all_lines(char **split);
+int		ft_skip_quotes(char *str, int i);
+int		ft_is_valid_word(t_tokens_list *t);
+char *ft_join(char *old, t_tokens_list **tokens);
 // builtins funcs and structs
 
 

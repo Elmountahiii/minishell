@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split_to_command.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aet-tale <aet-tale@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 11:06:51 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/07/28 16:47:19 by aet-tale         ###   ########.fr       */
+/*   Updated: 2024/07/29 14:18:04 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,11 @@ void	ft_skip_tokens_spaces(t_tokens_list **tokens)
 		*tokens = (*tokens)->next;
 }
 
-char **ft_append_to_list(char **list, char *command)
+char **ft_append_to_list_tokens(char **list, t_tokens_list **tokens)
 {
 	int		len;
 	char	**new_list;
-	
-	if (!command)
-		return (list);
+
 	len = 0;
 	while ( list[len])
 		len++;
@@ -39,8 +37,31 @@ char **ft_append_to_list(char **list, char *command)
 		new_list[len] = ft_strdup(list[len]);
 		len++;
 	}
+	new_list[len] = ft_join(NULL, tokens);
+	new_list[len + 1] = NULL;
+	return (new_list);	
+}
+
+char **ft_append_to_list(char **list, char *command)
+{
+	int		len;
+	char	**new_list;
+	
+	if (!command)
+		return (list);
+	len = 0;
+	while (list[len])
+		len++;
+	new_list = calloc(len + 2, sizeof(char *));
+	if (!new_list)
+		return (NULL);
+	len = 0;
+	while (list[len])
+	{
+		new_list[len] = ft_strdup(list[len]);
+		len++;
+	}
 	new_list[len] = ft_clean_string(ft_split_clean(command));
-	//new_list[len] = ft_strdup(command);
 	new_list[len + 1] = NULL;
 	return (new_list);	
 }
@@ -49,14 +70,15 @@ void 	ft_handle_word(t_command *node, t_tokens_list **tokens)
 {
 	if (!tokens || !*tokens)
 		return ;
-		
-	if ((*tokens)->type == WORD 
+	
+	if (*tokens && ((*tokens)->type == WORD 
 		|| (*tokens)->type == SINGLE_QUOTE_WORD 
 		||(*tokens)->type == DOUBLE_QUOTE_WORD 
-		|| (*tokens)->type == ENV)
+		|| (*tokens)->type == ENV))
 	{
-		node->command_args = ft_append_to_list(node->command_args, (*tokens)->value);
-		*tokens = (*tokens)->next;
+		node->command_args = ft_append_to_list_tokens(node->command_args, tokens);
+		if (*tokens)
+			*tokens = (*tokens)->next;
 	}
 }
 

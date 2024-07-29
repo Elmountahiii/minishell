@@ -61,5 +61,6 @@ int		ft_count_space(char *str);
 int		ft_count_metachar(char *str);
 int		ft_count_quotes(char *str);
 char	*ft_substr_orig(char *s, unsigned int start, size_t len);
+int		ft_strcpy(char *dst, char *src);
 
 #endif
