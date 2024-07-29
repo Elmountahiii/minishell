@@ -6,7 +6,7 @@
 /*   By: aet-tale <aet-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 12:17:38 by aet-tale          #+#    #+#             */
-/*   Updated: 2024/07/28 10:26:57 by aet-tale         ###   ########.fr       */
+/*   Updated: 2024/07/28 11:26:03 by aet-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ int	get_pipe_fd(t_pipe *list_pipes, int index, char c)
 			}
 		}
 	}
-	// printf("index : %i i: %d\n", index, i);
 	return (1000);
 }
 
@@ -60,10 +59,6 @@ int get_file_fd(t_list_files 	*list_of_files, char *file_name)
 {
 	while (list_of_files)
 	{
-		if (list_of_files->name == NULL)
-			printf("list_of_files->name is null\n");
-		if (file_name == NULL)
-			printf("file_name is null\n");
 		if (ft_strcmp(list_of_files->name, file_name) == 0)
 			return (list_of_files->fd);
 		list_of_files = list_of_files->next;

@@ -6,7 +6,7 @@
 /*   By: aet-tale <aet-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 12:31:21 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/07/27 14:16:29 by aet-tale         ###   ########.fr       */
+/*   Updated: 2024/07/28 15:10:35 by aet-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	ft_print_command_info(t_command	*command)
 	while (command)
 	{
 		//printf("command path : %s\n", command->path);
+		printf("path : %s\n", command->path);
 		printf("in_type : %s", ft_get_file_type(command->in_type));
 		printf("out_type : %s", ft_get_file_type(command->out_type));
 		printf("in_file : %s\n", command->in_file);

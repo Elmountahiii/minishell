@@ -6,7 +6,7 @@
 /*   By: aet-tale <aet-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 09:30:52 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/07/27 14:17:54 by aet-tale         ###   ########.fr       */
+/*   Updated: 2024/07/28 16:33:54 by aet-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,19 +53,27 @@ typedef struct s_pipe
 t_pipe			*give_list_pipes(t_tokens_list	*tokens_list);
 void			print_list_pipes(t_pipe	*pipes);
 
+typedef struct t_env_list
+{
+	char				*key;
+	char				*value;
+	struct t_env_list	*next;
+}t_env_list;
+
 typedef struct s_command {
-	char	**command_args;
-	// char 	*path;
-	IOType	in_type;
-	IOType	out_type;
-	char	*in_file;
-	char	*out_file;
-	int		fd_in;
-	int		fd_out;
-	bool	is_append;
-	bool	is_heredoc;
-	int		index;
-	t_pipe	*list_pipes;
+	char				**command_args;
+	char 				*path;
+	t_env_list 			*env_list;
+	IOType				in_type;
+	IOType				out_type;
+	char				*in_file;
+	char				*out_file;
+	int					fd_in;
+	int					fd_out;
+	bool				is_append;
+	bool				is_heredoc;
+	int					index;
+	t_pipe				*list_pipes;
 	struct s_command	*next;
 } t_command;
 
@@ -102,12 +110,6 @@ char	*ft_join_until_space(char **tokens, int index);
 int		ft_list_skip_spaces(char **tokens,int index);
 // builtins funcs and structs
 
-typedef struct t_env_list
-{
-	char				*key;
-	char				*value;
-	struct t_env_list	*next;
-}t_env_list;
 
 
 char		*our_pwd(char **env);
@@ -120,6 +122,7 @@ t_env_list	*get_env_list(char **env);
 void		print_env_list(t_env_list* list);
 void		our_export(char	*var,char *value, t_env_list	*env_list);
 void		our_unset(char *var, t_env_list   **list);
+// t_env_list	*get_env_list(char	**env)
 
 // end of builtins
 
@@ -139,6 +142,9 @@ t_list_files	*give_list_files(t_tokens_list	*list_tokens);
 // end of builtins
 void assign_in(t_command *commands_list, t_list_files *list_of_files, t_pipe *list_pipes);
 void assign_out(t_command *commands_list, t_list_files *list_of_files, t_pipe *list_pipes);
+void	fill_in_out(t_command *commands_list, t_list_files *list_of_files, t_pipe *list_pipes);
+void    execute_things(t_command *command_list, t_list_files *list_of_files);
+void	fill_command_paths(t_command *command_list, t_env_list *env);
 
 #endif
 void	ft_print_command_info(t_command *command);
