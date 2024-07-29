@@ -6,18 +6,18 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 11:35:05 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/07/15 10:06:56 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/07/29 11:19:04 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lib.h"
 
-int	ft_count_quotes(char * str)
+int	ft_count_quotes(char *str)
 {
-	char quote;
-	int i;
-	int allocate;
-	
+	char	quote;
+	int		i;
+	int		allocate;
+
 	i = 0;
 	if (!str || !ft_is_quote(str[i]))
 		return (0);
@@ -38,10 +38,10 @@ int	ft_count_quotes(char * str)
 
 int	ft_count_metachar(char *str)
 {
-	int i;
-	char meta_char;
-	int allocate;
-	
+	int		i;
+	char	meta_char;
+	int		allocate;
+
 	i = 0;
 	allocate = 0;
 	meta_char = 0;
@@ -60,17 +60,17 @@ int	ft_count_metachar(char *str)
 	return (allocate);
 }
 
-int ft_count_space(char *str)
+int	ft_count_space(char *str)
 {
-	int i;
+	int	i;
+
 	i = 0;
 	while (str[i])
 	{
 		if (ft_is_quote(str[i]))
-		{
 			i += ft_count_quotes(str + i);
-		}else if (ft_is_space_v2(str[i]) || ft_is_metachar(str[i]))
-			break;
+		else if (ft_is_space_v2(str[i]) || ft_is_metachar(str[i]))
+			break ;
 		else
 			i ++;
 	}
@@ -79,22 +79,14 @@ int ft_count_space(char *str)
 
 int	ft_count_alloc(char *str, int index)
 {
-	int allocate;
+	int	allocate;
 
 	if (!str)
 		return (0);
 	allocate = 0;
 	if (ft_is_metachar(str[index]))
-	{
 		allocate = ft_count_metachar(str + index);
-	}
 	else if (!ft_is_space_v2(str[index]))
-	{		
 		allocate = ft_count_space(str + index);
-	}
-	// else if (ft_is_quote(str[index]))
-	// {
-	// 	allocate = ft_count_quotes(str + index);
-	// }
 	return (allocate);
 }

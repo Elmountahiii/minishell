@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 11:40:07 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/07/11 15:27:58 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/07/29 11:23:15 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ int	ft_is_space(char c)
 		return (1);
 	return (0);
 }
-
 
 int	ft_is_space_v2(char c)
 {
