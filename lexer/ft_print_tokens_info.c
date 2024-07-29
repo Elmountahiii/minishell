@@ -3,26 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_print_tokens_info.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aet-tale <aet-tale@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 15:56:02 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/07/26 18:48:21 by aet-tale         ###   ########.fr       */
+/*   Updated: 2024/07/29 18:08:43 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void print_table_header() {
-    printf("|----------------------|----------------------|----------------------|\n");
-    printf("|----------------------|----------------------|----------------------|\n");
-}
-
-
-void print_table_footer() {
-	printf("|----------------------|----------------------|----------------------|\n");
-}
-
-char* ft_print_token_type(t_token_type token_type)
+char	*ft_print_token_type(t_token_type token_type)
 {
 	if (token_type == WORD)
 		return ("WORD");
@@ -47,16 +37,17 @@ char* ft_print_token_type(t_token_type token_type)
 	return ("UNKNOWN");
 }
 
-void print_table_row(t_tokens_list *token) {
-	printf("|   '%s'    ->    %s   |\n", token->value, ft_print_token_type(token->type));
+void	print_table_row(t_tokens_list *token)
+{
+	printf("|   '%s'    ->    %s   |\n", token->value,
+		ft_print_token_type(token->type));
 }
+
 void	ft_print_tokens_info(t_tokens_list *head)
 {
-
 	printf("|--------------------------|\n");
 	printf("|** value  -> token_type **|\n");
 	printf("|--------------------------|\n");
-	
 	while (head)
 	{
 		print_table_row(head);

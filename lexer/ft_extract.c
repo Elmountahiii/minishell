@@ -6,17 +6,17 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 11:43:12 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/07/15 13:13:41 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/07/29 17:47:37 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-char *ft_lexer_substr(char *line)
+char	*ft_lexer_substr(char *line)
 {
-	int  i;
-	int  len;
-	char *token;
+	int		i;
+	int		len;
+	char	*token;
 
 	i = 0;
 	len = ft_count_skip(line);
@@ -32,11 +32,11 @@ char *ft_lexer_substr(char *line)
 	return (token);
 }
 
-char **ft_extract(char *line)
+char	**ft_extract(char *line)
 {
-	char **tokens;
-	int i;
-	int index;
+	char	**tokens;
+	int		i;
+	int		index;
 
 	if (!line)
 		return (NULL);

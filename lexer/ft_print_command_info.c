@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_print_command_info.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aet-tale <aet-tale@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 12:31:21 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/07/28 15:10:35 by aet-tale         ###   ########.fr       */
+/*   Updated: 2024/07/29 18:05:05 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,18 +22,16 @@ char	*ft_get_file_type(IOType type)
 		return ("FILE_IO\n");
 	else if (type == PIPE_IO)
 		return ("PIPE_IO\n");
-	// else if (type == DEFAULT_IO)
-	// 	return ("DEFAULT_IO\n");
 	return ("UNKNOWN\n");
 }
 
 void	ft_print_command_info(t_command	*command)
 {
-	int i = 0;
-	
+	int	i;
+
+	i = 0;
 	while (command)
 	{
-		//printf("command path : %s\n", command->path);
 		printf("path : %s\n", command->path);
 		printf("in_type : %s", ft_get_file_type(command->in_type));
 		printf("out_type : %s", ft_get_file_type(command->out_type));
@@ -44,13 +42,6 @@ void	ft_print_command_info(t_command	*command)
 		printf("index : %d\n", command->index);
 		printf("fd_in : %d\n", command->fd_in);
 		printf("fd_out : %d\n", command->fd_out);
-		while (command->command_args[i] != NULL)
-		{
-			printf("command arg : %s\n", command->command_args[i]);
-			i++;
-		}
-		i = 0;
-		command = command->next;
 		printf("--------------------\n");
 	}
 }

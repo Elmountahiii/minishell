@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 10:48:16 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/07/29 11:05:04 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/07/29 17:46:31 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int	ft_skip_spaces(char *str)
 {
-	int i;
-	
+	int	i;
+
 	if (!str)
 		return (0);
 	i = 0;
@@ -26,8 +26,8 @@ int	ft_skip_spaces(char *str)
 
 int	ft_skip_special(char *str)
 {
-	int i;
-	char special;
+	int		i;
+	char	special;
 
 	if (!str)
 		return (0);
@@ -47,10 +47,11 @@ int	ft_skip_special(char *str)
 	return (i);
 }
 
-int ft_skip_until_quote(char *str)
+int	ft_skip_until_quote(char *str)
 {
-	int i;
-	char quote;
+	int		i;
+	char	quote;
+
 	if (!str || !ft_is_quote(str[0]))
 		return (0);
 	i = 0;
@@ -64,13 +65,13 @@ int ft_skip_until_quote(char *str)
 	}
 	if (str[i] && str[i] == quote)
 		i++;
-	return (i);	
+	return (i);
 }
 
 int	ft_skip(char *str)
 {
-	int i;
-	
+	int	i;
+
 	if (!str)
 		return (0);
 	i = 0;
@@ -87,32 +88,33 @@ int	ft_skip(char *str)
 
 int	ft_count_skip(char *str)
 {
-	int i;
-	
+	int	i;
+
 	if (!str)
 		return (0);
 	i = 0;
 	if (!ft_is_special_char(str[i]))
 		i += ft_skip(str + i);
 	else
-		i+= ft_skip_special(str + i);
+		i += ft_skip_special(str + i);
 	return (i);
 }
 
 int	ft_count_lexer_tokens(char *str)
 {
-	int tokens;
+	int	tokens;
 	int	i;
+
 	if (!str)
 		return (0);
 	i = 0;
-	tokens = 0;	
+	tokens = 0;
 	while (str[i])
 	{
 		if (!ft_is_special_char(str[i]))
 			i += ft_skip(str + i);
 		else
-			i+= ft_skip_special(str + i);	
+			i += ft_skip_special(str + i);
 		tokens++;
 	}
 	return (tokens);

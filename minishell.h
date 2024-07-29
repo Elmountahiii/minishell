@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 09:30:52 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/07/29 13:32:38 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/07/29 15:13:39 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ char	**ft_extract(char *line);
 t_tokens_list	*ft_init_token_list(char *line);
 void	ft_print_tokens_info(t_tokens_list *head);
 t_command  *ft_split_to_command(t_tokens_list *tokens_list, t_pipe *list_pipes);
-void	until_pipe(t_command *node, t_tokens_list *tokens, int	index, t_pipe *list_pipes);
+void	until_pipe(t_command *node, t_tokens_list *tokens);
 char **ft_append_to_list(char **list,char *command);
 void	ft_tokens_add_back(t_tokens_list **tokens, t_tokens_list *new);
 void	ft_commands_add_back(t_command **commands, t_command *new);
@@ -116,6 +116,17 @@ int		ft_count_all_lines(char **split);
 int		ft_skip_quotes(char *str, int i);
 int		ft_is_valid_word(t_tokens_list *t);
 char *ft_join(char *old, t_tokens_list **tokens);
+void	ft_skip_tokens_spaces(t_tokens_list **tokens);
+char	**ft_append_to_list_tokens(char **list, t_tokens_list **tokens);
+char	**ft_append_to_list(char **list, char *command);
+void	ft_handle_word(t_command *node, t_tokens_list **tokens);
+t_command * ft_command_allocate();
+int	ft_command_next(t_command **commands_list, t_tokens_list **tokens_list);
+void	ft_skip_tokens_spaces(t_tokens_list **tokens);
+char	**ft_append_to_list_tokens(char **list, t_tokens_list **tokens);
+char	**ft_append_to_list(char **list, char *command);
+void	ft_handle_word(t_command *node, t_tokens_list **tokens);
+void	ft_handle_redirection(t_command *node, t_tokens_list **tokens);
 // builtins funcs and structs
 
 
