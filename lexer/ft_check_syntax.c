@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 18:24:42 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/07/26 16:29:56 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/07/29 10:55:17 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -207,18 +207,12 @@ int ft_check_syntax(t_tokens_list *list)
 	}
 	while (tmp)
 	{
-		// if (ft_check_word_syntax(tmp))
-		// 	return (1);
-		if (ft_check_pipe_syntax(tmp))
-				return (1);
-		if (ft_check_redin_syntax(tmp))
-				return (1);
-		if (ft_check_redout_syntax(tmp))
-				return (1);
-		if (ft_check_append_syntax(tmp))
-		 	return (1);
-		if (ft_check_herdoc_syntax(tmp))
+		if (ft_check_word_syntax(tmp) || ft_check_pipe_syntax(tmp))
 			return (1);
+		if (ft_check_redin_syntax(tmp) || ft_check_redout_syntax(tmp))
+				return (1);
+		if (ft_check_append_syntax(tmp) || ft_check_herdoc_syntax(tmp) )
+		 	return (1);
 		tmp = tmp->next;
 	}
 	return (0);
