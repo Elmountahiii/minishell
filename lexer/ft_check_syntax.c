@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 18:24:42 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/07/29 14:15:20 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/07/31 18:52:21 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,13 +64,16 @@ int	ft_check_word_syntax(t_tokens_list *token)
 {
 	int len;
 
-	len = 0;
+	len = ft_strlen(token->value);
 	if (token && (token->type == SINGLE_QUOTE_WORD ||  token->type == DOUBLE_QUOTE_WORD))
 	{
-		len = ft_strlen(token->value);
 		if (len == 1)
 			return (syntax_error('n'));
-	}		
+		if (token->type == SINGLE_QUOTE_WORD && token->value[len - 1] != '\'')
+			return (syntax_error('n'));
+		if (token->type == DOUBLE_QUOTE_WORD && token->value[len - 1] != '\"')
+			return (syntax_error('n'));
+	}
 	return (0);
 }
 

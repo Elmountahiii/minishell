@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/26 10:01:16 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/07/29 17:58:01 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/07/31 19:13:13 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	ft_is_valid_word(t_tokens_list *t)
 {
 	if (t->type == WORD || t->type == SINGLE_QUOTE_WORD
-		|| t->type == DOUBLE_QUOTE_WORD)
+		|| t->type == DOUBLE_QUOTE_WORD || t->type == ENV)
 		return (1);
 	return (0);
 }
@@ -45,7 +45,8 @@ char	*ft_custom_strjoin(char *old, t_tokens_list *token)
 		i++;
 		j++;
 	}
-	return (new_str[i] = '\0', new_str);
+	new_str[i] = '\0';
+	return ( new_str);
 }
 
 char	*ft_join(char *old, t_tokens_list **tokens)
@@ -63,5 +64,6 @@ char	*ft_join(char *old, t_tokens_list **tokens)
 		free(tmp);
 		*tokens = (*tokens)->next;
 	}
+	printf("new_str: %s\n", new_str);
 	return (new_str);
 }

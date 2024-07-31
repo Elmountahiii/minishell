@@ -1,6 +1,7 @@
 NAME = minishell
 minibuiltins = miniBuiltIns
-CC = cc -g -fsanitize=address
+CC = cc 
+# -g -fsanitize=address
 CFLAGS = -Wall -Wextra -Werror  
 #  -g -fsanitize=address
 READLINE = -lreadline -lncurses
@@ -10,7 +11,7 @@ SRC = 	main.c  lexer/ft_special_char.c lexer/ft_count_lexer_tokens.c lexer/ft_ex
 		lexer/print_list_files.c lexer/give_list_files.c lexer/ft_check_syntax.c lexer/ft_clean_string.c lexer/ft_join_until_space.c \
 		lexer/give_list_pipes.c lexer/print_list_pipes.c lexer/assign_in_out.c lexer/fill_in_out.c lexer/execute_things.c builtins/get_env_list.c \
 		builtins/print_env_list.c builtins/add_back_for_env.c lexer/fill_command_paths.c lexer/ft_check_syntax_2.c lexer/ft_clean_string_2.c \
-		lexer/ft_split_to_command_2.c lexer/split_to_command_utils.c
+		lexer/ft_split_to_command_2.c lexer/split_to_command_utils.c lexer/ft_expend.c lexer/ft_expand_2.c lexer/ft_expand_utils.c
 OBJ = $(SRC:.c=.o)
 HEADR = minishell.h
 

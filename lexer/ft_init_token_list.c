@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 14:53:54 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/07/29 17:52:18 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/07/31 18:47:53 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,9 @@ t_tokens_list	*ft_fill_tokens_list(char **tokens_words)
 	return (head);
 }
 
-t_tokens_list	*ft_init_token_list(char *line)
+t_tokens_list	*ft_init_token_list(char *line, char **env)
 {
+	(void)env;
 	char			**tokens_words;
 	t_tokens_list	*tokens_list;
 
@@ -72,6 +73,7 @@ t_tokens_list	*ft_init_token_list(char *line)
 	if (!tokens_words)
 		return (NULL);
 	tokens_list = ft_fill_tokens_list(tokens_words);
+	//ft_expend_tokens(tokens_list, env);
 	if (!tokens_list)
 		return (NULL);
 	return (tokens_list);
