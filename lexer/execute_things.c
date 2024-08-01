@@ -6,13 +6,13 @@
 /*   By: aet-tale <aet-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 11:35:05 by aet-tale          #+#    #+#             */
-/*   Updated: 2024/07/30 16:42:20 by aet-tale         ###   ########.fr       */
+/*   Updated: 2024/08/01 11:25:53 by aet-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-char **give_array_str(t_env_list *env_list)
+char	**give_array_str(t_env_list *env_list)
 {
 	char **env;
 	char *line;
@@ -22,6 +22,7 @@ char **give_array_str(t_env_list *env_list)
 	while (env_list)
 	{
 		line = ft_strjoin(env_list->key, env_list->value);
+		// 
 		ft_append_to_list(env, line);
 		// don't forget to free the array
 		free(line);
@@ -30,7 +31,7 @@ char **give_array_str(t_env_list *env_list)
 	return (env);
 }
 
-void execute_one_command(t_command *command, t_pipe *list_of_pipes)
+void	execute_one_command(t_command *command, t_pipe *list_of_pipes)
 {
 	(void)command;
 	(void)list_of_pipes;

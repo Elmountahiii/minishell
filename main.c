@@ -6,7 +6,7 @@
 /*   By: aet-tale <aet-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 09:30:38 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/07/30 16:14:39 by aet-tale         ###   ########.fr       */
+/*   Updated: 2024/08/01 11:50:13 by aet-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,15 @@ void	ft_check_leaks(void)
 	system("leaks minishell");
 }
 
-int	main(int argc, char const *argv[], char *envp[])
+int	main(int argc, char *argv[], char *envp[])
 {
 	t_tokens_list	*tokens_list;
 	t_be_executed	*to_execute;
 	t_command		*commands_list;
 	t_env_list		*env_list;
+	//atexit(ft_check_leaks);
+	//char			**split;
+	t_list_files	*list_of_files;
 	t_pipe			*list_pipes;
 	char			*line;
 	// t_list_files	*list_of_files;
@@ -42,16 +45,17 @@ int	main(int argc, char const *argv[], char *envp[])
 			break ;
 		}
 		add_history(line);
-		tokens_list = ft_init_token_list(line);
+		tokens_list = ft_init_token_list(line, envp); // change it to our env
+		//ft_print_tokens_info(tokens_list);
+
 		if (ft_check_syntax(tokens_list))
 			continue ;
-		// list_of_files = give_list_files(tokens_list);
+		list_of_files = give_list_files(tokens_list);
 		list_pipes = give_list_pipes(tokens_list);
 		commands_list = ft_split_to_command(tokens_list, list_pipes);
-		fill_command_paths(commands_list, env_list);
 		to_execute = give_executed(commands_list, list_pipes, tokens_list);
+		fill_command_paths(commands_list, env_list);
 		// ft_print_command_info(commands_list);
-		// fill_in_out(commands_list, list_of_files, ldit_pipes);
 		execute_things(to_execute);
 		// print_list_pipes(list_pipes);
 		if (ft_strlen(line) > 0 && ft_strncmp(line, "exit", ft_strlen(line)) == 0)
@@ -65,17 +69,4 @@ int	main(int argc, char const *argv[], char *envp[])
 	return (0);
 }
 
-// int main(int argc, char const *argv[], char  *envp[])
-// {
-// 	(void) argc;
-// 	(void) argv;
-// 	char *args[] = {
-//     "awk", 
-//     "{print $1}", 
-//     "file.txt", 
-//     NULL  
-// };
 
-// 	execve("/usr/bin/awk", args, envp);
-// 	return 0;
-// }

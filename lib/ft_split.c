@@ -49,7 +49,6 @@ char	**ft_split(char *str)
 	return (split[index] = NULL, split);
 }
 
-
 static int	ft_allocate_v2(char ***split, char *str)
 {
 	*split = malloc(sizeof(char *) * (ft_count_words_v2(str) + 1));
@@ -57,7 +56,6 @@ static int	ft_allocate_v2(char ***split, char *str)
 		return (1);
 	return (0);
 }
-
 
 char	**ft_super_split(char *str)
 {
@@ -70,8 +68,6 @@ char	**ft_super_split(char *str)
 	i = 0;
 	index = 0;
 	while (str && str[i])
-	{
 		i ++;
-	}
 	return (split[index] = NULL, split);
 }

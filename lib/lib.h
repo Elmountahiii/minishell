@@ -16,7 +16,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdio.h>
-#include  <stdbool.h>
+# include <stdbool.h>
 # include "get_next_line/get_next_line.h"
 
 char	*ft_strchr(char *s, int c);
@@ -46,7 +46,7 @@ int		ft_strncmp(char *s1, char *s2, int n);
 int		ft_strcmp(char *s1, char *s2);
 void	*ft_calloc(size_t count, size_t size);
 void	ft_bzero(void *s, size_t n);
-int	ft_is_all_space(char *str);
+int		ft_is_all_space(char *str);
 // v2
 char	**ft_super_split(char *str);
 int		ft_count_words_v2(char *str);
@@ -56,11 +56,11 @@ int		ft_is_metachar(char c);
 int		ft_is_append(char c, char *str);
 int		ft_is_heredoc(char c, char *str);
 int		ft_shift_space(char *str, int index);
-int     ft_count_alloc(char *str, int index);
-int     ft_count_space(char *str);
-int     ft_count_metachar(char *str);
-int     ft_count_quotes(char * str);
+int		ft_count_alloc(char *str, int index);
+int		ft_count_space(char *str);
+int		ft_count_metachar(char *str);
+int		ft_count_quotes(char *str);
 char	*ft_substr_orig(char *s, unsigned int start, size_t len);
-
+int		ft_strcpy(char *dst, char *src);
 
 #endif
