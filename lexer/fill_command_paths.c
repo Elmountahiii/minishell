@@ -6,7 +6,7 @@
 /*   By: aet-tale <aet-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 12:50:49 by aet-tale          #+#    #+#             */
-/*   Updated: 2024/07/28 15:13:01 by aet-tale         ###   ########.fr       */
+/*   Updated: 2024/07/30 14:51:26 by aet-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	fill_command_paths(t_command *command_list, t_env_list *env)
     while (command_list)
     {
 		cmd = command_list->command_args[0];
-		if (ft_strncmp(cmd, "./", 2) == 0 || ft_strncmp(cmd, "../", 3) == 0 || ft_strncmp(cmd, ".", 1) == 0)
+		if (ft_strncmp(cmd, "./", 2) == 0 || ft_strncmp(cmd, "../", 3) == 0 || ft_strncmp(cmd, "/", 1) == 0)
 			command_list->path = cmd;
 		else
 			command_list->path = search_for_path(cmd, env);

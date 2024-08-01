@@ -6,7 +6,7 @@
 /*   By: aet-tale <aet-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 09:30:52 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/07/28 16:33:54 by aet-tale         ###   ########.fr       */
+/*   Updated: 2024/07/30 16:12:39 by aet-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,15 +136,24 @@ typedef struct t_list_files
 	struct t_list_files	*next;
 }t_list_files;
 
+typedef struct t_be_executed
+{
+	t_command		*commands_list;
+	t_tokens_list	*tokens_list;
+	t_pipe			*list_pipes;
+}t_be_executed;
+
 void			print_list_files(t_list_files  *list_files);
 t_list_files	*give_list_files(t_tokens_list	*list_tokens);
 
 // end of builtins
-void assign_in(t_command *commands_list, t_list_files *list_of_files, t_pipe *list_pipes);
-void assign_out(t_command *commands_list, t_list_files *list_of_files, t_pipe *list_pipes);
+void	assign_in(t_command *commands_list, t_list_files *list_of_files, t_pipe *list_pipes);
+void	assign_out(t_command *commands_list, t_list_files *list_of_files, t_pipe *list_pipes);
 void	fill_in_out(t_command *commands_list, t_list_files *list_of_files, t_pipe *list_pipes);
-void    execute_things(t_command *command_list, t_list_files *list_of_files);
+void    execute_things(t_be_executed *to_execute);
 void	fill_command_paths(t_command *command_list, t_env_list *env);
+t_be_executed	*give_executed(t_command *commands_list, t_pipe *list_pipes, t_tokens_list *tokens_list);
+
 
 #endif
 void	ft_print_command_info(t_command *command);

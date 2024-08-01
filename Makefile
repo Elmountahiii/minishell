@@ -9,7 +9,7 @@ SRC = 	main.c lexer/ft_lexical_spliter.c lexer/ft_special_char.c lexer/ft_count_
 		lexer/ft_print_tokens_info.c lexer/ft_split_to_command.c lexer/ft_print_command_info.c lexer/ft_lstadd_back.c lexer/ft_lstnew.c \
 		lexer/print_list_files.c lexer/give_list_files.c lexer/ft_check_syntax.c lexer/ft_clean_string.c lexer/ft_join_until_space.c \
 		lexer/give_list_pipes.c lexer/print_list_pipes.c lexer/assign_in_out.c lexer/fill_in_out.c lexer/execute_things.c builtins/get_env_list.c \
-		builtins/print_env_list.c builtins/add_back_for_env.c lexer/fill_command_paths.c
+		builtins/print_env_list.c builtins/add_back_for_env.c lexer/fill_command_paths.c lexer/init_execute.c
 OBJ = $(SRC:.c=.o)
 HEADR = minishell.h
 
