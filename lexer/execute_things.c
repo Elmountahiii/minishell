@@ -6,7 +6,7 @@
 /*   By: aet-tale <aet-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 11:35:05 by aet-tale          #+#    #+#             */
-/*   Updated: 2024/08/01 19:02:29 by aet-tale         ###   ########.fr       */
+/*   Updated: 2024/08/01 19:16:19 by aet-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,10 +120,7 @@ void	execute_things(t_be_executed	*to_execute)
 		{
 			pid = fork();
 			if (pid == 0)
-			{
-				// printf("comaand: %i\n", commands_list->index);
 				execute_command(commands_list, to_execute->list_pipes);
-			}
 		}else
 			execute_built_in(commands_list, to_execute->list_pipes, to_execute->env_list);
 		commands_list = commands_list->next;
