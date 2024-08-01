@@ -3,20 +3,8 @@
 
 int main(void)
 {
-    int i;
-    int pid;
-
-	i = 0;
-	pid = 1;
-	while (i < 5)
-	{
-		pid = fork();
-		if (pid == 0)
-		{
-			printf("I am the childd\n");
-			break ;
-		}
-		printf("I am the parentt\n");
-		i++;
-	}
+    // printf("%s\n", getcwd(NULL, 0));
+	chdir("srcs");
+	// printf("%s\n", getcwd(NULL, 0));
+	return 1;
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_join_until_space.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aet-tale <aet-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/26 10:01:16 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/07/31 19:13:13 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/01 12:41:06 by aet-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,5 @@ char	*ft_join(char *old, t_tokens_list **tokens)
 		free(tmp);
 		*tokens = (*tokens)->next;
 	}
-	printf("new_str: %s\n", new_str);
 	return (new_str);
 }

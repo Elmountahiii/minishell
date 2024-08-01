@@ -1,27 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_execute.c                                     :+:      :+:    :+:   */
+/*   ft_export_env.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aet-tale <aet-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/30 15:57:21 by aet-tale          #+#    #+#             */
-/*   Updated: 2024/08/01 19:02:08 by aet-tale         ###   ########.fr       */
+/*   Created: 2024/08/01 18:28:32 by aet-tale          #+#    #+#             */
+/*   Updated: 2024/08/01 18:55:46 by aet-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+
 #include "../minishell.h"
 
-t_be_executed	*give_executed(t_command *commands_list, t_pipe *list_pipes, t_tokens_list *tokens_list, t_env_list **env_list)
+void	ft_export_env(t_env_list	*env_list)
 {
-	t_be_executed	*to_execute;
-
-	to_execute = malloc(sizeof(t_be_executed));
-	if (!to_execute)
-		return (NULL);
-	to_execute->commands_list = commands_list;
-	to_execute->list_pipes = list_pipes;
-	to_execute->tokens_list = tokens_list;
-	to_execute->env_list = env_list;
-	return (to_execute);
+	while (env_list)
+	{
+		printf("declare -x %s", env_list->key);
+		if (env_list->value)
+			printf("=\"%s\"\n", env_list->value);
+		else
+			printf("\n");
+		env_list = env_list->next;
+	}
 }

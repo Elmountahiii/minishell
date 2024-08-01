@@ -1,9 +1,10 @@
 #include "../minishell.h"
 
-char	*our_pwd(char	**env)
+char	*our_pwd(void)
 {
-	(void)env;
-	char *pwd = getcwd(NULL, 0);
+	char *pwd;
+
+	pwd = getcwd(NULL, 0);
 	printf("%s\n", pwd);
 	// printf("pwd\n");
 	return (pwd);
