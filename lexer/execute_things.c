@@ -6,7 +6,7 @@
 /*   By: aet-tale <aet-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 11:35:05 by aet-tale          #+#    #+#             */
-/*   Updated: 2024/08/01 19:16:19 by aet-tale         ###   ########.fr       */
+/*   Updated: 2024/08/02 18:25:06 by aet-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,26 +83,28 @@ int	is_built_in(char	*command)
 	return (0);
 }
 
-void	execute_built_in(t_command	*command, t_pipe *list_of_pipes, t_env_list **env_list)
+void	execute_built_in(t_command	*command, t_pipe *list_of_pipes, t_env_list **env_list, int procss)
 {
-	(void)command;
+	// (void)command;
 	// work on output and input files
 	if (ft_strcmp(command->command_args[0], "echo") == 0)
-		our_echo(command->command_args);
+		our_echo(command->command_args, procss);
 	else if (ft_strcmp(command->command_args[0], "cd") == 0)
-		our_cd(command->command_args, env_list);
+		our_cd(command->command_args, env_list, procss);
 	else if (ft_strcmp(command->command_args[0], "pwd") == 0)
 		our_pwd();
 	else if (ft_strcmp(command->command_args[0], "unset") == 0)
-		our_unset(command->command_args[1], env_list);
+		our_unset(command->command_args[1], env_list, procss);
 	else if (ft_strcmp(command->command_args[0], "env") == 0)
-		our_env(*env_list);
+		our_env(*env_list, procss);
 	else if (ft_strcmp(command->command_args[0], "export") == 0 && command->command_args[1])
-		ft_export(command->command_args[1], env_list);
+		ft_export(command->command_args[1], env_list, procss);
 	else if (ft_strcmp(command->command_args[0], "export") == 0 && !command->command_args[1])
-		ft_export_env(*env_list);
-	else if (ft_strcmp(command->command_args[0], "exit") == 0)
-		exit(errno);
+		ft_export_env(*env_list, procss);
+	else if (ft_strcmp(command->command_args[0], "exit") == 0 && command->command_args[1])
+		our_exit(ft_atoi(command->command_args[1]));
+	else if (ft_strcmp(command->command_args[0], "exit") == 0 && !command->command_args[1])
+		our_exit(exit_status);
 	(void)list_of_pipes;
 }
 
@@ -110,20 +112,40 @@ void	execute_things(t_be_executed	*to_execute)
 {
 	t_command	*commands_list;
 	int 		status;
-	pid_t		pid;
+	pid_t		*pid;
+	int			i;
 
+	i = 0;
 	commands_list = to_execute->commands_list;
-
+	pid = malloc(sizeof(pid_t)*(to_execute->list_size));
+	if (to_execute->list_size == 1 && is_built_in(commands_list->command_args[0]))
+	{
+		execute_built_in(commands_list, to_execute->list_pipes, to_execute->env_list, 0);
+		return ;
+	}
 	while (commands_list)
 	{
-		if (!is_built_in(commands_list->command_args[0]))
+		pid[i] = fork();
+		if (pid[i] == 0)
 		{
-			pid = fork();
-			if (pid == 0)
+			if (is_built_in(commands_list->command_args[0]))
+			{
+				execute_built_in(commands_list, to_execute->list_pipes, to_execute->env_list, 1);
+			}
+			else
 				execute_command(commands_list, to_execute->list_pipes);
-		}else
-			execute_built_in(commands_list, to_execute->list_pipes, to_execute->env_list);
+		}
+		i++;
 		commands_list = commands_list->next;
 	}
-	while (waitpid(-1, &status, 0) > 0);
+	i = 0;
+	while (i < to_execute->list_size)
+	{
+		waitpid(pid[i], &status, 0);
+		if (WIFEXITED(status))
+			exit_status = WEXITSTATUS(status);
+		else if (WIFSIGNALED(status))
+			exit_status = WTERMSIG(status);
+		i++;
+	}
 }

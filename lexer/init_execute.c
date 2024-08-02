@@ -6,7 +6,7 @@
 /*   By: aet-tale <aet-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 15:57:21 by aet-tale          #+#    #+#             */
-/*   Updated: 2024/08/01 19:02:08 by aet-tale         ###   ########.fr       */
+/*   Updated: 2024/08/02 17:50:29 by aet-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,6 @@ t_be_executed	*give_executed(t_command *commands_list, t_pipe *list_pipes, t_tok
 	to_execute->list_pipes = list_pipes;
 	to_execute->tokens_list = tokens_list;
 	to_execute->env_list = env_list;
+	to_execute->list_size = count_list(commands_list);
 	return (to_execute);
 }

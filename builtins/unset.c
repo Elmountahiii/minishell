@@ -6,7 +6,7 @@
 /*   By: aet-tale <aet-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 11:49:55 by aet-tale          #+#    #+#             */
-/*   Updated: 2024/08/01 18:59:19 by aet-tale         ###   ########.fr       */
+/*   Updated: 2024/08/02 17:43:32 by aet-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,15 @@ void	free_env_node(t_env_list *node)
 	free(node);
 }
 
-void	our_unset(char *var, t_env_list   **list)
+void		our_unset(char *var, t_env_list   **list, int procss)
 {
 	t_env_list	*tmp;
 	t_env_list	*previous;
+	int			exit_stts;
 
 	tmp = *list;
 	previous = NULL;
+	exit_stts = 0;
 	while (tmp)
 	{
 		if (!ft_strcmp(var, tmp->key))
@@ -43,4 +45,6 @@ void	our_unset(char *var, t_env_list   **list)
 		previous = tmp;
 		tmp = tmp->next;
 	}
+	if (procss)
+		exit(exit_stts);
 }

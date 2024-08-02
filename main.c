@@ -6,16 +6,19 @@
 /*   By: aet-tale <aet-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 09:30:38 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/01 19:02:03 by aet-tale         ###   ########.fr       */
+/*   Updated: 2024/08/02 18:26:22 by aet-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+int exit_status = 0;
+
 void	ft_check_leaks(void)
 {
 	system("leaks minishell");
 }
+
 
 int	main(int argc, char *argv[], char *envp[])
 {
@@ -56,6 +59,7 @@ int	main(int argc, char *argv[], char *envp[])
 		to_execute = give_executed(commands_list, list_pipes, tokens_list, &env_list);
 		fill_command_paths(commands_list, env_list);
 		execute_things(to_execute);
+		// free things
 		// ft_print_command_info(commands_list);
 		// print_list_pipes(list_pipes);
 		// if (ft_strlen(line) > 0 && ft_strncmp(line, "exit", ft_strlen(line)) == 0)
