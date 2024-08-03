@@ -6,7 +6,7 @@
 /*   By: aet-tale <aet-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 09:30:52 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/02 17:51:29 by aet-tale         ###   ########.fr       */
+/*   Updated: 2024/08/03 12:08:56 by aet-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -189,10 +189,10 @@ t_list_files	*give_list_files(t_tokens_list	*list_tokens);
 void			assign_in(t_command *commands_list, t_list_files *list_of_files, t_pipe *list_pipes);
 void			assign_out(t_command *commands_list, t_list_files *list_of_files, t_pipe *list_pipes);
 void			fill_in_out(t_command *commands_list, t_list_files *list_of_files, t_pipe *list_pipes);
-void    		execute_things(t_be_executed *to_execute);
+void			execute_things(t_be_executed *to_execute);
 void			fill_command_paths(t_command *command_list, t_env_list *env);
 t_be_executed	*give_executed(t_command *commands_list, t_pipe *list_pipes, t_tokens_list *tokens_list, t_env_list **env_list);
 
 
-#endif
 void	ft_print_command_info(t_command *command);
+#endif
