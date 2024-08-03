@@ -6,7 +6,7 @@
 /*   By: aet-tale <aet-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 11:35:05 by aet-tale          #+#    #+#             */
-/*   Updated: 2024/08/03 11:01:18 by aet-tale         ###   ########.fr       */
+/*   Updated: 2024/08/03 12:03:52 by aet-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,9 +129,7 @@ void	execute_things(t_be_executed	*to_execute)
 		if (pid[i] == 0)
 		{
 			if (is_built_in(commands_list->command_args[0]))
-			{
 				execute_built_in(commands_list, to_execute->list_pipes, to_execute->env_list, 1);
-			}
 			else
 				execute_command(commands_list, to_execute->list_pipes);
 		}
