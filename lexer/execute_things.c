@@ -6,7 +6,7 @@
 /*   By: aet-tale <aet-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 11:35:05 by aet-tale          #+#    #+#             */
-/*   Updated: 2024/08/02 18:25:06 by aet-tale         ###   ########.fr       */
+/*   Updated: 2024/08/03 11:01:18 by aet-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,12 +117,12 @@ void	execute_things(t_be_executed	*to_execute)
 
 	i = 0;
 	commands_list = to_execute->commands_list;
-	pid = malloc(sizeof(pid_t)*(to_execute->list_size));
 	if (to_execute->list_size == 1 && is_built_in(commands_list->command_args[0]))
 	{
 		execute_built_in(commands_list, to_execute->list_pipes, to_execute->env_list, 0);
 		return ;
 	}
+	pid = malloc(sizeof(pid_t)*(to_execute->list_size));
 	while (commands_list)
 	{
 		pid[i] = fork();

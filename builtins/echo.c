@@ -31,19 +31,19 @@ void	our_echo(char **str, int procss)
 		{
 			if (str[i][0] == '?')
 			{
-				printf("%i\n", exit_status);
+				printf("%i", exit_status);
 			}
 			else
 			{
-				write(1, str[i], ft_strlen(str[i]));
+				printf("%s", str[i]);
 				if (str[i + 1])
-					write(1, " ", 1);
+					printf(" ");
 			}
 		}
 		i++;
 	}
 	if (new_line)
-		write(1, "\n", 1);
+		printf("\n");
 	if (procss)
 		exit(exit_sts);
 }
