@@ -38,14 +38,19 @@ void	our_export(char	*key, char	*value, t_env_list	**env_list, int procss)
 		exit(exit_stts);
 }
 
-void		ft_export(char	*key_value, t_env_list	**env_list, int procss)
+// void		ft_export(char	*key_value, t_env_list	**env_list, int procss)
+void	ft_export(t_command *command, t_be_executed	*to_execute, int procss)
 {
+	char		*key_value;
 	char 		*key;
 	char 		*value;
 	char 		*equal_ptr;
 	int			exit_sts;
+	t_env_list	**env_list;
 
 	exit_sts = 0;
+	key_value = command->command_args[1];
+	env_list = to_execute->env_list;
 	if (key_value[0] == '=')
 	{
 		printf("export: `%s': not a valid identifier", key_value);

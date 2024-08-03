@@ -16,12 +16,15 @@ int	is_nn(char *str)
 	return (0);
 }
 
-void	our_echo(char **str, int procss)
+void	our_echo(t_command *command, t_be_executed	*to_execute, int procss)
 {
+	(void )to_execute;
 	int new_line = 1;
 	int exit_sts = 0;
 	int i = 1;
+	char **str = command->command_args;
 
+	// dup2(command->fd_out, 1);
 	while (str[i])
 	{
 		if (i == 1 && is_nn(str[i]))
@@ -42,6 +45,7 @@ void	our_echo(char **str, int procss)
 		}
 		i++;
 	}
+	// dup2(5, 1);
 	if (new_line)
 		printf("\n");
 	if (procss)

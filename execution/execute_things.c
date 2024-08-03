@@ -6,106 +6,51 @@
 /*   By: aet-tale <aet-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 11:35:05 by aet-tale          #+#    #+#             */
-/*   Updated: 2024/08/03 12:11:18 by aet-tale         ###   ########.fr       */
+/*   Updated: 2024/08/03 16:40:57 by aet-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-char	**give_array_str(t_env_list *env_list)
+
+// ft_export(t_command *command, t_be_executed	*to_execute, int procss)
+void	execute_built_in(t_command	*command, t_be_executed	*to_execute, int procss)
 {
-	char **env;
-	char *line;
+	int exit_stts;
+	int std_out;
+	int std_int;
 
-	env = NULL;
-	line = NULL;
-	while (env_list)
-	{
-		line = ft_strjoin(env_list->key, env_list->value);
-		ft_append_to_list(env, line);
-		// don't forget to free the array
-		free(line);
-		env_list = env_list->next;
-	}
-	return (env);
-}
-
-void print_error(char *prefix, char *command)
-{
-	write(2, prefix, ft_strlen(prefix));
-	write(2, command, ft_strlen(command));
-	write(2, ": ", 2);
-	if (errno == 14)
-		write(2, "command not found\n", 18);
-	// else if (errno == 2)
-	// {
-			
-	// }
-}
-
-void	execute_command(t_command *command, t_pipe *list_of_pipes)
-{
-	char **env;
-	(void)list_of_pipes;
-	(void)command;
-
-	// workd on out ad in files
-	env = give_array_str(command->env_list);
-	execve(command->path, command->command_args, env);
-	print_error("minishell: ", command->command_args[0]);
-	// printf("erno: %i\n", errno);
-	// perror("mini:");
-	// printf("comaand: %i\n", command->index);
-	// (void)command;
-	// dup2(command->fd_in, 0);
-	// dup2(command->fd_out, 1);
-	// check if builtin
-	// close pipes
-	exit(errno);
-}
-
-int	is_built_in(char	*command)
-{
-	if (ft_strcmp(command, "echo") == 0)
-		return (1);
-	else if (ft_strcmp(command, "cd") == 0)
-		return (1);
-	else if (ft_strcmp(command, "pwd") == 0)
-		return (1);
-	else if (ft_strcmp(command, "export") == 0)
-		return (1);
-	else if (ft_strcmp(command, "unset") == 0)
-		return (1);
-	else if (ft_strcmp(command, "env") == 0)
-		return (1);
-	else if (ft_strcmp(command, "exit") == 0)
-		return (1);
-	return (0);
-}
-
-void	execute_built_in(t_command	*command, t_be_executed	*to_exectue, int procss)
-{
-	(void)to_exectue;
-	// work on output and input files
+	exit_stts = 0;
+	assign_input(command, to_execute);
+	assign_output(command, to_execute);
+	std_out = dup(1);
+	std_int = dup(0);
+	dup2(command->fd_out, 1);
 	if (ft_strcmp(command->command_args[0], "echo") == 0)
-		our_echo(command->command_args, procss);
+		our_echo(command, to_execute, procss);
 	else if (ft_strcmp(command->command_args[0], "cd") == 0)
-		our_cd(command->command_args, to_exectue->env_list, procss);
+		our_cd(command, to_execute, procss);
 	else if (ft_strcmp(command->command_args[0], "pwd") == 0)
-		our_pwd();
+		our_pwd(command, to_execute, procss);
 	else if (ft_strcmp(command->command_args[0], "unset") == 0)
-		our_unset(command->command_args[1], to_exectue->env_list, procss);
+		our_unset(command, to_execute, procss);
 	else if (ft_strcmp(command->command_args[0], "env") == 0)
-		our_env(*to_exectue->env_list, procss);
+		our_env(command, to_execute, procss);
 	else if (ft_strcmp(command->command_args[0], "export") == 0 && command->command_args[1])
-		ft_export(command->command_args[1], to_exectue->env_list, procss);
+		ft_export(command, to_execute, procss);
 	else if (ft_strcmp(command->command_args[0], "export") == 0 && !command->command_args[1])
-		ft_export_env(*to_exectue->env_list, procss);
+		ft_export_env(*to_execute->env_list, procss);
 	else if (ft_strcmp(command->command_args[0], "exit") == 0 && command->command_args[1])
 		our_exit(ft_atoi(command->command_args[1]));
 	else if (ft_strcmp(command->command_args[0], "exit") == 0 && !command->command_args[1])
 		our_exit(exit_status);
-	// (void)list_of_pipes;
+	dup2(std_out, 1);
+	dup2(std_int, 0);
+	// if (procss)
+	// {
+	//		exit(exit_stts);
+	// }
+	// optimize export and exit conditions
 }
 
 void	execute_things(t_be_executed	*to_execute)
@@ -131,7 +76,7 @@ void	execute_things(t_be_executed	*to_execute)
 			if (is_built_in(commands_list->command_args[0]))
 				execute_built_in(commands_list, to_execute, 1);
 			else
-				execute_command(commands_list, to_execute->list_pipes);
+				execute_command(commands_list, to_execute);
 		}
 		i++;
 		commands_list = commands_list->next;

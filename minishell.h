@@ -6,7 +6,7 @@
 /*   By: aet-tale <aet-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 09:30:52 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/03 12:08:56 by aet-tale         ###   ########.fr       */
+/*   Updated: 2024/08/03 16:41:44 by aet-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,22 +139,32 @@ char	*ft_expand(char *value, char **keys, char **env);
 char	*ft_get_key_value(char *key, char **env);
 int	ft_count_expand_alloc(char *str, char **env, char **keys);
 int is_valid_expand(char c);
+
+typedef struct t_be_executed
+{
+	t_command		*commands_list;
+	t_tokens_list	*tokens_list;
+	t_pipe			*list_pipes;
+	t_env_list		**env_list;
+	int				list_size;
+}t_be_executed;
+
 // builtins funcs and structs
 
 
 
-char		*our_pwd(void);
-int			our_env(t_env_list	*envp, int procss);
-void		our_echo(char **str, int procss);
+void		our_pwd(t_command *command, t_be_executed	*to_execute, int procss);
+void		our_env(t_command *command, t_be_executed	*to_execute, int procss);
+void		our_echo(t_command *command, t_be_executed	*to_execute, int procss);
 int			ft_strlen(char *s);
 void		add_back_for_env(t_env_list **list, char *str);
 t_env_list	*get_env_list(char **env);
 void		print_env_list(t_env_list* list);
 void		our_export(char	*key, char	*value, t_env_list	**env_list, int procss);
 void		ft_export_env(t_env_list *env_list, int procss);
-void		ft_export(char	*key_value, t_env_list	**env_list, int procss);
-void		our_unset(char *var, t_env_list   **list, int procss);
-void		our_cd(char	**path, t_env_list **env, int procss);
+void		ft_export(t_command *command, t_be_executed	*to_execute, int procss);
+void		our_unset(t_command *command, t_be_executed	*to_execute, int procss);
+void		our_cd(t_command *command, t_be_executed	*to_execute, int procss);
 void		our_exit(int last_proccess_status);
 
 // t_env_list	*get_env_list(char	**env)
@@ -171,28 +181,26 @@ typedef struct t_list_files
 	struct t_list_files	*next;
 }t_list_files;
 
-typedef struct t_be_executed
-{
-	t_command		*commands_list;
-	t_tokens_list	*tokens_list;
-	t_pipe			*list_pipes;
-	t_env_list		**env_list;
-	// int				last_exit_status;
-	int				list_size;
-}t_be_executed;
 
 int 			count_list(t_command *list);
 void			print_list_files(t_list_files  *list_files);
 t_list_files	*give_list_files(t_tokens_list	*list_tokens);
 
 // end of builtins
-void			assign_in(t_command *commands_list, t_list_files *list_of_files, t_pipe *list_pipes);
-void			assign_out(t_command *commands_list, t_list_files *list_of_files, t_pipe *list_pipes);
-void			fill_in_out(t_command *commands_list, t_list_files *list_of_files, t_pipe *list_pipes);
-void			execute_things(t_be_executed *to_execute);
+
 void			fill_command_paths(t_command *command_list, t_env_list *env);
 t_be_executed	*give_executed(t_command *commands_list, t_pipe *list_pipes, t_tokens_list *tokens_list, t_env_list **env_list);
 
 
-void	ft_print_command_info(t_command *command);
+// execution
+int				is_built_in(char	*command);
+void			execute_things(t_be_executed *to_execute);
+void			execute_command(t_command *command,	t_be_executed	*to_execute);
+void			assign_output(t_command	*command, t_be_executed	*to_execute);
+void			assign_input(t_command	*command, t_be_executed	*to_execute);
+int				get_file_fd(t_command	*command, char i_o);
+
+// end
+
+void			ft_print_command_info(t_command *command);
 #endif
