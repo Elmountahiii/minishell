@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_things.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aet-tale <aet-tale@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 11:35:05 by aet-tale          #+#    #+#             */
-/*   Updated: 2024/08/03 16:40:57 by aet-tale         ###   ########.fr       */
+/*   Updated: 2024/08/04 11:30:01 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@
 // ft_export(t_command *command, t_be_executed	*to_execute, int procss)
 void	execute_built_in(t_command	*command, t_be_executed	*to_execute, int procss)
 {
-	int exit_stts;
+	// int exit_stts;
 	int std_out;
 	int std_int;
 
-	exit_stts = 0;
+	// exit_stts = 0;
 	assign_input(command, to_execute);
 	assign_output(command, to_execute);
 	std_out = dup(1);
