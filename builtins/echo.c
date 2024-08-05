@@ -32,16 +32,9 @@ void	our_echo(t_command *command, t_be_executed	*to_execute, int procss)
 			new_line = 0;
 		}else
 		{
-			if (str[i][0] == '?')
-			{
-				printf("%i", exit_status);
-			}
-			else
-			{
-				printf("%s", str[i]);
-				if (str[i + 1])
-					printf(" ");
-			}
+			printf("%s", str[i]);
+			if (str[i + 1])
+				printf(" ");
 		}
 		i++;
 	}
