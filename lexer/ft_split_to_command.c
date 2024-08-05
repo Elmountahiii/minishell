@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 11:06:51 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/05 12:37:06 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/05 15:47:55 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,13 +59,9 @@ void	until_pipe(t_command *node, t_tokens_list *tokens)
 			continue ;
 		}
 		ft_handle_word(node, &tokens);
-		//printf("ft_handle_word done \n"	);
 		ft_handle_redirection(node, &tokens);
-		//printf("ft_handle_redirection done \n"	);
 		ft_handle_append(node, &tokens);
-		//printf("ft_handle_append done \n"	);
 		ft_handle_heredoc(node, &tokens);
-		//printf("ft_handle_heredoc done \n"	);
 	}
 	if (node->out_type == STDIN_IO)
 	{
