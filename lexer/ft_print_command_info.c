@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 12:31:21 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/07/31 15:08:12 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/05 12:44:00 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ void	ft_print_command_info(t_command	*command)
 		}
 		
 		printf("--------------------\n");
+		i = 0;
 		command = command->next;
 	}
 }

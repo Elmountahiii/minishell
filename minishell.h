@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aet-tale <aet-tale@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 09:30:52 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/03 16:41:44 by aet-tale         ###   ########.fr       */
+/*   Updated: 2024/08/05 12:42:31 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,9 +126,7 @@ void	ft_handle_word(t_command *node, t_tokens_list **tokens);
 t_command * ft_command_allocate();
 int	ft_command_next(t_command **commands_list, t_tokens_list **tokens_list);
 void	ft_skip_tokens_spaces(t_tokens_list **tokens);
-char	**ft_append_to_list_tokens(char **list, t_tokens_list **tokens);
 char	**ft_append_to_list(char **list, char *command);
-void	ft_handle_word(t_command *node, t_tokens_list **tokens);
 void	ft_handle_redirection(t_command *node, t_tokens_list **tokens);
 int		ft_is_env(char *str);
 void	ft_expend_tokens(t_tokens_list *commands, char **env);
