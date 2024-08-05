@@ -6,7 +6,7 @@
 /*   By: aet-tale <aet-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 12:42:46 by aet-tale          #+#    #+#             */
-/*   Updated: 2024/08/03 16:41:20 by aet-tale         ###   ########.fr       */
+/*   Updated: 2024/08/05 10:40:48 by aet-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,31 +43,35 @@ char	**give_array_str(t_env_list *env_list)
 	return (env);
 }
 
+void close_pipes(t_pipe *list_pipes)
+{
+	t_pipe	*tmp;
+
+	tmp = list_pipes;
+	while (tmp)
+	{
+		// if(tmp->fd[0] != )
+		close(tmp->fd[0]);
+		close(tmp->fd[1]);
+		tmp = tmp->next;
+	}
+}
+
 void	execute_command(t_command *command,	t_be_executed	*to_execute)
 {
 	char **env;
-	// (void)list_of_pipes;
 	(void)command;
-	// int std_out;
-	// int std_int;
+
 
 	assign_input(command, to_execute);
 	assign_output(command, to_execute);
-	// workd on out ad in files
-	// std_out = dup(1);
-	// std_int = dup(0);
+
 	dup2(command->fd_out, 1);
 	dup2(command->fd_in, 0);
+	close_pipes(command->list_pipes);
 	env = give_array_str(command->env_list);
 	execve(command->path, command->command_args, env);
 	print_error("minishell: ", command->command_args[0]);
-	// printf("erno: %i\n", errno);
-	// perror("mini:");
-	// printf("comaand: %i\n", command->index);
-	// (void)command;
-	// dup2(command->fd_in, 0);
-	// dup2(command->fd_out, 1);
-	// check if builtin
-	// close pipes
+
 	exit(errno);
 }

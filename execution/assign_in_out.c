@@ -6,7 +6,7 @@
 /*   By: aet-tale <aet-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 13:36:57 by aet-tale          #+#    #+#             */
-/*   Updated: 2024/08/03 15:18:24 by aet-tale         ###   ########.fr       */
+/*   Updated: 2024/08/05 11:10:04 by aet-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	get_file_fd(t_command	*command, char i_o)
 			fd = open(command->in_file, O_RDONLY | O_APPEND, 0644);
 		}else
 		{
-			fd = open(command->in_file, O_RDONLY | O_TRUNC, 0644);
+			fd = open(command->in_file, O_RDONLY, 0644);
 		}
 	}
 	else if (i_o == 'o')

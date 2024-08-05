@@ -3,17 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   execute_things.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aet-tale <aet-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 11:35:05 by aet-tale          #+#    #+#             */
-/*   Updated: 2024/08/04 11:30:01 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/05 11:09:45 by aet-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
 
-// ft_export(t_command *command, t_be_executed	*to_execute, int procss)
+void	close_other_pipes(t_command	*command, t_pipe *list_pipes)
+{
+	(void )command;
+	t_pipe	*tmp;
+
+	tmp = list_pipes;
+	while (tmp)
+	{
+		if (tmp->fd[0] != command->fd_in)
+			close(tmp->fd[0]);
+		if (tmp->fd[1] != command->fd_out)
+			close(tmp->fd[1]);
+		tmp = tmp->next;
+	}
+}
+
 void	execute_built_in(t_command	*command, t_be_executed	*to_execute, int procss)
 {
 	// int exit_stts;
@@ -23,8 +38,13 @@ void	execute_built_in(t_command	*command, t_be_executed	*to_execute, int procss)
 	// exit_stts = 0;
 	assign_input(command, to_execute);
 	assign_output(command, to_execute);
+	if (procss)
+	{
+		close_other_pipes(command, to_execute->list_pipes);
+	} 
 	std_out = dup(1);
 	std_int = dup(0);
+
 	dup2(command->fd_out, 1);
 	if (ft_strcmp(command->command_args[0], "echo") == 0)
 		our_echo(command, to_execute, procss);
@@ -46,6 +66,8 @@ void	execute_built_in(t_command	*command, t_be_executed	*to_execute, int procss)
 		our_exit(exit_status);
 	dup2(std_out, 1);
 	dup2(std_int, 0);
+	close(std_out);
+	close(std_int);
 	// if (procss)
 	// {
 	//		exit(exit_stts);
@@ -81,6 +103,7 @@ void	execute_things(t_be_executed	*to_execute)
 		i++;
 		commands_list = commands_list->next;
 	}
+	close_pipes(to_execute->list_pipes);
 	i = 0;
 	while (i < to_execute->list_size)
 	{

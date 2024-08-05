@@ -6,7 +6,7 @@
 /*   By: aet-tale <aet-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 09:30:52 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/03 16:41:44 by aet-tale         ###   ########.fr       */
+/*   Updated: 2024/08/05 10:50:49 by aet-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,6 +139,7 @@ char	*ft_expand(char *value, char **keys, char **env);
 char	*ft_get_key_value(char *key, char **env);
 int	ft_count_expand_alloc(char *str, char **env, char **keys);
 int is_valid_expand(char c);
+void close_pipes(t_pipe *list_pipes);
 
 typedef struct t_be_executed
 {
@@ -166,6 +167,7 @@ void		ft_export(t_command *command, t_be_executed	*to_execute, int procss);
 void		our_unset(t_command *command, t_be_executed	*to_execute, int procss);
 void		our_cd(t_command *command, t_be_executed	*to_execute, int procss);
 void		our_exit(int last_proccess_status);
+char	**give_array_str(t_env_list *env_list);
 
 // t_env_list	*get_env_list(char	**env)
 
