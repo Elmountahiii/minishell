@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 14:47:39 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/05 13:17:24 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/05 15:34:50 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,13 @@ char	*ft_expand(char *value, char **keys, t_env_list *env)
 	i = 0;
 	j = 0;
 	index = 0;
+	
+	// add itoia
+	// if (keys && keys[0][0] == '?')
+	// {
+	// printf("keys[0] = %s\n", keys[0]);
+	// 	return (exit_status(keys[0]);	
+	// }
 	char *new_value = ft_calloc(ft_count_expand_alloc(value, env, keys) + 1, sizeof(char));
 	if (!new_value)
 		return (NULL);

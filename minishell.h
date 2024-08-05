@@ -6,7 +6,7 @@
 /*   By: aet-tale <aet-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 09:30:52 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/05 14:56:03 by aet-tale         ###   ########.fr       */
+/*   Updated: 2024/08/05 15:48:50 by aet-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,6 +140,12 @@ int	ft_count_expand_alloc(char *str, t_env_list *env, char **keys);
 int is_valid_expand(char c);
 void close_pipes(t_pipe *list_pipes);
 char *find_value(char * key ,t_env_list *env);
+
+
+// cleaning functions
+void	ft_free_array(char **array);
+void	ft_clean_tokens(t_tokens_list *tokens_list);
+void	ft_clean_commands(t_command *commands_list);
 
 typedef struct t_be_executed
 {

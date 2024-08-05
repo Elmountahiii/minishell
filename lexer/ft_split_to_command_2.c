@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 14:43:22 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/05 13:18:44 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/05 15:28:19 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,13 @@ char	**ft_append_to_list_tokens(char **list, t_tokens_list **tokens)
 		new_list[len] = ft_strdup(list[len]);
 		len++;
 	}
-	new_list[len] = ft_join(NULL, tokens);
+	if (*tokens && (*tokens)->type == ENV)
+	{
+		new_list[len] = ft_strdup((*tokens)->value);
+		*tokens = (*tokens)->next;
+	}
+	else
+		new_list[len] = ft_join(NULL, tokens);
 	new_list[len + 1] = NULL;
 	return (new_list);
 }
