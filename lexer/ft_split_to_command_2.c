@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 14:43:22 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/05 15:28:19 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/05 15:52:11 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ char	**ft_append_to_list_tokens(char **list, t_tokens_list **tokens)
 	else
 		new_list[len] = ft_join(NULL, tokens);
 	new_list[len + 1] = NULL;
+	ft_free_array(list);
 	return (new_list);
 }
 
@@ -69,6 +70,7 @@ char	**ft_append_to_list(char **list, char *command)
 	}
 	new_list[len] = command;
 	new_list[len + 1] = NULL;
+	ft_free_array(list);
 	return (new_list);
 }
 
@@ -83,8 +85,6 @@ void	ft_handle_word(t_command *node, t_tokens_list **tokens)
 	{
 		node->command_args = ft_append_to_list_tokens(node->command_args,
 				tokens);
-		// if (*tokens)
-		// 	*tokens = (*tokens)->next;
 	}
 }
 

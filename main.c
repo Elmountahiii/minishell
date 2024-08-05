@@ -6,7 +6,7 @@
 /*   By: aet-tale <aet-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 09:30:38 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/05 18:12:20 by aet-tale         ###   ########.fr       */
+/*   Updated: 2024/08/05 18:18:18 by aet-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,16 +45,25 @@ int	main(int argc, char *argv[], char *envp[])
 			break ;
 		}
 		add_history(line);
+		if (ft_strlen(line) > 0 && ft_strncmp(line, "exit", ft_strlen(line)) == 0)
+		{
+			printf("exit\n");
+			break;
+		}
 		tokens_list = ft_init_token_list(line);
 		//ft_print_tokens_info(tokens_list);
 		// free then constinue
 		if (ft_check_syntax(tokens_list))
+		{
+			ft_clean_tokens(tokens_list);
 			continue ;
 		// printf("envii[0] = %s\n", envii[0]);
 		// continue ;
 		ft_expend_tokens(tokens_list, env_list); // change it to our env
 		// list_of_files = give_list_files(tokens_list);
 		list_pipes = give_list_pipes(tokens_list);
+		
+		ft_expend_tokens(tokens_list, (env_list));
 		commands_list = ft_split_to_command(tokens_list, list_pipes);
 		fill_command_paths(commands_list, env_list);
 		to_execute = give_executed(commands_list, list_pipes, tokens_list, &env_list);
