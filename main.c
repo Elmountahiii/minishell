@@ -6,13 +6,13 @@
 /*   By: aet-tale <aet-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 09:30:38 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/05 10:52:01 by aet-tale         ###   ########.fr       */
+/*   Updated: 2024/08/05 14:49:23 by aet-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int exit_status = 0;
+// int exit_status = 0;
 
 void	ft_check_leaks(void)
 {

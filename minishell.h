@@ -6,7 +6,7 @@
 /*   By: aet-tale <aet-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 09:30:52 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/05 10:50:49 by aet-tale         ###   ########.fr       */
+/*   Updated: 2024/08/05 14:49:49 by aet-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 #include <errno.h>
 #include "./lib/lib.h"
 
-extern int exit_status;
+// extern int exit_status;
 
 typedef enum {
 	WORD,
@@ -38,6 +38,7 @@ typedef enum {
 	ENV,
 } t_token_type;
 
+int exit_status;
 
 typedef enum {  STDIN_IO, STDOUT_IO, FILE_IO, PIPE_IO } IOType;
 //DEFAULT_IO
