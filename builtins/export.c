@@ -51,6 +51,11 @@ void	ft_export(t_command *command, t_be_executed	*to_execute, int procss)
 	exit_sts = 0;
 	key_value = command->command_args[1];
 	env_list = to_execute->env_list;
+	if (!command->command_args[1])
+	{
+		ft_export_env(*env_list, procss);
+		return ;
+	}
 	if (key_value[0] == '=')
 	{
 		printf("export: `%s': not a valid identifier", key_value);
