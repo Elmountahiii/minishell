@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 09:30:52 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/05 12:47:11 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/05 13:21:29 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ int		ft_count_lexer_tokens(char *str);
 int		ft_count_skip(char *str);
 char	*ft_lexer_substr(char *line);
 char	**ft_extract(char *line);
-t_tokens_list	*ft_init_token_list(char *line, char **env);
+t_tokens_list	*ft_init_token_list(char *line);
 void	ft_print_tokens_info(t_tokens_list *head);
 t_command  *ft_split_to_command(t_tokens_list *tokens_list, t_pipe *list_pipes);
 void	until_pipe(t_command *node, t_tokens_list *tokens);
@@ -129,15 +129,16 @@ void	ft_skip_tokens_spaces(t_tokens_list **tokens);
 char	**ft_append_to_list(char **list, char *command);
 void	ft_handle_redirection(t_command *node, t_tokens_list **tokens);
 int		ft_is_env(char *str);
-void	ft_expend_tokens(t_tokens_list *commands, char **env);
+void	ft_expend_tokens(t_tokens_list *commands, t_env_list *env);
 char	*ft_get_key(char *str, int i);
 char	*ft_append_char(char *str, char c);
 char	*ft_get_key(char *str, int i);
-char	*ft_expand(char *value, char **keys, char **env);
+char	*ft_expand(char *value, char **keys, t_env_list *env);
 char	*ft_get_key_value(char *key, char **env);
-int	ft_count_expand_alloc(char *str, char **env, char **keys);
+int	ft_count_expand_alloc(char *str, t_env_list *env, char **keys);
 int is_valid_expand(char c);
 void close_pipes(t_pipe *list_pipes);
+char *find_value(char * key ,t_env_list *env);
 
 typedef struct t_be_executed
 {

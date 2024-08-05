@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 14:43:22 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/05 12:44:24 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/05 13:18:44 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,18 +50,18 @@ char	**ft_append_to_list(char **list, char *command)
 	if (!command)
 		return (list);
 	len = 0;
-	while (list[len])
+	while (list && list[len])
 		len++;
 	new_list = calloc(len + 2, sizeof(char *));
 	if (!new_list)
 		return (NULL);
 	len = 0;
-	while (list[len])
+	while ( list && list[len])
 	{
 		new_list[len] = ft_strdup(list[len]);
 		len++;
 	}
-	new_list[len] = ft_clean_string(ft_split_clean(command));
+	new_list[len] = command;
 	new_list[len + 1] = NULL;
 	return (new_list);
 }

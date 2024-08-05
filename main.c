@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 09:30:38 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/05 12:46:49 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/05 13:24:02 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,13 +48,14 @@ int	main(int argc, char *argv[], char *envp[])
 			break ;
 		}
 		add_history(line);
-		tokens_list = ft_init_token_list(line, envp); // change it to our env
+		tokens_list = ft_init_token_list(line); 
 		//ft_print_tokens_info(tokens_list);
 
 
 		if (ft_check_syntax(tokens_list))
 			continue ;
-		// ft_expend_tokens(tokens_list, envp);
+		ft_expend_tokens(tokens_list, (env_list)); // change it to our env
+		ft_print_tokens_info(tokens_list);
 		// list_of_files = give_list_files(tokens_list);
 		list_pipes = give_list_pipes(tokens_list);
 		commands_list = ft_split_to_command(tokens_list, list_pipes);

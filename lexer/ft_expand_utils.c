@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 15:33:24 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/04 12:51:41 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/05 13:21:06 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,20 @@ char	*ft_get_key_value(char *key ,char **env)
 	i = 0;
 	while (env && env[i])
 	{
+		printf("env[%d] : %s\n", i, env[i]);
+		i++;
+	}
+	exit(0);
+	
+	while (env && env[i])
+	{
 		if (ft_strnstr(env[i], key, ft_strlen(key)))
-			return (ft_strchr(env[i], '='));
+			return (env[i]);
 		i ++;
 	}
 	return (NULL);
 }
-int	ft_count_expand_alloc(char *str, char **env, char **keys)
+int	ft_count_expand_alloc(char *str, t_env_list *env, char **keys)
 {
 	int	i;
 	int	count;
@@ -41,7 +48,7 @@ int	ft_count_expand_alloc(char *str, char **env, char **keys)
 			i ++;
 			while (str[i] && is_valid_expand(str[i]))
 				i++;
-			count += ft_strlen(ft_get_key_value(keys[index], env));
+			count += ft_strlen(find_value(keys[index], env));
 			index++;
 		}
 		else

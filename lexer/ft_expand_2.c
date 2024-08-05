@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 14:47:39 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/04 12:47:08 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/05 13:17:24 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,18 @@ int	expand_join(char *new_value, char *value, int index)
 	return (index);
 }
 
-char	*ft_expand(char *value, char **keys, char **env)
+char *find_value(char * key ,t_env_list *env)
+{
+	while (env)
+	{
+		if (ft_strcmp(env->key, key) == 0)
+			return (env->value);
+		env = env->next;
+	}
+	return (NULL);
+}
+
+char	*ft_expand(char *value, char **keys, t_env_list *env)
 {
 	int	i;
 	int j;
@@ -91,7 +102,7 @@ char	*ft_expand(char *value, char **keys, char **env)
 			i++;
 			while (value[i] && is_valid_expand(value[i]))
 				i++;
-			j = expand_join(new_value, ft_get_key_value(keys[index], env), j);
+			j = expand_join(new_value, find_value(keys[index],env), j);
 			index++;			
 		}else
 			new_value[j++] = value[i++];
