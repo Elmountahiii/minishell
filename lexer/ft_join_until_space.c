@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_join_until_space.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aet-tale <aet-tale@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/26 10:01:16 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/01 12:41:06 by aet-tale         ###   ########.fr       */
+/*   Updated: 2024/08/05 12:42:42 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ char	*ft_join(char *old, t_tokens_list **tokens)
 	while (*tokens && ft_is_valid_word(*tokens))
 	{
 		tmp = new_str;
-		new_str = ft_custom_strjoin(new_str, (*tokens));
+		new_str = ft_custom_strjoin(new_str, *tokens);
 		free(tmp);
 		*tokens = (*tokens)->next;
 	}

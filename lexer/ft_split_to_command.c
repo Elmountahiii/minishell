@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 11:06:51 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/07/29 16:01:08 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/05 12:37:06 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_handle_append(t_command *node, t_tokens_list **tokens)
 {
-	if (!tokens || !*tokens)
+	if (!tokens || !*tokens) 
 		return ;
 	if ((*tokens)->type == APPEND)
 	{
@@ -28,12 +28,13 @@ void	ft_handle_append(t_command *node, t_tokens_list **tokens)
 			*tokens = (*tokens)->next;
 		}
 	}
+	
 }
 
 void	ft_handle_heredoc(t_command *node, t_tokens_list **tokens)
 {
 	if (!tokens || !*tokens)
-		return ;
+		return;
 	if ((*tokens)->type == HEREDOC)
 	{
 		node->in_type = FILE_IO;
@@ -52,12 +53,19 @@ void	until_pipe(t_command *node, t_tokens_list *tokens)
 {
 	while (tokens && tokens->type != PIPE)
 	{
-		ft_handle_redirection(node, &tokens);
-		ft_handle_append(node, &tokens);
-		ft_handle_heredoc(node, &tokens);
-		ft_handle_word(node, &tokens);
-		if (tokens && tokens->type == SPACE)
+		if (tokens->type == SPACE)
+		{
 			tokens = tokens->next;
+			continue ;
+		}
+		ft_handle_word(node, &tokens);
+		//printf("ft_handle_word done \n"	);
+		ft_handle_redirection(node, &tokens);
+		//printf("ft_handle_redirection done \n"	);
+		ft_handle_append(node, &tokens);
+		//printf("ft_handle_append done \n"	);
+		ft_handle_heredoc(node, &tokens);
+		//printf("ft_handle_heredoc done \n"	);
 	}
 	if (node->out_type == STDIN_IO)
 	{
@@ -78,10 +86,10 @@ t_command	*ft_split_to_command(t_tokens_list *tokens_list, t_pipe *list_pipes)
 	while (commands_list && tokens_list)
 	{
 		until_pipe(commands_list, tokens_list);
-		commands_list->index = index;
-		commands_list->list_pipes = list_pipes;
 		while (tokens_list && tokens_list->type != PIPE)
 			tokens_list = tokens_list->next;
+		commands_list->index = index;
+		commands_list->list_pipes = list_pipes;
 		if (ft_command_next(&commands_list, &tokens_list))
 			break ;
 		commands_list->next = ft_command_allocate();
