@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_things.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aet-tale <aet-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 11:35:05 by aet-tale          #+#    #+#             */
-/*   Updated: 2024/08/05 15:38:03 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/05 16:13:08 by aet-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,9 @@ void	execute_built_in(t_command	*command, t_be_executed	*to_execute, int procss)
 		ft_export(command, to_execute, procss);
 	else if (ft_strcmp(command->command_args[0], "export") == 0 && !command->command_args[1])
 		ft_export_env(*to_execute->env_list, procss);
-	else if (ft_strcmp(command->command_args[0], "exit") == 0 && command->command_args[1])
-		our_exit(ft_atoi(command->command_args[1]));
-	else if (ft_strcmp(command->command_args[0], "exit") == 0 && !command->command_args[1])
-		our_exit(exit_status);
+	else if (ft_strcmp(command->command_args[0], "exit") == 0)
+		our_exit(command, to_execute, procss);
+
 	dup2(std_out, 1);
 	dup2(std_int, 0);
 	close(std_out);

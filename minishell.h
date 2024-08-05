@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aet-tale <aet-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 09:30:52 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/05 15:09:20 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/05 15:57:28 by aet-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 #include <errno.h>
 #include "./lib/lib.h"
 
-extern int exit_status;
+// extern int exit_status;
 
 typedef enum {
 	WORD,
@@ -38,6 +38,7 @@ typedef enum {
 	ENV,
 } t_token_type;
 
+int exit_status;
 
 typedef enum {  STDIN_IO, STDOUT_IO, FILE_IO, PIPE_IO } IOType;
 //DEFAULT_IO
@@ -171,8 +172,8 @@ void		ft_export_env(t_env_list *env_list, int procss);
 void		ft_export(t_command *command, t_be_executed	*to_execute, int procss);
 void		our_unset(t_command *command, t_be_executed	*to_execute, int procss);
 void		our_cd(t_command *command, t_be_executed	*to_execute, int procss);
-void		our_exit(int last_proccess_status);
-char	**give_array_str(t_env_list *env_list);
+void		our_exit(t_command *command, t_be_executed	*to_execute, int procss);
+char		**give_array_str(t_env_list *env_list);
 
 // t_env_list	*get_env_list(char	**env)
 
