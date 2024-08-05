@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 14:53:54 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/05 12:57:03 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/05 15:10:56 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ t_tokens_list	*ft_fill_tokens_list(char **tokens_words)
 	head = NULL;
 	while (tokens_words[i])
 	{
-		token = calloc(1, sizeof(t_tokens_list));
+		token = ft_calloc(1, sizeof(t_tokens_list));
 		if (!token)
 			return (NULL);
 		if (head == NULL)
@@ -72,7 +72,8 @@ t_tokens_list	*ft_init_token_list(char *line)
 	if (!tokens_words)
 		return (NULL);
 	tokens_list = ft_fill_tokens_list(tokens_words);
-	//ft_expend_tokens(tokens_list, env);
+	ft_free_array(tokens_words);
+	free(line);
 	if (!tokens_list)
 		return (NULL);
 	return (tokens_list);

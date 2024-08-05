@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_things.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aet-tale <aet-tale@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 11:35:05 by aet-tale          #+#    #+#             */
-/*   Updated: 2024/08/05 11:09:45 by aet-tale         ###   ########.fr       */
+/*   Updated: 2024/08/05 15:38:03 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,10 +68,10 @@ void	execute_built_in(t_command	*command, t_be_executed	*to_execute, int procss)
 	dup2(std_int, 0);
 	close(std_out);
 	close(std_int);
-	// if (procss)
-	// {
-	//		exit(exit_stts);
-	// }
+	if (procss)
+	{
+		exit(exit_status);
+	}
 	// optimize export and exit conditions
 }
 
