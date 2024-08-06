@@ -58,7 +58,7 @@ void	ft_export(t_command *command, t_be_executed	*to_execute, int procss)
 	}
 	if (key_value[0] == '=')
 	{
-		printf("export: `%s': not a valid identifier", key_value);
+		printf("export: `%s': not a valid identifier\n", key_value);
 		return ;
 	}
 	equal_ptr = ft_strchr(key_value, '=');
