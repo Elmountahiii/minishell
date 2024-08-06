@@ -21,13 +21,14 @@
 #include <string.h>
 #include <fcntl.h>
 #include <errno.h>
+#include <sys/wait.h>
 #include "./lib/lib.h"
 
-// extern int exit_status;
+extern int exit_status;
 
 typedef enum {
 	WORD,
-	SPACE,
+	SPACE_TOKEN,
 	PIPE,
 	SINGLE_QUOTE_WORD,
 	DOUBLE_QUOTE_WORD,
@@ -37,8 +38,6 @@ typedef enum {
 	HEREDOC,
 	ENV,
 } t_token_type;
-
-int exit_status;
 
 typedef enum {  STDIN_IO, STDOUT_IO, FILE_IO, PIPE_IO } IOType;
 //DEFAULT_IO

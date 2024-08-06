@@ -29,7 +29,7 @@ $(minibuiltins): $(bSRC)
 
 $(NAME): $(OBJ)
 	@cd lib && make
-	@$(CC) $(CFLAGS) lib/lib.a $(READLINE) -o $(NAME) $(OBJ)
+	@$(CC) $(CFLAGS) $(OBJ) lib/lib.a $(READLINE) -o $(NAME)
 
 clean:
 	@cd lib && make clean

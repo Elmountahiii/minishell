@@ -29,7 +29,7 @@ t_token_type	ft_token_analyzer(char *token)
 	if (token && token[0] == '\"')
 		return (DOUBLE_QUOTE_WORD);
 	if (ft_is_all_space(token))
-		return (SPACE);
+		return (SPACE_TOKEN);
 	if (ft_strncmp(token, "$", 1) == 0)
 		return (ENV);
 	return (WORD);

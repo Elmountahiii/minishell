@@ -54,7 +54,7 @@ void	until_pipe(t_command *node, t_tokens_list *tokens)
 {
 	while (tokens && tokens->type != PIPE)
 	{
-		if (tokens->type == SPACE)
+		if (tokens->type == SPACE_TOKEN)
 		{
 			tokens = tokens->next;
 			continue ;

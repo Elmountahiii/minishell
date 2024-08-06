@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-// int exit_status = 0;
+int exit_status = 0;
 
 void	ft_check_leaks(void)
 {
