@@ -18,7 +18,15 @@ void print_error(char *prefix, char *command)
 	write(2, command, ft_strlen(command));
 	write(2, ": ", 2);
 	if (errno == 14)
+	{
 		write(2, "command not found\n", 18);
+		exit(127);
+	}
+	if (errno == 8)
+	{
+		write(2, "cannot execute binary file: Exec format error\n", 46);
+		exit(126);
+	}
 	// else if (errno == 2)
 	// {
 			
@@ -101,15 +109,10 @@ void	execute_command(t_command *command,	t_be_executed	*to_execute)
 	assign_output(command, to_execute);
 	dup2(command->fd_out, 1);
 	dup2(command->fd_in, 0);
-	close_pipes(command->list_pipes);
 	env = give_array_str(*to_execute->env_list);
-	// write(1, env[0], ft_strlen(env[0]));
-	// write(1, "command->path\n", ft_strlen("command->path\n"));
-	// printf("hh\n");
-	// printf("kk %s\n", env[0]);
-	// printf("pp\n");
-	// printf("env[0]%s\n", env[0]);
 	execve(command->path, command->command_args, env);
 	print_error("minishell: ", command->command_args[0]);
-	exit(errno);
+	close_pipes(command->list_pipes);
+	
+	// exit(errno);
 }

@@ -79,6 +79,7 @@ int	main(int argc, char *argv[], char *envp[])
 		to_execute = give_executed(commands_list, list_pipes, tokens_list, &env_list);
 		execute_things(to_execute);
 		close_files(list_of_files);
+		free(to_execute);
 		// ft_clean_commands(commands_list);
 		// free things
 		// ft_print_command_info(commands_list);
