@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 15:04:28 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/07/29 16:02:19 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/06 11:34:03 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_command	*ft_command_allocate(void)
 {
 	t_command	*command;
 
-	command = calloc(1, sizeof(t_command));
+	command = ft_calloc(1, sizeof(t_command));
 	if (!command)
 		return (NULL);
 	command->command_args = calloc(1, sizeof(char *));

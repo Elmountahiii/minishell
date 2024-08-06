@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 12:31:21 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/05 12:44:00 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/06 11:34:20 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ void	ft_print_command_info(t_command	*command)
 		printf("index : %d\n", command->index);
 		printf("fd_in : %d\n", command->fd_in);
 		printf("fd_out : %d\n", command->fd_out);
+		printf("dil : %s\n", command->dil);
 		while (command->command_args[i])
 		{
 			printf("command_args[%d] : %s\n", i, command->command_args[i]);

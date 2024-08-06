@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aet-tale <aet-tale@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 09:30:52 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/05 18:01:02 by aet-tale         ###   ########.fr       */
+/*   Updated: 2024/08/06 11:55:37 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ typedef struct s_command {
 	IOType				out_type;
 	char				*in_file;
 	char				*out_file;
+	char				*dil;
 	int					fd_in;
 	int					fd_out;
 	bool				is_append;
@@ -141,6 +142,11 @@ int is_valid_expand(char c);
 void close_pipes(t_pipe *list_pipes);
 char *find_value(char * key ,t_env_list *env);
 
+// heredoc
+void	ft_init_heredoc(t_command *command);
+void	ft_open_heredoc(t_command *command);
+void	ft_fill_heredoc(t_command *command);
+void	ft_clean_heredoc(t_command *command);
 
 // cleaning functions
 void	ft_free_array(char **array);

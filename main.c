@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aet-tale <aet-tale@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 09:30:38 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/05 18:26:40 by aet-tale         ###   ########.fr       */
+/*   Updated: 2024/08/06 11:55:49 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,9 @@ int	main(int argc, char *argv[], char *envp[])
 		list_pipes = give_list_pipes(tokens_list);
 		ft_expend_tokens(tokens_list, (env_list));
 		commands_list = ft_split_to_command(tokens_list, list_pipes);
+		ft_init_heredoc(commands_list);
+		// ft_print_command_info(commands_list);
+		// continue ;
 		fill_command_paths(commands_list, env_list);
 		to_execute = give_executed(commands_list, list_pipes, tokens_list, &env_list);
 		execute_things(to_execute);

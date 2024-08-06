@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 11:06:51 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/05 15:47:55 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/06 11:33:39 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,8 @@ void	ft_handle_heredoc(t_command *node, t_tokens_list **tokens)
 		ft_skip_tokens_spaces(tokens);
 		if (*tokens)
 		{
-			node->in_file = ft_strdup((*tokens)->value);
+			node->in_file = ft_strjoin("/tmp/herdoc", ft_itoa(node->index));
+			node->dil = ft_strdup((*tokens)->value);
 			*tokens = (*tokens)->next;
 		}
 	}
@@ -81,10 +82,10 @@ t_command	*ft_split_to_command(t_tokens_list *tokens_list, t_pipe *list_pipes)
 	head = commands_list;
 	while (commands_list && tokens_list)
 	{
+		commands_list->index = index;
 		until_pipe(commands_list, tokens_list);
 		while (tokens_list && tokens_list->type != PIPE)
 			tokens_list = tokens_list->next;
-		commands_list->index = index;
 		commands_list->list_pipes = list_pipes;
 		if (ft_command_next(&commands_list, &tokens_list))
 			break ;

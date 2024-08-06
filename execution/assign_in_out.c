@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   assign_in_out.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aet-tale <aet-tale@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 13:36:57 by aet-tale          #+#    #+#             */
-/*   Updated: 2024/08/05 11:10:04 by aet-tale         ###   ########.fr       */
+/*   Updated: 2024/08/06 11:51:41 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,11 @@ int	get_pipe_fd(t_pipe *list_pipes, int index, char c)
 
 void	assign_input(t_command	*command, t_be_executed	*to_execute)
 {
-	if (command->in_type == FILE_IO)
+	if (command->in_type == FILE_IO && command->is_heredoc)
+	{
+		return ;
+	}
+	else if (command->in_type == FILE_IO)
 	{
 		command->fd_in = get_file_fd(command, 'i');
 	}
