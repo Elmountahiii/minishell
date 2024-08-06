@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_commmand.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aet-tale <aet-tale@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 12:42:46 by aet-tale          #+#    #+#             */
-/*   Updated: 2024/08/05 18:11:40 by aet-tale         ###   ########.fr       */
+/*   Updated: 2024/08/06 14:26:15 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,7 @@ void	execute_command(t_command *command,	t_be_executed	*to_execute)
 	assign_output(command, to_execute);
 	dup2(command->fd_out, 1);
 	dup2(command->fd_in, 0);
+	close_pipes(command->list_pipes);
 	env = give_array_str(*to_execute->env_list);
 	close_pipes(command->list_pipes);
 	execve(command->path, command->command_args, env);
