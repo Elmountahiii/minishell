@@ -172,13 +172,14 @@ int			ft_strlen(char *s);
 void		add_back_for_env(t_env_list **list, char *str);
 t_env_list	*get_env_list(char **env);
 void		print_env_list(t_env_list* list);
-void		our_export(char	*key, char	*value, t_env_list	**env_list, int procss);
 void		ft_export_env(t_env_list *env_list, int procss);
 void		ft_export(t_command *command, t_be_executed	*to_execute, int procss);
 void		our_unset(t_command *command, t_be_executed	*to_execute, int procss);
 void		our_cd(t_command *command, t_be_executed	*to_execute, int procss);
 void		our_exit(t_command *command, t_be_executed	*to_execute, int procss);
 char		**give_array_str(t_env_list *env_list);
+void		close_other_pipes(t_command	*command, t_pipe *list_pipes);
+void		add_to_env(char	*key, char	*value, t_env_list	**env_list);
 
 // t_env_list	*get_env_list(char	**env)
 

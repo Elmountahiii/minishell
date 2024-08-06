@@ -35,10 +35,10 @@ void	our_unset(t_command *command, t_be_executed	*to_execute, int procss)
 			if (*to_execute->env_list == tmp)
 			{
 				*to_execute->env_list = (*to_execute->env_list)->next;
-				free_env_node(tmp);
+				// free_env_node(tmp);
 			}else {
 				previous->next = tmp->next;
-				free_env_node(tmp);
+				// free_env_node(tmp);
 			}
 			break;
 		}

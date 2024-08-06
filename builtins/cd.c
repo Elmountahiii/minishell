@@ -19,9 +19,9 @@ void	our_cd(t_command *command, t_be_executed	*to_execute, int procss)
 
 	exit_sts = 0;
 	path = command->command_args;
-	our_export("OLDPWD", getcwd(NULL, 0), to_execute->env_list, 0);
+	add_to_env("OLDPWD", getcwd(NULL, 0), to_execute->env_list);
 	chdir(path[1]);
-	our_export("PWD", getcwd(NULL, 0), to_execute->env_list, 0);
+	add_to_env("PWD", getcwd(NULL, 0), to_execute->env_list);
 	if (procss)
 		exit(exit_sts);
 }

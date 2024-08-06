@@ -19,7 +19,7 @@ void	ft_check_leaks(void)
 	system("leaks minishell");
 }
 
-void close_files(t_list_files *list_of_files)
+void close_files(t_list_files	*list_of_files)
 {
 	t_list_files	*tmp;
 
@@ -38,8 +38,8 @@ int	main(int argc, char *argv[], char *envp[])
 	
 	t_tokens_list	*tokens_list = NULL;
 	t_command		*commands_list = NULL;
-	t_be_executed	*to_execute;
 	t_env_list		*env_list;
+	t_be_executed	*to_execute;
 	t_list_files	*list_of_files;
 	t_pipe			*list_pipes;
 	char			*line;
