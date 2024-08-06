@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_commmand.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aet-tale <aet-tale@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 12:42:46 by aet-tale          #+#    #+#             */
-/*   Updated: 2024/08/05 18:11:40 by aet-tale         ###   ########.fr       */
+/*   Updated: 2024/08/06 14:26:15 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,11 @@ void print_error(char *prefix, char *command)
 	{
 		write(2, "cannot execute binary file: Exec format error\n", 46);
 		exit(126);
+	}
+	if (errno == 2)
+	{
+		write(2, "No such file or directory\n", 26);
+		exit(127);
 	}
 	// else if (errno == 2)
 	// {
@@ -109,10 +114,10 @@ void	execute_command(t_command *command,	t_be_executed	*to_execute)
 	assign_output(command, to_execute);
 	dup2(command->fd_out, 1);
 	dup2(command->fd_in, 0);
+	close_pipes(command->list_pipes);
 	env = give_array_str(*to_execute->env_list);
 	execve(command->path, command->command_args, env);
 	print_error("minishell: ", command->command_args[0]);
-	close_pipes(command->list_pipes);
 	
 	// exit(errno);
 }
