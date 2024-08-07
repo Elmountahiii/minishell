@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_things.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aet-tale <aet-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 11:35:05 by aet-tale          #+#    #+#             */
-/*   Updated: 2024/08/06 11:51:27 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/07 18:50:23 by aet-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	execute_built_in(t_command	*command, t_be_executed	*to_execute, int procss)
 	else if (ft_strcmp(command->command_args[0], "pwd") == 0)
 		our_pwd(command, to_execute, procss);
 	else if (ft_strcmp(command->command_args[0], "unset") == 0)
-		our_unset(command, to_execute, procss);
+		ft_unset(command, to_execute, procss);
 	else if (ft_strcmp(command->command_args[0], "env") == 0)
 		our_env(command, to_execute, procss);
 	else if (ft_strcmp(command->command_args[0], "export") == 0)
