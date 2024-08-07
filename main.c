@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 09:30:38 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/05 16:32:02 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/07 09:28:17 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ int	main(int argc, char *argv[], char *envp[])
 		{
 			ft_clean_tokens(tokens_list);
 			continue ;
+		}
 		ft_expend_tokens(tokens_list, (env_list)); // change it to our env
 		list_of_files = give_list_files(tokens_list);
 		list_pipes = give_list_pipes(tokens_list);
