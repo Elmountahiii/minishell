@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 12:31:21 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/06 11:34:20 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/07 11:16:51 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,13 @@ void	ft_print_command_info(t_command	*command)
 			printf("command_args[%d] : %s\n", i, command->command_args[i]);
 			i++;
 		}
-		
+		i = 0;
+		printf("heredoc_list : \n");
+		while (command->heredoc_list)
+		{
+			printf("file_name : %s , dil %s , fd %d\n", command->heredoc_list->file_name, command->heredoc_list->dil, command->heredoc_list->fd);
+			command->heredoc_list = command->heredoc_list->next;
+		}		
 		printf("--------------------\n");
 		i = 0;
 		command = command->next;

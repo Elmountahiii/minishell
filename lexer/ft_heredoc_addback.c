@@ -1,20 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_open_heredoc.c                                  :+:      :+:    :+:   */
+/*   ft_heredoc_addback.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/06 10:45:01 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/07 10:59:26 by yel-moun         ###   ########.fr       */
+/*   Created: 2024/08/07 11:04:25 by yel-moun          #+#    #+#             */
+/*   Updated: 2024/08/07 11:33:46 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	ft_open_heredoc(t_heredoc *heredoc)
+void	ft_heredoc_addback(t_heredoc **alst, t_heredoc *new)
 {
-	heredoc->fd = open(heredoc->file_name, O_RDWR | O_CREAT | O_TRUNC, 0644);
-	if (heredoc->fd < 0)
-		perror("Error opening heredoc file");
+	t_heredoc	*last;
+
+	if (!alst || !new)
+		return ;
+	if (!*alst)
+	{
+		*alst = new;
+		return ;
+	}
+	last = *alst;
+	while (last->next)
+		last = last->next;
+	last->next = new;
 }

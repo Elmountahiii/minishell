@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 11:06:51 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/07 10:04:33 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/07 12:03:13 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	ft_handle_append(t_command *node, t_tokens_list **tokens)
 	
 }
 
-void	ft_handle_heredoc(t_command *node, t_tokens_list **tokens)
+void	ft_handle_heredoc(t_command *node, t_tokens_list **tokens, t_command *head)
 {
 	if (!tokens || !*tokens)
 		return;
@@ -43,14 +43,13 @@ void	ft_handle_heredoc(t_command *node, t_tokens_list **tokens)
 		ft_skip_tokens_spaces(tokens);
 		if (*tokens)
 		{
-			node->in_file = ft_strjoin("/tmp/herdoc", ft_itoa(node->index));
-			node->dil = ft_strdup((*tokens)->value);
+			ft_heredoc_addback(&node->heredoc_list, ft_create_heredoc(head, (*tokens)->value, (*tokens)->type));
 			*tokens = (*tokens)->next;
 		}
 	}
 }
 
-void	until_pipe(t_command *node, t_tokens_list *tokens)
+void	until_pipe(t_command *node, t_tokens_list *tokens , t_command *head)
 {
 	while (tokens && tokens->type != PIPE)
 	{
@@ -62,7 +61,7 @@ void	until_pipe(t_command *node, t_tokens_list *tokens)
 		ft_handle_word(node, &tokens);
 		ft_handle_redirection(node, &tokens);
 		ft_handle_append(node, &tokens);
-		ft_handle_heredoc(node, &tokens);
+		ft_handle_heredoc(node, &tokens, head);
 	}
 	if (node->out_type == STDIN_IO)
 	{
@@ -80,10 +79,11 @@ t_command	*ft_split_to_command(t_tokens_list *tokens_list, t_pipe *list_pipes)
 	index = 0;
 	commands_list = ft_command_allocate();
 	head = commands_list;
+	commands_list->head = commands_list;
 	while (commands_list && tokens_list)
 	{
 		commands_list->index = index;
-		until_pipe(commands_list, tokens_list);
+		until_pipe(commands_list, tokens_list, head);
 		while (tokens_list && tokens_list->type != PIPE)
 			tokens_list = tokens_list->next;
 		commands_list->list_pipes = list_pipes;

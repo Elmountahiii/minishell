@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 09:30:52 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/07 10:42:01 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/07 12:02:14 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,14 @@ typedef  struct e_tokens_list {
 	struct e_tokens_list	*next;
 } t_tokens_list;
 
+typedef struct s_heredoc
+{
+	int				fd;
+	char			*file_name;
+	char			*dil;
+	struct s_heredoc	*next;
+}	t_heredoc;
+
 typedef struct s_pipe
 {
 	int				fd[2];
@@ -77,7 +85,9 @@ typedef struct s_command {
 	bool				is_append;
 	bool				is_heredoc;
 	int					index;
+	t_heredoc			*heredoc_list;
 	t_pipe				*list_pipes;
+	struct s_command	*head;
 	struct s_command	*next;
 } t_command;
 
@@ -99,7 +109,7 @@ char	**ft_extract(char *line);
 t_tokens_list	*ft_init_token_list(char *line);
 void	ft_print_tokens_info(t_tokens_list *head);
 t_command  *ft_split_to_command(t_tokens_list *tokens_list, t_pipe *list_pipes);
-void	until_pipe(t_command *node, t_tokens_list *tokens);
+void	until_pipe(t_command *node, t_tokens_list *tokens, t_command *head);
 char **ft_append_to_list(char **list,char *command);
 void	ft_tokens_add_back(t_tokens_list **tokens, t_tokens_list *new);
 void	ft_commands_add_back(t_command **commands, t_command *new);
@@ -143,10 +153,13 @@ char *find_value(char * key ,t_env_list *env);
 char	*ft_remove_quotes(char *str);
 
 // heredoc
-void	ft_init_heredoc(t_command *command);
-void	ft_open_heredoc(t_command *command);
-void	ft_fill_heredoc(t_command *command);
-void	ft_clean_heredoc(t_command *command);
+int			ft_heredoc_size(t_command *commands);
+void		ft_heredoc_addback(t_heredoc **alst, t_heredoc *new);
+t_heredoc	*ft_create_heredoc(t_command *list,char *dil, t_token_type type);
+void		ft_init_heredoc(t_command *command);
+void		ft_open_heredoc(t_heredoc *heredoc);
+void		ft_fill_heredoc(t_command *command);
+void		ft_clean_heredoc(t_command *command);
 
 // cleaning functions
 void	ft_free_array(char **array);
@@ -163,8 +176,6 @@ typedef struct t_be_executed
 }t_be_executed;
 
 // builtins funcs and structs
-
-
 
 void		our_pwd(t_command *command, t_be_executed	*to_execute, int procss);
 void		our_env(t_command *command, t_be_executed	*to_execute, int procss);
