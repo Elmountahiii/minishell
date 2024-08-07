@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 09:30:52 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/06 11:55:37 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/07 10:42:01 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,6 +140,7 @@ int	ft_count_expand_alloc(char *str, t_env_list *env, char **keys);
 int is_valid_expand(char c);
 void close_pipes(t_pipe *list_pipes);
 char *find_value(char * key ,t_env_list *env);
+char	*ft_remove_quotes(char *str);
 
 // heredoc
 void	ft_init_heredoc(t_command *command);
