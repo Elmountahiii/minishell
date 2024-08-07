@@ -3,8 +3,7 @@ minibuiltins = miniBuiltIns
 CC = cc 
 # -g -fsanitize=address
 # -g -fsanitize=address
-CFLAGS = -Wall -Wextra -Werror   
-# -g -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror   -g -fsanitize=address
 READLINE = -lreadline -lncurses
 bSRC = builtins/env.c builtins/pwd.c builtins/cd.c builtins/echo.c builtins/print_env_list.c builtins/add_back_for_env.c builtins/get_env_list.c builtins/export.c builtins/unset.c builtins/ft_export_env.c builtins/exit.c
 SRC = main.c lexer/ft_special_char.c lexer/ft_count_lexer_tokens.c lexer/ft_extract.c lexer/ft_init_token_list.c \

@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 14:43:22 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/07 10:43:03 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/07 12:06:29 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,7 @@ void	ft_handle_redirection(t_command *node, t_tokens_list **tokens)
 	{
 		node->in_type = FILE_IO;
 		*tokens = (*tokens)->next;
+		node->is_heredoc = false;
 		ft_skip_tokens_spaces(tokens);
 		if (*tokens)
 		{

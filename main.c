@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 09:30:38 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/07 11:18:00 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/07 12:41:47 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,9 +73,9 @@ int	main(int argc, char *argv[], char *envp[])
 		list_pipes = give_list_pipes(tokens_list);
 		ft_expend_tokens(tokens_list, (env_list));
 		commands_list = ft_split_to_command(tokens_list, list_pipes);
-	//	ft_init_heredoc(commands_list);
-		ft_print_command_info(commands_list);
-		continue ;
+		ft_init_heredoc(commands_list);
+		// ft_print_command_info(commands_list);
+		// continue ;
 		fill_command_paths(commands_list, env_list);
 		to_execute = give_executed(commands_list, list_pipes, tokens_list, &env_list);
 		execute_things(to_execute);

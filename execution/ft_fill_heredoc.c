@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 10:47:36 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/06 11:42:07 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/07 12:38:42 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,30 @@
 
 void	ft_fill_heredoc(t_command *command)
 {
-	char	*line;
+	char		*line;
+	t_heredoc	*tmp;
 
-	if (command->fd_in < 0)
+	if (!command || !command->heredoc_list)
 		return ;
-	command->dil = ft_strjoin(command->dil, "\n");
-	while (1)
+	tmp = command->heredoc_list;
+	while (tmp)
 	{
-		write(1, "> ", 2);
-		line = get_next_line(0);
-		if (!line)
-			break ;
-		if (!ft_strncmp(line, command->dil, ft_strlen(command->dil)))
+		while (1)
+		{
+			write(1, "> ", 2);
+			line = get_next_line(0);
+			if (!line)
+				break ;
+		if (!ft_strncmp(line, tmp->dil, ft_strlen(tmp->dil)))
 		{
 			free(line);
 			break ;
 		}
-		write(command->fd_in, line, ft_strlen(line));
+		write(tmp->fd, line, ft_strlen(line));
 		free(line);
+		}
+		 close(tmp->fd);
+		 tmp->fd = open(tmp->file_name, O_RDONLY);
+		tmp = tmp->next;
 	}
-	close(command->fd_in);
-	command->fd_in = open(command->in_file, O_RDONLY);
 }

@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 11:21:26 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/07 11:17:11 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/07 12:39:58 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,30 @@
 
 void	ft_init_heredoc(t_command *command)
 {
+	t_command	*tmp;
+	t_heredoc	*heredoc;
+	
 	if (!command)
 		return ;
-	while (command)
+	tmp = command;
+	while (tmp)
 	{
-		if (command->in_type == FILE_IO && command->is_heredoc)
+		 ft_fill_heredoc(tmp);
+		tmp = tmp->next;
+	}
+	tmp = command;
+	while (tmp)
+	{
+		heredoc = tmp->heredoc_list;
+		if (heredoc && tmp->is_heredoc)
 		{
-			//ft_open_heredoc(command);
-			ft_fill_heredoc(command);
+			while (heredoc->next)
+			{
+				heredoc = heredoc->next;
+			}
+			tmp->fd_in = heredoc->fd;
+			tmp->in_file = heredoc->file_name;
 		}
-		command = command->next;
+		tmp = tmp->next;
 	}
 }
