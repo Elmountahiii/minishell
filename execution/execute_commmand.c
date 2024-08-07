@@ -6,7 +6,7 @@
 /*   By: aet-tale <aet-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 12:42:46 by aet-tale          #+#    #+#             */
-/*   Updated: 2024/08/07 16:24:38 by aet-tale         ###   ########.fr       */
+/*   Updated: 2024/08/07 19:36:04 by aet-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,40 +23,40 @@ void print_error(char *prefix, char *command)
 	// 	printf("is adirectory\n");
 	// 	exit(127);
 	// }
-	(void)command;
-	perror(prefix);
-	if (errno == ENOENT || errno == ENOTDIR)
-		exit(127);
-	else if (errno == ENOEXEC)
-		exit(126);
-	else if (errno == EACCES)
-		exit(126);
-	else
-		exit(1);
+	// (void)command;
+	// // perror(prefix);
+	// if (errno == ENOENT || errno == ENOTDIR)
+	// 	exit(127);
+	// else if (errno == ENOEXEC)
+	// 	exit(126);
+	// else if (errno == EACCES)
+	// 	exit(126);
+	// else
+	// 	exit(1);
 		
-	// write(2, prefix, ft_strlen(prefix));
-	// write(2, command, ft_strlen(command));
-	// write(2, ": ", 2);
+	write(2, prefix, ft_strlen(prefix));
+	write(2, command, ft_strlen(command));
+	write(2, ": ", 2);
 	// printf("\nerror number is : %d\n",errno);
-	// if (errno == 14)
-	// {
-	// 	write(2, "command not found\n", 18);
-	// 	exit(127);
-	// }
-	// else if (errno == 8)
-	// {
-	// 	write(2, "cannot execute binary file: Exec format error\n", 46);
-	// 	exit(126);
-	// }else if (errno == 2)
-	// {
-	// 	write(2, "No such file or directory\n", 26);
-	// 	exit(127);
-	// }
-	// else if(errno == 13)
-	// {
-	// 	write(2, "permission denied\n", 18);
-	// 	exit(126);
-	// }
+	if (errno == 14)
+	{
+		write(2, "command not found\n", 18);
+		exit(127);
+	}
+	else if (errno == 8)
+	{
+		write(2, "cannot execute binary file: Exec format error\n", 46);
+		exit(126);
+	}else if (errno == 2)
+	{
+		write(2, "No such file or directory\n", 26);
+		exit(127);
+	}
+	else if(errno == 13)
+	{
+		write(2, "permission denied\n", 18);
+		exit(126);
+	}
 	// // else if (errno == 2)
 	// // {
 			
@@ -130,10 +130,14 @@ void close_pipes(t_pipe *list_pipes)
 
 void	execute_command(t_command *command,	t_be_executed	*to_execute)
 {
-	char **env;
+	char	**env;
+	char	**args;
 	// int	i = 0;
 	// (void)i;
 
+	args = command->command_args;
+	if (args == NULL || args[0] == NULL)
+		exit(0);
 	assign_input(command, to_execute);
 	assign_output(command, to_execute);
 	dup2(command->fd_out, 1);
