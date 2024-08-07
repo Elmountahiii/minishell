@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   execute_things.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aet-tale <aet-tale@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 11:35:05 by aet-tale          #+#    #+#             */
-/*   Updated: 2024/08/05 16:13:08 by aet-tale         ###   ########.fr       */
+/*   Updated: 2024/08/06 11:51:27 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
 
 void	close_other_pipes(t_command	*command, t_pipe *list_pipes)
 {
@@ -31,20 +30,15 @@ void	close_other_pipes(t_command	*command, t_pipe *list_pipes)
 
 void	execute_built_in(t_command	*command, t_be_executed	*to_execute, int procss)
 {
-	// int exit_stts;
 	int std_out;
 	int std_int;
 
-	// exit_stts = 0;
 	assign_input(command, to_execute);
 	assign_output(command, to_execute);
 	if (procss)
-	{
 		close_other_pipes(command, to_execute->list_pipes);
-	} 
 	std_out = dup(1);
 	std_int = dup(0);
-
 	dup2(command->fd_out, 1);
 	if (ft_strcmp(command->command_args[0], "echo") == 0)
 		our_echo(command, to_execute, procss);
@@ -56,21 +50,16 @@ void	execute_built_in(t_command	*command, t_be_executed	*to_execute, int procss)
 		our_unset(command, to_execute, procss);
 	else if (ft_strcmp(command->command_args[0], "env") == 0)
 		our_env(command, to_execute, procss);
-	else if (ft_strcmp(command->command_args[0], "export") == 0 && command->command_args[1])
+	else if (ft_strcmp(command->command_args[0], "export") == 0)
 		ft_export(command, to_execute, procss);
-	else if (ft_strcmp(command->command_args[0], "export") == 0 && !command->command_args[1])
-		ft_export_env(*to_execute->env_list, procss);
 	else if (ft_strcmp(command->command_args[0], "exit") == 0)
 		our_exit(command, to_execute, procss);
-
 	dup2(std_out, 1);
 	dup2(std_int, 0);
 	close(std_out);
 	close(std_int);
 	if (procss)
-	{
 		exit(exit_status);
-	}
 	// optimize export and exit conditions
 }
 
@@ -99,8 +88,8 @@ void	execute_things(t_be_executed	*to_execute)
 			else
 				execute_command(commands_list, to_execute);
 		}
-		i++;
 		commands_list = commands_list->next;
+		i++;
 	}
 	close_pipes(to_execute->list_pipes);
 	i = 0;

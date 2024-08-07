@@ -16,7 +16,7 @@ void	ft_skip_tokens_spaces(t_tokens_list **tokens)
 {
 	if (!tokens || !*tokens)
 		return ;
-	while (*tokens && (*tokens)->type == SPACE)
+	while (*tokens && (*tokens)->type == SPACE_TOKEN)
 		*tokens = (*tokens)->next;
 }
 

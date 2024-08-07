@@ -1,29 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_free_array.c                                    :+:      :+:    :+:   */
+/*   ft_clean_heredoc.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/05 14:57:02 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/06 13:00:23 by yel-moun         ###   ########.fr       */
+/*   Created: 2024/08/06 10:52:16 by yel-moun          #+#    #+#             */
+/*   Updated: 2024/08/06 11:42:36 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "../minishell.h"
 
-void	ft_free_array(char **array)
+void	ft_clean_heredoc(t_command *command)
 {
-	int	i;
-
-	i = 0;
-	if (!array)
+	if (!command)
 		return ;
-	while (array[i])
-	{
-		free(array[i]);
-		i++;
-	}
-	free(array);
+	unlink(command->in_file);
 }

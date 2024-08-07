@@ -1,0 +1,12 @@
+Makefile
+builtins
+clean
+execution
+lexer
+lib
+main.c
+minishell
+minishell.h
+minishell_parsin
+out
+tst.c

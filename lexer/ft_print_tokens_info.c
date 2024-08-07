@@ -16,7 +16,7 @@ char	*ft_print_token_type(t_token_type token_type)
 {
 	if (token_type == WORD)
 		return ("WORD");
-	if (token_type == SPACE)
+	if (token_type == SPACE_TOKEN)
 		return ("SPACE");
 	if (token_type == PIPE)
 		return ("PIPE");

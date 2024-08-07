@@ -1,29 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_free_array.c                                    :+:      :+:    :+:   */
+/*   ft_init_heredoc.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/05 14:57:02 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/06 13:00:23 by yel-moun         ###   ########.fr       */
+/*   Created: 2024/08/06 11:21:26 by yel-moun          #+#    #+#             */
+/*   Updated: 2024/08/06 11:55:24 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "../minishell.h"
 
-void	ft_free_array(char **array)
+void	ft_init_heredoc(t_command *command)
 {
-	int	i;
-
-	i = 0;
-	if (!array)
+	if (!command)
 		return ;
-	while (array[i])
+	while (command)
 	{
-		free(array[i]);
-		i++;
+		if (command->in_type == FILE_IO && command->is_heredoc)
+		{
+			ft_open_heredoc(command);
+			ft_fill_heredoc(command);
+		}
+		command = command->next;
 	}
-	free(array);
 }

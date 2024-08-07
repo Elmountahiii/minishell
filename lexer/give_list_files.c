@@ -71,7 +71,7 @@ t_list_files	*give_list_files(t_tokens_list	*list_tokens)
 		{
 			type = list_tokens->type;
 			list_tokens  = list_tokens->next;
-			if (list_tokens && list_tokens->type == SPACE)
+			if (list_tokens && list_tokens->type == SPACE_TOKEN)
 				list_tokens = list_tokens->next;
 			if (list_tokens && (list_tokens->type == WORD || list_tokens->type == SINGLE_QUOTE_WORD || list_tokens->type == DOUBLE_QUOTE_WORD ))
 			{

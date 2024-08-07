@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aet-tale <aet-tale@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 09:30:52 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/05 15:57:28 by aet-tale         ###   ########.fr       */
+/*   Updated: 2024/08/06 11:55:37 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,14 @@
 #include <string.h>
 #include <fcntl.h>
 #include <errno.h>
+#include <sys/wait.h>
 #include "./lib/lib.h"
 
-// extern int exit_status;
+extern int exit_status;
 
 typedef enum {
 	WORD,
-	SPACE,
+	SPACE_TOKEN,
 	PIPE,
 	SINGLE_QUOTE_WORD,
 	DOUBLE_QUOTE_WORD,
@@ -37,8 +38,6 @@ typedef enum {
 	HEREDOC,
 	ENV,
 } t_token_type;
-
-int exit_status;
 
 typedef enum {  STDIN_IO, STDOUT_IO, FILE_IO, PIPE_IO } IOType;
 //DEFAULT_IO
@@ -67,11 +66,12 @@ typedef struct t_env_list
 typedef struct s_command {
 	char				**command_args;
 	char 				*path;
-	t_env_list 			*env_list;
+	// t_env_list 			*env_list;
 	IOType				in_type;
 	IOType				out_type;
 	char				*in_file;
 	char				*out_file;
+	char				*dil;
 	int					fd_in;
 	int					fd_out;
 	bool				is_append;
@@ -141,6 +141,11 @@ int is_valid_expand(char c);
 void close_pipes(t_pipe *list_pipes);
 char *find_value(char * key ,t_env_list *env);
 
+// heredoc
+void	ft_init_heredoc(t_command *command);
+void	ft_open_heredoc(t_command *command);
+void	ft_fill_heredoc(t_command *command);
+void	ft_clean_heredoc(t_command *command);
 
 // cleaning functions
 void	ft_free_array(char **array);
@@ -167,13 +172,14 @@ int			ft_strlen(char *s);
 void		add_back_for_env(t_env_list **list, char *str);
 t_env_list	*get_env_list(char **env);
 void		print_env_list(t_env_list* list);
-void		our_export(char	*key, char	*value, t_env_list	**env_list, int procss);
 void		ft_export_env(t_env_list *env_list, int procss);
 void		ft_export(t_command *command, t_be_executed	*to_execute, int procss);
 void		our_unset(t_command *command, t_be_executed	*to_execute, int procss);
 void		our_cd(t_command *command, t_be_executed	*to_execute, int procss);
 void		our_exit(t_command *command, t_be_executed	*to_execute, int procss);
 char		**give_array_str(t_env_list *env_list);
+void		close_other_pipes(t_command	*command, t_pipe *list_pipes);
+void		add_to_env(char	*key, char	*value, t_env_list	**env_list);
 
 // t_env_list	*get_env_list(char	**env)
 
