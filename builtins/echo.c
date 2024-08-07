@@ -25,17 +25,16 @@ void	our_echo(t_command *command, t_be_executed	*to_execute, int procss)
 	char **str = command->command_args;
 
 	// dup2(command->fd_out, 1);
+	while (str[i] && is_nn(str[i]))
+	{
+		new_line = 0;
+		i++;
+	}
 	while (str[i])
 	{
-		if (i == 1 && is_nn(str[i]))
-		{
-			new_line = 0;
-		}else
-		{
-			printf("%s", str[i]);
-			if (str[i + 1])
-				printf(" ");
-		}
+		printf("%s", str[i]);
+		if (str[i + 1])
+			printf(" ");
 		i++;
 	}
 	// dup2(5, 1);

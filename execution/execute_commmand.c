@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_commmand.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aet-tale <aet-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 12:42:46 by aet-tale          #+#    #+#             */
-/*   Updated: 2024/08/07 14:01:57 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/07 16:24:38 by aet-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,11 +79,11 @@ char	**append_to_array(char **array, char *str) {
 
     // Copy the old array to the new array
     for (int i = 0; i < len; i++) {
-        new_array[i] = strdup(array[i]);
+        new_array[i] = ft_strdup(array[i]);
     }
 
     // Add the new string to the end of the new array
-    new_array[len] = strdup(str);
+    new_array[len] = ft_strdup(str);
 
     // Set the last element to NULL
     new_array[len + 1] = NULL;
