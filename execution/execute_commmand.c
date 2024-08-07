@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 12:42:46 by aet-tale          #+#    #+#             */
-/*   Updated: 2024/08/06 14:26:15 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/07 14:01:57 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,32 +14,53 @@
 
 void print_error(char *prefix, char *command)
 {
-	write(2, prefix, ft_strlen(prefix));
-	write(2, command, ft_strlen(command));
-	write(2, ": ", 2);
-	if (errno == 14)
-	{
-		write(2, "command not found\n", 18);
-		exit(127);
-	}
-	else if (errno == 8)
-	{
-		write(2, "cannot execute binary file: Exec format error\n", 46);
-		exit(126);
-	}else if (errno == 2)
-	{
-		write(2, "No such file or directory\n", 26);
-		exit(127);
-	}
-	else if(errno == 13)
-	{
-		write(2, "permission denied\n", 18);
-		exit(126);
-	}
-	// else if (errno == 2)
+	// struct stat fileStat;
+	// printf("command is : %s\n", command);
+	
+	// if (stat(command, &fileStat) == 0)
 	// {
-			
+	// 	perror(prefix);
+	// 	printf("is adirectory\n");
+	// 	exit(127);
 	// }
+	(void)command;
+	perror(prefix);
+	if (errno == ENOENT || errno == ENOTDIR)
+		exit(127);
+	else if (errno == ENOEXEC)
+		exit(126);
+	else if (errno == EACCES)
+		exit(126);
+	else
+		exit(1);
+		
+	// write(2, prefix, ft_strlen(prefix));
+	// write(2, command, ft_strlen(command));
+	// write(2, ": ", 2);
+	// printf("\nerror number is : %d\n",errno);
+	// if (errno == 14)
+	// {
+	// 	write(2, "command not found\n", 18);
+	// 	exit(127);
+	// }
+	// else if (errno == 8)
+	// {
+	// 	write(2, "cannot execute binary file: Exec format error\n", 46);
+	// 	exit(126);
+	// }else if (errno == 2)
+	// {
+	// 	write(2, "No such file or directory\n", 26);
+	// 	exit(127);
+	// }
+	// else if(errno == 13)
+	// {
+	// 	write(2, "permission denied\n", 18);
+	// 	exit(126);
+	// }
+	// // else if (errno == 2)
+	// // {
+			
+	// // }
 }
 
 char	**append_to_array(char **array, char *str) {
@@ -120,6 +141,10 @@ void	execute_command(t_command *command,	t_be_executed	*to_execute)
 	close_pipes(command->list_pipes);
 	env = give_array_str(*to_execute->env_list);
 	close_pipes(command->list_pipes);
+	// you should check if the command is executed or not 
+	// if the commands args is null of empty doesn't execute the command
+	if (ft_is_executed(command->command_args) == 0)
+		exit(0);
 	execve(command->path, command->command_args, env);
 	print_error("minishell: ", command->command_args[0]);
 	// why

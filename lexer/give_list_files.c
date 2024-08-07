@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 18:22:42 by aet-tale          #+#    #+#             */
-/*   Updated: 2024/08/07 09:55:47 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/07 12:48:48 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,8 @@ t_list_files	*give_list_files(t_tokens_list	*list_tokens)
 				// printf("list_tokens->value: %s\n", list_tokens->value);
 				add_file(&list_files, list_tokens->value , type);
 			}
-			else
-				write(2, "after a redirection a word should exist\n", 40);
+			// else
+			// 	write(2, "after a redirection a word should exist\n", 40);
 		}
 		if (list_tokens)
 			list_tokens = list_tokens->next;
