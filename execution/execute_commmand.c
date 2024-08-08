@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 12:42:46 by aet-tale          #+#    #+#             */
-/*   Updated: 2024/08/08 01:27:55 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/08 14:59:50 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,25 +15,14 @@
 void print_error(char *prefix, char *command)
 {
 	// struct stat fileStat;
-	// printf("command is : %s\n", command);
 	
 	// if (stat(command, &fileStat) == 0)
 	// {
-	// 	perror(prefix);
-	// 	printf("is adirectory\n");
-	// 	exit(127);
-	// }
-	// (void)command;
-	// // perror(prefix);
-	// if (errno == ENOENT || errno == ENOTDIR)
-	// 	exit(127);
-	// else if (errno == ENOEXEC)
-	// 	exit(126);
-	// else if (errno == EACCES)
-	// 	exit(126);
-	// else
-	// 	exit(1);
+	// 	// perror(prefix);
 		
+	// 	printf("minishell : %s is a directory\n", command);
+	// 	exit(127);
+	// }		
 	write(2, prefix, ft_strlen(prefix));
 	write(2, command, ft_strlen(command));
 	write(2, ": ", 2);
@@ -135,6 +124,11 @@ void	execute_command(t_command *command,	t_be_executed	*to_execute)
 	// int	i = 0;
 	// (void)i;
 
+	if (ft_is_executed(to_execute->list_files, command->index) == 0)
+	{
+		close_pipes(to_execute->list_pipes);
+		exit(1);
+	}
 	args = command->command_args;
 	if (args == NULL || args[0] == NULL)
 		exit(0);
@@ -144,17 +138,17 @@ void	execute_command(t_command *command,	t_be_executed	*to_execute)
 		dup2(command->fd_in, STDIN_FILENO);
 	if (command->out_type != STDOUT_FILENO)
 		dup2(command->fd_out, STDOUT_FILENO);
-	close_pipes(command->list_pipes);
+	// close_pipes(command->list_pipes);
+	close_pipes(to_execute->list_pipes);
 	env = give_array_str(*to_execute->env_list);
-	close_pipes(command->list_pipes);
+	// close_pipes(command->list_pipes);
+	// close_pipes(to_execute->list_pipes);
 	// you should check if the command is executed or not 
 	// if the commands args is null of empty doesn't execute the command
-	if (ft_is_executed(command->command_args) == 0)
-		exit(0);
 	execve(command->path, command->command_args, env);
 	print_error("minishell: ", command->command_args[0]);
-	// why
-	close_pipes(command->list_pipes);
+	// // why
+	// close_pipes(command->list_pipes);
 	// close(command->fd_out);
 	// close(command->fd_in);
 	// close(1);

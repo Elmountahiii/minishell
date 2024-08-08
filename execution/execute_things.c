@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 11:35:05 by aet-tale          #+#    #+#             */
-/*   Updated: 2024/08/08 01:31:20 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/08 14:30:30 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,20 @@ void	execute_built_in(t_command	*command, t_be_executed	*to_execute, int procss)
 {
 	int std_out;
 	int std_int;
-
+	if (ft_is_executed(to_execute->list_files, command->index) == 0)
+	{
+		close_pipes(to_execute->list_pipes);
+		if (procss)
+			exit(1);
+		exit_status = 1;
+		return ;
+	}
 	assign_input(command, to_execute);
 	assign_output(command, to_execute);
 	if (procss)
 		close_other_pipes(command, to_execute->list_pipes);
-	std_out = dup(1);
-	std_int = dup(0);
+	std_out = dup(STDOUT_FILENO);
+	std_int = dup(STDIN_FILENO);
 	dup2(command->fd_out, 1);
 	if (ft_strcmp(command->command_args[0], "echo") == 0)
 		our_echo(command, to_execute, procss);

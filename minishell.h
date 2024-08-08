@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aet-tale <aet-tale@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 09:30:52 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/07 19:55:28 by aet-tale         ###   ########.fr       */
+/*   Updated: 2024/08/08 14:31:57 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,8 +87,7 @@ typedef struct s_command {
 	bool				is_heredoc;
 	int					index;
 	t_heredoc			*heredoc_list;
-	t_pipe				*list_pipes;
-	struct s_command	*head;
+	// t_pipe				*list_pipes;
 	struct s_command	*next;
 } t_command;
 
@@ -109,7 +108,7 @@ char	*ft_lexer_substr(char *line);
 char	**ft_extract(char *line);
 t_tokens_list	*ft_init_token_list(char *line);
 void	ft_print_tokens_info(t_tokens_list *head);
-t_command  *ft_split_to_command(t_tokens_list *tokens_list, t_pipe *list_pipes);
+t_command  *ft_split_to_command(t_tokens_list *tokens_list);
 void	until_pipe(t_command *node, t_tokens_list *tokens, t_command *head);
 char **ft_append_to_list(char **list,char *command);
 void	ft_tokens_add_back(t_tokens_list **tokens, t_tokens_list *new);
@@ -167,12 +166,21 @@ void	ft_free_array(char **array);
 void	ft_clean_tokens(t_tokens_list *tokens_list);
 void	ft_clean_commands(t_command *commands_list);
 
+typedef struct t_list_files
+{
+	int					id;
+	int					fd;
+	char				*name;
+	struct t_list_files	*next;
+}t_list_files;
+
 typedef struct t_be_executed
 {
 	t_command		*commands_list;
 	t_tokens_list	*tokens_list;
 	t_pipe			*list_pipes;
 	t_env_list		**env_list;
+	t_list_files	*list_files;
 	int				list_size;
 }t_be_executed;
 
@@ -203,17 +211,11 @@ int			count_array_str(char **array);
 
 // function for list of files
 
-typedef struct t_list_files
-{
-	int					fd;
-	char				*name;
-	struct t_list_files	*next;
-}t_list_files;
 
 
 int 			count_list(t_command *list);
 void			print_list_files(t_list_files  *list_files);
-t_list_files	*give_list_files(t_tokens_list	*list_tokens);
+t_list_files	*give_list_files(t_tokens_list	*list_tokens, t_command *list_commands);
 
 // end of builtins
 
@@ -228,7 +230,7 @@ void			execute_command(t_command *command,	t_be_executed	*to_execute);
 void			assign_output(t_command	*command, t_be_executed	*to_execute);
 void			assign_input(t_command	*command, t_be_executed	*to_execute);
 int				get_file_fd(t_command	*command, char i_o);
-int				ft_is_executed(char **commands);
+int				ft_is_executed(t_list_files *files , int index);
 
 // end
 

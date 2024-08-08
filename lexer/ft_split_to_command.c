@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 11:06:51 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/07 12:03:13 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/08 14:31:45 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	until_pipe(t_command *node, t_tokens_list *tokens , t_command *head)
 	}
 }
 
-t_command	*ft_split_to_command(t_tokens_list *tokens_list, t_pipe *list_pipes)
+t_command	*ft_split_to_command(t_tokens_list *tokens_list)
 {
 	t_command	*commands_list;
 	t_command	*head;
@@ -79,14 +79,12 @@ t_command	*ft_split_to_command(t_tokens_list *tokens_list, t_pipe *list_pipes)
 	index = 0;
 	commands_list = ft_command_allocate();
 	head = commands_list;
-	commands_list->head = commands_list;
 	while (commands_list && tokens_list)
 	{
 		commands_list->index = index;
 		until_pipe(commands_list, tokens_list, head);
 		while (tokens_list && tokens_list->type != PIPE)
 			tokens_list = tokens_list->next;
-		commands_list->list_pipes = list_pipes;
 		if (ft_command_next(&commands_list, &tokens_list))
 			break ;
 		commands_list->next = ft_command_allocate();
