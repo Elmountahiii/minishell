@@ -51,6 +51,8 @@ int		ft_is_all_space(char *str);
 int     ft_atoi(const char *str);
 char	*ft_itoa(int n);
 int     is_alpha(char c);
+void	ft_putchar_fd(char c, int fd);
+void	ft_putstr_fd(char *s, int fd);
 // v2
 char	**ft_super_split(char *str);
 int		ft_count_words_v2(char *str);
