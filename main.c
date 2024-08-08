@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 09:30:38 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/08 18:30:23 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/08 22:32:25 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,10 @@ int	main(int argc, char *argv[], char *envp[])
 		ft_init_heredoc(commands_list);
 		list_of_files = give_list_files(tokens_list , commands_list);		
 		list_pipes = give_list_pipes(tokens_list);
+		//print_list_files(list_of_files);
+		// ft_print_command_info(commands_list);
+		
+		//  continue ;
 		fill_command_paths(commands_list, env_list);
 		to_execute = give_executed(commands_list, list_pipes, tokens_list, &env_list);
 		to_execute->list_files = list_of_files;

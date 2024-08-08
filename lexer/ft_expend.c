@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 14:22:22 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/08 20:04:42 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/08 22:32:05 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,12 @@ void	ft_expend_tokens(t_tokens_list *token, t_env_list *env)
 		if (ft_is_token_expandable(token))
 		{
 			keys = ft_extract_keys(token->value);
+			//int i = 0;
+			// while (keys && keys[i])
+			// {
+			// 	printf("keys[%d] = %s\n", i, keys[i]);
+			// 	i++;
+			// }
 			token->value = ft_expand(token->value, keys, env);
 			if (ft_strlen(token->value) == 0)
 			{
