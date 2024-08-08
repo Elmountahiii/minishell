@@ -27,25 +27,25 @@ void print_error(char *prefix, char *command)
 	write(2, command, ft_strlen(command));
 	write(2, ": ", 2);
 	// printf("\nerror number is : %d\n",errno);
-	if (errno == 14)
-	{
-		write(2, "command not found\n", 18);
-		exit(127);
-	}
-	else if (errno == 8)
-	{
-		write(2, "cannot execute binary file: Exec format error\n", 46);
-		exit(126);
-	}else if (errno == 2)
-	{
-		write(2, "No such file or directory\n", 26);
-		exit(127);
-	}
-	else if(errno == 13)
-	{
-		write(2, "permission denied\n", 18);
-		exit(126);
-	}
+	// if (errno == 14)
+	// {
+	// 	write(2, "command not found\n", 18);
+	// 	exit(127);
+	// }
+	// else if (errno == 8)
+	// {
+	// 	write(2, "cannot execute binary file: Exec format error\n", 46);
+	// 	exit(126);
+	// }else if (errno == 2)
+	// {
+	// 	write(2, "No such file or directory\n", 26);
+	// 	exit(127);
+	// }
+	// else if(errno == 13)
+	// {
+	// 	write(2, "permission denied\n", 18);
+	// 	exit(126);
+	// }
 	// // else if (errno == 2)
 	// // {
 			
@@ -117,6 +117,15 @@ void close_pipes(t_pipe *list_pipes)
 	}
 }
 
+int is_directory(const char *path) {
+    struct stat path_stat;
+    if (stat(path, &path_stat) != 0) {
+        perror("stat");
+        return 0; // Return 0 if stat fails
+    }
+    return S_ISDIR(path_stat.st_mode);
+}
+
 void	execute_command(t_command *command,	t_be_executed	*to_execute)
 {
 	char	**env;
@@ -132,6 +141,20 @@ void	execute_command(t_command *command,	t_be_executed	*to_execute)
 	args = command->command_args;
 	if (args == NULL || args[0] == NULL)
 		exit(0);
+	else if(command->path == NULL)
+	{
+		write(2, "minishell: ", 11);
+		write(2, args[0], ft_strlen(args[0]));
+		write(2, ": command not found\n", 20);
+		exit(127);
+	}
+	else if (is_directory(command->path))
+	{
+		write(2, "minishell: ", 11);
+		write(2, args[0], ft_strlen(args[0]));
+		write(2, ": is a directory\n", 17);
+		exit(126);
+	}
 	assign_input(command, to_execute);
 	assign_output(command, to_execute);
 	if (command->in_type != STDIN_FILENO)
@@ -147,6 +170,7 @@ void	execute_command(t_command *command,	t_be_executed	*to_execute)
 	// if the commands args is null of empty doesn't execute the command
 	execve(command->path, command->command_args, env);
 	print_error("minishell: ", command->command_args[0]);
+	exit(126);
 	// // why
 	// close_pipes(command->list_pipes);
 	// close(command->fd_out);
