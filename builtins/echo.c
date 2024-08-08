@@ -41,4 +41,6 @@ void	our_echo(t_command *command, t_be_executed	*to_execute, int procss)
 		printf("\n");
 	if (procss)
 		exit(exit_sts);
+	else
+		exit_status = 0;
 }

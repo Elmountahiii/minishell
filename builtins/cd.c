@@ -38,6 +38,7 @@ void	our_cd(t_command *command, t_be_executed	*to_execute, int procss)
 	{
 		add_to_env("OLDPWD", get_pwd_value(*to_execute->env_list), to_execute->env_list);
 		add_to_env("PWD", getcwd(NULL, 0), to_execute->env_list);
+		exit_status = 0;
 	}else{
 		write(2, "minishell: cd: ", 10);
 		write(2, path[1], ft_strlen(path[1]));

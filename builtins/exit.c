@@ -52,7 +52,9 @@ void	our_exit(t_command *command, t_be_executed	*to_execute, int procss)
 	else if (count_array_str(command->command_args) > 2)
 	{
 		write(2, "minishell: exit: too many arguments\n", 36);
-		exit_status = 1;
+		if (procss)
+			exit(255);
+		exit_status = 255;
 	}else
 	{
 		exit(ft_atoi(command->command_args[1]));

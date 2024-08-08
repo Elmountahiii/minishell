@@ -9,7 +9,9 @@ void our_pwd(t_command *command, t_be_executed	*to_execute, int procss)
 
 	pwd = getcwd(NULL, 0);
 	printf("%s\n", pwd);
-	if(procss)
+	if (procss)
 		exit(0);
+	else
+		exit_status = 0;
 	return ;
 }
