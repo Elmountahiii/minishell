@@ -6,7 +6,7 @@
 /*   By: aet-tale <aet-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 09:30:52 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/07 18:48:35 by aet-tale         ###   ########.fr       */
+/*   Updated: 2024/08/07 19:55:28 by aet-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -194,6 +194,7 @@ char		**give_array_str(t_env_list *env_list);
 void		close_other_pipes(t_command	*command, t_pipe *list_pipes);
 void		add_to_env(char	*key, char	*value, t_env_list	**env_list);
 int			check_every_arg(char *arg);
+int			count_array_str(char **array);
 
 // t_env_list	*get_env_list(char	**env)
 
