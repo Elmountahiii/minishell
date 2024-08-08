@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 18:24:42 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/07/31 18:52:21 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/08 18:32:21 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ int	ft_check_syntax(t_tokens_list *list)
 	ft_skip_tokens_spaces(&tmp);
 	if (tmp && tmp->type == PIPE)
 	{
-		printf("syntax error near unexpected token `|'\n");
+		ft_putstr_fd("minishell: syntax error near unexpected token `|'\n", STDERR_FILENO);
 		return (1);
 	}
 	while (tmp)

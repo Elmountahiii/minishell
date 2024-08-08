@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 11:33:07 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/08 16:47:02 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/08 18:33:37 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,15 @@
 int	syntax_error(char token)
 {
 	if (token == 'n')
-		write(2, "syntax error near unexpected token `newline'\n", 45);
+		ft_putstr_fd("syntax error near unexpected token `newline'\n", STDERR_FILENO);
 	else if ("a")
-	    write(2, "syntax error near unexpected token `>>'\n", 42);
+		ft_putstr_fd("syntax error near unexpected token `>>'\n", STDERR_FILENO);
 	else
 	{
-		write(2,"syntax error near unexpected token `", 36);
-		write(2, &token, 1);
-		write(2, "'\n", 2);
+		ft_putstr_fd("syntax error near unexpected token `", STDERR_FILENO);
+		ft_putchar_fd(token, STDERR_FILENO);
+		ft_putchar_fd('\'', STDERR_FILENO);
+		ft_putstr_fd("'\n", STDERR_FILENO);
 	}
 	exit_status = 258;
 	return (1);
