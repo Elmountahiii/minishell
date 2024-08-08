@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_commmand.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aet-tale <aet-tale@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 12:42:46 by aet-tale          #+#    #+#             */
-/*   Updated: 2024/08/07 19:36:04 by aet-tale         ###   ########.fr       */
+/*   Updated: 2024/08/08 01:27:55 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,8 +140,10 @@ void	execute_command(t_command *command,	t_be_executed	*to_execute)
 		exit(0);
 	assign_input(command, to_execute);
 	assign_output(command, to_execute);
-	dup2(command->fd_out, 1);
-	dup2(command->fd_in, 0);
+	if (command->in_type != STDIN_FILENO)
+		dup2(command->fd_in, STDIN_FILENO);
+	if (command->out_type != STDOUT_FILENO)
+		dup2(command->fd_out, STDOUT_FILENO);
 	close_pipes(command->list_pipes);
 	env = give_array_str(*to_execute->env_list);
 	close_pipes(command->list_pipes);

@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 13:36:57 by aet-tale          #+#    #+#             */
-/*   Updated: 2024/08/06 11:51:41 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/08 01:19:23 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void	assign_input(t_command	*command, t_be_executed	*to_execute)
 	}
 	else if (command->in_type == STDIN_IO)
 	{
-		command->fd_in = 0;
+		command->fd_in = STDIN_FILENO;
 	}
 	else if (command->in_type == PIPE_IO)
 	{
@@ -99,7 +99,7 @@ void	assign_output(t_command	*command, t_be_executed	*to_execute)
 	}
 	else if (command->out_type == STDIN_IO)
 	{
-		command->fd_out = 1;
+		command->fd_out = STDOUT_FILENO;
 	}
 	else if (command->out_type == PIPE_IO)
 	{
