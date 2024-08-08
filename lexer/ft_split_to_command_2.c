@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 14:43:22 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/07 12:06:29 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/08 10:08:55 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,11 @@ void	ft_handle_word(t_command *node, t_tokens_list **tokens)
 			|| (*tokens)->type == ENV))
 	{
 		
+		if (!(*tokens)->value  || ft_strlen((*tokens)->value) == 0)
+		{
+			*tokens = (*tokens)->next;
+			return ;
+		}
 		node->command_args = ft_append_to_list_tokens(node->command_args,
 				tokens);
 	}

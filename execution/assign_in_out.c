@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 13:36:57 by aet-tale          #+#    #+#             */
-/*   Updated: 2024/08/08 01:19:23 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/08 14:22:22 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,19 @@ int	get_file_fd(t_command	*command, char i_o)
 		if (command->is_heredoc)
 		{
 			fd = open(command->in_file, O_RDONLY | O_APPEND, 0644);
+			if (fd == -1)
+			{
+				perror(ft_strjoin("minishell: ", command->in_file));
+				exit(1);
+			}
 		}else
 		{
 			fd = open(command->in_file, O_RDONLY, 0644);
+			if (fd == -1)
+			{
+				perror(ft_strjoin("minishell: ", command->in_file));
+				exit(1);
+			}
 		}
 	}
 	else if (i_o == 'o')
@@ -32,9 +42,19 @@ int	get_file_fd(t_command	*command, char i_o)
 		if (command->is_append)
 		{
 			fd = open(command->out_file, O_WRONLY | O_CREAT | O_APPEND, 0644);
+			if (fd == -1)
+			{
+				perror(ft_strjoin("minishell: ", command->out_file));
+				exit(1);
+			}
 		}else
 		{
 			fd = open(command->out_file, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+			if (fd == -1)
+			{
+				perror(ft_strjoin("minishell: ", command->out_file));
+				exit(1);
+			}
 		}
 	}
 	return (fd);
@@ -73,6 +93,7 @@ int	get_pipe_fd(t_pipe *list_pipes, int index, char c)
 
 void	assign_input(t_command	*command, t_be_executed	*to_execute)
 {
+
 	if (command->in_type == FILE_IO && command->is_heredoc)
 	{
 		return ;

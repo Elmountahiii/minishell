@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 09:30:38 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/07 15:27:38 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/08 15:05:49 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,15 +69,22 @@ int	main(int argc, char *argv[], char *envp[])
 		if (ft_check_syntax(tokens_list))
 			continue ;
 		ft_expend_tokens(tokens_list, (env_list)); // change it to our env
-		list_of_files = give_list_files(tokens_list);
-		list_pipes = give_list_pipes(tokens_list);
 		ft_expend_tokens(tokens_list, (env_list));
-		commands_list = ft_split_to_command(tokens_list, list_pipes);
+		//ft_print_tokens_info(tokens_list);
+		commands_list = ft_split_to_command(tokens_list);
 		ft_init_heredoc(commands_list);
-		// ft_print_command_info(commands_list);
+		
+		// continue ;
+		//ft_print_tokens_info(tokens_list);
+		list_of_files = give_list_files(tokens_list , commands_list);		
+		list_pipes = give_list_pipes(tokens_list);
+		//print_list_files(list_of_files);
+		//ft_print_command_info(commands_list);
+		//continue ;
 		// continue ;
 		fill_command_paths(commands_list, env_list);
 		to_execute = give_executed(commands_list, list_pipes, tokens_list, &env_list);
+		to_execute->list_files = list_of_files;
 		execute_things(to_execute);
 		close_files(list_of_files);
 		free(to_execute);
