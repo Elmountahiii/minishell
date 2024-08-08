@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 18:22:42 by aet-tale          #+#    #+#             */
-/*   Updated: 2024/08/08 15:59:37 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/08 19:28:22 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,11 @@ t_list_files	*give_list_files(t_tokens_list	*list_tokens, t_command *command)
 				{
 					if (tmp)
 						tmp = tmp->next;
-					
+					while (list_tokens && list_tokens->type != PIPE)
+					{
+						if (list_tokens)
+							list_tokens = list_tokens->next;
+					}
 				}
 					
 				if (list_tokens)
