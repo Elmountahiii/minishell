@@ -6,7 +6,7 @@
 /*   By: aet-tale <aet-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 14:53:57 by aet-tale          #+#    #+#             */
-/*   Updated: 2024/08/07 20:55:06 by aet-tale         ###   ########.fr       */
+/*   Updated: 2024/08/08 14:22:33 by aet-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,21 +40,21 @@ void	our_exit(t_command *command, t_be_executed	*to_execute, int procss)
 	(void )to_execute;
 	if (!procss)
 		printf("exit\n");
-	if (check_if_number(command->command_args[1]))
+	if (count_array_str(command->command_args) == 1)
+		exit(0);
+	else if (!check_if_number(command->command_args[1]))
 	{
-		exit(ft_atoi(command->command_args[1]));
-	}else
-	{
-		write(2, "bash: exit: ", 12);
+		write(2, "minishell: exit: ", 12);
 		write(2, command->command_args[1], ft_strlen(command->command_args[1]));
 		write(2, ": numeric argument required\n", 28);
 		exit(255);
 	}
-	if (count_array_str(command->command_args) > 2 && !check_if_number(command->command_args[1]))
+	else if (count_array_str(command->command_args) > 2)
 	{
-		write(2, "bash: exit: ", 12);
-		write(2, command->command_args[1], ft_strlen(command->command_args[1]));
-		write(2, ": numeric argument required\n", 28);
-		exit(255);
+		write(2, "minishell: exit: too many arguments\n", 36);
+		exit_status = 1;
+	}else
+	{
+		exit(ft_atoi(command->command_args[1]));
 	}
 }

@@ -5,7 +5,8 @@ int is_digit(char c) {
 }
 
 // Function to check if a character is an alphabetic letter
-int is_alpha(char c) {
+int is_alpha(char c) 
+{
     return (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z');
 }
 

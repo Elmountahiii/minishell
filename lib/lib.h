@@ -50,7 +50,7 @@ void	ft_bzero(void *s, size_t n);
 int		ft_is_all_space(char *str);
 int     ft_atoi(const char *str);
 char	*ft_itoa(int n);
-
+int     is_alpha(char c);
 // v2
 char	**ft_super_split(char *str);
 int		ft_count_words_v2(char *str);

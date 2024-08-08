@@ -48,6 +48,8 @@ int	check_every_arg(char *arg)
 	int i;
 
 	i = 0;
+	if (!is_alpha(arg[0]) && arg[0] != '_')
+		return 1;
 	while (arg[i])
 	{
 		if (!is_alnum(arg[i]) && arg[i] != '_')
