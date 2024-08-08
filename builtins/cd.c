@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 17:50:52 by aet-tale          #+#    #+#             */
-/*   Updated: 2024/08/08 13:16:16 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/08 16:39:18 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	our_cd(t_command *command, t_be_executed	*to_execute, int procss)
 		add_to_env("OLDPWD", get_pwd_value(*to_execute->env_list), to_execute->env_list);
 		add_to_env("PWD", getcwd(NULL, 0), to_execute->env_list);
 	}else{
-		write(2, "bash: cd: ", 10);
+		write(2, "minishell: cd: ", 10);
 		write(2, path[1], ft_strlen(path[1]));
 		if (errno == ENOTDIR)
 			write(2, ": Not a directory\n", 18);

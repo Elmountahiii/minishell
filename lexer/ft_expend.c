@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 14:22:22 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/08 10:05:48 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/08 16:37:01 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ int	ft_count_keys(char *str)
 		if (str[i] == '$')
 		{
 			count++;
-			i++;
 		}
 		i++;
 	}
@@ -77,8 +76,7 @@ char	**ft_extract_keys(char *str)
 	{
 		if (str[i] == '$')
 		{
-			i++;
-			keys[index] = ft_get_key(str, i);
+			keys[index] = ft_get_key(str, i + 1);
 			index++;
 		}
 		i++;
@@ -104,7 +102,6 @@ void	ft_expend_tokens(t_tokens_list *token, t_env_list *env)
 				token->value = NULL;
 			}
 		}
-		
 		token = token->next;
 	}
 }

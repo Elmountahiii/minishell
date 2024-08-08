@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 12:52:17 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/08 14:56:04 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/08 15:50:48 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	ft_is_executed(t_list_files *files , int index)
 		{
 			if (tmp->fd == -1)
 			{
-				write(2, "minishell : ", 12);
+				write(2, "minishell: ", 11);
 				write(2, tmp->name, ft_strlen(tmp->name));
 				write(2, ": No such file or directory\n", 28);
 				// printf("minishell : %s: No such file or directory\n", tmp->name);

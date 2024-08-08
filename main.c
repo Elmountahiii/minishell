@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 09:30:38 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/08 15:05:49 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/08 16:41:03 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,11 @@ int	main(int argc, char *argv[], char *envp[])
 			break ;
 		}
 		add_history(line);
-		if (ft_strlen(line) > 0 && ft_strncmp(line, "exit", ft_strlen(line)) == 0)
-		{
-			printf("exit\n");
-			break;
-		}
+		// if (ft_strlen(line) > 0 && ft_strncmp(line, "exit", ft_strlen(line)) == 0)
+		// {
+		// 	printf("exit\n");
+		// 	break;
+		// }
 		tokens_list = ft_init_token_list(line);
 		// free then constinue
 		if (ft_check_syntax(tokens_list))

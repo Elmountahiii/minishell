@@ -23,8 +23,7 @@ void	our_echo(t_command *command, t_be_executed	*to_execute, int procss)
 	int exit_sts = 0;
 	int i = 1;
 	char **str = command->command_args;
-
-	// dup2(command->fd_out, 1);
+	
 	while (str[i] && is_nn(str[i]))
 	{
 		new_line = 0;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aet-tale <aet-tale@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 14:53:57 by aet-tale          #+#    #+#             */
-/*   Updated: 2024/08/08 15:16:58 by aet-tale         ###   ########.fr       */
+/*   Updated: 2024/08/08 16:45:54 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	our_exit(t_command *command, t_be_executed	*to_execute, int procss)
 	if (!procss)
 		printf("exit\n");
 	if (count_array_str(command->command_args) == 1)
-		exit(0);
+		exit(exit_status);
 	else if (!check_if_number(command->command_args[1]))
 	{
 		write(2, "minishell: exit: ", 12);
