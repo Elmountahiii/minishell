@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 14:43:22 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/08 10:08:55 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/09 16:51:00 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,10 @@ void	ft_handle_redirection(t_command *node, t_tokens_list **tokens)
 		ft_skip_tokens_spaces(tokens);
 		if (*tokens)
 		{
-			node->out_file = ft_strdup((*tokens)->value);
+			if ((*tokens)->type == DOUBLE_QUOTE_WORD || (*tokens)->type == SINGLE_QUOTE_WORD)
+				node->out_file = ft_remove_quotes((*tokens)->value);
+			else
+				node->out_file = ft_strdup((*tokens)->value);
 			*tokens = (*tokens)->next;
 		}
 	}

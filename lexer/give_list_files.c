@@ -6,22 +6,10 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 18:22:42 by aet-tale          #+#    #+#             */
-/*   Updated: 2024/08/08 21:16:38 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/09 16:44:31 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// typedef enum {
-// 	WORD,
-// 	SPACE,
-// 	PIPE,
-// 	SINGLE_QUOTE_WORD,
-// 	DOUBLE_QUOTE_WORD,
-// 	REDIRECTION_IN,
-// 	REDIRECTION_OUT,
-// 	APPEND,
-// 	HEREDOC,
-// 	ENV,
-// } t_token_type;
 
 #include "../minishell.h"
 
@@ -37,7 +25,6 @@ t_list_files	*creat_file_node(char *str, t_token_type type, t_command *command, 
 		unquoted = ft_remove_quotes(str);
 	else
 		unquoted = ft_strdup(str);
-	
 	if (type == REDIRECTION_IN)
 		node->fd = open(unquoted, O_RDONLY);
 	else if (type == REDIRECTION_OUT)

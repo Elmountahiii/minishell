@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 09:30:38 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/09 11:57:28 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/09 16:45:07 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,8 @@ int	main(int argc, char *argv[], char *envp[])
 		list_of_files = give_list_files(tokens_list , commands_list);		
 		list_pipes = give_list_pipes(tokens_list);
 		fill_command_paths(commands_list, env_list);
-		// print_list_files(list_of_files);
+		//  print_list_files(list_of_files);
 		//ft_print_command_info(commands_list);
-		
 		//continue ;
 		to_execute = give_executed(commands_list, list_pipes, tokens_list, &env_list);
 		to_execute->list_files = list_of_files;

@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 12:50:49 by aet-tale          #+#    #+#             */
-/*   Updated: 2024/08/09 11:49:00 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/09 15:58:34 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,11 @@ char	*ft_search_in_current_dir(char *command)
 	path = ft_strjoin("./", command);
 	if (stat(path, &fileStat) == 0)
 	{
+		if (S_ISDIR(fileStat.st_mode))
+		{
+			free(path);
+			return (NULL);
+		}
 		if (access(path, F_OK) != -1)
 			return (path);
 	}
