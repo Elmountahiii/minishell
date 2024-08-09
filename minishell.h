@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 09:30:52 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/08 14:31:57 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/09 11:27:19 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -231,6 +231,8 @@ void			assign_output(t_command	*command, t_be_executed	*to_execute);
 void			assign_input(t_command	*command, t_be_executed	*to_execute);
 int				get_file_fd(t_command	*command, char i_o);
 int				ft_is_executed(t_list_files *files , int index);
+int				ft_is_path(char *cmd);
+void			ft_check_path_correct(char *cmd);
 
 // end
 

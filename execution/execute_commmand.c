@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 12:42:46 by aet-tale          #+#    #+#             */
-/*   Updated: 2024/08/08 14:59:50 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/09 11:57:03 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ void print_error(char *prefix, char *command)
 		
 	// 	printf("minishell : %s is a directory\n", command);
 	// 	exit(127);
-	// }		
+	// }
+	
 	write(2, prefix, ft_strlen(prefix));
 	write(2, command, ft_strlen(command));
 	write(2, ": ", 2);
@@ -132,7 +133,6 @@ void	execute_command(t_command *command,	t_be_executed	*to_execute)
 	char	**args;
 	// int	i = 0;
 	// (void)i;
-
 	if (ft_is_executed(to_execute->list_files, command->index) == 0)
 	{
 		close_pipes(to_execute->list_pipes);
@@ -148,13 +148,10 @@ void	execute_command(t_command *command,	t_be_executed	*to_execute)
 		write(2, ": command not found\n", 20);
 		exit(127);
 	}
-	else if (is_directory(command->path))
-	{
-		write(2, "minishell: ", 11);
-		write(2, args[0], ft_strlen(args[0]));
-		write(2, ": is a directory\n", 17);
-		exit(126);
-	}
+	else if (ft_is_path(args[0]))
+		ft_check_path_correct(args[0]);
+	else if (ft_is_path(command->path))
+		ft_check_path_correct(command->path);
 	assign_input(command, to_execute);
 	assign_output(command, to_execute);
 	if (command->in_type != STDIN_FILENO)
@@ -164,20 +161,9 @@ void	execute_command(t_command *command,	t_be_executed	*to_execute)
 	// close_pipes(command->list_pipes);
 	close_pipes(to_execute->list_pipes);
 	env = give_array_str(*to_execute->env_list);
-	// close_pipes(command->list_pipes);
-	// close_pipes(to_execute->list_pipes);
-	// you should check if the command is executed or not 
-	// if the commands args is null of empty doesn't execute the command
 	execve(command->path, command->command_args, env);
 	print_error("minishell: ", command->command_args[0]);
 	if (errno == 13)
 		exit(126);
 	exit(127);
-	// // why
-	// close_pipes(command->list_pipes);
-	// close(command->fd_out);
-	// close(command->fd_in);
-	// close(1);
-	// close(0);
-	// exit(errno);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fill_command_paths.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aet-tale <aet-tale@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 12:50:49 by aet-tale          #+#    #+#             */
-/*   Updated: 2024/08/01 11:23:43 by aet-tale         ###   ########.fr       */
+/*   Updated: 2024/08/09 11:49:00 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,23 @@ char	*ft_check_path(t_env_list *env_list)
 			return (env_list->value);
 		env_list = env_list->next;
 	}
+	return (NULL);
+}
+
+char	*ft_search_in_current_dir(char *command)
+{
+	struct stat	fileStat;
+	char		*path;
+
+	if (is_built_in(command))
+		return (NULL);
+	path = ft_strjoin("./", command);
+	if (stat(path, &fileStat) == 0)
+	{
+		if (access(path, F_OK) != -1)
+			return (path);
+	}
+	free(path);
 	return (NULL);
 }
 
@@ -44,7 +61,7 @@ char	*search_for_path(char *command, t_env_list *env)
 		i++;
 	}
 	ft_free_split(path_list, ft_split_count(path_list));
-	return (NULL);
+	return (ft_search_in_current_dir(command));
 }
 
 void	fill_command_paths(t_command *command_list, t_env_list *env)

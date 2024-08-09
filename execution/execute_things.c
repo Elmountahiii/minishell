@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 11:35:05 by aet-tale          #+#    #+#             */
-/*   Updated: 2024/08/08 14:30:30 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/09 10:56:00 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,10 @@ void	execute_built_in(t_command	*command, t_be_executed	*to_execute, int procss)
 		close_other_pipes(command, to_execute->list_pipes);
 	std_out = dup(STDOUT_FILENO);
 	std_int = dup(STDIN_FILENO);
-	dup2(command->fd_out, 1);
+	if (command->fd_in != STDIN_FILENO)
+		dup2(command->fd_in, STDIN_FILENO);
+	if (command->fd_out != STDOUT_FILENO)
+		dup2(command->fd_out, STDOUT_FILENO);
 	if (ft_strcmp(command->command_args[0], "echo") == 0)
 		our_echo(command, to_execute, procss);
 	else if (ft_strcmp(command->command_args[0], "cd") == 0)

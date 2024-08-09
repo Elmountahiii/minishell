@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 11:06:51 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/08 14:31:45 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/09 10:52:16 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ void	until_pipe(t_command *node, t_tokens_list *tokens , t_command *head)
 	if (node->out_type == STDIN_IO)
 	{
 		node->out_type = STDOUT_IO;
+		node->fd_out = STDOUT_FILENO;
 		node->out_file = NULL;
 	}
 }
