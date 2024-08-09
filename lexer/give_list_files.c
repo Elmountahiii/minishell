@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 18:22:42 by aet-tale          #+#    #+#             */
-/*   Updated: 2024/08/08 19:28:22 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/08 21:16:38 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,9 @@ t_list_files	*creat_file_node(char *str, t_token_type type, t_command *command, 
 	if (type == REDIRECTION_IN)
 		node->fd = open(unquoted, O_RDONLY);
 	else if (type == REDIRECTION_OUT)
-		node->fd = open(unquoted, O_CREAT | O_RDWR | O_TRUNC, 0644);
+		node->fd = open(unquoted, O_CREAT | O_RDWR | O_TRUNC, 0666);
 	else if (type == APPEND)
-		node->fd = open(unquoted, O_CREAT | O_RDWR | O_APPEND, 0644);
+		node->fd = open(unquoted, O_CREAT | O_RDWR | O_APPEND, 0666);
 	node->name = unquoted;
 	node->next = NULL;
 	if (command)

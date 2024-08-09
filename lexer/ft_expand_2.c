@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 14:47:39 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/08 20:04:56 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/08 22:31:40 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ int	expand_join(char *new_value, char *value, int index)
 	i = 0;
 	if (!value)
 		return (index);
+	//printf("value = %s\n", value);
 	while(value[i])
 	{
 		new_value[index] = value[i];
@@ -78,9 +79,15 @@ char *find_value(char * key ,t_env_list *env)
 	while (env)
 	{
 		if (key && key[0] == '?')
+		{
+			//printf("key = %s value = %s \n", key, ft_itoa(exit_status));
 			return (ft_itoa(exit_status));
+		}
 		if (ft_strcmp(env->key, key) == 0)
+		{
+			//printf("key = %s value = %s \n", key, env->value);
 			return (env->value);
+		}
 		env = env->next;
 	}
 	return (NULL);
@@ -108,6 +115,7 @@ char	*ft_expand(char *value, char **keys, t_env_list *env)
 			if (value[i] == '?')
 			{
 				j = expand_join(new_value, find_value("?",env), j);
+				index++;
 				i++;
 				continue ;
 			}
