@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 14:43:22 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/09 18:26:27 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/09 18:55:51 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,37 +96,28 @@ void	ft_handle_word(t_command *node, t_tokens_list **tokens)
 
 void	ft_handle_redirection(t_command *node, t_tokens_list **tokens)
 {
-
+	t_token_type 	type;
+	char			*file_name;
+	t_command_files	*new;
+	
 	if (!tokens || !*tokens)
 		return ;
-	if ((*tokens)->type == REDIRECTION_IN)
+	file_name = NULL;
+	if ((*tokens)->type == REDIRECTION_IN || (*tokens)->type == REDIRECTION_OUT)
 	{
-		node->in_type = FILE_IO;
-		*tokens = (*tokens)->next;
-		node->is_heredoc = false;
-		ft_skip_tokens_spaces(tokens);
-		if (*tokens)
-		{
-			if ((*tokens)->type == DOUBLE_QUOTE_WORD || (*tokens)->type == SINGLE_QUOTE_WORD)
-				node->in_file = ft_remove_quotes((*tokens)->value);
-			else
-				node->in_file = ft_strdup((*tokens)->value);
-			*tokens = (*tokens)->next;
-		}
-	}
-	else if ((*tokens)->type == REDIRECTION_OUT)
-	{
-		
-		node->out_type = FILE_IO;
+		if((*tokens)->type == REDIRECTION_IN)
+			node->is_heredoc = false;
+		else
+			node->is_append = false;
+		type = (*tokens)->type;
+		if (type == REDIRECTION_IN)
+			node->in_type = FILE_IO;
+		else
+			node->out_type = FILE_IO;
 		*tokens = (*tokens)->next;
 		ft_skip_tokens_spaces(tokens);
-		if (*tokens)
-		{
-			if ((*tokens)->type == DOUBLE_QUOTE_WORD || (*tokens)->type == SINGLE_QUOTE_WORD)
-				node->out_file = ft_remove_quotes((*tokens)->value);
-			else
-				node->out_file = ft_strdup((*tokens)->value);
-			*tokens = (*tokens)->next;
-		}
+		file_name = ft_handle_file_name(tokens);
+		new = ft_create_file_node(file_name, type);
+		ft_files_addback(&node->files_list, new);
 	}
 }

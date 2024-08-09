@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 09:30:38 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/09 16:45:07 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/09 20:05:17 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	main(int argc, char *argv[], char *envp[])
 	t_command		*commands_list = NULL;
 	t_env_list		*env_list;
 	t_be_executed	*to_execute;
-	t_list_files	*list_of_files;
+	//t_list_files	*list_of_files;
 	t_pipe			*list_pipes;
 	char			*line;
 	//atexit(ft_check_leaks);
@@ -65,16 +65,18 @@ int	main(int argc, char *argv[], char *envp[])
 		ft_expend_tokens(tokens_list, (env_list));
 		commands_list = ft_split_to_command(tokens_list);
 		ft_init_heredoc(commands_list);
-		list_of_files = give_list_files(tokens_list , commands_list);		
+		ft_open_files(commands_list);
+		ft_select_files(commands_list);
+		//list_of_files = give_list_files(tokens_list , commands_list);		
 		list_pipes = give_list_pipes(tokens_list);
 		fill_command_paths(commands_list, env_list);
 		//  print_list_files(list_of_files);
 		//ft_print_command_info(commands_list);
-		//continue ;
+		// continue ;
 		to_execute = give_executed(commands_list, list_pipes, tokens_list, &env_list);
-		to_execute->list_files = list_of_files;
+		to_execute->list_files = NULL;
 		execute_things(to_execute);
-		close_files(list_of_files);
+		//close_files(list_of_files);
 		free(to_execute);
 	}
 	return (0);

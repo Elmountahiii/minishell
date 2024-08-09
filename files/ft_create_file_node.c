@@ -6,13 +6,13 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 18:01:36 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/09 18:26:55 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/09 18:56:11 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-t_command_files	*ft_create_file_node(char *file_name, IOType type)
+t_command_files	*ft_create_file_node(char *file_name, t_token_type type)
 {
 	t_command_files	*new;
 

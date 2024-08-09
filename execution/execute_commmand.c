@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 12:42:46 by aet-tale          #+#    #+#             */
-/*   Updated: 2024/08/09 11:57:03 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/09 19:57:07 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,7 +133,7 @@ void	execute_command(t_command *command,	t_be_executed	*to_execute)
 	char	**args;
 	// int	i = 0;
 	// (void)i;
-	if (ft_is_executed(to_execute->list_files, command->index) == 0)
+	if (ft_is_executed(command) == 0)
 	{
 		close_pipes(to_execute->list_pipes);
 		exit(1);

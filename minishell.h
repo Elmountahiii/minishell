@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 09:30:52 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/09 18:27:11 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/09 19:56:48 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,7 +182,7 @@ void	ft_clean_tokens(t_tokens_list *tokens_list);
 void	ft_clean_commands(t_command *commands_list);
 
 // files 
-t_command_files	*ft_create_file_node( char *file_name, IOType type);
+t_command_files	*ft_create_file_node( char *file_name, t_token_type type);
 int				ft_is_valid_file_name(t_token_type type);
 t_heredoc		*ft_heredoc_last(t_heredoc *lst);
 void			ft_files_addback(t_command_files **alst, t_command_files *new);
@@ -190,6 +190,9 @@ t_command_files	*ft_files_last(t_command_files *lst);
 int				ft_is_valid_file_name(t_token_type type);
 char			*ft_handle_file_name(t_tokens_list **tokens);
 void			ft_select_files(t_command *command);
+void			ft_open_files(t_command *command);
+t_command_files *ft_correct_in_file(t_command_files *files_list);
+t_command_files *ft_correct_out_file(t_command_files *files_list);
 
 
 typedef struct t_be_executed
@@ -248,7 +251,7 @@ void			execute_command(t_command *command,	t_be_executed	*to_execute);
 void			assign_output(t_command	*command, t_be_executed	*to_execute);
 void			assign_input(t_command	*command, t_be_executed	*to_execute);
 int				get_file_fd(t_command	*command, char i_o);
-int				ft_is_executed(t_list_files *files , int index);
+int				ft_is_executed(t_command *command);
 int				ft_is_path(char *cmd);
 void			ft_check_path_correct(char *cmd);
 

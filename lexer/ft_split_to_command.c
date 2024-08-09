@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 11:06:51 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/09 10:52:16 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/09 18:48:18 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,24 @@
 
 void	ft_handle_append(t_command *node, t_tokens_list **tokens)
 {
+	char			*file_name;
+	t_command_files	*file;
+	t_token_type	type;
+	
 	if (!tokens || !*tokens) 
 		return ;
+	file_name = NULL;
 	if ((*tokens)->type == APPEND)
 	{
-		node->out_type = FILE_IO;
+		type = (*tokens)->type;
 		node->is_append = true;
+		node->out_type = FILE_IO;
 		*tokens = (*tokens)->next;
 		ft_skip_tokens_spaces(tokens);
-		if (*tokens)
-		{
-			node->out_file = ft_strdup((*tokens)->value);
-			*tokens = (*tokens)->next;
-		}
+		file_name = ft_handle_file_name(tokens);
+		file = ft_create_file_node(file_name, type);
+		ft_files_addback(&node->files_list, file);
 	}
-	
 }
 
 void	ft_handle_heredoc(t_command *node, t_tokens_list **tokens, t_command *head)
