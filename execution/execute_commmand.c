@@ -170,7 +170,9 @@ void	execute_command(t_command *command,	t_be_executed	*to_execute)
 	// if the commands args is null of empty doesn't execute the command
 	execve(command->path, command->command_args, env);
 	print_error("minishell: ", command->command_args[0]);
-	exit(126);
+	if (errno == 13)
+		exit(126);
+	exit(127);
 	// // why
 	// close_pipes(command->list_pipes);
 	// close(command->fd_out);

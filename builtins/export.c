@@ -124,6 +124,4 @@ void	ft_export(t_command *command, t_be_executed	*to_execute, int procss)
 	}
 	if (procss)
 		exit(exit_sts);
-	else
-		exit_status = 0;
 }

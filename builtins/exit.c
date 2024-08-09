@@ -47,14 +47,14 @@ void	our_exit(t_command *command, t_be_executed	*to_execute, int procss)
 		write(2, "minishell: exit: ", 12);
 		write(2, command->command_args[1], ft_strlen(command->command_args[1]));
 		write(2, ": numeric argument required\n", 28);
-		exit(255);
+		exit(2);
 	}
 	else if (count_array_str(command->command_args) > 2)
 	{
 		write(2, "minishell: exit: too many arguments\n", 36);
 		if (procss)
-			exit(255);
-		exit_status = 255;
+			exit(1);
+		exit_status = 1;
 	}else
 	{
 		exit(ft_atoi(command->command_args[1]));
