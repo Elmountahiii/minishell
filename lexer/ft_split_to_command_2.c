@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 14:43:22 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/09 16:51:00 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/09 18:26:27 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ void	ft_handle_word(t_command *node, t_tokens_list **tokens)
 
 void	ft_handle_redirection(t_command *node, t_tokens_list **tokens)
 {
+
 	if (!tokens || !*tokens)
 		return ;
 	if ((*tokens)->type == REDIRECTION_IN)

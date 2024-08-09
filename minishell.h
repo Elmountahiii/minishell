@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 09:30:52 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/09 11:27:19 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/09 18:27:11 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,10 +72,25 @@ typedef struct t_env_list
 	struct t_env_list	*next;
 }t_env_list;
 
+typedef struct t_list_files
+{
+	int					id;
+	int					fd;
+	char				*name;
+	struct t_list_files	*next;
+}t_list_files;
+
+typedef struct s_command_files
+{
+	int					fd;
+	t_token_type		type;
+	char				*name;
+	struct s_command_files	*next;
+}t_command_files;
+
 typedef struct s_command {
 	char				**command_args;
 	char 				*path;
-	// t_env_list 			*env_list;
 	IOType				in_type;
 	IOType				out_type;
 	char				*in_file;
@@ -86,8 +101,8 @@ typedef struct s_command {
 	bool				is_append;
 	bool				is_heredoc;
 	int					index;
+	t_command_files		*files_list;
 	t_heredoc			*heredoc_list;
-	// t_pipe				*list_pipes;
 	struct s_command	*next;
 } t_command;
 
@@ -166,13 +181,16 @@ void	ft_free_array(char **array);
 void	ft_clean_tokens(t_tokens_list *tokens_list);
 void	ft_clean_commands(t_command *commands_list);
 
-typedef struct t_list_files
-{
-	int					id;
-	int					fd;
-	char				*name;
-	struct t_list_files	*next;
-}t_list_files;
+// files 
+t_command_files	*ft_create_file_node( char *file_name, IOType type);
+int				ft_is_valid_file_name(t_token_type type);
+t_heredoc		*ft_heredoc_last(t_heredoc *lst);
+void			ft_files_addback(t_command_files **alst, t_command_files *new);
+t_command_files	*ft_files_last(t_command_files *lst);
+int				ft_is_valid_file_name(t_token_type type);
+char			*ft_handle_file_name(t_tokens_list **tokens);
+void			ft_select_files(t_command *command);
+
 
 typedef struct t_be_executed
 {
