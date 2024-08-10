@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 14:22:22 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/08 22:32:05 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/10 15:31:02 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ int	ft_is_token_expandable(t_tokens_list *token)
 		if (ft_is_env(token->value))
 			return (1);
 	}
+	if (token->type == WORD)
+		return (1);
 	return (0);
 }
 
@@ -78,13 +80,11 @@ char	**ft_extract_keys(char *str)
 		{
 			if (str[i + 1] == '?')
 			{
-				keys[index] = ft_strdup("?");
-				index++;
+				keys[index++] = ft_strdup("?");
 				i++;
 				continue ;
 			}
-			keys[index] = ft_get_key(str, i + 1);
-			index++;
+			keys[index++] = ft_get_key(str, i + 1);
 		}
 		i++;
 	}
@@ -102,12 +102,12 @@ void	ft_expend_tokens(t_tokens_list *token, t_env_list *env)
 		if (ft_is_token_expandable(token))
 		{
 			keys = ft_extract_keys(token->value);
-			//int i = 0;
-			// while (keys && keys[i])
-			// {
-			// 	printf("keys[%d] = %s\n", i, keys[i]);
-			// 	i++;
-			// }
+			int i = 0;
+			while (keys && keys[i])
+			{
+				printf("keys[%d] = %s\n", i, keys[i]);
+				i++; 
+			}
 			token->value = ft_expand(token->value, keys, env);
 			if (ft_strlen(token->value) == 0)
 			{

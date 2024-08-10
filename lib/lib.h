@@ -53,6 +53,7 @@ char	*ft_itoa(int n);
 int     is_alpha(char c);
 void	ft_putchar_fd(char c, int fd);
 void	ft_putstr_fd(char *s, int fd);
+int		ft_isdigit(int d);
 // v2
 char	**ft_super_split(char *str);
 int		ft_count_words_v2(char *str);

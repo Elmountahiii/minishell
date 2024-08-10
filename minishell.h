@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 09:30:52 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/10 12:52:58 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/10 16:30:35 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -205,6 +205,12 @@ void			ft_open_files(t_command *command);
 t_command_files *ft_correct_in_file(t_command_files *files_list);
 t_command_files *ft_correct_out_file(t_command_files *files_list);
 
+//  expanding
+void	ft_tokens_expand(t_tokens_list *tokens_list, t_env_list *env_list);
+int		ft_is_expandable(t_tokens_list *token);
+int		ft_keys_count(char *str, t_token_type type);
+char	**ft_split_keys(char *str , t_token_type type);
+char	*ft_extract_key(char *str);
 
 
 // builtins funcs and structs
