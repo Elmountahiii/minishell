@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 09:30:38 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/09 20:05:17 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/10 12:07:36 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ int	main(int argc, char *argv[], char *envp[])
 		line = readline("minishell$ ");
 		if (!line)
 		{
-			printf("exit\n");
 			break ;
 		}
 		add_history(line);
@@ -79,7 +78,7 @@ int	main(int argc, char *argv[], char *envp[])
 		//close_files(list_of_files);
 		free(to_execute);
 	}
-	return (0);
+	return (exit_status);
 }
 
 

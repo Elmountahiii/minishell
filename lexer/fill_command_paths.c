@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 12:50:49 by aet-tale          #+#    #+#             */
-/*   Updated: 2024/08/09 15:58:34 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/10 11:07:29 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ char	*search_for_path(char *command, t_env_list *env)
 	// char	*env_path;
 
 	i = 0;
+	if (ft_check_path(env) == NULL)
+		return (ft_search_in_current_dir(command));
 	path_list = ft_split_dil(ft_check_path(env), ':');
 	while (command && path_list && path_list[i])
 	{
@@ -66,7 +68,7 @@ char	*search_for_path(char *command, t_env_list *env)
 		i++;
 	}
 	ft_free_split(path_list, ft_split_count(path_list));
-	return (ft_search_in_current_dir(command));
+	return (NULL);
 }
 
 void	fill_command_paths(t_command *command_list, t_env_list *env)

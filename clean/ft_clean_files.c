@@ -1,29 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   loop.c                                             :+:      :+:    :+:   */
+/*   ft_clean_files.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lalex-ku <lalex-ku@42sp.org.br>            +#+  +:+       +#+        */
+/*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/22 17:32:45 by lalex-ku          #+#    #+#             */
-/*   Updated: 2022/06/22 17:32:50 by lalex-ku         ###   ########.fr       */
+/*   Created: 2024/08/10 10:22:46 by yel-moun          #+#    #+#             */
+/*   Updated: 2024/08/10 10:23:30 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <fcntl.h>
-#include <stdio.h>
-#include <unistd.h>
+#include "../minishell.h"
 
-int	main(int argc, char const *argv[])
+void	ft_clean_files(t_list_files *list_of_files)
 {
-	int	pid;
+	t_list_files	*tmp;
 
-	pid = fork();
-	open("infile", O_RDONLY);
-	while (1)
+	while (list_of_files)
 	{
-		printf("Helloo miniHELL %i\n", pid);
-		sleep(1);
+		tmp = list_of_files;
+		list_of_files = list_of_files->next;
+		free(tmp->name);
+		free(tmp);
 	}
-	return (0);
 }
