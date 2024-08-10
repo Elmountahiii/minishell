@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 09:30:52 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/09 19:56:48 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/10 12:52:58 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,14 @@ typedef struct s_command {
 	t_heredoc			*heredoc_list;
 	struct s_command	*next;
 } t_command;
+typedef struct t_be_executed
+{
+	t_command		*commands_list;
+	t_tokens_list	*tokens_list;
+	t_pipe			*list_pipes;
+	t_env_list		**env_list;
+	int				list_size;
+}t_be_executed;
 
 
 int		ft_sub_alloc(char *str);
@@ -174,12 +182,15 @@ t_heredoc	*ft_create_heredoc(t_command *list,char *dil, t_token_type type);
 void		ft_init_heredoc(t_command *command);
 void		ft_open_heredoc(t_heredoc *heredoc);
 void		ft_fill_heredoc(t_command *command);
-void		ft_clean_heredoc(t_command *command);
 
 // cleaning functions
+void	ft_clean(t_be_executed *to_execute);
 void	ft_free_array(char **array);
+void	ft_clean_files(t_command_files *list_of_files);
 void	ft_clean_tokens(t_tokens_list *tokens_list);
 void	ft_clean_commands(t_command *commands_list);
+void	ft_clean_pipes(t_pipe *list_pipes);
+void	ft_clean_heredoc(t_heredoc *list_heredoc);
 
 // files 
 t_command_files	*ft_create_file_node( char *file_name, t_token_type type);
@@ -195,15 +206,6 @@ t_command_files *ft_correct_in_file(t_command_files *files_list);
 t_command_files *ft_correct_out_file(t_command_files *files_list);
 
 
-typedef struct t_be_executed
-{
-	t_command		*commands_list;
-	t_tokens_list	*tokens_list;
-	t_pipe			*list_pipes;
-	t_env_list		**env_list;
-	t_list_files	*list_files;
-	int				list_size;
-}t_be_executed;
 
 // builtins funcs and structs
 

@@ -1,26 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_create_file_node.c                              :+:      :+:    :+:   */
+/*   ft_clean.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/09 18:01:36 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/10 13:08:45 by yel-moun         ###   ########.fr       */
+/*   Created: 2024/08/10 12:39:10 by yel-moun          #+#    #+#             */
+/*   Updated: 2024/08/10 13:48:19 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-t_command_files	*ft_create_file_node(char *file_name, t_token_type type)
+void	ft_clean(t_be_executed *to_execute)
 {
-	t_command_files	*new;
-
-	new = ft_calloc(1,sizeof(t_command_files));
-	if (!new)
-		return (NULL);
-	new->name = ft_strdup(file_name);
-	new->type = type;
-	new->next = NULL;
-	return (new);
+	ft_clean_files(to_execute->commands_list->files_list);
+	ft_clean_tokens(to_execute->tokens_list);
+	ft_clean_heredoc(to_execute->commands_list->heredoc_list);
+	ft_clean_pipes(to_execute->list_pipes);
+	ft_clean_commands(to_execute->commands_list);
 }

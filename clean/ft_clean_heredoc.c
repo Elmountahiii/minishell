@@ -1,26 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_create_file_node.c                              :+:      :+:    :+:   */
+/*   ft_clean_heredoc.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/09 18:01:36 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/10 13:08:45 by yel-moun         ###   ########.fr       */
+/*   Created: 2024/08/10 12:35:19 by yel-moun          #+#    #+#             */
+/*   Updated: 2024/08/10 12:36:02 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-t_command_files	*ft_create_file_node(char *file_name, t_token_type type)
+void	ft_clean_heredoc(t_heredoc *list_heredoc)
 {
-	t_command_files	*new;
+	t_heredoc	*tmp;
 
-	new = ft_calloc(1,sizeof(t_command_files));
-	if (!new)
-		return (NULL);
-	new->name = ft_strdup(file_name);
-	new->type = type;
-	new->next = NULL;
-	return (new);
+	while (list_heredoc)
+	{
+		tmp = list_heredoc;
+		unlink(tmp->file_name);
+		close(tmp->fd);
+		list_heredoc = list_heredoc->next;
+		free(tmp->file_name);
+		free(tmp->dil);
+		free(tmp);
+	}
 }

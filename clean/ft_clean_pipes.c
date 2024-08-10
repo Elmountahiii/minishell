@@ -1,20 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_clean_heredoc.c                                 :+:      :+:    :+:   */
+/*   ft_clean_pipes.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/06 10:52:16 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/06 11:42:36 by yel-moun         ###   ########.fr       */
+/*   Created: 2024/08/10 12:31:14 by yel-moun          #+#    #+#             */
+/*   Updated: 2024/08/10 12:32:34 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	ft_clean_heredoc(t_command *command)
+void	ft_clean_pipes(t_pipe *list_pipes)
 {
-	if (!command)
-		return ;
-	unlink(command->in_file);
+	t_pipe	*tmp;
+
+	while (list_pipes)
+	{
+		tmp = list_pipes;
+		close(tmp->fd[0]);
+		close(tmp->fd[1]);
+		list_pipes = list_pipes->next;
+		free(tmp);
+	}
 }

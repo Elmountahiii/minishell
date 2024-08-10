@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 14:43:22 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/09 18:55:51 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/10 13:33:08 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,5 +119,6 @@ void	ft_handle_redirection(t_command *node, t_tokens_list **tokens)
 		file_name = ft_handle_file_name(tokens);
 		new = ft_create_file_node(file_name, type);
 		ft_files_addback(&node->files_list, new);
+		free(file_name);
 	}
 }

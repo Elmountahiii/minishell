@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 09:30:38 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/10 12:07:36 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/10 14:56:21 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,13 +54,14 @@ int	main(int argc, char *argv[], char *envp[])
 	{
 		line = readline("minishell$ ");
 		if (!line)
-		{
 			break ;
-		}
 		add_history(line);
 		tokens_list = ft_init_token_list(line);
 		if (ft_check_syntax(tokens_list))
+		{
+			ft_clean_tokens(tokens_list);
 			continue ;
+		}
 		ft_expend_tokens(tokens_list, (env_list));
 		commands_list = ft_split_to_command(tokens_list);
 		ft_init_heredoc(commands_list);
@@ -73,9 +74,9 @@ int	main(int argc, char *argv[], char *envp[])
 		//ft_print_command_info(commands_list);
 		// continue ;
 		to_execute = give_executed(commands_list, list_pipes, tokens_list, &env_list);
-		to_execute->list_files = NULL;
 		execute_things(to_execute);
 		//close_files(list_of_files);
+		ft_clean(to_execute);
 		free(to_execute);
 	}
 	return (exit_status);
