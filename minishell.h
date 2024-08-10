@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 09:30:52 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/10 16:30:35 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/10 23:27:39 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -211,6 +211,8 @@ int		ft_is_expandable(t_tokens_list *token);
 int		ft_keys_count(char *str, t_token_type type);
 char	**ft_split_keys(char *str , t_token_type type);
 char	*ft_extract_key(char *str);
+int		ft_is_env_char(char c);
+char	*ft_link_key_value(char *str, char **keys ,t_env_list *env_list);
 
 
 // builtins funcs and structs

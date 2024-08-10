@@ -1,16 +1,31 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_isalnum.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/12/08 15:18:18 by yel-moun          #+#    #+#             */
+/*   Updated: 2024/08/10 19:25:18 by yel-moun         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "lib.h"
 
-int is_digit(char c) {
-    return c >= '0' && c <= '9';
-}
-
-// Function to check if a character is an alphabetic letter
-int is_alpha(char c) 
+int	ft_isalpha(int c)
 {
-    return (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z');
+	if ((c >= 65 && c <= 90) || (c >= 97 && c <= 122))
+	{
+		return (1);
+	}
+	return (0);
 }
 
-// Function to check if a character is alphanumeric
-int is_alnum(char c) {
-    return is_alpha(c) || is_digit(c);
+int	ft_isalnum(int c)
+{
+	if (ft_isalpha(c) || ft_isdigit(c))
+	{
+		return (1);
+	}
+	return (0);
 }
