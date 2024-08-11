@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 12:42:46 by aet-tale          #+#    #+#             */
-/*   Updated: 2024/08/09 19:57:07 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/11 20:06:02 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ char	**append_to_array(char **array, char *str) {
     // Set the last element to NULL
     new_array[len + 1] = NULL;
 
-    // Free the old array
+    //Free the old array
     if (array) {
         free(array);
     }

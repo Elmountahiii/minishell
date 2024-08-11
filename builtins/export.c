@@ -48,7 +48,7 @@ int	check_every_arg(char *arg)
 	int i;
 
 	i = 0;
-	if (!ft_isalpha(arg[0]) && arg[0] != '_')
+	if (!ft_isalpha(arg[0]) && arg[0] != '_' )
 		return 1;
 	while (arg[i])
 	{

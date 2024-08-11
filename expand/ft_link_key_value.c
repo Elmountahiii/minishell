@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 23:09:36 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/11 16:45:30 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/11 19:20:11 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,10 @@ char	*ft_get_value(char *key, t_env_list *env)
 		return (ft_strdup("$"));
 	if (key[0] == '?')
 		return (ft_itoa(exit_status));
+	// if the key is just $ return $
+	
+	if (key[0] == '$' && ft_strlen(key) == 1)
+		return (ft_strdup("$"));
 	if (key[0] == '@')
 	{
 		if (ft_strlen(key) == 1)
@@ -63,19 +67,20 @@ int	ft_count_expand_len(char *str, char **keys, t_env_list *env)
 		{
 			i++;
 			if (str[i] && (str[i] == '$'))
-			  len += ft_count_for_dollar(str, &i);
+			{
+				len += ft_strlen(ft_get_value(keys[index], env));
+				i += ft_strlen(keys[index++]);
+			}
 			else if (str[i] && str[i] == '?')
 			{
-				len += ft_strlen(ft_itoa(exit_status));
 				i++;
-			}else if (str[i] && str[i] == '@')
-			{
-				len += ft_count_at(str, &i);
+				len += ft_strlen(ft_itoa(exit_status));
+				index++;
 			}
 			else
 			{
 				len += ft_strlen(ft_get_value(keys[index], env));
-				i += ft_strlen(ft_extract_key(keys[index++]));
+				i += ft_strlen(keys[index++]);
 			}
 		}
 		else
@@ -97,6 +102,7 @@ int	ft_join_key(char *buffer, char *value, int index)
 	j = 0;
 	if (!value || !buffer)
 		return (i);
+	
 	while (value[j])
 	{
 		buffer[i] = value[j];
@@ -113,6 +119,10 @@ char	*ft_link_key_value(char *str, char **keys ,t_env_list *env_list)
 	int		i;
 	int		index;
 	int 	j;
+	//  const char *RED = "\033[0;31m";
+    // const char *GREEN = "\033[0;32m";
+    // const char *RESET = "\033[0m";
+	// const char *blue = "\033[0;34m";
 	
 	//printf("the len is %d\n", ft_count_expand_len(str, keys, env_list));
 	expand = ft_calloc(ft_count_expand_len(str, keys, env_list) + 1, sizeof(char));
@@ -128,26 +138,26 @@ char	*ft_link_key_value(char *str, char **keys ,t_env_list *env_list)
 			i++;
 			if (str[i] && (str[i] == '$'))
 			{
-				j =ft_join_key(expand,keys[index], j);
+				//printf("%sYou found $ after $.%s\n", GREEN, RESET);
+				j = ft_join_key(expand,keys[index], j);
 				i += ft_strlen(keys[index]);
 				index++;
 			}else if (str[i] && str[i] == '?')
 			{
+				//printf("%syou found ? after $ and i = %d %s\n", RED, i,RESET);
 				j = ft_join_key(expand, ft_itoa(exit_status), j);
-				i+= ft_strlen(ft_itoa(exit_status));
+				i++;
+				index++;
+				//printf("%syou ended i = %d str now at %s %s\n", RED, i,&str[i],RESET);
 			}
-			// else if (str[i] && str[i] == '@')
-			// {
-			// 	j = ft_join_key(expand, keys[index], j);
-			// 	i += ft_strlen(keys[index]);
-			// 	index++;
-			// }
 			else
 			{
-				j = ft_join_key(expand, ft_get_value(ft_extract_key(keys[index]), env_list), j);
-				i += ft_strlen(ft_extract_key(keys[index++]));
+				// printf("%sYou found normal char the j = %d and i = %i and str is at %s .%s\n", blue, j,i,&str[i],RESET);
+				// printf("%sThe key is %s and the value is %s%s\n", blue, keys[index], ft_get_value(keys[index], env_list),RESET);
+				j = ft_join_key(expand, ft_get_value(keys[index], env_list), j);
+				i += ft_strlen(keys[index++]);
+				//printf("%sThe i is now %d and the str is at %s%s\n", blue, i, &str[i],RESET);
 			}
-			
 		}else
 		{
 			expand[j] = str[i];
