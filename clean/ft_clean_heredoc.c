@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 12:35:19 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/10 12:36:02 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/11 15:03:12 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	ft_clean_heredoc(t_heredoc *list_heredoc)
 
 	while (list_heredoc)
 	{
+		printf("cleaning heredoc\n");
 		tmp = list_heredoc;
 		unlink(tmp->file_name);
 		close(tmp->fd);

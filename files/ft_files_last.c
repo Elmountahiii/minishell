@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 18:12:45 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/09 20:06:06 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/11 14:59:18 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,20 @@
 t_command_files *ft_correct_out_file(t_command_files *files_list)
 {
 	t_command_files	*selected_file;
+	t_command_files	*tmp;
 
 	selected_file = NULL;
-	while (files_list)
+	tmp = files_list;
+	while (tmp)
 	{
-		if (files_list->fd == -1 )
+		if (tmp->fd == -1)
 		{
-			selected_file = files_list;
+			selected_file = tmp;
 			break ;
 		}
-		if (files_list->type == REDIRECTION_OUT || files_list->type == APPEND)
-			selected_file = files_list;
-		files_list = files_list->next;
+		if (tmp->type == REDIRECTION_OUT || tmp->type == APPEND)
+			selected_file = tmp;
+		tmp = tmp->next;
 	}
 	return (selected_file);
 }
@@ -35,27 +37,30 @@ t_command_files *ft_correct_out_file(t_command_files *files_list)
 t_command_files *ft_correct_in_file(t_command_files *files_list)
 {
 	t_command_files	*selected_file;
+	t_command_files	*tmp;
 
 	selected_file = NULL;
-	while (files_list)
+	tmp = files_list;
+	while (tmp)
 	{
-		if (files_list->fd == -1)
+		if (tmp->fd == -1)
 		{
-			selected_file = files_list;
+			selected_file = tmp;
 			break ;
 		}
-		if (files_list->type == REDIRECTION_IN)
-			selected_file = files_list;
-		files_list = files_list->next;
+		if (tmp->type == REDIRECTION_IN)
+			selected_file = tmp;
+		tmp = tmp->next;
 	}
 	return (selected_file);
 }
 
 t_command_files	*ft_files_last(t_command_files *lst)
 {
-	if (!lst)
+	t_command_files *tmp = lst;
+	if (!tmp)
 		return (NULL);
-	while (lst->next)
-		lst = lst->next;
-	return (lst);
+		while (tmp->next)
+    		tmp = tmp->next;
+	return (tmp);
 }

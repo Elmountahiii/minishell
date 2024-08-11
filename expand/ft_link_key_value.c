@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 23:09:36 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/11 12:18:03 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/11 16:45:30 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,47 +34,59 @@ char	*ft_get_value(char *key, t_env_list *env)
 }
 
 
+int	ft_do_count(char *str, char **keys, t_env_list *env, int len)
+{
+	if (str[0] == '$')
+	{
+		if (str[1] == '$' || str[1] == '@')
+			return (1);
+		if (str[1] == '?')
+			return (ft_strlen(ft_itoa(exit_status)));
+		return (ft_strlen(ft_get_value(ft_extract_key(keys[len]), env)));
+	}
+	return (0);
+}
+
 int	ft_count_expand_len(char *str, char **keys, t_env_list *env)
 {
 	int	i;
 	int	len;
 	int index;
-	
-	if (!str)
-		return (0);
+	(void)keys;
+	(void)env;
 	i = 0;
 	len = 0;
 	index = 0;
-	printf("string is %s\n", str);
 	while (str[i])
 	{
-		if (str[i] == '$' && str[i + 1])
+		if (str[i] == '$')
 		{
 			i++;
-			if (str[i] == '?')
+			if (str[i] && (str[i] == '$'))
+			  len += ft_count_for_dollar(str, &i);
+			else if (str[i] && str[i] == '?')
 			{
-			 i ++;
-			 len += ft_strlen(ft_itoa(exit_status));
-			 continue;
+				len += ft_strlen(ft_itoa(exit_status));
+				i++;
+			}else if (str[i] && str[i] == '@')
+			{
+				len += ft_count_at(str, &i);
 			}
-			if (str[i] == '@')
+			else
 			{
 				len += ft_strlen(ft_get_value(keys[index], env));
-				i+= ft_strlen(ft_get_value(keys[index ++], env));
-				continue;
+				i += ft_strlen(ft_extract_key(keys[index++]));
 			}
-			while (str[i] && !ft_is_env_char(str[i]))
-				i++;
-			len += ft_strlen(ft_get_value(ft_extract_key(keys[index++]), env));
 		}
 		else
 		{
-			i++;
 			len++;
+			i++;
 		}
 	}
 	return (len);
 }
+
 
 int	ft_join_key(char *buffer, char *value, int index)
 {
@@ -83,7 +95,7 @@ int	ft_join_key(char *buffer, char *value, int index)
 
 	i = index;
 	j = 0;
-	if (!value)
+	if (!value || !buffer)
 		return (i);
 	while (value[j])
 	{
@@ -102,8 +114,7 @@ char	*ft_link_key_value(char *str, char **keys ,t_env_list *env_list)
 	int		index;
 	int 	j;
 	
-	printf("the len is %d\n", ft_count_expand_len(str, keys, env_list));
-	exit(0);
+	//printf("the len is %d\n", ft_count_expand_len(str, keys, env_list));
 	expand = ft_calloc(ft_count_expand_len(str, keys, env_list) + 1, sizeof(char));
 	if (!expand)
 		return (NULL);
@@ -112,13 +123,31 @@ char	*ft_link_key_value(char *str, char **keys ,t_env_list *env_list)
 	j = 0;
 	while (str[i])
 	{
-		if (str[i] == '$' && str[i + 1])
+		if (str[i] == '$')
 		{
-			//printf()
 			i++;
-			while (str[i] && !ft_is_env_char(str[i]))
-				i++;
-			j = ft_join_key(&expand[j], ft_get_value(ft_extract_key(keys[index++]), env_list), j);
+			if (str[i] && (str[i] == '$'))
+			{
+				j =ft_join_key(expand,keys[index], j);
+				i += ft_strlen(keys[index]);
+				index++;
+			}else if (str[i] && str[i] == '?')
+			{
+				j = ft_join_key(expand, ft_itoa(exit_status), j);
+				i+= ft_strlen(ft_itoa(exit_status));
+			}
+			// else if (str[i] && str[i] == '@')
+			// {
+			// 	j = ft_join_key(expand, keys[index], j);
+			// 	i += ft_strlen(keys[index]);
+			// 	index++;
+			// }
+			else
+			{
+				j = ft_join_key(expand, ft_get_value(ft_extract_key(keys[index]), env_list), j);
+				i += ft_strlen(ft_extract_key(keys[index++]));
+			}
+			
 		}else
 		{
 			expand[j] = str[i];

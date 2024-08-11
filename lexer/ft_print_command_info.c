@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 12:31:21 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/11 12:24:22 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/11 13:33:45 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,44 +53,46 @@ char	*ft_get_file_type(IOType type)
 void	ft_print_command_info(t_command	*command)
 {
 	int	i;
+	t_command *tmp;
 
 	i = 0;
-	while (command)
+	tmp = command;
+	while (tmp)
 	{
-		printf("path : %s\n", command->path);
-		printf("in_type : %s", ft_get_file_type(command->in_type));
-		printf("out_type : %s", ft_get_file_type(command->out_type));
-		printf("in_file : %s\n", command->in_file);
-		printf("out_file : %s\n", command->out_file);
-		printf("is_append : %d\n", command->is_append);
-		printf("is_heredoc : %d\n", command->is_heredoc);
-		printf("index : %d\n", command->index);
-		printf("fd_in : %d\n", command->fd_in);
-		printf("fd_out : %d\n", command->fd_out);
-		printf("dil : %s\n", command->dil);
+		printf("path : %s\n", tmp->path);
+		printf("in_type : %s", ft_get_file_type(tmp->in_type));
+		printf("out_type : %s", ft_get_file_type(tmp->out_type));
+		printf("in_file : %s\n", tmp->in_file);
+		printf("out_file : %s\n", tmp->out_file);
+		printf("is_append : %d\n", tmp->is_append);
+		printf("is_heredoc : %d\n", tmp->is_heredoc);
+		printf("index : %d\n", tmp->index);
+		printf("fd_in : %d\n", tmp->fd_in);
+		printf("fd_out : %d\n", tmp->fd_out);
+		printf("dil : %s\n", tmp->dil);
 		printf("commands arguments  : \n");
-		while (command->command_args[i])
+		while (tmp->command_args[i])
 		{
-			printf("%s ",command->command_args[i]);
+			printf("%s ",tmp->command_args[i]);
 			i++;
 		}
 		printf("\n");
 		i = 0;
 		printf("heredoc list : \n");
-		while (command->heredoc_list)
+		while (tmp->heredoc_list)
 		{
-			printf("name : %s , dil : %s , fd %d\n", command->heredoc_list->file_name, command->heredoc_list->dil, command->heredoc_list->fd);
-			command->heredoc_list = command->heredoc_list->next;
+			printf("name : %s , dil : %s , fd %d\n", tmp->heredoc_list->file_name, tmp->heredoc_list->dil, tmp->heredoc_list->fd);
+			tmp->heredoc_list = tmp->heredoc_list->next;
 		}		
 		i = 0;
 		printf("files_list : \n");
-		while (command->files_list)
+		while (tmp->files_list)
 		{
-			printf("name : %s , fd %d ,type %s", command->files_list->name,command->files_list->fd ,ft_get_token_type(command->files_list->type));
-			command->files_list = command->files_list->next;
+			printf("name : %s , fd %d ,type %s", tmp->files_list->name,tmp->files_list->fd ,ft_get_token_type(tmp->files_list->type));
+			tmp->files_list = tmp->files_list->next;
 		}
 		i = 0;
 		printf("--------------------\n");
-		command = command->next;
+		tmp = tmp->next;
 	}
 }

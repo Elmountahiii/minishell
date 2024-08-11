@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 14:22:22 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/10 18:40:03 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/11 15:14:15 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ char	**ft_extract_keys(char *str)
 	{
 		if (str[i] == '$')
 		{
-			if (str[i + 1] == '?')
+			if (str[i +1] && str[i + 1] == '?')
 			{
 				keys[index++] = ft_strdup("?");
 				i++;
