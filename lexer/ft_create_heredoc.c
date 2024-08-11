@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 10:55:12 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/07 11:27:21 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/11 12:25:28 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,9 @@ t_heredoc	*ft_create_heredoc(t_command *list, char *dil,  t_token_type type)
 	if (type == SINGLE_QUOTE_WORD || type == DOUBLE_QUOTE_WORD)
 		heredoc->dil = ft_remove_quotes(dil);
 	else
-		heredoc->dil = ft_strdup(dil);
+	{
+		heredoc->dil = ft_strjoin(dil, "\n");
+	}
 	heredoc->file_name = ft_strjoin("/tmp/herdoc", ft_itoa(index));
 	ft_open_heredoc(heredoc);
 	return (heredoc);

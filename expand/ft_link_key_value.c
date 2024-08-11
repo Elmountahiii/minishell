@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 23:09:36 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/10 23:59:41 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/11 12:18:03 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,15 @@
 char	*ft_get_value(char *key, t_env_list *env)
 {
 	if (!key)
-		return (NULL);
+		return (ft_strdup("$"));
 	if (key[0] == '?')
 		return (ft_itoa(exit_status));
+	if (key[0] == '@')
+	{
+		if (ft_strlen(key) == 1)
+			return (ft_strdup("@"));
+		return (ft_strdup(key + 1));	
+	}
 	while (env)
 	{
 		if (!ft_strcmp(key, env->key))
@@ -26,6 +32,7 @@ char	*ft_get_value(char *key, t_env_list *env)
 	}
 	return (NULL);
 }
+
 
 int	ft_count_expand_len(char *str, char **keys, t_env_list *env)
 {
@@ -38,11 +45,24 @@ int	ft_count_expand_len(char *str, char **keys, t_env_list *env)
 	i = 0;
 	len = 0;
 	index = 0;
+	printf("string is %s\n", str);
 	while (str[i])
 	{
 		if (str[i] == '$' && str[i + 1])
 		{
 			i++;
+			if (str[i] == '?')
+			{
+			 i ++;
+			 len += ft_strlen(ft_itoa(exit_status));
+			 continue;
+			}
+			if (str[i] == '@')
+			{
+				len += ft_strlen(ft_get_value(keys[index], env));
+				i+= ft_strlen(ft_get_value(keys[index ++], env));
+				continue;
+			}
 			while (str[i] && !ft_is_env_char(str[i]))
 				i++;
 			len += ft_strlen(ft_get_value(ft_extract_key(keys[index++]), env));
@@ -63,6 +83,8 @@ int	ft_join_key(char *buffer, char *value, int index)
 
 	i = index;
 	j = 0;
+	if (!value)
+		return (i);
 	while (value[j])
 	{
 		buffer[i] = value[j];
@@ -80,7 +102,8 @@ char	*ft_link_key_value(char *str, char **keys ,t_env_list *env_list)
 	int		index;
 	int 	j;
 	
-	//printf("the len is %d\n", ft_count_expand_len(str, keys, env_list));
+	printf("the len is %d\n", ft_count_expand_len(str, keys, env_list));
+	exit(0);
 	expand = ft_calloc(ft_count_expand_len(str, keys, env_list) + 1, sizeof(char));
 	if (!expand)
 		return (NULL);
@@ -104,6 +127,5 @@ char	*ft_link_key_value(char *str, char **keys ,t_env_list *env_list)
 		}
 	}
 	expand[j] = '\0';
-	printf("expand: %s\n", expand);
-	return (NULL);
+	return (expand);
 }

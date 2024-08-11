@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 10:47:36 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/10 15:08:12 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/11 12:19:50 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	listen_for_heredoc(t_heredoc *heredoc)
 		line = get_next_line(0);
 		if (!line)
 			break ;
-		if (!ft_strncmp(line, heredoc->dil, ft_strlen(heredoc->dil)))
+		if (!ft_strncmp(line, heredoc->dil, ft_strlen(line)))
 		{
 			free(line);
 			break ;

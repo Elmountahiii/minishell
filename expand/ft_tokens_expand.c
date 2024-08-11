@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 15:46:46 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/10 23:28:28 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/11 11:00:36 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ int	ft_keys_count(char *str, t_token_type type)
 	free(value);
 	return (count);
 }
+
 char **ft_split_keys(char *str , t_token_type type)
 {
 	char	**keys;
@@ -62,10 +63,11 @@ char **ft_split_keys(char *str , t_token_type type)
 	index = 0;
 	while (value && value[i])
 	{
-		if (value[i] == '$' && value[i + 1] && !ft_is_env_char(value[i + 1]))
+		if (value[i] == '$' && value[i + 1])
 		{
-			keys[index] = ft_extract_key(&value[i + 1]);
-			// printf("key[%d]: %s\n", index ,keys[index]);
+			i ++;
+			keys[index] = ft_extract_key(&value[i]);
+			printf("key[%d]: %s\n", index ,keys[index]);
 			i += ft_strlen(keys[index]);
 			index++;
 		}
@@ -87,10 +89,9 @@ void	ft_tokens_expand(t_tokens_list *tokens_list, t_env_list *env_list)
 	{
 		if (ft_is_expandable(tokens_list))
 		{
-			// printf("count: %d\n", ft_keys_count(tokens_list->value, tokens_list->type));
-			keys = ft_split_keys(tokens_list->value, tokens_list->type);
+			printf("count: %d\n", ft_keys_count(tokens_list->value, tokens_list->type));
+			 keys = ft_split_keys(tokens_list->value, tokens_list->type);
 			ft_link_key_value(tokens_list->value, keys, env_list);
-			
 		}
 		tokens_list = tokens_list->next;
 	}
