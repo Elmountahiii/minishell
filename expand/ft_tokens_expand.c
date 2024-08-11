@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 15:46:46 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/11 19:20:15 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/11 20:50:54 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ void	ft_tokens_expand(t_tokens_list *tokens_list, t_env_list *env_list)
 		{
 			//printf("count: %d\n", ft_keys_count(tokens_list->value, tokens_list->type));
 			keys = ft_split_keys(tokens_list->value, tokens_list->type);
-			if (tokens_list->type == DOUBLE_QUOTE_WORD)
+			if (tokens_list->type == DOUBLE_QUOTE_WORD && ft_strchr(tokens_list->value, '$'))
 				tokens_list->value = ft_link_key_value(ft_remove_quotes(tokens_list->value), keys, env_list);
 			else
 				tokens_list->value = ft_link_key_value(tokens_list->value, keys, env_list);
