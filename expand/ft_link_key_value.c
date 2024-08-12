@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 23:09:36 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/12 12:08:58 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/12 15:59:03 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ char	*ft_get_value(char *key, t_env_list *env)
 	
 	if (key[0] == '$' && ft_strlen(key) == 1)
 		return (ft_strdup("$"));
-	if (key[0] == '@')
+	if (key[0] == '@' || ft_isdigit(key[0]) )
 	{
-		if (ft_strlen(key) == 1)
+		if (ft_strlen(key) == 1 && key[0] == '@')
 			return (ft_strdup("@"));
 		return (ft_strdup(key + 1));	
 	}
