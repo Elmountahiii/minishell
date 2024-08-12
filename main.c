@@ -6,7 +6,7 @@
 /*   By: aet-tale <aet-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 09:30:38 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/12 16:16:47 by aet-tale         ###   ########.fr       */
+/*   Updated: 2024/08/12 16:38:44 by aet-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,10 @@ int	main(int argc, char *argv[], char *envp[])
 	
 	t_tokens_list	*tokens_list = NULL;
 	t_command		*commands_list = NULL;
-	t_env_list		*env_list;
-	t_be_executed	*to_execute;
+	t_env_list		*env_list = NULL;
+	t_be_executed	*to_execute = NULL;
 	//t_list_files	*list_of_files;
-	t_pipe			*list_pipes;
+	t_pipe			*list_pipes = NULL;
 	char			*line;
 	//atexit(ft_check_leaks);
 
@@ -119,7 +119,6 @@ int	main(int argc, char *argv[], char *envp[])
 		execute_things(to_execute);
 		// close_files(list_of_files);
 		ft_clean(to_execute);
-		free(to_execute);
 	}
 	return (exit_status);
 }

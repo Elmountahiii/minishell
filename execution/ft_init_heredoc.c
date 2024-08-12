@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_init_heredoc.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aet-tale <aet-tale@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 11:21:26 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/12 11:35:15 by aet-tale         ###   ########.fr       */
+/*   Updated: 2024/08/12 15:43:16 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ int	ft_init_heredoc(t_command *command)
 				heredoc = heredoc->next;
 			tmp->fd_in = heredoc->fd;
 			tmp->in_file = ft_strdup(heredoc->file_name);
+			//system("leaks minishell");
 		}
 		tmp = tmp->next;
 	}

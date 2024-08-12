@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_clean_files.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aet-tale <aet-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 10:22:46 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/11 15:11:16 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/12 16:38:51 by aet-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ void	ft_clean_files(t_command_files *list_of_files)
 		tmp = list_of_files;
 		if (tmp)
 		{
-		close(tmp->fd);
+		if (tmp->fd > 2)
+			close(tmp->fd);
 		free(tmp->name);
 			
 		// free(tmp);
