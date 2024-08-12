@@ -21,17 +21,30 @@ int	ft_str_chr_index(char *s, char c)
 t_env_list	*creat_env_node(char *str)
 {
 	t_env_list	*node;
+	char		*tmp;
 	int			equal_index;
 
+	if (ft_strncmp(str, "_=", 2) == 0)
+		return (NULL);
 	node = malloc(sizeof(t_env_list));
 	equal_index = ft_str_chr_index(str, '=');
+	tmp = NULL;
 	if (equal_index < 0)
 	{
 		write(1, "no equal sign\n", 14);
-		return NULL;
+		return (NULL);
 	}
 	node->key = ft_substr_orig(str, 0, equal_index);
-	node->value = ft_substr_orig(str, equal_index + 1, ft_strlen(str));
+	if (!ft_strncmp(str, "OLDPWD=", 7))
+		node->value = NULL;
+	else
+		node->value = ft_substr_orig(str, equal_index + 1, ft_strlen(str));
+	if (ft_strcmp(node->key, "SHLVL") == 0)
+	{
+		tmp = node->value;
+		node->value = ft_itoa(ft_atoi(node->value) + 1);
+		free(tmp);
+	}
 	node->next = NULL;
 	return (node);
 }

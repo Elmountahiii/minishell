@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_link_key_value.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aet-tale <aet-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 23:09:36 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/11 19:20:11 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/12 16:26:45 by aet-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ char	*ft_get_value(char *key, t_env_list *env)
 	
 	if (key[0] == '$' && ft_strlen(key) == 1)
 		return (ft_strdup("$"));
-	if (key[0] == '@')
+	if (key[0] == '@' || ft_isdigit(key[0]))
 	{
-		if (ft_strlen(key) == 1)
+		if (ft_strlen(key) == 1 && key[0] == '@')
 			return (ft_strdup("@"));
 		return (ft_strdup(key + 1));	
 	}
@@ -91,7 +91,6 @@ int	ft_count_expand_len(char *str, char **keys, t_env_list *env)
 	}
 	return (len);
 }
-
 
 int	ft_join_key(char *buffer, char *value, int index)
 {
