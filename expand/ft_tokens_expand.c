@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 15:46:46 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/11 20:50:54 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/12 10:40:10 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,20 +81,26 @@ char **ft_split_keys(char *str , t_token_type type)
 
 void	ft_tokens_expand(t_tokens_list *tokens_list, t_env_list *env_list)
 {
-	(void)env_list;
+	char *tmp;
 	char **keys;
 
 	keys = NULL;
+	tmp = NULL;
 	while (tokens_list)
 	{
 		if (ft_is_expandable(tokens_list))
 		{
 			//printf("count: %d\n", ft_keys_count(tokens_list->value, tokens_list->type));
 			keys = ft_split_keys(tokens_list->value, tokens_list->type);
+			tmp = tokens_list->value;
 			if (tokens_list->type == DOUBLE_QUOTE_WORD && ft_strchr(tokens_list->value, '$'))
 				tokens_list->value = ft_link_key_value(ft_remove_quotes(tokens_list->value), keys, env_list);
 			else
 				tokens_list->value = ft_link_key_value(tokens_list->value, keys, env_list);
+			ft_free_array(keys);
+			keys = NULL;
+			free(tmp);
+			tmp = NULL;
 		}
 		tokens_list = tokens_list->next;
 	}

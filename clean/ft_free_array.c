@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 14:57:02 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/11 19:43:57 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/12 10:36:10 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,5 @@ void	ft_free_array(char **array)
 		free(array[i]);
 		i++;
 	}
-	// free(array);
+	free(array);
 }
