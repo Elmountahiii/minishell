@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 09:30:38 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/12 12:09:47 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/12 15:30:21 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,10 @@ int	main(int argc, char *argv[], char *envp[])
 	
 	t_tokens_list	*tokens_list = NULL;
 	t_command		*commands_list = NULL;
-	t_env_list		*env_list;
-	t_be_executed	*to_execute;
+	t_env_list		*env_list = NULL;
+	t_be_executed	*to_execute = NULL;
 	//t_list_files	*list_of_files;
-	t_pipe			*list_pipes;
+	t_pipe			*list_pipes = NULL;
 	char			*line;
 	//atexit(ft_check_leaks);
 
@@ -64,17 +64,8 @@ int	main(int argc, char *argv[], char *envp[])
 			continue ;
 		}
 		ft_tokens_expand(tokens_list, env_list);
-		// system("leaks minishell");
-		// ft_clean_tokens(tokens_list);
-		// ft_clean_commands(commands_list);
-		// continue ;
-		//ft_print_tokens_info(tokens_list);
-		// continue	;
-		// ft_expend_tokens(tokens_list, (env_list));
 		commands_list = ft_split_to_command(tokens_list);
-		//ft_print_command_info(commands_list);
 		ft_init_heredoc(commands_list);
-		
 		ft_open_files(commands_list);
 		ft_select_files(commands_list);
 		list_pipes = give_list_pipes(tokens_list);
@@ -82,7 +73,6 @@ int	main(int argc, char *argv[], char *envp[])
 		to_execute = give_executed(commands_list, list_pipes, tokens_list, &env_list);
 		execute_things(to_execute);
 		ft_clean(to_execute);
-		free(to_execute);
 	}
 	return (exit_status);
 }
