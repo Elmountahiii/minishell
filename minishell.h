@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aet-tale <aet-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 09:30:52 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/11 16:27:48 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/12 11:34:48 by aet-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,7 @@ typedef struct s_command {
 	t_heredoc			*heredoc_list;
 	struct s_command	*next;
 } t_command;
+
 typedef struct t_be_executed
 {
 	t_command		*commands_list;
@@ -179,9 +180,10 @@ char	*ft_remove_quotes(char *str);
 int			ft_heredoc_size(t_command *commands);
 void		ft_heredoc_addback(t_heredoc **alst, t_heredoc *new);
 t_heredoc	*ft_create_heredoc(t_command *list,char *dil, t_token_type type);
-void		ft_init_heredoc(t_command *command);
+int			ft_init_heredoc(t_command *command);
 void		ft_open_heredoc(t_heredoc *heredoc);
-void		ft_fill_heredoc(t_command *command);
+int			ft_fill_heredoc(t_command *command);
+void		sig_handler(int sig);
 
 // cleaning functions
 void	ft_clean(t_be_executed *to_execute);

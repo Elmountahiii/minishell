@@ -6,42 +6,39 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 17:50:52 by aet-tale          #+#    #+#             */
-/*   Updated: 2024/08/12 11:53:01 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/12 15:42:34 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-char *get_pwd_value(t_env_list *env_list)
+char *get_key_value(t_env_list *env_list, char *key)
 {
 	t_env_list *tmp;
 
 	tmp = env_list;
 	while (tmp)
 	{
-		if (ft_strcmp(tmp->key, "PWD") == 0)
+		if (ft_strcmp(tmp->key, key) == 0)
 			return (tmp->value);
 		tmp = tmp->next;
 	}
 	return (NULL);
 }
 
-void	our_cd(t_command *command, t_be_executed	*to_execute, int procss)
+void basic_cd(char *path, t_be_executed	*to_execute, int procss)
 {
-	int			exit_sts;
-	char		**path;
-
-	exit_sts = 0;
-	path = command->command_args;
-	
-	if (chdir(path[1]) != -1)
+	if (chdir(path) != -1)
 	{
-		add_to_env("OLDPWD", get_pwd_value(*to_execute->env_list), to_execute->env_list);
+		add_to_env("OLDPWD", get_key_value(*to_execute->env_list, "PWD"), to_execute->env_list);
 		add_to_env("PWD", getcwd(NULL, 0), to_execute->env_list);
-		exit_status = 0;
+		if (procss)
+			exit(0);
+		else
+			exit_status = 0;
 	}else{
 		write(2, "minishell: cd: ", 10);
-		write(2, path[1], ft_strlen(path[1]));
+		write(2, path, ft_strlen(path));
 		if (errno == ENOTDIR)
 			write(2, ": Not a directory\n", 18);
 		else if (errno == ENOENT)
@@ -49,11 +46,25 @@ void	our_cd(t_command *command, t_be_executed	*to_execute, int procss)
 		else if (errno == EACCES)
 			write(2, ": Permission denied\n", 20);
 		if (procss)
-			exit_sts = 1;
+			exit(1);
 		else
 			exit_status = 1;
 	}
-	if (procss)
-		exit(exit_sts);
+}
+
+void	our_cd(t_command *command, t_be_executed	*to_execute, int procss)
+{
+	char		**path;
+
+	path = command->command_args;
+	if (path[1] == NULL)
+	{
+		basic_cd(get_key_value(*to_execute->env_list, "HOME"), to_execute, procss);
+		if (procss)
+			exit(0);
+		else
+			exit_status = 0;
+	}else
+		basic_cd(path[1], to_execute, procss);
 }
 

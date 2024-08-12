@@ -6,23 +6,26 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 11:21:26 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/12 14:20:26 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/12 15:43:16 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	ft_init_heredoc(t_command *command)
+int	ft_init_heredoc(t_command *command)
 {
 	t_command	*tmp;
 	t_heredoc	*heredoc;
 	
 	if (!command)
-		return ;
+		return (0);
 	tmp = command;
 	while (tmp)
 	{
-		 ft_fill_heredoc(tmp);
+		// ft_fill_heredoc returns 2 when fork fails
+		// return 1 when ctrl c 
+		if (ft_fill_heredoc(tmp))
+			return (1);
 		tmp = tmp->next;
 	}
 	tmp = command;
@@ -39,4 +42,5 @@ void	ft_init_heredoc(t_command *command)
 		}
 		tmp = tmp->next;
 	}
+	return (0);
 }
