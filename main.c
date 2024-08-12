@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aet-tale <aet-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 09:30:38 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/11 12:25:33 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/12 11:30:08 by aet-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,28 @@ void close_files(t_list_files	*list_of_files)
 	}
 }
 
+void	sig_handler(int sig)
+{
+	if (sig == SIGINT)
+	{
+		write(1, "\n", 1);
+		rl_on_new_line();
+		rl_replace_line("", 0);
+		rl_redisplay();
+		exit_status = 1;
+	}
+}
+
+void	close_heredocs(t_heredoc	*tmp)
+{
+	while (tmp)
+	{
+		close(tmp->fd);
+		unlink(tmp->file_name);
+		tmp = tmp->next;
+	}
+}
+
 int	main(int argc, char *argv[], char *envp[])
 {
 	
@@ -49,12 +71,18 @@ int	main(int argc, char *argv[], char *envp[])
 	(void) argv;
 	(void) envp;
 
+	signal(SIGINT,	sig_handler);
+	signal(SIGQUIT, SIG_IGN);
 	env_list = get_env_list(envp);
 	while (1)
 	{
 		line = readline("minishell$ ");
 		if (!line)
+		{
+			printf("exit\n");
+			exit(exit_status);
 			break ;
+		}
 		add_history(line);
 		tokens_list = ft_init_token_list(line);
 		if (ft_check_syntax(tokens_list))
@@ -68,19 +96,26 @@ int	main(int argc, char *argv[], char *envp[])
 		ft_expend_tokens(tokens_list, (env_list));
 		commands_list = ft_split_to_command(tokens_list);
 		//ft_print_command_info(commands_list);
-		ft_init_heredoc(commands_list);
+		if (ft_init_heredoc(commands_list))
+		{
+			// free what should be freed
+			close_heredocs(commands_list->heredoc_list);
+			ft_clean_tokens(tokens_list);
+			exit_status = 1;
+			continue ;
+		}
 		ft_open_files(commands_list);
 		ft_select_files(commands_list);
-		//list_of_files = give_list_files(tokens_list , commands_list);		
+		//list_of_files = give_list_files(tokens_list , commands_list);
 		list_pipes = give_list_pipes(tokens_list);
 		fill_command_paths(commands_list, env_list);
-		//  print_list_files(list_of_files);
-		//ft_print_command_info(commands_list);
+		// print_list_files(list_of_files);
+		// ft_print_command_info(commands_list);
 		// continue ;
 		to_execute = give_executed(commands_list, list_pipes, tokens_list, &env_list);
 		execute_things(to_execute);
-		//close_files(list_of_files);
-		ft_clean(to_execute);
+		// close_files(list_of_files);
+		// ft_clean(to_execute);
 		free(to_execute);
 	}
 	return (exit_status);

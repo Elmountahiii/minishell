@@ -68,11 +68,11 @@ void add_every_var(char *key_value, t_env_list **env_list, int *exit_stt, int pr
 	equal_ptr = ft_strchr(key_value, '=');
 	if (equal_ptr == NULL)
 	{
-		key = key_value;
+		key = ft_strdup(key_value);
 		value = NULL;
 	}else {
 		key = ft_substr_orig(key_value, 0, ft_strchr(key_value, '=') - key_value);
-		value = ft_strchr(key_value, '=') + 1;
+		value = ft_strdup(ft_strchr(key_value, '=')) + 1;
 	}
 	if (!check_every_arg(key))
 		add_to_env(key, value, env_list);

@@ -3,6 +3,9 @@ minibuiltins = miniBuiltIns
 CC = cc 
 # -g -fsanitize=address
 # -g -fsanitize=address
+READ_LIB= -L/goinfre/$(USER)/homebrew/opt/readline/lib
+READ_INCL= -I/goinfre/$(USER)/homebrew/opt/readline/include
+
 CFLAGS = -Wall -Wextra -Werror -g -fsanitize=address
 READLINE = -lreadline -lncurses
 files_files = ft_create_file_node.c ft_files_addback.c ft_files_last.c ft_hanlde_file_name.c ft_heredoc_last.c ft_select_files.c ft_open_files.c
@@ -25,18 +28,18 @@ HEADR = minishell.h
 all: $(NAME)
 
 %.o: %.c $(HEADR)
-	@$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) $(READ_INCL) -c $< -o $@
 
 mc : all clean
 	clear
 	./minishell
 
 $(minibuiltins): $(bSRC)
-	$(CC) $(CFLAGS) lib/lib.a $(bSRC) -o $(minibuiltins)
+	$(CC) $(CFLAGS) $(READ_LIB) lib/lib.a $(bSRC) -o $(minibuiltins)
 
 $(NAME): $(OBJ)
 	@cd lib && make
-	@$(CC) $(CFLAGS) $(OBJ) lib/lib.a $(READLINE) -o $(NAME)
+	@$(CC) $(CFLAGS) $(READ_LIB) $(OBJ) lib/lib.a $(READLINE) -o $(NAME)
 
 clean:
 	@cd lib && make clean
