@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aet-tale <aet-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 14:53:57 by aet-tale          #+#    #+#             */
-/*   Updated: 2024/08/10 12:12:01 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/12 15:06:04 by aet-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ int check_if_number(char *str)
 void	our_exit(t_command *command, t_be_executed	*to_execute, int procss)
 {
 	(void )to_execute;
-	if (!procss)
-		printf("exit\n");
+	// if (!procss)
+	// 	printf("exit\n");
 	if (count_array_str(command->command_args) == 1)
 		exit(exit_status);
 	else if (!check_if_number(command->command_args[1]))

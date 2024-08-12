@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aet-tale <aet-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 17:50:52 by aet-tale          #+#    #+#             */
-/*   Updated: 2024/08/12 15:42:34 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/12 16:31:22 by aet-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void basic_cd(char *path, t_be_executed	*to_execute, int procss)
 		else
 			exit_status = 0;
 	}else{
-		write(2, "minishell: cd: ", 10);
+		write(2, "minishell: cd: ", 15);
 		write(2, path, ft_strlen(path));
 		if (errno == ENOTDIR)
 			write(2, ": Not a directory\n", 18);
@@ -58,13 +58,8 @@ void	our_cd(t_command *command, t_be_executed	*to_execute, int procss)
 
 	path = command->command_args;
 	if (path[1] == NULL)
-	{
 		basic_cd(get_key_value(*to_execute->env_list, "HOME"), to_execute, procss);
-		if (procss)
-			exit(0);
-		else
-			exit_status = 0;
-	}else
+	else
 		basic_cd(path[1], to_execute, procss);
 }
 

@@ -28,18 +28,18 @@ HEADR = minishell.h
 all: $(NAME)
 
 %.o: %.c $(HEADR)
-	@$(CC) $(CFLAGS) $(READ_INCL) -c $< -o $@
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 mc : all clean
 	clear
 	./minishell
 
 $(minibuiltins): $(bSRC)
-	$(CC) $(CFLAGS) $(READ_LIB) lib/lib.a $(bSRC) -o $(minibuiltins)
+	$(CC) $(CFLAGS) lib/lib.a $(bSRC) -o $(minibuiltins)
 
 $(NAME): $(OBJ)
 	@cd lib && make
-	@$(CC) $(CFLAGS) $(READ_LIB) $(OBJ) lib/lib.a $(READLINE) -o $(NAME)
+	@$(CC) $(CFLAGS)  $(OBJ) lib/lib.a $(READLINE) -o $(NAME)
 
 clean:
 	@cd lib && make clean

@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 09:30:38 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/12 16:32:59 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/12 16:45:23 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	sig_handler(int sig)
 	{
 		write(1, "\n", 1);
 		rl_on_new_line();
-		rl_replace_line("", 0);
+		// rl_replace_line("", 0);
 		rl_redisplay();
 		exit_status = 1;
 	}
@@ -79,7 +79,7 @@ int	main(int argc, char *argv[], char *envp[])
 		line = readline("minishell$ ");
 		if (!line)
 		{
-			printf("exit\n");
+			// printf("exit\n");
 			exit(exit_status);
 			break ;
 		}
@@ -91,7 +91,9 @@ int	main(int argc, char *argv[], char *envp[])
 			exit_status = 258;
 			continue ;
 		}
-		ft_tokens_expand(tokens_list, env_list);
+		//ft_print_tokens_info(tokens_list);
+		// continue	;
+		// ft_expend_tokens(tokens_list, (env_list));
 		commands_list = ft_split_to_command(tokens_list);
 		//ft_print_command_info(commands_list);
 		if (ft_init_heredoc(commands_list))
@@ -102,9 +104,12 @@ int	main(int argc, char *argv[], char *envp[])
 			exit_status = 1;
 			continue ;
 		}
+		ft_tokens_expand(tokens_list, env_list);
+		// free command list
+		commands_list = ft_split_to_command(tokens_list);
 		ft_open_files(commands_list);
 		ft_select_files(commands_list);
-		//list_of_files = give_list_files(tokens_list , commands_list);		
+		//list_of_files = give_list_files(tokens_list , commands_list);
 		list_pipes = give_list_pipes(tokens_list);
 		fill_command_paths(commands_list, env_list);
 		//  print_list_files(list_of_files);
