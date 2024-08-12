@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 23:09:36 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/11 19:20:11 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/12 12:08:58 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,11 +56,12 @@ int	ft_count_expand_len(char *str, char **keys, t_env_list *env)
 	int	i;
 	int	len;
 	int index;
-	(void)keys;
-	(void)env;
+	char *tmp;
+	
 	i = 0;
 	len = 0;
 	index = 0;
+	tmp = NULL;
 	while (str[i])
 	{
 		if (str[i] == '$')
@@ -68,20 +69,25 @@ int	ft_count_expand_len(char *str, char **keys, t_env_list *env)
 			i++;
 			if (str[i] && (str[i] == '$'))
 			{
-				len += ft_strlen(ft_get_value(keys[index], env));
+				tmp = ft_get_value(keys[index], env);
+				len += ft_strlen(tmp);
 				i += ft_strlen(keys[index++]);
 			}
 			else if (str[i] && str[i] == '?')
 			{
 				i++;
-				len += ft_strlen(ft_itoa(exit_status));
+				tmp = ft_itoa(exit_status);
+				len += ft_strlen(tmp);
 				index++;
 			}
 			else
 			{
-				len += ft_strlen(ft_get_value(keys[index], env));
+				tmp = ft_get_value(keys[index], env);
+				len += ft_strlen(tmp);
 				i += ft_strlen(keys[index++]);
 			}
+			free(tmp);
+			tmp = NULL;
 		}
 		else
 		{
@@ -119,6 +125,7 @@ char	*ft_link_key_value(char *str, char **keys ,t_env_list *env_list)
 	int		i;
 	int		index;
 	int 	j;
+	char *tmp;
 	//  const char *RED = "\033[0;31m";
     // const char *GREEN = "\033[0;32m";
     // const char *RESET = "\033[0m";
@@ -131,6 +138,7 @@ char	*ft_link_key_value(char *str, char **keys ,t_env_list *env_list)
 	i = 0;
 	index = 0;
 	j = 0;
+	tmp = NULL;
 	while (str[i])
 	{
 		if (str[i] == '$')
@@ -144,20 +152,24 @@ char	*ft_link_key_value(char *str, char **keys ,t_env_list *env_list)
 				index++;
 			}else if (str[i] && str[i] == '?')
 			{
+				tmp = ft_itoa(exit_status);
 				//printf("%syou found ? after $ and i = %d %s\n", RED, i,RESET);
-				j = ft_join_key(expand, ft_itoa(exit_status), j);
+				j = ft_join_key(expand, tmp, j);
 				i++;
 				index++;
 				//printf("%syou ended i = %d str now at %s %s\n", RED, i,&str[i],RESET);
 			}
 			else
 			{
+				tmp = ft_get_value(keys[index], env_list);
 				// printf("%sYou found normal char the j = %d and i = %i and str is at %s .%s\n", blue, j,i,&str[i],RESET);
 				// printf("%sThe key is %s and the value is %s%s\n", blue, keys[index], ft_get_value(keys[index], env_list),RESET);
-				j = ft_join_key(expand, ft_get_value(keys[index], env_list), j);
+				j = ft_join_key(expand, tmp, j);
 				i += ft_strlen(keys[index++]);
 				//printf("%sThe i is now %d and the str is at %s%s\n", blue, i, &str[i],RESET);
 			}
+			free(tmp);
+			tmp = NULL;
 		}else
 		{
 			expand[j] = str[i];

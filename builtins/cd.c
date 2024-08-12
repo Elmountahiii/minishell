@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 17:50:52 by aet-tale          #+#    #+#             */
-/*   Updated: 2024/08/10 11:12:47 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/12 11:53:01 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,15 +34,6 @@ void	our_cd(t_command *command, t_be_executed	*to_execute, int procss)
 	exit_sts = 0;
 	path = command->command_args;
 	
-	if (path[2] != NULL)
-	{
-		write(2, "minishell: cd: too many arguments\n", 35);
-		if (procss)
-			exit(1);
-		else
-			exit_status = 1;
-		return ;
-	}
 	if (chdir(path[1]) != -1)
 	{
 		add_to_env("OLDPWD", get_pwd_value(*to_execute->env_list), to_execute->env_list);
