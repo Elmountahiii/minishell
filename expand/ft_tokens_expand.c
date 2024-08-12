@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 15:46:46 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/11 11:00:36 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/11 20:50:54 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,12 @@ int	ft_keys_count(char *str, t_token_type type)
 	i = 0;
 	count = 0;
 	if (type == DOUBLE_QUOTE_WORD)
-	value = ft_remove_quotes(str);
+		value = ft_remove_quotes(str);
 	else
 		value = ft_strdup(str);
 	while (value && value[i])
 	{
-		if (value[i] == '$' && value[i + 1])
+		if (value[i] == '$')
 			count++;
 		i++;
 	}
@@ -63,11 +63,11 @@ char **ft_split_keys(char *str , t_token_type type)
 	index = 0;
 	while (value && value[i])
 	{
-		if (value[i] == '$' && value[i + 1])
+		if (value[i] == '$')
 		{
-			i ++;
+			i++;
 			keys[index] = ft_extract_key(&value[i]);
-			printf("key[%d]: %s\n", index ,keys[index]);
+			//printf("key[%d]: %s\n", index ,keys[index]);
 			i += ft_strlen(keys[index]);
 			index++;
 		}
@@ -89,9 +89,12 @@ void	ft_tokens_expand(t_tokens_list *tokens_list, t_env_list *env_list)
 	{
 		if (ft_is_expandable(tokens_list))
 		{
-			printf("count: %d\n", ft_keys_count(tokens_list->value, tokens_list->type));
-			 keys = ft_split_keys(tokens_list->value, tokens_list->type);
-			ft_link_key_value(tokens_list->value, keys, env_list);
+			//printf("count: %d\n", ft_keys_count(tokens_list->value, tokens_list->type));
+			keys = ft_split_keys(tokens_list->value, tokens_list->type);
+			if (tokens_list->type == DOUBLE_QUOTE_WORD && ft_strchr(tokens_list->value, '$'))
+				tokens_list->value = ft_link_key_value(ft_remove_quotes(tokens_list->value), keys, env_list);
+			else
+				tokens_list->value = ft_link_key_value(tokens_list->value, keys, env_list);
 		}
 		tokens_list = tokens_list->next;
 	}

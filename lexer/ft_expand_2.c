@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 14:47:39 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/08 22:31:40 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/11 15:20:05 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ char	*ft_expand(char *value, char **keys, t_env_list *env)
 		if (value[i] == '$')
 		{
 			i++;
-			if (value[i] == '?')
+			if (value && value[i] == '?')
 			{
 				j = expand_join(new_value, find_value("?",env), j);
 				index++;
@@ -126,6 +126,7 @@ char	*ft_expand(char *value, char **keys, t_env_list *env)
 		}else
 			new_value[j++] = value[i++];
 	}
+	printf("new_value = \n" );
 	new_value[j] = '\0';
 	return (new_value);
 }

@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 11:06:51 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/10 13:33:50 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/11 20:42:22 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,17 +37,19 @@ void	ft_handle_append(t_command *node, t_tokens_list **tokens)
 
 void	ft_handle_heredoc(t_command *node, t_tokens_list **tokens, t_command *head)
 {
+	t_token_type	type;
 	if (!tokens || !*tokens)
 		return;
 	if ((*tokens)->type == HEREDOC)
 	{
+		type = (*tokens)->type;
 		node->in_type = FILE_IO;
 		node->is_heredoc = true;
 		*tokens = (*tokens)->next;
 		ft_skip_tokens_spaces(tokens);
 		if (*tokens)
 		{
-			ft_heredoc_addback(&node->heredoc_list, ft_create_heredoc(head, (*tokens)->value, (*tokens)->type));
+			ft_heredoc_addback(&node->heredoc_list, ft_create_heredoc(head, (*tokens)->value, type));
 			*tokens = (*tokens)->next;
 		}
 	}

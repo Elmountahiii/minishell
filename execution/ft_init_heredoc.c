@@ -6,7 +6,7 @@
 /*   By: aet-tale <aet-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 11:21:26 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/12 10:11:29 by aet-tale         ###   ########.fr       */
+/*   Updated: 2024/08/12 11:35:15 by aet-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	ft_init_heredoc(t_command *command)
 			while (heredoc->next)
 				heredoc = heredoc->next;
 			tmp->fd_in = heredoc->fd;
-			tmp->in_file = heredoc->file_name;
+			tmp->in_file = ft_strdup(heredoc->file_name);
 		}
 		tmp = tmp->next;
 	}

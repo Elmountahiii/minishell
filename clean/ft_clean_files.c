@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 10:22:46 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/10 13:08:11 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/11 15:11:16 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,17 @@
 void	ft_clean_files(t_command_files *list_of_files)
 {
 	t_command_files	*tmp;
-
+	
 	while (list_of_files)
 	{
 		tmp = list_of_files;
+		if (tmp)
+		{
+		close(tmp->fd);
 		free(tmp->name);
-		free(tmp);
+			
+		// free(tmp);
+		}
 		list_of_files = list_of_files->next;
 	}
 }

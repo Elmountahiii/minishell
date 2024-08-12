@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 18:24:42 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/08 18:32:21 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/11 20:19:04 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,10 @@ int	ft_check_append_syntax(t_tokens_list *list)
 				return (syntax_error('<'));
 			else if (list->type == REDIRECTION_OUT)
 				return (syntax_error('>'));
+			else if (list->type == HEREDOC)
+				return (syntax_error('n'));
+			else if (list->type == PIPE)
+				return (syntax_error('|'));
 		}
 		else
 			return (syntax_error('n'));

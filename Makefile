@@ -10,7 +10,7 @@ CFLAGS = -Wall -Wextra -Werror -g -fsanitize=address
 READLINE = -lreadline -lncurses
 files_files = ft_create_file_node.c ft_files_addback.c ft_files_last.c ft_hanlde_file_name.c ft_heredoc_last.c ft_select_files.c ft_open_files.c
 clean_files = ft_clean.c ft_clean_commands.c ft_clean_files.c ft_clean_heredoc.c ft_clean_pipes.c ft_clean_tokens.c ft_free_array.c
-expand_files = ft_tokens_expand.c ft_extract_key.c ft_link_key_value.c
+expand_files = ft_tokens_expand.c ft_extract_key.c ft_link_key_value.c ft_expand_utils2.c
 clean_prefix = $(addprefix clean/, $(clean_files))
 files_prefix = $(addprefix files/, $(files_files))
 expand_prefix = $(addprefix expand/, $(expand_files))

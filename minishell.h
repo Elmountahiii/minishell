@@ -6,7 +6,7 @@
 /*   By: aet-tale <aet-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 09:30:52 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/11 13:12:38 by aet-tale         ###   ########.fr       */
+/*   Updated: 2024/08/12 11:34:48 by aet-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -215,8 +215,8 @@ char	**ft_split_keys(char *str , t_token_type type);
 char	*ft_extract_key(char *str);
 int		ft_is_env_char(char c);
 char	*ft_link_key_value(char *str, char **keys ,t_env_list *env_list);
-
-
+int		ft_count_for_dollar(char *str, int *index);
+int		ft_count_at(char *str, int *index);
 // builtins funcs and structs
 
 void		our_pwd(t_command *command, t_be_executed	*to_execute, int procss);
