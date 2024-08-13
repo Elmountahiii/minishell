@@ -6,7 +6,7 @@
 /*   By: aet-tale <aet-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 17:50:52 by aet-tale          #+#    #+#             */
-/*   Updated: 2024/08/12 16:31:22 by aet-tale         ###   ########.fr       */
+/*   Updated: 2024/08/13 16:21:39 by aet-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,15 @@ char *get_key_value(t_env_list *env_list, char *key)
 
 void basic_cd(char *path, t_be_executed	*to_execute, int procss)
 {
+	if (path == NULL)
+	{
+		write(2, "minishell: cd: HOME not set\n", 28);
+		if (procss)
+			exit(1);
+		else
+			exit_status = 1;
+		return ;
+	}
 	if (chdir(path) != -1)
 	{
 		add_to_env("OLDPWD", get_key_value(*to_execute->env_list, "PWD"), to_execute->env_list);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aet-tale <aet-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 09:30:38 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/12 16:45:23 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/13 16:19:10 by aet-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ int	main(int argc, char *argv[], char *envp[])
 		//ft_print_tokens_info(tokens_list);
 		// continue	;
 		// ft_expend_tokens(tokens_list, (env_list));
+		ft_tokens_expand(tokens_list, env_list);
 		commands_list = ft_split_to_command(tokens_list);
 		//ft_print_command_info(commands_list);
 		if (ft_init_heredoc(commands_list))
@@ -104,9 +105,8 @@ int	main(int argc, char *argv[], char *envp[])
 			exit_status = 1;
 			continue ;
 		}
-		ft_tokens_expand(tokens_list, env_list);
 		// free command list
-		commands_list = ft_split_to_command(tokens_list);
+		// commands_list = ft_split_to_command(tokens_list);
 		ft_open_files(commands_list);
 		ft_select_files(commands_list);
 		//list_of_files = give_list_files(tokens_list , commands_list);

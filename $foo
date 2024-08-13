@@ -1,2 +1,0 @@
-appends                 cd                      2 env                     exit                    export                  heredocs                mkdir                   pipes                   redirections            syntax-errors
-cat                     echo                    execution               exit-status             files                   misc                    nested-minishell        pwd                     rmdir                   unset

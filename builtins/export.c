@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   export.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aet-tale <aet-tale@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/08/13 16:22:32 by aet-tale          #+#    #+#             */
+/*   Updated: 2024/08/13 16:22:33 by aet-tale         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../minishell.h"
 
 void	add_to_env(char	*key, char	*value, t_env_list	**env_list)
@@ -59,11 +71,25 @@ int	check_every_arg(char *arg)
 	return 0;
 }
 
+int is_in_list(char *key, t_env_list *env_list)
+{
+	t_env_list	*tmp;
+
+	tmp = env_list;
+	while (tmp)
+	{
+		if (!ft_strcmp(key, tmp->key))
+			return 1;
+		tmp = tmp->next;
+	}
+	return 0;
+}
+
 void add_every_var(char *key_value, t_env_list **env_list, int *exit_stt, int procss)
 {
-	char 		*key;
-	char 		*value;
-	char 		*equal_ptr;
+	char 	*key;
+	char 	*value;
+	char 	*equal_ptr;
 
 	equal_ptr = ft_strchr(key_value, '=');
 	if (equal_ptr == NULL)
@@ -73,6 +99,11 @@ void add_every_var(char *key_value, t_env_list **env_list, int *exit_stt, int pr
 	}else {
 		key = ft_substr_orig(key_value, 0, ft_strchr(key_value, '=') - key_value);
 		value = ft_strdup(ft_strchr(key_value, '=')) + 1;
+	}
+	if (is_in_list(key, *env_list) && !value)
+	{
+		free(key);
+		return ;
 	}
 	if (!check_every_arg(key))
 		add_to_env(key, value, env_list);

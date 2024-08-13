@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_tokens_expand.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aet-tale <aet-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 15:46:46 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/12 16:34:23 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/13 16:18:30 by aet-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	ft_keys_count(char *str, t_token_type type)
 	return (count);
 }
 
-char **ft_split_keys(char *str , t_token_type type)
+char **ft_split_keys(char *str, t_token_type type)
 {
 	char	**keys;
 	char	*value;
@@ -67,7 +67,7 @@ char **ft_split_keys(char *str , t_token_type type)
 		{
 			i++;
 			keys[index] = ft_extract_key(&value[i]);
-			printf("key[%d]: %s\n", index ,keys[index]);
+			// printf("key[%d]: %s\n", index ,keys[index]);
 			i += ft_strlen(keys[index]);
 			index++;
 		}
