@@ -111,11 +111,23 @@ int	main(int argc, char *argv[], char *envp[])
 		ft_select_files(commands_list);
 		//list_of_files = give_list_files(tokens_list , commands_list);
 		list_pipes = give_list_pipes(tokens_list);
+		if (!list_pipes && count_list(commands_list) > 1)
+		{
+			ft_clean_tokens(tokens_list);
+			exit_status = 1;
+			continue ;
+		}
 		fill_command_paths(commands_list, env_list);
-		//  print_list_files(list_of_files);
-		//ft_print_command_info(commands_list);
-		// continue ;
+		//	print_list_files(list_of_files);
+		//	ft_print_command_info(commands_list);
+		//	continue ;
 		to_execute = give_executed(commands_list, list_pipes, tokens_list, &env_list);
+		if (to_execute == NULL)
+		{
+			ft_clean_tokens(tokens_list);
+			exit_status = 1;
+			continue ;
+		}
 		execute_things(to_execute);
 		// close_files(list_of_files);
 		ft_clean(to_execute);

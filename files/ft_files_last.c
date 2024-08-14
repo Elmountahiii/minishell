@@ -60,7 +60,7 @@ t_command_files	*ft_files_last(t_command_files *lst)
 	t_command_files *tmp = lst;
 	if (!tmp)
 		return (NULL);
-		while (tmp->next)
+	while (tmp->next)
     		tmp = tmp->next;
 	return (tmp);
 }

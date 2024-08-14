@@ -24,6 +24,7 @@
 #include <sys/wait.h>
 #include "./lib/lib.h"
 #include <sys/stat.h>
+#include <signal.h>
 
 extern int exit_status;
 
