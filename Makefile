@@ -29,7 +29,8 @@ expand_files = ft_expand.c ft_extract_key.c ft_get_expand_keys.c
 utils_files = ft_array_len.c ft_remove_quotes.c ft_get_expand_split.c
 env_files = get_env_list.c add_back_for_env.c ft_print_env_list.c
 files_files = ft_add_files.c ft_create_file.c ft_files_addback.c ft_print_files.c ft_open_files.c
-
+commands_files = ft_command_addback.c ft_create_command.c ft_print_command_args.c ft_add_commands.c ft_print_commands.c ft_commands_utils.c ft_command_assign_fds.c
+clean_files = ft_clean_array.c
 
 
 
@@ -41,6 +42,9 @@ heredoc_pre = $(addprefix heredoc/, $(heredoc_files))
 expand_pre = $(addprefix expand/, $(expand_files))
 env_pre = $(addprefix env/, $(env_files))
 files_pre = $(addprefix files/, $(files_files))
+commands_pre = $(addprefix commands/, $(commands_files))
+clean_pre = $(addprefix clean/, $(clean_files))
+
 
 
 
@@ -51,7 +55,7 @@ expand_prefix = $(addprefix expand/, $(expand_files))
 execution_prefix = $(addprefix execution/, $(execution_files))
 heredoc_prefix = $(addprefix heredoc/, $(heredoc_files))
 
-SRC = main.c  $(execution_prefix) $(tokens_pre) $(spliting_pre) $(syntax_pre) $(expand) $(heredoc_pre) $(utils_pre)  $(expand_pre) $(env_pre) $(files_pre)
+SRC = main.c  $(execution_prefix) $(tokens_pre) $(spliting_pre) $(syntax_pre) $(expand) $(heredoc_pre) $(utils_pre)  $(expand_pre) $(env_pre) $(files_pre) $(commands_pre) $(clean_pre)
 OBJ = $(SRC:.c=.o)
 HEADR = minishell.h
 

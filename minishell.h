@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 09:30:52 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/15 14:37:50 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/15 14:46:57 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,7 @@ typedef struct s_command {
 	int					fd_out;
 	bool				is_append;
 	bool				is_heredoc;
+	bool				is_ambiguous;
 	int					index;
 	t_command_files		*files_list;
 	t_heredoc			*heredoc_list;
@@ -197,6 +198,19 @@ void			ft_printf_files(t_command_files *files);
 void			ft_open_files(t_command_files *files);
 int				ft_is_valid_redirection(t_token_type type);
 
+// commands functions
+t_command	*ft_create_command(t_tokens_list **tokens, t_env_list *env_list);
+void		ft_command_addback(t_command **alst, t_command *new);
+int			ft_check_word_valid(t_token_type type);
+int			ft_check_redirection_valid(t_token_type type);
+void		ft_print_commands(t_command *command_list);
+void		ft_print_command_args(t_command *command);
+t_command	*ft_add_command(t_command **command_list, t_tokens_list *tokens, t_env_list *env_list);
+char		*ft_join_token_value(t_tokens_list **tokens, t_env_list *env_list);
+void		ft_command_assign_fds(t_command *cmd,t_command_files *f_list, t_heredoc *h_list);
+
+// clean functions
+void	ft_clean_array(char **array);
 
 // int		ft_sub_alloc(char *str);
 // int		ft_shift_quotes(char *str);
