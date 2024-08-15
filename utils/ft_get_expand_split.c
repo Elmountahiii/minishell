@@ -1,26 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_create_file_node.c                              :+:      :+:    :+:   */
+/*   ft_get_expand_split.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/09 18:01:36 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/10 13:08:45 by yel-moun         ###   ########.fr       */
+/*   Created: 2024/08/15 14:34:53 by yel-moun          #+#    #+#             */
+/*   Updated: 2024/08/15 14:35:23 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-t_command_files	*ft_create_file_node(char *file_name, t_token_type type)
+char	**ft_get_expand_split(char *value, t_env_list *env_list)
 {
-	t_command_files	*new;
+	char	**expanded;
+	char	*expanded_value;
 
-	new = ft_calloc(1,sizeof(t_command_files));
-	if (!new)
+	if (!value)
 		return (NULL);
-	new->name = ft_strdup(file_name);
-	new->type = type;
-	new->next = NULL;
-	return (new);
+	expanded_value = ft_expand(value, env_list);
+	if (!expanded_value)
+		return (NULL);
+	expanded = ft_split_dil(expanded_value, ' ');
+	free(expanded_value);
+	return (expanded);
 }

@@ -5,26 +5,26 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/09 17:48:43 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/09 18:01:18 by yel-moun         ###   ########.fr       */
+/*   Created: 2024/08/14 11:20:08 by yel-moun          #+#    #+#             */
+/*   Updated: 2024/08/15 14:30:53 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	ft_files_addback(t_command_files **alst, t_command_files *new)
+void	ft_files_addback(t_command_files **files_list, t_command_files *new)
 {
-	t_command_files	*last;
+	t_command_files	*tmp;
 
-	if (!alst || !new)
+	if (!files_list || !new)
 		return ;
-	if (!*alst)
+	if (!*files_list)
 	{
-		*alst = new;
+		*files_list = new;
 		return ;
 	}
-	last = *alst;
-	while (last->next)
-		last = last->next;
-	last->next = new;
+	tmp = *files_list;
+	while (tmp->next)
+		tmp = tmp->next;
+	tmp->next = new;
 }

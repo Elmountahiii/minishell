@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 09:30:38 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/15 13:59:30 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/15 14:38:45 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,15 +83,13 @@ int	main(int argc, char *argv[], char *envp[])
 			exit_status = 258;
 			continue ;
 		}
-		ft_print_tokens(be_executed->tokens_list);
+		//ft_print_tokens(be_executed->tokens_list);
 		be_executed->heredoc_list = ft_add_heredoc(&be_executed->heredoc_list, be_executed->tokens_list);
 		ft_open_heredoc(be_executed->heredoc_list,env_list);
-		if (ft_heredoc_done(be_executed->heredoc_list))
-		{
-			printf("heredoc not done\n");
-			continue ;
-		}
-		ft_print_heredoc(be_executed->heredoc_list);
+		be_executed->files_list = ft_add_files(&be_executed->files_list, be_executed->tokens_list, env_list);
+		ft_open_files(be_executed->files_list);
+		//ft_printf_files(be_executed->files_list);
+		//ft_print_heredoc(be_executed->heredoc_list);
 	}
 	return (exit_status);
 }

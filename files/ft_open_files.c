@@ -5,46 +5,48 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/09 19:21:56 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/09 19:27:12 by yel-moun         ###   ########.fr       */
+/*   Created: 2024/08/14 16:20:14 by yel-moun          #+#    #+#             */
+/*   Updated: 2024/08/15 14:31:10 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	ft_open(t_command_files *file)
+void	ft_skip_to_next_command(t_command_files **files)
 {
-	int	fd;
-
-	fd = -1;
-	if (file->type == REDIRECTION_IN)
-		fd = open(file->name, O_RDONLY);
-	else if (file->type == REDIRECTION_OUT)
-		fd = open(file->name, O_CREAT | O_RDWR | O_TRUNC, 0666);
-	else if (file->type == APPEND)
-		fd = open(file->name, O_CREAT | O_RDWR | O_APPEND, 0666);
-	return (fd);
+	int	id;
+	if (!files || !*files)
+		return ;
+	id = (*files)->index;
+	while (*files && (*files)->index == id)
+		*files = (*files)->next;
 }
 
-void	ft_open_files(t_command *command)
+void	ft_open_files(t_command_files *files)
 {
-	t_command	*commands_tmp;
-	t_command_files	*files_tmp;
+	t_command_files	*tmp;
 
-	if (!command)
+	if (!files)
 		return ;
-	commands_tmp = command;
-	files_tmp = commands_tmp->files_list;	
-	while (commands_tmp)
+	tmp = files;
+	while (tmp)
 	{
-		files_tmp = commands_tmp->files_list;
-		while (files_tmp)
+		if (tmp->is_ambiguous)
 		{
-			files_tmp->fd = ft_open(files_tmp);
-			if (files_tmp->fd == -1)
-				break ;
-			files_tmp = files_tmp->next;
+			ft_skip_to_next_command(&tmp);
+			continue ;
 		}
-		commands_tmp = commands_tmp->next;
+		if (tmp->type == REDIRECTION_IN)
+			tmp->fd = open(tmp->files[0], O_RDONLY);
+		else if (tmp->type == REDIRECTION_OUT)
+			tmp->fd = open(tmp->files[0], O_CREAT | O_WRONLY | O_TRUNC, 0644);
+		else if (tmp->type == APPEND)
+			tmp->fd = open(tmp->files[0], O_CREAT | O_WRONLY | O_APPEND, 0644);
+		if (tmp->fd < 0)
+		{
+			ft_skip_to_next_command(&tmp);
+			continue ;
+		}
+		tmp = tmp->next;
 	}
 }

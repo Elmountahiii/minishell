@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 09:30:52 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/15 13:50:27 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/15 14:37:50 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,9 +86,11 @@ typedef struct t_list_files
 
 typedef struct s_command_files
 {
+	int					index;
 	int					fd;
 	t_token_type		type;
-	char				*name;
+	char				**files;
+	bool				is_ambiguous;
 	struct s_command_files	*next;
 }t_command_files;
 
@@ -114,7 +116,7 @@ typedef struct t_be_executed
 {
 	t_command		*commands_list;
 	t_tokens_list	*tokens_list;
-	t_command_files	*list_files;
+	t_command_files	*files_list;
 	t_heredoc		*heredoc_list;
 	t_pipe			*list_pipes;
 	t_env_list		**env_list;
@@ -177,12 +179,23 @@ void		sig_handler(int sig);
 // utils functions	
 int		ft_array_len(char **array);
 char	*ft_remove_quotes(char *str);
+char	**ft_get_expand_split(char *value, t_env_list *env_list);
 
 // env functions
 t_env_list	*get_env_list(char	**env);
 void		add_back_for_env(t_env_list	**list, char	*str);
 void		print_env_list(t_env_list*	list);
 
+
+// files functions
+t_command_files	*ft_add_files(t_command_files **files_list, t_tokens_list *tokens, t_env_list *env_list);
+t_command_files	*ft_create_files(t_tokens_list **tokens, t_env_list *env_list);
+void			ft_files_addback(t_command_files **files_list, t_command_files *new);
+void			ft_handle_redirection(t_command_files *file, t_tokens_list **tokens, t_env_list *env_list);
+char			*ft_get_files_type(t_token_type type);
+void			ft_printf_files(t_command_files *files);
+void			ft_open_files(t_command_files *files);
+int				ft_is_valid_redirection(t_token_type type);
 
 
 // int		ft_sub_alloc(char *str);
