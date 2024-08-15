@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 09:30:52 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/15 14:46:57 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/15 18:00:10 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ typedef struct s_command_files
 	t_token_type		type;
 	char				**files;
 	bool				is_ambiguous;
+	char				*ambiguous_name;
 	struct s_command_files	*next;
 }t_command_files;
 
@@ -107,6 +108,7 @@ typedef struct s_command {
 	bool				is_append;
 	bool				is_heredoc;
 	bool				is_ambiguous;
+	char				*ambiguous_name;
 	int					index;
 	t_command_files		*files_list;
 	t_heredoc			*heredoc_list;
@@ -211,6 +213,50 @@ void		ft_command_assign_fds(t_command *cmd,t_command_files *f_list, t_heredoc *h
 
 // clean functions
 void	ft_clean_array(char **array);
+
+// pipes
+t_pipe	*give_list_pipes(t_tokens_list	*tokens_list);
+
+// execution function
+t_be_executed	*give_executed();
+void			fill_command_paths(t_command *command_list, t_env_list *env);
+void			assign_output(t_command	*command, t_be_executed	*to_execute);
+void			assign_input(t_command	*command, t_be_executed	*to_execute);
+int				get_pipe_fd(t_pipe *list_pipes, int index, char c);
+int				get_file_fd(t_command	*command, char i_o);
+int				count_list(t_command	*list);
+void			execute_command(t_command *command,	t_be_executed	*to_execute);
+void			execute_things(t_be_executed	*to_execute);
+int				ft_is_executed(t_command *command);
+void			ft_check_path_correct(char *cmd);
+int				ft_is_path(char *cmd);
+int				is_built_in(char	*command);
+void			close_pipes(t_pipe *list_pipes);
+
+// builtins functions
+void		our_pwd(t_command *command, t_be_executed	*to_execute, int procss);
+void		our_env(t_command *command, t_be_executed	*to_execute, int procss);
+void		our_echo(t_command *command, t_be_executed	*to_execute, int procss);
+int			ft_strlen(char *s);
+void		add_back_for_env(t_env_list **list, char *str);
+t_env_list	*get_env_list(char **env);
+void		print_env_list(t_env_list* list);
+void		ft_export_env(t_env_list *env_list, int procss);
+void		ft_export(t_command *command, t_be_executed	*to_execute, int procss);
+void		ft_unset(t_command *command, t_be_executed	*to_execute, int procss);
+void		our_cd(t_command *command, t_be_executed	*to_execute, int procss);
+void		our_exit(t_command *command, t_be_executed	*to_execute, int procss);
+char		**give_array_str(t_env_list *env_list);
+void		close_other_pipes(t_command	*command, t_pipe *list_pipes);
+void		add_to_env(char	*key, char	*value, t_env_list	**env_list);
+int			check_every_arg(char *arg);
+int			count_array_str(char **array);
+
+
+
+
+
+
 
 // int		ft_sub_alloc(char *str);
 // int		ft_shift_quotes(char *str);
@@ -361,7 +407,9 @@ void	ft_clean_array(char **array);
 // int				ft_is_executed(t_command *command);
 // int				ft_is_path(char *cmd);
 // void			ft_check_path_correct(char *cmd);
-t_be_executed	*give_executed();
+
+
+
 
 // end
 

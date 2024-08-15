@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 09:30:38 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/15 14:48:10 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/15 19:11:11 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ int	main(int argc, char *argv[], char *envp[])
 		add_history(line);
 		tokens = ft_split_line(line);
 		be_executed = give_executed();
+		be_executed->env_list = &env_list;
 		be_executed->tokens_list = ft_add_tokens(tokens);
 		if (ft_check_syntax(be_executed->tokens_list))
 		{
@@ -86,10 +87,17 @@ int	main(int argc, char *argv[], char *envp[])
 		be_executed->heredoc_list = ft_add_heredoc(&be_executed->heredoc_list, be_executed->tokens_list);
 		ft_open_heredoc(be_executed->heredoc_list,env_list);
 		be_executed->files_list = ft_add_files(&be_executed->files_list, be_executed->tokens_list, env_list);
+		//printf("\nhere\n");
 		ft_open_files(be_executed->files_list);
+		//ft_printf_files(be_executed->files_list);
+		//ft_print_tokens(be_executed->tokens_list);
 		be_executed->commands_list = ft_add_command(&be_executed->commands_list, be_executed->tokens_list,env_list);
 		ft_command_assign_fds(be_executed->commands_list, be_executed->files_list, be_executed->heredoc_list);
-		ft_print_commands(be_executed->commands_list);
+		fill_command_paths(be_executed->commands_list, env_list);
+		be_executed->list_pipes =  give_list_pipes(be_executed->tokens_list);
+		be_executed->list_size = count_list(be_executed->commands_list);
+		//ft_print_commands(be_executed->commands_list);
+		execute_things(be_executed);
 	}
 	return (exit_status);
 }

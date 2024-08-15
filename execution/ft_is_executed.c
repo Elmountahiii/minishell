@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 12:52:17 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/09 19:56:17 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/15 19:11:05 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,13 @@
 
 int	ft_is_executed(t_command *command)
 {
+	if (command->is_ambiguous)
+	{
+		write(2, "minishell: ", 11);
+		write(2, command->ambiguous_name, ft_strlen(command->ambiguous_name));
+		write(2, ": ambiguous redirect\n", 22);
+		return (0);
+	}
 	if (command->fd_in == -1)
 	{
 		write(2, "minishell: ", 11);

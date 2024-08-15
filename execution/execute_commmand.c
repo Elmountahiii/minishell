@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 12:42:46 by aet-tale          #+#    #+#             */
-/*   Updated: 2024/08/11 22:18:56 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/15 15:32:12 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,13 +152,15 @@ void	execute_command(t_command *command,	t_be_executed	*to_execute)
 		ft_check_path_correct(args[0]);
 	else if (ft_is_path(command->path))
 		ft_check_path_correct(command->path);
+
+
 	assign_input(command, to_execute);
 	assign_output(command, to_execute);
 	if (command->in_type != STDIN_FILENO)
 		dup2(command->fd_in, STDIN_FILENO);
 	if (command->out_type != STDOUT_FILENO)
 		dup2(command->fd_out, STDOUT_FILENO);
-	// close_pipes(command->list_pipes);
+	//close_pipes(command->list_pipes);
 	close_pipes(to_execute->list_pipes);
 	env = give_array_str(*to_execute->env_list);
 	execve(command->path, command->command_args, env);

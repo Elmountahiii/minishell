@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 16:45:29 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/15 14:45:33 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/15 18:51:05 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,10 +62,15 @@ void	ft_add_args(t_command *command,t_tokens_list **token, t_env_list *env_list)
 	else
 	 tmp = command->command_args;
 	value = ft_join_token_value(token, env_list);
-	//printf("value = %s\n", value);
-	expanded = ft_get_expand_split(value, env_list);
+	// if (ft_strchr(value, '$'))
+	// 	expanded = ft_split_dil(value, ' ');
+	// else
+	// 	expanded = ft_get_expand_split(value, env_list);
+	expanded = calloc(2, sizeof(char *));
+	expanded[0] = strdup(value);
+	expanded[1] = NULL;
 	free(value);
-	command->command_args = calloc((ft_array_len(tmp) + ft_array_len(expanded) + 1), sizeof(char *));
+	command->command_args = calloc((ft_array_len(tmp) + 2), sizeof(char *));
 	if (!command->command_args)
 		return (ft_clean_array(tmp) , ft_clean_array(expanded));
 	ft_add_to_array(tmp, command->command_args, expanded);
@@ -109,6 +114,7 @@ t_command *ft_create_command(t_tokens_list **tokens, t_env_list *env_list)
 	if (!command)
 		return (NULL);
 	command->out_type = STDOUT_IO;
+	command->command_args = ft_calloc(1, sizeof(char *));
 	while (command && *tokens && (*tokens)->type != PIPE)
 	{
 		if (ft_check_word_valid((*tokens)->type))

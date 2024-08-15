@@ -31,7 +31,7 @@ t_env_list	*creat_env_node(char *str)
 	tmp = NULL;
 	if (equal_index < 0)
 	{
-		write(1, "no equal sign\n", 14);
+		//write(1, "no equal sign\n", 14);
 		return (NULL);
 	}
 	node->key = ft_substr_orig(str, 0, equal_index);

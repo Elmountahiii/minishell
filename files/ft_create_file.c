@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 11:20:38 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/15 14:30:48 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/15 19:09:16 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,13 @@ void	ft_handle_redirection(t_command_files *file, t_tokens_list **tokens, t_env_
 	else
 		value = strdup((*tokens)->value); 
 	file->files = ft_get_expand_split(value, env_list);
+	// ft_print_array(file->files);
+	// printf("array len = %d\n", ft_array_len(file->files));
 	if (ft_array_len(file->files) > 1)
+	{
+		file->ambiguous_name = strdup((*tokens)->value);
 		file->is_ambiguous = true;
+	}
 	else
 		file->is_ambiguous = false;
 	free(value);
@@ -72,6 +77,7 @@ t_command_files	*ft_create_files(t_tokens_list **tokens, t_env_list *env_list)
 	if (!files)
 		return (NULL);
 	files->fd = -1;
+	files->is_ambiguous = false;
 	while (*tokens && (*tokens)->type != PIPE)
 	{
 		if (ft_is_valid_redirection((*tokens)->type))

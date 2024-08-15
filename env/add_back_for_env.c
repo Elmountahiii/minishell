@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 14:55:55 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/15 13:50:09 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/15 19:12:32 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ t_env_list	*creat_env_node(char *str)
 	tmp = NULL;
 	if (equal_index < 0)
 	{
-		write(1, "no equal sign\n", 14);
+		//write(1, "no equal sign\n", 14);
 		return (NULL);
 	}
 	node->key = ft_substr_orig(str, 0, equal_index);

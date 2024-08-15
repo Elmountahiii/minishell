@@ -5,7 +5,9 @@ commands
 env
 execution
 expand
+file
 files
+hello
 heredoc
 lexer
 lib

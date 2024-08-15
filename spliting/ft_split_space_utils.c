@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 11:09:16 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/15 12:53:56 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/15 15:40:08 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	ft_skip_spacee(char **line)
 		return (0);
 	while (**line)
 	{
-		if (!ft_is_space(**line))
+		if (!ft_is_space_v2(**line))
 			break ;
 		(*line)++;
 		i++;

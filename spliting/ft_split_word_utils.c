@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 01:11:51 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/15 12:51:01 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/15 15:41:28 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	ft_skip_word(char **line)
 		return (0) ;
 	while (**line)
 	{
-		if (ft_is_space(**line) || **line == '|' || **line == '>'
+		if (ft_is_space_v2(**line) || **line == '|' || **line == '>'
 			|| **line == '<' || ft_is_quote(**line))
 			break ;
 		(*line)++;

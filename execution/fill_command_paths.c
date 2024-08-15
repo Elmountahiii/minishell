@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 12:50:49 by aet-tale          #+#    #+#             */
-/*   Updated: 2024/08/10 15:20:48 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/15 17:46:14 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void	fill_command_paths(t_command *command_list, t_env_list *env)
 {
 	char *cmd;
 
-    while (command_list)
+    while (command_list && command_list->command_args)
     {
 		cmd = command_list->command_args[0];
 		if (ft_strncmp(cmd, "./", 2) == 0 || ft_strncmp(cmd, "../", 3) == 0 || ft_strncmp(cmd, "/", 1) == 0)

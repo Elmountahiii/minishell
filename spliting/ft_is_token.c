@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 00:35:41 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/15 12:46:02 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/15 15:41:10 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ t_token_type	ft_get_token_type(char *str)
 		return (DOUBLE_QUOTE_WORD);
 	if (str[0] == '$')
 		return (ENV);
-	if (ft_is_space(str[0]))
+	if (ft_is_space_v2(str[0]))
 		return (SPACE_TOKEN);
 	return (WORD);
 }

@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 12:30:01 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/15 13:35:31 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/15 18:08:28 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	ft_handle_heredoc(t_heredoc *heredoc, t_tokens_list **tokens, int list_size
 	heredoc->fd = -1;
 	heredoc->file_name = ft_strjoin("/tmp/heredoc", number);
 	free(number);
-	if ((*tokens)->type == ENV)
+	if ((*tokens)->type == ENV || (*tokens)->type == WORD)
 		heredoc->expand_line = true;
 	else
 		heredoc->expand_line = false;
