@@ -10,23 +10,34 @@ CFLAGS = -Wall -Wextra -Werror
 #-g -fsanitize=address
 READLINE = -lreadline -lncurses
 
-builtins_files = add_back_for_env.c cd.c echo.c env.c exit.c export.c ft_export_env.c get_env_list.c print_env_list.c \
-pwd.c unset.c 
-files_files = ft_create_file_node.c ft_files_addback.c ft_files_last.c ft_hanlde_file_name.c ft_heredoc_last.c ft_select_files.c ft_open_files.c
-clean_files = ft_clean.c ft_clean_commands.c ft_clean_files.c ft_clean_heredoc.c ft_clean_pipes.c ft_clean_tokens.c ft_free_array.c
-execution_files = init_execute.c
-expand_files = ft_tokens_expand.c ft_extract_key.c ft_link_key_value.c ft_expand_utils2.c
-heredoc_files = ft_fill_heredoc.c ft_open_heredoc.c ft_init_heredoc.c
-pipes_files = give_list_pipes.c
+# builtins_files = add_back_for_env.c cd.c echo.c env.c exit.c export.c ft_export_env.c get_env_list.c print_env_list.c \
+# pwd.c unset.c 
+# files_files = ft_create_file_node.c ft_files_addback.c ft_files_last.c ft_hanlde_file_name.c ft_heredoc_last.c ft_select_files.c ft_open_files.c
+# clean_files = ft_clean.c ft_clean_commands.c ft_clean_files.c ft_clean_heredoc.c ft_clean_pipes.c ft_clean_tokens.c ft_free_array.c
+ execution_files = init_execute.c
+# expand_files = ft_tokens_expand.c ft_extract_key.c ft_link_key_value.c ft_expand_utils2.c
+# # heredoc_files = ft_fill_heredoc.c ft_open_heredoc.c ft_init_heredoc.c
+# pipes_files = give_list_pipes.c
 
 # new
 spiting_files = ft_count_line_tokens.c ft_is_token.c ft_line_split.c ft_split_quotes_utils.c ft_split_space_utils.c ft_split_word_utils.c ft_split_redirection_utils.c \
 ft_print_array.c ft_split_env_utils.c 
 tokens_files = ft_create_token.c ft_tokens_addback.c  ft_add_tokens.c ft_print_tokens.c ft_token_skip.c
 syntax_files = ft_check_syntax.c ft_check_syntax_2.c 
+heredoc_files = ft_add_heredoc.c ft_create_heredoc.c ft_heredoc_len.c ft_heredoc_addback.c ft_printf_heredoc.c ft_open_heredoc.c ft_heredoc_done.c
+expand_files = ft_expand.c ft_extract_key.c ft_get_expand_keys.c 
+utils_files = ft_array_len.c ft_remove_quotes.c
+env_files = get_env_list.c add_back_for_env.c ft_print_env_list.c
+
+
+
+utils_pre = $(addprefix utils/, $(utils_files))
 tokens_pre = $(addprefix tokens/, $(tokens_files))
 spliting_pre = $(addprefix spliting/, $(spiting_files))
 syntax_pre = $(addprefix syntax/, $(syntax_files))
+heredoc_pre = $(addprefix heredoc/, $(heredoc_files))
+expand_pre = $(addprefix expand/, $(expand_files))
+env_pre = $(addprefix env/, $(env_files))
 
 
 
@@ -37,7 +48,7 @@ expand_prefix = $(addprefix expand/, $(expand_files))
 execution_prefix = $(addprefix execution/, $(execution_files))
 heredoc_prefix = $(addprefix heredoc/, $(heredoc_files))
 
-SRC = main.c  $(execution_prefix) $(tokens_pre) $(spliting_pre) $(syntax_pre)
+SRC = main.c  $(execution_prefix) $(tokens_pre) $(spliting_pre) $(syntax_pre) $(expand) $(heredoc_pre) $(utils_pre)  $(expand_pre) $(env_pre)
 OBJ = $(SRC:.c=.o)
 HEADR = minishell.h
 

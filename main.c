@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 09:30:38 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/15 13:02:43 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/15 13:59:30 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,12 +61,12 @@ int	main(int argc, char *argv[], char *envp[])
 	(void) argv;
 	(void) envp;
 	t_be_executed	*be_executed;
-	//t_env_list		*env_list = NULL;
+	t_env_list		*env_list = NULL;
 	char **tokens;
 	char * line;
 
 	tokens = NULL;
-	//env_list = get_env_list(envp);
+	env_list = get_env_list(envp);
 	signal(SIGINT,	sig_handler);
 	signal(SIGQUIT, SIG_IGN);
 	while (1)
@@ -84,6 +84,14 @@ int	main(int argc, char *argv[], char *envp[])
 			continue ;
 		}
 		ft_print_tokens(be_executed->tokens_list);
+		be_executed->heredoc_list = ft_add_heredoc(&be_executed->heredoc_list, be_executed->tokens_list);
+		ft_open_heredoc(be_executed->heredoc_list,env_list);
+		if (ft_heredoc_done(be_executed->heredoc_list))
+		{
+			printf("heredoc not done\n");
+			continue ;
+		}
+		ft_print_heredoc(be_executed->heredoc_list);
 	}
 	return (exit_status);
 }

@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 09:30:52 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/15 13:03:23 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/15 13:50:27 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,12 @@ typedef  struct e_tokens_list {
 
 typedef struct s_heredoc
 {
-	int				fd;
-	char			*file_name;
-	char			*dil;
+	int					index;
+	int					fd;
+	char				*file_name;
+	char				*dil;
+	bool				expand_line;
+	bool				done;
 	struct s_heredoc	*next;
 }	t_heredoc;
 
@@ -145,7 +148,7 @@ t_tokens_list	*ft_add_tokens(char **tokens);
 void			ft_print_tokens(t_tokens_list *tokens_list);
 void			ft_token_skip(t_tokens_list **tokens, t_token_type type);
 
-// syntax check
+// syntax check functions
 int	ft_check_redout_syntax(t_tokens_list *list);
 int	ft_check_redin_syntax(t_tokens_list *list);
 int	ft_check_pipe_syntax(t_tokens_list *list);
@@ -156,6 +159,29 @@ int	ft_check_word_syntax(t_tokens_list *token);
 int	ft_check_syntax(t_tokens_list *list);
 void	ft_skip_tokens_spaces(t_tokens_list **tokens);
 
+// expanding functions
+char	*ft_expand(char *original, t_env_list *env);
+char	*ft_extract_key(char *str);
+char	**ft_split_keys(char *value);
+
+// here doc functions
+t_heredoc 	*ft_add_heredoc(t_heredoc **heredoc_list, t_tokens_list *tokens);
+t_heredoc	*ft_create_heredoc(t_tokens_list **tokens,int list_size);
+int			ft_count_heredoc(t_heredoc **heredoc_list);
+void		ft_heredoc_addback(t_heredoc **lst, t_heredoc *new);
+void		ft_print_heredoc(t_heredoc *heredoc);
+void		ft_open_heredoc(t_heredoc *heredoc_list, t_env_list *env_list);
+int			ft_heredoc_done(t_heredoc *heredoc_list);
+void		sig_handler(int sig);
+
+// utils functions	
+int		ft_array_len(char **array);
+char	*ft_remove_quotes(char *str);
+
+// env functions
+t_env_list	*get_env_list(char	**env);
+void		add_back_for_env(t_env_list	**list, char	*str);
+void		print_env_list(t_env_list*	list);
 
 
 

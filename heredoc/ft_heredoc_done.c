@@ -1,45 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_init_heredoc.c                                  :+:      :+:    :+:   */
+/*   ft_heredoc_done.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/06 11:21:26 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/12 15:43:16 by yel-moun         ###   ########.fr       */
+/*   Created: 2024/08/15 13:34:36 by yel-moun          #+#    #+#             */
+/*   Updated: 2024/08/15 13:36:46 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	ft_init_heredoc(t_command *command)
+int	ft_heredoc_done(t_heredoc *heredoc_list)
 {
-	t_command	*tmp;
-	t_heredoc	*heredoc;
-	
-	if (!command)
+	t_heredoc	*tmp;
+
+	if (!heredoc_list)
 		return (0);
-	tmp = command;
+	tmp = heredoc_list;
 	while (tmp)
 	{
-		// ft_fill_heredoc returns 2 when fork fails
-		// return 1 when ctrl c 
-		if (ft_fill_heredoc(tmp))
+		if (tmp->done == false)
 			return (1);
-		tmp = tmp->next;
-	}
-	tmp = command;
-	while (tmp)
-	{
-		heredoc = tmp->heredoc_list;
-		if (heredoc && tmp->is_heredoc)
-		{
-			while (heredoc->next)
-				heredoc = heredoc->next;
-			tmp->fd_in = heredoc->fd;
-			tmp->in_file = ft_strdup(heredoc->file_name);
-			//system("leaks minishell");
-		}
 		tmp = tmp->next;
 	}
 	return (0);
