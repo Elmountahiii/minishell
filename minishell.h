@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 09:30:52 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/15 18:00:10 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/15 19:47:05 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -199,6 +199,7 @@ char			*ft_get_files_type(t_token_type type);
 void			ft_printf_files(t_command_files *files);
 void			ft_open_files(t_command_files *files);
 int				ft_is_valid_redirection(t_token_type type);
+int				ft_check_ambig(t_command_files *files);
 
 // commands functions
 t_command	*ft_create_command(t_tokens_list **tokens, t_env_list *env_list);

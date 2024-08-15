@@ -1,35 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_check_ambig.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/02 17:16:09 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/15 20:39:04 by yel-moun         ###   ########.fr       */
+/*   Created: 2024/08/15 19:44:33 by yel-moun          #+#    #+#             */
+/*   Updated: 2024/08/15 19:59:12 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lib.h"
+#include "../minishell.h"
 
-char	*ft_strdup(char *s1)
+int ft_all_spaces(char *str)
 {
-	int		len;
-	int		i;
-	char	*s2;
+	int i;
 
-	len = ft_strlen(s1);
-	s2 = malloc(len * sizeof(char) + 1);
 	i = 0;
-	if (s2 == NULL)
+	if (!str)
+		return (1);
+	while (str[i])
 	{
-		return (NULL);
-	}
-	while (s1 && s1[i])
-	{
-		s2[i] = s1[i];
+		if (str[i] != ' ')
+			return (0);
 		i++;
 	}
-	s2[i] = '\0';
-	return (s2);
+	return (1);
+}
+
+int	ft_check_ambig(t_command_files *files)
+{
+	if (!files)
+		return (0);
+	if (ft_array_len(files->files) > 1)
+		return (1);
+	// if (ft_all_spaces(files->files[0]))
+	// 	return (1);
+	
+	return (0);
 }

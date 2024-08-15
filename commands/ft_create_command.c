@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 16:45:29 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/15 18:51:05 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/15 20:43:35 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,12 @@ void	ft_add_to_array(char **old, char **buffer ,char **new)
 	j = 0;
 	while (old && old[i])
 	{
-		buffer[i] = strdup(old[i]);
+		buffer[i] = ft_strdup(old[i]);
 		i++;
 	}
 	while (new && new[j])
 	{
-		buffer[i + j] = strdup(new[j]);
+		buffer[i + j] = ft_strdup(new[j]);
 		j++;
 	}
 	buffer[i + j] = NULL;
@@ -62,6 +62,12 @@ void	ft_add_args(t_command *command,t_tokens_list **token, t_env_list *env_list)
 	else
 	 tmp = command->command_args;
 	value = ft_join_token_value(token, env_list);
+	// if (ft_strlen(value) == 0)
+	// {
+	// 	free(value);
+	// 	return ;
+	// }
+	//printf("value: %s\n", value);
 	// if (ft_strchr(value, '$'))
 	// 	expanded = ft_split_dil(value, ' ');
 	// else

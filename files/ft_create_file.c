@@ -6,11 +6,12 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 11:20:38 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/15 19:09:16 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/15 19:50:21 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
 
 void	ft_handle_redirection(t_command_files *file, t_tokens_list **tokens, t_env_list *env_list)
 {
@@ -30,9 +31,8 @@ void	ft_handle_redirection(t_command_files *file, t_tokens_list **tokens, t_env_
 	else
 		value = strdup((*tokens)->value); 
 	file->files = ft_get_expand_split(value, env_list);
-	// ft_print_array(file->files);
-	// printf("array len = %d\n", ft_array_len(file->files));
-	if (ft_array_len(file->files) > 1)
+	//ft_print_array(file->files);
+	if (ft_check_ambig(file))
 	{
 		file->ambiguous_name = strdup((*tokens)->value);
 		file->is_ambiguous = true;

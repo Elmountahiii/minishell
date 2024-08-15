@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 15:09:06 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/15 13:44:25 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/15 19:35:51 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ char	*ft_get_value(char *key, t_env_list *env)
 	if (!key)
 		return (strdup("$"));
 	if (key[0] == '?')
-		return (ft_itoa(0));
+		return (ft_itoa(exit_status));
 	if (key[0] == '$' && ft_strlen(key) == 1)
 		return (strdup("$"));
 	if (key[0] == '@' || ft_isdigit(key[0]))
@@ -55,7 +55,7 @@ int	ft_count_expand_len(char *str, char **keys, t_env_list *env)
 			if (str[i] && str[i] == '?')
 			{
 				i++;
-				tmp = ft_itoa(0);
+				tmp = ft_itoa(exit_status);
 				len += ft_strlen(tmp);
 				index++;
 			}
@@ -127,7 +127,7 @@ char	*ft_expand(char *original, t_env_list *env)
 			i++;
 			if (original[i] && original[i] == '?')
 			{
-				tmp = ft_itoa(0);
+				tmp = ft_itoa(exit_status);
 	
 				j = ft_join_key(expanded, tmp, j);
 				i++;

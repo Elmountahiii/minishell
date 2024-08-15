@@ -26,7 +26,7 @@ heredoc_files = ft_add_heredoc.c ft_create_heredoc.c ft_heredoc_len.c ft_heredoc
 expand_files = ft_expand.c ft_extract_key.c ft_get_expand_keys.c 
 utils_files = ft_array_len.c ft_remove_quotes.c ft_get_expand_split.c
 env_files = get_env_list.c add_back_for_env.c ft_print_env_list.c
-files_files = ft_add_files.c ft_create_file.c ft_files_addback.c ft_print_files.c ft_open_files.c
+files_files = ft_add_files.c ft_create_file.c ft_files_addback.c ft_print_files.c ft_open_files.c ft_check_ambig.c
 commands_files = ft_command_addback.c ft_create_command.c ft_print_command_args.c ft_add_commands.c ft_print_commands.c ft_commands_utils.c ft_command_assign_fds.c
 clean_files = ft_clean_array.c
 
