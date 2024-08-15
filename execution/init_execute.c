@@ -3,26 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   init_execute.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aet-tale <aet-tale@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 15:57:21 by aet-tale          #+#    #+#             */
-/*   Updated: 2024/08/02 17:50:29 by aet-tale         ###   ########.fr       */
+/*   Updated: 2024/08/15 12:32:40 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-t_be_executed	*give_executed(t_command *commands_list, t_pipe *list_pipes, t_tokens_list *tokens_list, t_env_list **env_list)
+t_be_executed	*give_executed()
 {
 	t_be_executed	*to_execute;
 
-	to_execute = malloc(sizeof(t_be_executed));
+	to_execute = calloc(1,sizeof(t_be_executed));
 	if (!to_execute)
 		return (NULL);
-	to_execute->commands_list = commands_list;
-	to_execute->list_pipes = list_pipes;
-	to_execute->tokens_list = tokens_list;
-	to_execute->env_list = env_list;
-	to_execute->list_size = count_list(commands_list);
+	
 	return (to_execute);
 }
+
+// count the len

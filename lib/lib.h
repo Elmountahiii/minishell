@@ -56,6 +56,8 @@ void	ft_putstr_fd(char *s, int fd);
 int		ft_isdigit(int d);
 int		ft_isalpha(int c);
 int		ft_isalnum(int c);
+char	*ft_substrl(char  *s, int start, int len);
+
 // v2
 char	**ft_super_split(char *str);
 int		ft_count_words_v2(char *str);
