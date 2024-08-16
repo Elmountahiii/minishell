@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 12:42:46 by aet-tale          #+#    #+#             */
-/*   Updated: 2024/08/16 15:17:27 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/16 16:20:56 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,8 +152,6 @@ void	execute_command(t_command *command,	t_be_executed	*to_execute)
 		ft_check_path_correct(args[0]);
 	else if (ft_is_path(command->path))
 		ft_check_path_correct(command->path);
-
-
 	assign_input(command, to_execute);
 	assign_output(command, to_execute);
 	if (command->in_type != STDIN_FILENO)

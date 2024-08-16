@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 17:55:03 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/16 15:15:32 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/16 16:27:41 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,12 @@ char	*ft_join_token_value(t_tokens_list **tokens,t_env_list *env_list)
 {
 	char	*value;
 	char	*tmp;
+	char	*expand;
 	
 	if (!tokens || !*tokens)
 		return (NULL);
 	value = strdup("");
+	expand = NULL;
 	while (*tokens)
 	{
 		if (ft_check_word_valid((*tokens)->type))
@@ -55,7 +57,14 @@ char	*ft_join_token_value(t_tokens_list **tokens,t_env_list *env_list)
 			if ((*tokens)->type == SINGLE_QUOTE_WORD)
 				value = ft_strjoin_free(value, tmp);
 			else
-				value = ft_strjoin_free(value, ft_expand(tmp, env_list));
+			{
+				expand = ft_expand(tmp, env_list);
+				if (ft_strlen(expand) == 0 && (*tokens)->type != DOUBLE_QUOTE_WORD )
+					return (NULL);
+				value = ft_strjoin_free(value, expand);
+				free(expand);
+			
+			}
 			free(tmp);
 		}else
 			break;
