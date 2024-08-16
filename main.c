@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 09:30:38 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/15 20:46:14 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/16 15:20:33 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	sig_handler(int sig)
 	{
 		write(1, "\n", 1);
 		rl_on_new_line();
-		// rl_replace_line("", 0);
+		//rl_replace_line("", 0);
 		rl_redisplay();
 		exit_status = 1;
 	}
@@ -96,7 +96,8 @@ int	main(int argc, char *argv[], char *envp[])
 		fill_command_paths(be_executed->commands_list, env_list);
 		be_executed->list_pipes =  give_list_pipes(be_executed->tokens_list);
 		be_executed->list_size = count_list(be_executed->commands_list);
-		//ft_print_commands(be_executed->commands_list);
+		// ft_print_commands(be_executed->commands_list);
+		// continue ;
 		execute_things(be_executed);
 	}
 	return (exit_status);

@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 16:20:14 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/15 18:34:13 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/16 10:26:02 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,11 @@ void	ft_open_files(t_command_files *files)
 		// 	continue ;
 		// }
 		if (tmp->type == REDIRECTION_IN)
-			tmp->fd = open(tmp->files[0], O_RDONLY);
+			tmp->fd = open(tmp->file_name, O_RDONLY);
 		else if (tmp->type == REDIRECTION_OUT)
-			tmp->fd = open(tmp->files[0], O_CREAT | O_WRONLY | O_TRUNC, 0644);
+			tmp->fd = open(tmp->file_name, O_CREAT | O_WRONLY | O_TRUNC, 0644);
 		else if (tmp->type == APPEND)
-			tmp->fd = open(tmp->files[0], O_CREAT | O_WRONLY | O_APPEND, 0644);
+			tmp->fd = open(tmp->file_name, O_CREAT | O_WRONLY | O_APPEND, 0644);
 		if (tmp->fd < 0)
 		{
 			ft_skip_to_next_command(&tmp);

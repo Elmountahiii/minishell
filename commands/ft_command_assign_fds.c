@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 18:17:01 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/15 18:01:23 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/16 10:23:18 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,14 +56,14 @@ void	ft_assign_from_files(t_command *command , t_command_files *files, t_token_t
 	}
 	if (selected_file && type == REDIRECTION_IN)
 	{
-		command->in_file = ft_strdup(selected_file->files[0]);
+		command->in_file = ft_strdup(selected_file->file_name);
 		command->fd_in = selected_file->fd;
 		command->is_ambiguous = selected_file->is_ambiguous;
 		command->ambiguous_name = ft_strdup(selected_file->ambiguous_name);
 	} 
 	else if (selected_file && (type == REDIRECTION_OUT || type == APPEND))
 	{
-		command->out_file = ft_strdup(selected_file->files[0]);
+		command->out_file = ft_strdup(selected_file->file_name);
 		command->fd_out = selected_file->fd;
 		command->is_ambiguous = selected_file->is_ambiguous;
 		command->ambiguous_name = ft_strdup(selected_file->ambiguous_name);

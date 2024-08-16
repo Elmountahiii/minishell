@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 12:05:00 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/15 14:31:19 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/16 11:34:00 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,9 @@ void	ft_printf_files(t_command_files *files)
 	while (tmp)
 	{
 		printf("id: %d, fd: %d type: %s is_ambiguous: %s\n", tmp->index, tmp->fd, ft_get_files_type(tmp->type), tmp->is_ambiguous ? "true" : "false");
-		printf("files:\n");
-		ft_print_array(tmp->files);
+		printf("file_name: %s\n", tmp->file_name);
+		// printf("files:\n");
+		// ft_print_array(tmp->files);
 		tmp = tmp->next;
 	}
 	printf("\n");

@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 17:55:03 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/15 20:46:56 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/16 15:15:32 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ char	*ft_join_token_value(t_tokens_list **tokens,t_env_list *env_list)
 	if (!tokens || !*tokens)
 		return (NULL);
 	value = strdup("");
-	tmp = NULL;
 	while (*tokens)
 	{
 		if (ft_check_word_valid((*tokens)->type))

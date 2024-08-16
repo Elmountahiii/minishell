@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 16:45:29 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/15 20:43:35 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/16 15:22:41 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,21 +62,27 @@ void	ft_add_args(t_command *command,t_tokens_list **token, t_env_list *env_list)
 	else
 	 tmp = command->command_args;
 	value = ft_join_token_value(token, env_list);
+	//printf("value: '%s' len: %d\n", value, ft_strlen(value));
 	// if (ft_strlen(value) == 0)
 	// {
 	// 	free(value);
 	// 	return ;
 	// }
-	//printf("value: %s\n", value);
-	// if (ft_strchr(value, '$'))
-	// 	expanded = ft_split_dil(value, ' ');
-	// else
-	// 	expanded = ft_get_expand_split(value, env_list);
-	expanded = calloc(2, sizeof(char *));
-	expanded[0] = strdup(value);
-	expanded[1] = NULL;
+	if (ft_strchr(value, ' ') || ft_strlen(value) == 0)
+	{
+		expanded = ft_calloc(2, sizeof(char *));
+		expanded[0] = ft_strdup(value);
+		expanded[1] = NULL;
+	}
+	else
+		expanded = ft_split_dil(value, ' ');
+	// // else
+	// // 	expanded = ft_get_expand_split(value, env_list);
+	// expanded = calloc(2, sizeof(char *));
+	// expanded[0] = strdup(value);
+	// expanded[1] = NULL;
 	free(value);
-	command->command_args = calloc((ft_array_len(tmp) + 2), sizeof(char *));
+	command->command_args = calloc((ft_array_len(tmp) + ft_array_len(expanded) + 1), sizeof(char *));
 	if (!command->command_args)
 		return (ft_clean_array(tmp) , ft_clean_array(expanded));
 	ft_add_to_array(tmp, command->command_args, expanded);

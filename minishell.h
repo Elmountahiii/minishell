@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 09:30:52 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/15 19:47:05 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/16 10:22:08 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ typedef struct t_list_files
 typedef struct s_command_files
 {
 	int					index;
+	char				*file_name;
 	int					fd;
 	t_token_type		type;
 	char				**files;

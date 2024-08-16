@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 15:58:52 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/15 14:05:07 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/16 12:23:23 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	ft_heredoc_lisente(t_heredoc *heredoc_list, t_env_list *env_list)
 		return ;
 	line = NULL;
 	heredoc_list->fd = open(heredoc_list->file_name, O_CREAT | O_WRONLY | O_TRUNC, 0644);
+	// printf("dil = '%s'\n", heredoc_list->dil);
 	if (heredoc_list->fd < 0)
 		return ;
 	signal(SIGINT, handle_sigint);
@@ -35,7 +36,7 @@ void	ft_heredoc_lisente(t_heredoc *heredoc_list, t_env_list *env_list)
 		line = readline("> ");
 		if (!line)
 			break ;
-		if (ft_strlen(line) > 0 && !strncmp(line, heredoc_list->dil, ft_strlen(line)))
+		if (strcmp(line, heredoc_list->dil) == 0)
 		{
 			free(line);
 			break ;

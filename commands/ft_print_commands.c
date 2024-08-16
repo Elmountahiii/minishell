@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 21:18:53 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/15 14:45:48 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/16 15:18:15 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ void	ft_print_commands(t_command *command_list)
 		printf("path: %s\n", tmp->path);
 		printf("Command: \033[32m\033[0m");
 		ft_print_command_args(tmp);
+		printf("commands len : %d\n",ft_array_len(tmp->command_args));
 		printf("--------------------\n");
 		tmp = tmp->next;
 	}
