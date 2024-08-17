@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 11:11:43 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/17 20:33:23 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/17 22:41:46 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 int	ft_skip_quotess(char **line)
 {
-	int	i;
-	char quote;
+	int		i;
+	char	quote;
 
 	i = 0;
 	if (!*line)
 		return (0);
-	if(!ft_is_quote(**line))
+	if (!ft_is_quote(**line))
 		return (0);
 	quote = **line;
 	(*line)++;
@@ -32,7 +32,7 @@ int	ft_skip_quotess(char **line)
 		(*line)++;
 		i++;
 	}
-	if (**line  && **line == quote)
+	if (**line && **line == quote)
 	{
 		(*line)++;
 		i++;
@@ -59,12 +59,3 @@ char	*ft_crate_quote(char **line)
 	*line += len;
 	return (quote);
 }
-
-// int main()
-// {
-// 	char *line = "\"hello         youssef world\" 1337";
-// 	char *quote = ft_crate_quote(&line);
-// 	printf("quote:%s\n", quote);
-// 	printf("line:%s\n", line);
-// 	return 0;
-// }

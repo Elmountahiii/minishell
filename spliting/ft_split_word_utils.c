@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 01:11:51 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/17 20:42:15 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/17 22:42:29 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	ft_skip_word(char **line)
 
 	i = 0;
 	if (!*line)
-		return (0) ;
+		return (0);
 	while (**line)
 	{
 		if (ft_is_space_v2(**line) || **line == '|' || **line == '>'
@@ -35,7 +35,7 @@ char	*ft_create_word(char **line)
 	char	*word;
 	char	*tmp;
 	int		len;	
-	
+
 	if (!*line)
 		return (NULL);
 	tmp = ft_strdup(*line);
@@ -49,13 +49,3 @@ char	*ft_create_word(char **line)
 	*line += len;
 	return (word);
 }
-
-// int main()
-// {
-// 	char *line = "$?hello         youssef world";
-// 	char *word = ft_create_word(&line);
-// 	printf("word:%s\n", word);
-// 	printf("line:%s\n", line);
-// 	//system("leaks a.out");
-// 	return 0;
-// }

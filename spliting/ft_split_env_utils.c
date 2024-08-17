@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 12:29:33 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/17 20:33:04 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/17 22:38:57 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	ft_skip_env(char **line)
 
 	i = 0;
 	if (!*line)
-		return (0) ;
+		return (0);
 	(*line)++;
 	i++;
 	while (**line)
@@ -26,8 +26,8 @@ int	ft_skip_env(char **line)
 		if (ft_is_space_v2(**line) || **line == '|' || **line == '>'
 			|| **line == '<' || **line == '$')
 			break ;
-	(*line)++;
-	i++;
+		(*line)++;
+		i++;
 	}
 	return (i);
 }
@@ -37,7 +37,7 @@ char	*ft_create_env(char **line)
 	char	*word;
 	char	*tmp;
 	int		len;	
-	
+
 	if (!*line)
 		return (NULL);
 	tmp = ft_strdup(*line);

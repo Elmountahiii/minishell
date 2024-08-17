@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 11:42:20 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/15 12:50:46 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/17 22:34:26 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,3 @@ char	*ft_create_redirection(char **line)
 	*line += len;
 	return (redirection);
 }
-
-// int main()
-// {
-// 	char *line = "<youssef";
-// 	char *redirection = ft_create_redirection(&line);
-// 	printf("redirection :%s\n", redirection);
-// 	printf("line:%s\n", line);
-// 	return 0;
-// }
-
