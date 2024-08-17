@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 15:09:06 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/17 13:27:41 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/17 20:30:18 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,21 +15,21 @@
 char	*ft_get_value(char *key, t_env_list *env)
 {
 	if (!key)
-		return (strdup("$"));
+		return (ft_strdup("$"));
 	if (key[0] == '?')
 		return (ft_itoa(exit_status));
 	if (key[0] == '$' && ft_strlen(key) == 1)
-		return (strdup("$"));
+		return (ft_strdup("$"));
 	if (key[0] == '@' || ft_isdigit(key[0]))
 	{
 		if (ft_strlen(key) == 1 && key[0] == '@')
-			return (strdup("@"));
-		return (strdup(key + 1));	
+			return (ft_strdup("@"));
+		return (ft_strdup(key + 1));	
 	}
 	while (env)
 	{
-		if (!strcmp(key, env->key))
-			return (strdup(env->value));
+		if (!ft_strcmp(key, env->key))
+			return (ft_strdup(env->value));
 		env = env->next;
 	}
 	return (NULL);
@@ -109,7 +109,7 @@ char	*ft_expand(char *original, t_env_list *env)
 	if (!original)
 		return (NULL);
 	keys = ft_split_keys(original);
-	expanded = calloc(ft_count_expand_len(original, keys, env) + 1, sizeof(char));
+	expanded = ft_calloc(ft_count_expand_len(original, keys, env) + 1, sizeof(char));
 	if (!expanded)
 		return (NULL);
 	i = 0;

@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 00:22:19 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/15 12:49:45 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/17 20:32:46 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ char	**ft_split_line(char *line)
 	char **tokens;
 	int	index;
 
-	tokens = calloc((ft_count_line_tokens(line) + 1), sizeof(char *));
+	tokens = ft_calloc((ft_count_line_tokens(line) + 1), sizeof(char *));
 	if (!tokens)
 		return (NULL);
 	index = 0;

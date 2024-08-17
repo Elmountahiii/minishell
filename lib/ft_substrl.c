@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 12:48:32 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/15 12:48:46 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/17 20:45:48 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,11 @@ char	*ft_substrl(char  *s, int start, int len)
 	s_len = ft_strlen(s);
 	if (start >= s_len)
 	{
-		return (strdup(""));
+		return (ft_strdup(""));
 	}
 	if (len >= ft_strlen(s + start))
 	{
-		return (strdup(s + start));
+		return (ft_strdup(s + start));
 	}
 	i = 0;
 	sub_str = malloc(sizeof(char) * len + 1);

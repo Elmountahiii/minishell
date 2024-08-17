@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 12:30:01 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/17 15:57:34 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/17 20:32:01 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	ft_handle_heredoc(t_heredoc *heredoc, t_tokens_list **tokens, int list_size
 	if ((*tokens)->type == SINGLE_QUOTE_WORD || (*tokens)->type == DOUBLE_QUOTE_WORD)
 		heredoc->dil = ft_remove_quotes((*tokens)->value);
 	else
-		heredoc->dil = strdup((*tokens)->value);
+		heredoc->dil = ft_strdup((*tokens)->value);
 }
 
 int	ft_check_heredoc(t_tokens_list *tokens)
@@ -61,7 +61,7 @@ t_heredoc	*ft_create_heredoc(t_tokens_list **tokens,int list_size)
 		return (NULL);
 	if (!ft_check_heredoc(*tokens))
 		return (NULL);
-	heredoc = calloc(1,sizeof(t_heredoc));
+	heredoc = ft_calloc(1,sizeof(t_heredoc));
 	if (!heredoc)
 		return (NULL);
 	heredoc->done = true;

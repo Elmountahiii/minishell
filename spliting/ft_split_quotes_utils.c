@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 11:11:43 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/15 12:54:54 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/17 20:33:23 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,13 +48,13 @@ char	*ft_crate_quote(char **line)
 
 	if (!*line)
 		return (NULL);
-	tmp = strdup(*line);
+	tmp = ft_strdup(*line);
 	len = ft_skip_quotess(&tmp);
-	quote = calloc((len + 1), sizeof(char));
+	quote = ft_calloc((len + 1), sizeof(char));
 	free(tmp - len);
 	if (!quote)
 		return (NULL);
-	strncpy(quote, *line, len);
+	ft_strncpy(quote, *line, len);
 	quote[len] = '\0';
 	*line += len;
 	return (quote);

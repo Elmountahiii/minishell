@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 17:55:03 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/17 13:39:46 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/17 20:45:11 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@ char	*ft_strjoin_free(char *s1, char *s2)
 
 	if (!s1 || !s2)
 		return (NULL);
-	str = (char *)malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
+	str = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
 	if (!str)
 		return (NULL);
-	strncpy(str, s1, ft_strlen(s1) + 1);
-	strncat(str, s2, ft_strlen(s1) + ft_strlen(s2) + 1);
+	ft_strncpy(str, s1, ft_strlen(s1) + 1);
+	ft_strncat(str, s2, ft_strlen(s1) + ft_strlen(s2) + 1);
 	free(s1);
 	return (str);
 }
@@ -42,7 +42,7 @@ char	*ft_join_token_value(t_tokens_list **tokens,t_env_list *env_list)
 	
 	if (!tokens || !*tokens)
 		return (NULL);
-	value = strdup("");
+	value = ft_strdup("");
 	expand = NULL;
 	tmp = NULL;
 	while (*tokens)
@@ -54,7 +54,7 @@ char	*ft_join_token_value(t_tokens_list **tokens,t_env_list *env_list)
 				tmp = ft_remove_quotes((*tokens)->value);		
 			}
 			else
-				tmp = strdup((*tokens)->value);
+				tmp = ft_strdup((*tokens)->value);
 			if ((*tokens)->type == SINGLE_QUOTE_WORD)
 				value = ft_strjoin_free(value, tmp);
 			else

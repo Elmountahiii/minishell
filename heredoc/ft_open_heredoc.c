@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 15:58:52 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/17 15:53:34 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/17 20:32:16 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	ft_heredoc_lisente(t_heredoc *heredoc_list, t_env_list *env_list)
 		line = readline("> ");
 		if (!line)
 			break ;
-		if (strcmp(line, heredoc_list->dil) == 0)
+		if (ft_strcmp(line, heredoc_list->dil) == 0)
 		{
 			free(line);
 			break ;

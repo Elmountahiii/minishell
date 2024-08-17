@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 18:17:01 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/17 15:37:23 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/17 20:45:01 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	ft_assign_from_heredoc(t_command *command, t_heredoc *heredoc_list)
 	}
 	if (selected_heredoc)
 	{
-		command->in_file = strdup(selected_heredoc->file_name);
+		command->in_file = ft_strdup(selected_heredoc->file_name);
 		command->fd_in = selected_heredoc->fd;
 	}
 }

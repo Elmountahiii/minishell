@@ -6,11 +6,9 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 14:55:55 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/15 19:12:32 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/17 20:29:03 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include "../minishell.h"
 
 #include "../minishell.h"
 
@@ -38,7 +36,7 @@ t_env_list	*creat_env_node(char *str)
 	char		*tmp;
 	int			equal_index;
 
-	if (strncmp(str, "_=", 2) == 0)
+	if (ft_strncmp(str, "_=", 2) == 0)
 		return (NULL);
 	node = malloc(sizeof(t_env_list));
 	equal_index = ft_str_chr_index(str, '=');
@@ -49,11 +47,11 @@ t_env_list	*creat_env_node(char *str)
 		return (NULL);
 	}
 	node->key = ft_substr_orig(str, 0, equal_index);
-	if (!strncmp(str, "OLDPWD=", 7))
+	if (!ft_strncmp(str, "OLDPWD=", 7))
 		node->value = NULL;
 	else
 		node->value = ft_substr_orig(str, equal_index + 1, ft_strlen(str));
-	if (strcmp(node->key, "SHLVL") == 0)
+	if (ft_strcmp(node->key, "SHLVL") == 0)
 	{
 		tmp = node->value;
 		node->value = ft_itoa(ft_atoi(node->value) + 1);

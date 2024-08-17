@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 11:20:38 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/17 13:35:56 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/17 20:45:28 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,15 @@ char	*ft_get_token_name(t_tokens_list **tokens)
 {
 	char	*value;
 	char	*tmp;
-	char	*expand;
 	
 	if (!tokens || !*tokens)
 		return (NULL);
-	value = strdup("");
-	expand = NULL;
+	value = ft_strdup("");
 	while (*tokens)
 	{
 		if (ft_check_word_valid((*tokens)->type))
 		{
-			tmp = strdup((*tokens)->value);
+			tmp = ft_strdup((*tokens)->value);
 			value = ft_strjoin_free(value, tmp);
 			free(tmp);
 		}else
@@ -58,7 +56,7 @@ void	ft_handle_redirection(t_command_files *file, t_tokens_list **tokens, t_env_
 	//printf("file_name: %s\n", file->file_name);
 	if (ft_check_ambig(file))
 	{
-		file->ambiguous_name = strdup(value);
+		file->ambiguous_name = ft_strdup(value);
 		file->is_ambiguous = true;
 	}
 	else
@@ -97,7 +95,7 @@ t_command_files	*ft_create_files(t_tokens_list **tokens, t_env_list *env_list)
 		return (NULL);
 	if (!ft_check_redirection(*tokens))
 		return (NULL);
-	files = calloc(1,sizeof(t_command_files));
+	files = ft_calloc(1,sizeof(t_command_files));
 	if (!files)
 		return (NULL);
 	files->fd = -1;

@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 15:11:38 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/17 13:21:34 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/17 20:30:43 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ char **ft_split_keys(char *value)
 	int		i;
 	int 	index;
 
-	keys = calloc(ft_keys_count(value) + 1, sizeof(char *));
+	keys = ft_calloc(ft_keys_count(value) + 1, sizeof(char *));
 	if (!keys)
 		return (NULL);
 	i = 0;

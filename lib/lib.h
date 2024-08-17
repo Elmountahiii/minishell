@@ -57,6 +57,8 @@ int		ft_isdigit(int d);
 int		ft_isalpha(int c);
 int		ft_isalnum(int c);
 char	*ft_substrl(char  *s, int start, int len);
+char	*ft_strncpy(char *dest, const char *src, size_t n);
+char	*ft_strncat(char *dest, const char *src, size_t n);
 
 // v2
 char	**ft_super_split(char *str);

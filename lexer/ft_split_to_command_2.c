@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 14:43:22 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/10 13:33:08 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/17 20:47:52 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ char	**ft_append_to_list_tokens(char **list, t_tokens_list **tokens)
 	len = 0;
 	while (list[len])
 		len++;
-	new_list = calloc(len + 2, sizeof(char *));
+	new_list = ft_calloc(len + 2, sizeof(char *));
 	if (!new_list)
 		return (NULL);
 	len = 0;
@@ -59,7 +59,7 @@ char	**ft_append_to_list(char **list, char *command)
 	len = 0;
 	while (list && list[len])
 		len++;
-	new_list = calloc(len + 2, sizeof(char *));
+	new_list = ft_calloc(len + 2, sizeof(char *));
 	if (!new_list)
 		return (NULL);
 	len = 0;

@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 14:47:39 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/11 15:20:05 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/17 20:47:14 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*ft_append_char(char *str, char c)
 	i = 0;
 	new_str = ft_strdup(str);
 	free(str);
-	str = calloc(ft_strlen(new_str) + 2, sizeof(char));
+	str = ft_calloc(ft_strlen(new_str) + 2, sizeof(char));
 	if (!str)
 		return (0);
 	while (new_str[i])

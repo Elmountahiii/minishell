@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 11:09:16 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/15 15:40:08 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/17 20:41:54 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,13 @@ char	*ft_create_space(char **line)
 
 	if (!*line)
 		return (NULL);
-	tmp = strdup(*line);
+	tmp = ft_strdup(*line);
 	len = ft_skip_spacee(&tmp);
-	space = calloc((len + 1), sizeof(char));
+	space = ft_calloc((len + 1), sizeof(char));
 	free(tmp - len);
 	if (!space)
 		return (NULL);
-	strncpy(space, *line, len);
+	ft_strncpy(space, *line, len);
 	space[len] = '\0';
 	*line += len;
 	return (space);

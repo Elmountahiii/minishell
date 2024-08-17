@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 12:42:46 by aet-tale          #+#    #+#             */
-/*   Updated: 2024/08/16 16:20:56 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/17 20:46:27 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ char	**append_to_array(char **array, char *str) {
     }
 
     // Allocate memory for the new array
-    char **new_array = (char **)calloc(len + 2, sizeof(char *));
+    char **new_array = ft_calloc(len + 2, sizeof(char *));
     if (!new_array) {
         return NULL;
     }

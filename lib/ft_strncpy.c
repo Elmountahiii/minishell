@@ -1,26 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_create_token.c                                  :+:      :+:    :+:   */
+/*   ft_strncpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/13 12:41:07 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/17 20:42:39 by yel-moun         ###   ########.fr       */
+/*   Created: 2024/08/17 20:19:13 by yel-moun          #+#    #+#             */
+/*   Updated: 2024/08/17 20:19:31 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "lib.h"
 
-t_tokens_list	*ft_create_token(char *str)
+char	*ft_strncpy(char *dest, const char *src, size_t n)
 {
-	t_tokens_list	*token;
+	size_t	i;
 
-	token = ft_calloc(1, sizeof(t_tokens_list));
-	if (!token || !str)
-		return (NULL);
-	token->type = ft_get_token_type(str);
-	token->value = ft_strdup(str);
-	token->next = NULL;
-	return (token);
+	i = 0;
+	while (src[i] && i < n)
+	{
+		dest[i] = src[i];
+		i++;
+	}
+	while (i < n)
+		dest[i++] = '\0';
+	return (dest);
 }

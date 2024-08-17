@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 16:45:29 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/16 16:27:24 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/17 20:26:15 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,16 +58,10 @@ void	ft_add_args(t_command *command,t_tokens_list **token, t_env_list *env_list)
 	tmp = NULL;
 	
 	if (!command->command_args)
-	 command->command_args = calloc(1, sizeof(char *));
+	 command->command_args = ft_calloc(1, sizeof(char *));
 	else
 	 tmp = command->command_args;
 	value = ft_join_token_value(token, env_list);
-//	printf("value: '%s' len: %d\n", value, ft_strlen(value));
-	// if (ft_strlen(value) == 0)
-	// {
-	// 	free(value);
-	// 	return ;
-	// }
 	if (ft_strchr(value, ' ') )
 	{
 		expanded = ft_calloc(2, sizeof(char *));
@@ -88,13 +82,8 @@ void	ft_add_args(t_command *command,t_tokens_list **token, t_env_list *env_list)
 	}
 	else
 		expanded = ft_split_dil(value, ' ');
-	// // else
-	// // 	expanded = ft_get_expand_split(value, env_list);
-	// expanded = calloc(2, sizeof(char *));
-	// expanded[0] = strdup(value);
-	// expanded[1] = NULL;
 	free(value);
-	command->command_args = calloc((ft_array_len(tmp) + ft_array_len(expanded) + 1), sizeof(char *));
+	command->command_args = ft_calloc((ft_array_len(tmp) + ft_array_len(expanded) + 1), sizeof(char *));
 	if (!command->command_args)
 		return (ft_clean_array(tmp) , ft_clean_array(expanded));
 	ft_add_to_array(tmp, command->command_args, expanded);
@@ -134,7 +123,7 @@ t_command *ft_create_command(t_tokens_list **tokens, t_env_list *env_list)
 {
 	t_command 	*command;
 
-	command = calloc(1, sizeof(t_command));
+	command = ft_calloc(1, sizeof(t_command));
 	if (!command)
 		return (NULL);
 	command->out_type = STDOUT_IO;
