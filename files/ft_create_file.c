@@ -6,18 +6,17 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 11:20:38 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/17 20:45:28 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/17 22:52:03 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-
 char	*ft_get_token_name(t_tokens_list **tokens)
 {
 	char	*value;
 	char	*tmp;
-	
+
 	if (!tokens || !*tokens)
 		return (NULL);
 	value = ft_strdup("");
@@ -28,19 +27,21 @@ char	*ft_get_token_name(t_tokens_list **tokens)
 			tmp = ft_strdup((*tokens)->value);
 			value = ft_strjoin_free(value, tmp);
 			free(tmp);
-		}else
-			break;
+		}
+		else
+			break ;
 		if (*tokens)
 			*tokens = (*tokens)->next;
 	}
-	return (value);	
+	return (value);
 }
 
-void	ft_handle_redirection(t_command_files *file, t_tokens_list **tokens, t_env_list *env_list)
+void	ft_handle_redirection(t_command_files *file,
+	t_tokens_list **tokens, t_env_list *env_list)
 {
-	char	*value;
+	char			*value;
 	t_tokens_list	*tmp;
-	
+
 	if (!file || !tokens || !*tokens || !env_list)
 		return ;
 	value = NULL;
@@ -53,7 +54,6 @@ void	ft_handle_redirection(t_command_files *file, t_tokens_list **tokens, t_env_
 	tmp = *tokens;
 	value = ft_get_token_name(&tmp);
 	file->file_name = ft_join_token_value(tokens, env_list);
-	//printf("file_name: %s\n", file->file_name);
 	if (ft_check_ambig(file))
 	{
 		file->ambiguous_name = ft_strdup(value);
@@ -74,7 +74,7 @@ int	ft_is_valid_redirection(t_token_type type)
 int	ft_check_redirection(t_tokens_list *tokens)
 {
 	t_tokens_list	*tmp;
-	
+
 	if (!tokens)
 		return (0);
 	tmp = tokens;
@@ -95,7 +95,7 @@ t_command_files	*ft_create_files(t_tokens_list **tokens, t_env_list *env_list)
 		return (NULL);
 	if (!ft_check_redirection(*tokens))
 		return (NULL);
-	files = ft_calloc(1,sizeof(t_command_files));
+	files = ft_calloc(1, sizeof(t_command_files));
 	if (!files)
 		return (NULL);
 	files->fd = -1;
@@ -105,10 +105,7 @@ t_command_files	*ft_create_files(t_tokens_list **tokens, t_env_list *env_list)
 		if (ft_is_valid_redirection((*tokens)->type))
 		{
 			ft_handle_redirection(files, tokens, env_list);
-
-			// if (*tokens)
-			// 	(*tokens) = (*tokens)->next;
-			break;
+			break ;
 		}
 		if (*tokens)
 			(*tokens) = (*tokens)->next;

@@ -6,13 +6,14 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 11:17:11 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/17 12:32:06 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/17 22:45:15 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-t_command_files	*ft_add_files(t_command_files **files_list, t_tokens_list *tokens, t_env_list *env_list)
+t_command_files	*ft_add_files(t_command_files **files_list,
+	t_tokens_list *tokens, t_env_list *env_list)
 {
 	t_command_files	*files;
 	t_tokens_list	*tmp;
@@ -31,7 +32,7 @@ t_command_files	*ft_add_files(t_command_files **files_list, t_tokens_list *token
 				files->index = index;
 			ft_files_addback(files_list, files);
 		}
-		if ( tmp && tmp->type == PIPE)
+		if (tmp && tmp->type == PIPE)
 			index++;
 		if (tmp)
 			tmp = tmp->next;
