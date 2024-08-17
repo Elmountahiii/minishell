@@ -1,31 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_clean_pipes.c                                   :+:      :+:    :+:   */
+/*   ft_clean_files.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/10 12:31:14 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/17 16:09:59 by yel-moun         ###   ########.fr       */
+/*   Created: 2024/08/14 11:53:34 by yel-moun          #+#    #+#             */
+/*   Updated: 2024/08/17 15:09:33 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	ft_clean_pipes(t_pipe **list_pipes)
+void	ft_clean_files(t_command_files **files)
 {
-	t_pipe	*tmp;
+	t_command_files	*tmp;
 
-	if (!list_pipes)
+	if (!files || !(*files))
 		return ;
-	if (!(*list_pipes))
-		return ;
-	while ((*list_pipes))
+	while ((*files))
 	{
-		tmp = (*list_pipes);
-		close(tmp->fd[0]);
-		close(tmp->fd[1]);
-		(*list_pipes) = (*list_pipes)->next;
-		free(tmp);
+		tmp = (*files)->next;
+		close((*files)->fd);
+		free((*files)->file_name);
+		free((*files)->ambiguous_name);
+		if ((*files)->files)
+			ft_clean_array((*files)->files);
+		free((*files));
+		(*files) = tmp;
 	}
 }

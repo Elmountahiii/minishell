@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 15:58:52 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/16 12:23:23 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/17 15:53:34 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,13 @@ void handle_sigint(int sig)
 void	ft_heredoc_lisente(t_heredoc *heredoc_list, t_env_list *env_list)
 {
 	char	*line;
+	char	*tmp_expand;
 
 	if (!heredoc_list)
 		return ;
 	line = NULL;
+	tmp_expand = NULL;
 	heredoc_list->fd = open(heredoc_list->file_name, O_CREAT | O_WRONLY | O_TRUNC, 0644);
-	// printf("dil = '%s'\n", heredoc_list->dil);
 	if (heredoc_list->fd < 0)
 		return ;
 	signal(SIGINT, handle_sigint);
@@ -42,10 +43,15 @@ void	ft_heredoc_lisente(t_heredoc *heredoc_list, t_env_list *env_list)
 			break ;
 		}
 		if (heredoc_list->expand_line)
-			line = ft_expand(line, env_list);
-		write(heredoc_list->fd, line, ft_strlen(line));
+		{
+			tmp_expand = ft_expand(line, env_list);
+		}else
+			tmp_expand = ft_strdup(line);
+		write(heredoc_list->fd, tmp_expand, ft_strlen(tmp_expand));
 		write(heredoc_list->fd, "\n", 1);
 		free(line);
+		free(tmp_expand);
+		tmp_expand = NULL;
 	}
 	exit(0);
 }

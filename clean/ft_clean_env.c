@@ -1,31 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_clean_pipes.c                                   :+:      :+:    :+:   */
+/*   ft_clean_env.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/10 12:31:14 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/17 16:09:59 by yel-moun         ###   ########.fr       */
+/*   Created: 2024/08/13 22:11:04 by yel-moun          #+#    #+#             */
+/*   Updated: 2024/08/17 12:22:00 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	ft_clean_pipes(t_pipe **list_pipes)
+void	ft_clean_env(t_env_list *env_list)
 {
-	t_pipe	*tmp;
+	t_env_list	*tmp;
 
-	if (!list_pipes)
-		return ;
-	if (!(*list_pipes))
-		return ;
-	while ((*list_pipes))
+	while (env_list)
 	{
-		tmp = (*list_pipes);
-		close(tmp->fd[0]);
-		close(tmp->fd[1]);
-		(*list_pipes) = (*list_pipes)->next;
-		free(tmp);
+		tmp = env_list->next;
+		free(env_list->key);
+		free(env_list->value);
+		free(env_list);
+		env_list = tmp;
 	}
 }

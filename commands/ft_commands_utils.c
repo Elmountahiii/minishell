@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 17:55:03 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/16 16:27:41 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/17 13:39:46 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,13 +44,14 @@ char	*ft_join_token_value(t_tokens_list **tokens,t_env_list *env_list)
 		return (NULL);
 	value = strdup("");
 	expand = NULL;
+	tmp = NULL;
 	while (*tokens)
 	{
 		if (ft_check_word_valid((*tokens)->type))
 		{
 			if ((*tokens)->type == SINGLE_QUOTE_WORD || (*tokens)->type == DOUBLE_QUOTE_WORD)
 			{
-				tmp = strdup(ft_remove_quotes((*tokens)->value));		
+				tmp = ft_remove_quotes((*tokens)->value);		
 			}
 			else
 				tmp = strdup((*tokens)->value);
@@ -59,11 +60,16 @@ char	*ft_join_token_value(t_tokens_list **tokens,t_env_list *env_list)
 			else
 			{
 				expand = ft_expand(tmp, env_list);
-				if (ft_strlen(expand) == 0 && (*tokens)->type != DOUBLE_QUOTE_WORD )
+				
+				if (ft_strlen(expand) == 0 && (*tokens)->type != DOUBLE_QUOTE_WORD)
+				{
+					free(expand);
+					free(tmp);
+					free(value);
 					return (NULL);
+				}
 				value = ft_strjoin_free(value, expand);
 				free(expand);
-			
 			}
 			free(tmp);
 		}else

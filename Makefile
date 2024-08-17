@@ -6,7 +6,7 @@ CC = cc
 READ_LIB= #-L/goinfre/$(USER)/homebrew/opt/readline/lib
 READ_INCL= #-I/goinfre/$(USER)/homebrew/opt/readline/include
 
-CFLAGS = -Wall -Wextra -Werror #-g -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -g -fsanitize=address
 READLINE = -lreadline -lncurses
 
 # files_files = ft_create_file_node.c ft_files_addback.c ft_files_last.c ft_hanlde_file_name.c ft_heredoc_last.c ft_select_files.c ft_open_files.c
@@ -28,7 +28,7 @@ utils_files = ft_array_len.c ft_remove_quotes.c ft_get_expand_split.c
 env_files = get_env_list.c add_back_for_env.c ft_print_env_list.c
 files_files = ft_add_files.c ft_create_file.c ft_files_addback.c ft_print_files.c ft_open_files.c ft_check_ambig.c
 commands_files = ft_command_addback.c ft_create_command.c ft_print_command_args.c ft_add_commands.c ft_print_commands.c ft_commands_utils.c ft_command_assign_fds.c
-clean_files = ft_clean_array.c
+clean_files = ft_clean_tokens.c ft_clean_array.c ft_clean.c ft_clean_commands.c ft_clean_files.c  ft_clean_heredoc.c ft_clean_pipes.c ft_clean_env.c
 
 builtins_files = cd.c echo.c env.c exit.c export.c ft_export_env.c pwd.c unset.c 
 pipes_files = give_list_pipes.c

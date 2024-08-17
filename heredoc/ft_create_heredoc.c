@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 12:30:01 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/15 18:08:28 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/17 15:57:34 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	ft_handle_heredoc(t_heredoc *heredoc, t_tokens_list **tokens, int list_size
 	else
 		heredoc->expand_line = false;
 	if ((*tokens)->type == SINGLE_QUOTE_WORD || (*tokens)->type == DOUBLE_QUOTE_WORD)
-		heredoc->dil = strdup(ft_remove_quotes((*tokens)->value));
+		heredoc->dil = ft_remove_quotes((*tokens)->value);
 	else
 		heredoc->dil = strdup((*tokens)->value);
 }

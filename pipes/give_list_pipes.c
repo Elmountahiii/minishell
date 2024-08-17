@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   give_list_pipes.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aet-tale <aet-tale@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/26 17:39:02 by aet-tale          #+#    #+#             */
-/*   Updated: 2024/08/05 11:06:23 by aet-tale         ###   ########.fr       */
+/*   Updated: 2024/08/17 16:09:39 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ t_pipe	*give_node_pipe(void)
 		return (NULL);
 	if (pipe(node->fd) == -1)
 	{
-		perror("pipe");
+		free(node);
 		return (NULL);
 	}
 	node->next = NULL;

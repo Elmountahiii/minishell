@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 12:23:01 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/15 14:46:19 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/17 13:29:41 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,15 @@
 
 void	ft_clean_array(char **array)
 {
+	int	i;
+
 	if (!array)
 		return ;
-	while (*array)
+	i = 0;
+	while (array[i])
 	{
-		free(*array);
-		array++;
+		free(array[i]);
+		i++;
 	}
-	//free(array);
+	free(array);
 }

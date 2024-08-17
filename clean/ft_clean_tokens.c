@@ -1,31 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_clean_pipes.c                                   :+:      :+:    :+:   */
+/*   ft_clean_tokens.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/10 12:31:14 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/17 16:09:59 by yel-moun         ###   ########.fr       */
+/*   Created: 2024/08/13 13:08:25 by yel-moun          #+#    #+#             */
+/*   Updated: 2024/08/17 15:03:06 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	ft_clean_pipes(t_pipe **list_pipes)
+void	ft_clean_tokens(t_tokens_list **tokens_list)
 {
-	t_pipe	*tmp;
+    t_tokens_list	*tmp;
 
-	if (!list_pipes)
-		return ;
-	if (!(*list_pipes))
-		return ;
-	while ((*list_pipes))
-	{
-		tmp = (*list_pipes);
-		close(tmp->fd[0]);
-		close(tmp->fd[1]);
-		(*list_pipes) = (*list_pipes)->next;
-		free(tmp);
-	}
+    if (!tokens_list || !(*tokens_list))
+        return ;
+
+    while ((*tokens_list))
+    {
+        tmp = (*tokens_list)->next;
+        free((*tokens_list)->value);
+        (*tokens_list)->value = NULL;
+        free((*tokens_list));
+        (*tokens_list) = tmp;
+    }
 }

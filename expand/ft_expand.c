@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 15:09:06 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/15 19:35:51 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/17 13:27:41 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,9 +109,6 @@ char	*ft_expand(char *original, t_env_list *env)
 	if (!original)
 		return (NULL);
 	keys = ft_split_keys(original);
-	// ft_print_array(keys);
-	// printf("final len : %d\n", ft_count_expand_len(original, keys, env));
-	// return (NULL);
 	expanded = calloc(ft_count_expand_len(original, keys, env) + 1, sizeof(char));
 	if (!expanded)
 		return (NULL);
@@ -119,7 +116,6 @@ char	*ft_expand(char *original, t_env_list *env)
 	index = 0;
 	j = 0;
 	tmp = NULL;
-	
 	while (original[i])
 	{
 		if (original[i] == '$')
@@ -128,7 +124,6 @@ char	*ft_expand(char *original, t_env_list *env)
 			if (original[i] && original[i] == '?')
 			{
 				tmp = ft_itoa(exit_status);
-	
 				j = ft_join_key(expanded, tmp, j);
 				i++;
 				index++;
@@ -136,7 +131,6 @@ char	*ft_expand(char *original, t_env_list *env)
 			else
 			{
 				tmp = ft_get_value(keys[index], env);
-				
 				j = ft_join_key(expanded, tmp, j);
 				if(original[i])
 					i += ft_strlen(keys[index++]);
@@ -151,5 +145,6 @@ char	*ft_expand(char *original, t_env_list *env)
 		}
 	}
 	expanded[j] = '\0';
+	ft_clean_array(keys);
 	return (expanded);
 }

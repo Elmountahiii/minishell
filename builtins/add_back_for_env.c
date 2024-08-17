@@ -26,7 +26,7 @@ t_env_list	*creat_env_node(char *str)
 
 	if (ft_strncmp(str, "_=", 2) == 0)
 		return (NULL);
-	node = malloc(sizeof(t_env_list));
+	node = ft_calloc(1,sizeof(t_env_list));
 	equal_index = ft_str_chr_index(str, '=');
 	tmp = NULL;
 	if (equal_index < 0)

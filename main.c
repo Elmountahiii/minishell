@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 09:30:38 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/16 16:26:46 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/17 16:25:33 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,9 @@ int	main(int argc, char *argv[], char *envp[])
 	env_list = get_env_list(envp);
 	signal(SIGINT,	sig_handler);
 	signal(SIGQUIT, SIG_IGN);
+	be_executed = give_executed();
+	be_executed->env_list = &env_list;
+	//atexit(ft_check_leaks);
 	while (1)
 	{
 		line = readline("minishell$ ");
@@ -76,30 +79,32 @@ int	main(int argc, char *argv[], char *envp[])
 			break ;
 		add_history(line);
 		tokens = ft_split_line(line);
-		be_executed = give_executed();
-		be_executed->env_list = &env_list;
 		be_executed->tokens_list = ft_add_tokens(tokens);
 		if (ft_check_syntax(be_executed->tokens_list))
 		{
+			free(line);
+			ft_clean(be_executed,tokens);
 			exit_status = 258;
 			continue ;
 		}
 		be_executed->heredoc_list = ft_add_heredoc(&be_executed->heredoc_list, be_executed->tokens_list);
 		ft_open_heredoc(be_executed->heredoc_list,env_list);
 		be_executed->files_list = ft_add_files(&be_executed->files_list, be_executed->tokens_list, env_list);
-		//printf("\nhere\n");
 		ft_open_files(be_executed->files_list);
-		//ft_printf_files(be_executed->files_list);
-		//ft_print_tokens(be_executed->tokens_list);
 		be_executed->commands_list = ft_add_command(&be_executed->commands_list, be_executed->tokens_list,env_list);
 		ft_command_assign_fds(be_executed->commands_list, be_executed->files_list, be_executed->heredoc_list);
 		fill_command_paths(be_executed->commands_list, env_list);
 		be_executed->list_pipes =  give_list_pipes(be_executed->tokens_list);
 		be_executed->list_size = count_list(be_executed->commands_list);
-		// ft_print_commands(be_executed->commands_list);
-		// continue ;
 		execute_things(be_executed);
+
+		free(line);
+		ft_clean(be_executed,tokens);
+	//	system("leaks minishell");
 	}
+	//ft_clean_env(env_list);	
+	be_executed->env_list = NULL;
+	free(be_executed);
 	return (exit_status);
 }
 
