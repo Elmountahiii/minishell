@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 18:24:42 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/16 15:26:24 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/17 16:52:57 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,10 +68,11 @@ int	ft_check_herdoc_syntax(t_tokens_list *list)
 
 int	ft_check_word_syntax(t_tokens_list *token)
 {
-	int len;
+	int	len;
 
 	len = ft_strlen(token->value);
-	if (token && (token->type == SINGLE_QUOTE_WORD ||  token->type == DOUBLE_QUOTE_WORD))
+	if (token && (token->type == SINGLE_QUOTE_WORD
+			|| token->type == DOUBLE_QUOTE_WORD))
 	{
 		if (len == 1)
 			return (syntax_error('n'));
@@ -91,7 +92,8 @@ int	ft_check_syntax(t_tokens_list *list)
 	ft_skip_tokens_spaces(&tmp);
 	if (tmp && tmp->type == PIPE)
 	{
-		ft_putstr_fd("minishell: syntax error near unexpected token `|'\n", STDERR_FILENO);
+		ft_putstr_fd("minishell: syntax error near unexpected token `|'\n",
+			STDERR_FILENO);
 		return (1);
 	}
 	while (tmp)
