@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 21:00:24 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/16 15:43:00 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/17 16:43:32 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ char	*ft_remove_quotes(char *str)
 	int		i;
 	int		start;
 	int		end;
-	
+
 	if (!str)
 		return (NULL);
 	start = 0;

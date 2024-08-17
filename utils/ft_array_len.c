@@ -6,15 +6,15 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 19:23:50 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/15 13:39:14 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/17 16:43:12 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int ft_array_len(char **array)
+int	ft_array_len(char **array)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (array && array[i])

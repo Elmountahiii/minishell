@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 22:39:04 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/17 15:05:15 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/17 16:47:11 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,9 @@
 void	ft_clean_heredoc(t_heredoc **heredoc)
 {
 	t_heredoc	*tmp;
-	
+
 	if (!heredoc || !(*heredoc))
 		return ;
-
 	while ((*heredoc))
 	{
 		tmp = (*heredoc)->next;
