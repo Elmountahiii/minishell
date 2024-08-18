@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 09:30:52 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/18 15:45:52 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/18 16:33:56 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,7 +183,7 @@ t_heredoc	*ft_create_heredoc(t_tokens_list **tokens,int list_size);
 int			ft_count_heredoc(t_heredoc **heredoc_list);
 void		ft_heredoc_addback(t_heredoc **lst, t_heredoc *new);
 void		ft_print_heredoc(t_heredoc *heredoc);
-void		ft_open_heredoc(t_heredoc *heredoc_list, t_env_list *env_list);
+int			ft_open_heredoc(t_heredoc *heredoc_list, t_env_list *env_list);
 int			ft_heredoc_done(t_heredoc *heredoc_list);
 void		sig_handler(int sig);
 

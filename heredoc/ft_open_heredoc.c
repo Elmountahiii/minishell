@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_open_heredoc.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aet-tale <aet-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 15:58:52 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/17 20:32:16 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/18 12:54:53 by aet-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,14 +56,14 @@ void	ft_heredoc_lisente(t_heredoc *heredoc_list, t_env_list *env_list)
 	exit(0);
 }
 
-void	ft_open_heredoc(t_heredoc *heredoc_list, t_env_list *env_list)
+int	ft_open_heredoc(t_heredoc *heredoc_list, t_env_list *env_list)
 {
 	t_heredoc	*tmp;
 	pid_t		pid;
 	int			status;
 
 	if (!heredoc_list)
-		return ;
+		return (0);
 	tmp = heredoc_list;
 	signal(SIGINT, SIG_IGN);
 	while (tmp)
@@ -72,7 +72,7 @@ void	ft_open_heredoc(t_heredoc *heredoc_list, t_env_list *env_list)
 		if (pid == -1)
 		{
 			perror("fork");
-			return ;
+			return (2);
 		}
 		if (pid == 0)
 		{
@@ -85,7 +85,7 @@ void	ft_open_heredoc(t_heredoc *heredoc_list, t_env_list *env_list)
 			if (WEXITSTATUS(status) == 11)
 			{
 				tmp->done = false;
-				return ;
+				return (1);
 			}
 		}
 		close(tmp->fd);
@@ -93,4 +93,5 @@ void	ft_open_heredoc(t_heredoc *heredoc_list, t_env_list *env_list)
 		tmp = tmp->next;
 	}
 	signal(SIGINT, sig_handler);
+	return (0);
 }
