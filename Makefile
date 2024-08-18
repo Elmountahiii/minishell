@@ -30,7 +30,7 @@ files_files = ft_add_files.c ft_create_file.c ft_files_addback.c ft_print_files.
 commands_files = ft_command_addback.c ft_create_command.c ft_print_command_args.c ft_add_commands.c ft_print_commands.c ft_commands_utils.c ft_command_assign_fds.c
 clean_files = ft_clean_tokens.c ft_clean_array.c ft_clean.c ft_clean_commands.c ft_clean_files.c  ft_clean_heredoc.c ft_clean_pipes.c ft_clean_env.c
 
-builtins_files = cd.c echo.c env.c exit.c export.c ft_export_env.c pwd.c unset.c 
+builtins_files = cd.c echo.c env.c exit.c export.c ft_export_env.c pwd.c unset.c count_array.c
 pipes_files = give_list_pipes.c
 execution_files = assign_in_out.c count_list.c execute_commmand.c execute_things.c fill_command_paths.c ft_is_executed.c ft_is_path.c init_execute.c is_built_in.c
 

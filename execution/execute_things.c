@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_things.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aet-tale <aet-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 11:35:05 by aet-tale          #+#    #+#             */
-/*   Updated: 2024/08/15 18:58:00 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/18 15:08:46 by aet-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	execute_built_in(t_command	*command, t_be_executed	*to_execute, int procss)
 	if (command->fd_out != STDOUT_FILENO)
 		dup2(command->fd_out, STDOUT_FILENO);
 	if (ft_strcmp(command->command_args[0], "echo") == 0)
-		our_echo(command, to_execute, procss);
+		our_echo(command, procss);
 	else if (ft_strcmp(command->command_args[0], "cd") == 0)
 		our_cd(command, to_execute, procss);
 	else if (ft_strcmp(command->command_args[0], "pwd") == 0)

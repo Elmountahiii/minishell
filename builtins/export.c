@@ -6,16 +6,29 @@
 /*   By: aet-tale <aet-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 16:22:32 by aet-tale          #+#    #+#             */
-/*   Updated: 2024/08/13 16:22:33 by aet-tale         ###   ########.fr       */
+/*   Updated: 2024/08/15 12:26:42 by aet-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
+void	add_back_env(char	*key, char *val, t_env_list **env, t_env_list *last)
+{
+	t_env_list	*new_node;
+
+	new_node = malloc(sizeof(t_env_list));
+	new_node->value = val;
+	new_node->key = key;
+	new_node->next = NULL;
+	if (!last)
+		*env = new_node;
+	else
+		last->next = new_node;
+}
+
 void	add_to_env(char	*key, char	*value, t_env_list	**env_list)
 {
 	t_env_list	*tmp;
-	t_env_list	*new_node;
 	t_env_list	*last_node;
 	int			in_list;
 
@@ -34,96 +47,52 @@ void	add_to_env(char	*key, char	*value, t_env_list	**env_list)
 		tmp = tmp->next;
 	}
 	if (!in_list)
-	{
-		new_node = malloc(sizeof(t_env_list));
-		new_node->value = value;
-		new_node->key = key;
-		new_node->next = NULL;
-		if (!last_node)
-			*env_list = new_node;
-		else
-			last_node->next = new_node;
-	}
+		add_back_env(key, value, env_list, last_node);
 }
 
-int count_array_str(char **array)
-{
-	int i;
-
-	i = 0;
-	while (array && array[i])
-		i++;
-	return (i);
-}
 int	check_every_arg(char *arg)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (!ft_isalpha(arg[0]) && arg[0] != '_' )
-		return 1;
+		return (1);
 	while (arg[i])
 	{
 		if (!ft_isalnum(arg[i]) && arg[i] != '_')
-			return 1;
+			return (1);
 		i++;
 	}
-	return 0;
+	return (0);
 }
 
-int is_in_list(char *key, t_env_list *env_list)
+void	add_var(char *key_value, t_env_list **env, int *exit_stt, int procss)
 {
-	t_env_list	*tmp;
-
-	tmp = env_list;
-	while (tmp)
-	{
-		if (!ft_strcmp(key, tmp->key))
-			return 1;
-		tmp = tmp->next;
-	}
-	return 0;
-}
-
-void add_every_var(char *key_value, t_env_list **env_list, int *exit_stt, int procss)
-{
-	char 	*key;
-	char 	*value;
-	char 	*equal_ptr;
+	char	*key;
+	char	*value;
+	char	*equal_ptr;
 
 	equal_ptr = ft_strchr(key_value, '=');
 	if (equal_ptr == NULL)
 	{
 		key = ft_strdup(key_value);
 		value = NULL;
-	}else {
-		key = ft_substr_orig(key_value, 0, ft_strchr(key_value, '=') - key_value);
-		value = ft_strdup(ft_strchr(key_value, '=')) + 1;
 	}
-	if (is_in_list(key, *env_list) && !value)
+	else
+	{
+		key = ft_substr_orig(key_value, 0,
+				ft_strchr(key_value, '=') - key_value);
+		value = ft_strdup(ft_strchr(key_value, '=') + 1);
+	}
+	if (is_in_list(key, *env) && !value)
 	{
 		free(key);
 		return ;
 	}
 	if (!check_every_arg(key))
-		add_to_env(key, value, env_list);
+		add_to_env(key, value, env);
 	else
-	{
-		
-		write(2, "minishell: export: `", 20);
-		write(2, key, ft_strlen(key));
-		write(2, "': not a valid identifier\n", 26);
-		if (procss)
-		{
-			if (*exit_stt == 0)
-				*exit_stt = 1;
-		}
-		else
-		{
-			if (exit_status == 0)
-				exit_status = 1;
-		}
-	}
+		error_handler(exit_stt, key, value, procss);
 }
 
 void	ft_export(t_command *command, t_be_executed	*to_execute, int procss)
@@ -131,7 +100,7 @@ void	ft_export(t_command *command, t_be_executed	*to_execute, int procss)
 	int			i;
 	int			exit_sts;
 	t_env_list	**env_list;
-	char 		**args;
+	char		**args;
 
 	exit_sts = 0;
 	i = 1;
@@ -143,14 +112,11 @@ void	ft_export(t_command *command, t_be_executed	*to_execute, int procss)
 		if (procss)
 			exit(0);
 		else
-		{
 			exit_status = 0;
-			return ;
-		}
 	}
 	while (args[i])
 	{
-		add_every_var(args[i], to_execute->env_list, &exit_sts, procss);
+		add_var(args[i], to_execute->env_list, &exit_sts, procss);
 		i++;
 	}
 	if (procss)

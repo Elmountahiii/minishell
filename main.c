@@ -6,7 +6,7 @@
 /*   By: aet-tale <aet-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 09:30:38 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/18 14:41:32 by aet-tale         ###   ########.fr       */
+/*   Updated: 2024/08/18 16:50:45 by aet-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,8 +91,6 @@ int	main(int argc, char *argv[], char *envp[])
 		be_executed->heredoc_list = ft_add_heredoc(&be_executed->heredoc_list, be_executed->tokens_list);
 		if (ft_open_heredoc(be_executed->heredoc_list, env_list))
 		{
-			// close_heredocs(be_executed->heredoc_list);
-			// ft_clean_tokens(&be_executed->tokens_list);
 			ft_clean(be_executed, tokens);
 			exit_status = 1;
 			continue ;
@@ -103,6 +101,12 @@ int	main(int argc, char *argv[], char *envp[])
 		ft_command_assign_fds(be_executed->commands_list, be_executed->files_list, be_executed->heredoc_list);
 		fill_command_paths(be_executed->commands_list, env_list);
 		be_executed->list_pipes = give_list_pipes(be_executed->tokens_list);
+		if (!be_executed->list_pipes && count_list(be_executed->commands_list) > 1)
+		{
+			ft_clean(be_executed, tokens);
+			exit_status = 1;
+			continue ;
+		}
 		be_executed->list_size = count_list(be_executed->commands_list);
 		execute_things(be_executed);
 		free(line);

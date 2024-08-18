@@ -6,7 +6,7 @@
 /*   By: aet-tale <aet-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 14:53:57 by aet-tale          #+#    #+#             */
-/*   Updated: 2024/08/13 16:22:06 by aet-tale         ###   ########.fr       */
+/*   Updated: 2024/08/15 12:49:08 by aet-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ int	ft_isdigit(int c)
 	return (0);
 }
 
-int check_if_number(char *str)
+int	check_if_number(char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (str[0] == '-' || str[0] == '+')
@@ -38,8 +38,6 @@ int check_if_number(char *str)
 void	our_exit(t_command *command, t_be_executed	*to_execute, int procss)
 {
 	(void )to_execute;
-	// if (!procss)
-	// 	printf("exit\n");
 	if (count_array_str(command->command_args) == 1)
 		exit(exit_status);
 	else if (!check_if_number(command->command_args[1]))
@@ -55,8 +53,7 @@ void	our_exit(t_command *command, t_be_executed	*to_execute, int procss)
 		if (procss)
 			exit(1);
 		exit_status = 1;
-	}else
-	{
-		exit(ft_atoi(command->command_args[1]));
 	}
+	else
+		exit(ft_atoi(command->command_args[1]));
 }
