@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 15:09:06 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/17 20:30:18 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/18 13:35:37 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	*ft_get_value(char *key, t_env_list *env)
 	{
 		if (ft_strlen(key) == 1 && key[0] == '@')
 			return (ft_strdup("@"));
-		return (ft_strdup(key + 1));	
+		return (ft_strdup(key + 1));
 	}
 	while (env)
 	{
@@ -35,48 +35,33 @@ char	*ft_get_value(char *key, t_env_list *env)
 	return (NULL);
 }
 
-
 int	ft_count_expand_len(char *str, char **keys, t_env_list *env)
 {
 	int	i;
 	int	len;
-	int index;
-	char *tmp;
-	
-	i = 0;
-	len = 0;
-	index = 0;
-	tmp = NULL;
+	int	index;
+
+	ft_init_value(&i, &len, &index);
 	while (str[i])
 	{
-		if (str[i] == '$')
+		if (str[i] == '$' )
 		{
 			i++;
-			if (str[i] && str[i] == '?')
-			{
-				i++;
-				tmp = ft_itoa(exit_status);
-				len += ft_strlen(tmp);
-				index++;
-			}
+			if (str[i] && str[i] == '?' && i++)
+				ft_count_1(&len, &index);
 			else
 			{
-			tmp = ft_get_value(keys[index], env);
-			len += ft_strlen(tmp);
-			if(str[i])
-				i += ft_strlen(keys[index++]);
+				ft_count_2(keys[index], env, &len);
+				if (str[i])
+					i += ft_strlen(keys[index++]);
 			}
-			free(tmp);
-			tmp = NULL;
 		}
 		else
-		{
-			len++;
-			i++;
-		}
+			ft_increment(&i, &len);
 	}
 	return (len);
 }
+
 int	ft_join_key(char *buffer, char *value, int index)
 {
 	int	i;
@@ -86,65 +71,59 @@ int	ft_join_key(char *buffer, char *value, int index)
 	j = 0;
 	if (!value || !buffer)
 		return (i);
-	
 	while (value[j])
 	{
 		buffer[i] = value[j];
 		i++;
 		j++;
 	}
+	free(value);
 	return (i);
 }
 
-
-char	*ft_expand(char *original, t_env_list *env)
+void	process_expansion(char *original, char **keys,
+	char *buffer, t_env_list *env)
 {
-	char	**keys;
-	char	*expanded;
 	int		i;
 	int		index;
-	int 	j;
-	char *tmp;
+	int		j;
 
-	if (!original)
-		return (NULL);
-	keys = ft_split_keys(original);
-	expanded = ft_calloc(ft_count_expand_len(original, keys, env) + 1, sizeof(char));
-	if (!expanded)
-		return (NULL);
 	i = 0;
 	index = 0;
 	j = 0;
-	tmp = NULL;
 	while (original[i])
 	{
 		if (original[i] == '$')
 		{
 			i++;
 			if (original[i] && original[i] == '?')
-			{
-				tmp = ft_itoa(exit_status);
-				j = ft_join_key(expanded, tmp, j);
-				i++;
-				index++;
-			}
+				ft_handle_expand_1(buffer, &i, &j, &index);
 			else
 			{
-				tmp = ft_get_value(keys[index], env);
-				j = ft_join_key(expanded, tmp, j);
-				if(original[i])
+				j = ft_join_key(buffer, ft_get_value(keys[index], env), j);
+				if (original[i])
 					i += ft_strlen(keys[index++]);
 			}
-			free(tmp);
-			tmp = NULL;
-		}else
-		{
-			expanded[j] = original[i];
-			j++;
-			i++;
 		}
+		else
+			buffer[j++] = original[i++];
 	}
-	expanded[j] = '\0';
+	buffer[j] = '\0';
+}
+
+char	*ft_expand(char *original, t_env_list *env)
+{
+	char	**keys;
+	char	*expanded;
+
+	if (!original)
+		return (NULL);
+	keys = ft_split_keys(original);
+	expanded = ft_calloc(ft_count_expand_len(original, keys, env) + 1,
+			sizeof(char));
+	if (!expanded)
+		return (NULL);
+	process_expansion(original, keys, expanded, env);
 	ft_clean_array(keys);
 	return (expanded);
 }

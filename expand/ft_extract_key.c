@@ -6,15 +6,17 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 15:15:15 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/17 20:47:02 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/18 13:58:11 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int ft_is_env_char(char c)
+int	ft_is_env_char(char c)
 {
-	if (c == ' ' || c == '@' || c == '-' || c == '.' || c == '$' || c == '\'' || c == '\"')
+	if (c == ' ' || c == '@' || c == '-'
+		|| c == '.' || c == '$' || c == '\''
+		|| c == '\"')
 		return (1);
 	return (0);
 }
@@ -46,23 +48,30 @@ char	*ft_handel_dollar_sign(char *str)
 	return (new_str);
 }
 
+int	ft_count_len(char *str)
+{
+	int	i;
+
+	i = 0;
+	if (str[0] == '@')
+		i++;
+	while (str[i] && !ft_is_env_char(str[i]))
+		i++;
+	return (i);
+}
+
 char	*ft_extract_key(char *str)
 {
 	char	*key;
 	int		i;
 
-	i = 0;
 	if (!str)
 		return (NULL);
 	if (str[0] == '$')
 		return (ft_handel_dollar_sign(str));
-	if (str[0] == '@')
-		i++;
-	while (str[i] && !ft_is_env_char(str[i]))
-		i++;
-	if (i == 0)
+	if (ft_count_len(str) == 0)
 		return (NULL);
-	key = ft_calloc(i + 1, sizeof(char));
+	key = ft_calloc(ft_count_len(str) + 1, sizeof(char));
 	if (!key)
 		return (NULL);
 	if (str[0] == '@')
@@ -71,12 +80,11 @@ char	*ft_extract_key(char *str)
 		i = 1;
 	}
 	else
-	i = 0;
+		i = 0;
 	while (str[i] && !ft_is_env_char(str[i]))
 	{
 		key[i] = str[i];
 		i++;
 	}
-	key[i] = '\0';
-	return (key);
+	return (key[i] = '\0', key);
 }

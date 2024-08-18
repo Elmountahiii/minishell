@@ -23,7 +23,7 @@ ft_print_array.c ft_split_env_utils.c
 tokens_files = ft_create_token.c ft_tokens_addback.c  ft_add_tokens.c ft_print_tokens.c ft_token_skip.c
 syntax_files = ft_check_syntax.c ft_check_syntax_2.c 
 heredoc_files = ft_add_heredoc.c ft_create_heredoc.c ft_heredoc_len.c ft_heredoc_addback.c ft_printf_heredoc.c ft_open_heredoc.c ft_heredoc_done.c
-expand_files = ft_expand.c ft_extract_key.c ft_get_expand_keys.c 
+expand_files = ft_expand.c ft_extract_key.c ft_get_expand_keys.c ft_expand_utils.c 
 utils_files = ft_array_len.c ft_remove_quotes.c ft_get_expand_split.c
 env_files = get_env_list.c add_back_for_env.c ft_print_env_list.c
 files_files = ft_add_files.c ft_create_file.c ft_files_addback.c ft_print_files.c ft_open_files.c ft_check_ambig.c

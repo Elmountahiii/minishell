@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 15:11:38 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/17 20:30:43 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/18 13:51:00 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,17 +28,22 @@ int	ft_keys_count(char *value)
 	return (count);
 }
 
-char **ft_split_keys(char *value)
+void	init_values(int *i, int *index)
+{
+	*i = 0;
+	*index = 0;
+}
+
+char	**ft_split_keys(char *value)
 {
 	char	**keys;
 	int		i;
-	int 	index;
+	int		index;
 
 	keys = ft_calloc(ft_keys_count(value) + 1, sizeof(char *));
 	if (!keys)
 		return (NULL);
-	i = 0;
-	index = 0;
+	init_values(&i, &index);
 	while (value && value[i])
 	{
 		if (value[i] == '$')
@@ -46,17 +51,14 @@ char **ft_split_keys(char *value)
 			i++;
 			if (!value[i])
 			{
-				keys[index] = ft_strdup("$");
-				index++;
+				keys[index++] = ft_strdup("$");
 				break ;
 			}
 			keys[index] = ft_extract_key(&value[i]);
-			i += ft_strlen(keys[index]);
-			index++;
+			i += ft_strlen(keys[index++]);
 		}
 		else
 			i++;
 	}
-	keys[index] = NULL;
-	return (keys);
+	return (keys[index] = NULL, keys);
 }

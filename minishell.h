@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 09:30:52 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/17 15:42:46 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/18 13:27:07 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,6 +169,13 @@ void	ft_skip_tokens_spaces(t_tokens_list **tokens);
 char	*ft_expand(char *original, t_env_list *env);
 char	*ft_extract_key(char *str);
 char	**ft_split_keys(char *value);
+int		ft_join_key(char *buffer, char *value, int index);
+char	*ft_get_value(char *key, t_env_list *env);
+void	ft_handle_expand_1(char *buffer, int *i, int *j , int *index);
+void	ft_count_1(int *len, int *index);
+void	ft_count_2(char *value, t_env_list *env, int *len);
+void	ft_init_value(int* i, int* j, int* index);
+void	ft_increment(int *i, int *j);
 
 // here doc functions
 t_heredoc 	*ft_add_heredoc(t_heredoc **heredoc_list, t_tokens_list *tokens);
