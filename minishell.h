@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 09:30:52 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/18 16:33:56 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/18 17:08:27 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -257,7 +257,7 @@ void			close_pipes(t_pipe *list_pipes);
 // builtins functions
 void		our_pwd(t_command *command, t_be_executed	*to_execute, int procss);
 void		our_env(t_command *command, t_be_executed	*to_execute, int procss);
-void		our_echo(t_command *command, t_be_executed	*to_execute, int procss);
+void		our_echo(t_command *command, int procss);
 int			ft_strlen(char *s);
 void		add_back_for_env(t_env_list **list, char *str);
 t_env_list	*get_env_list(char **env);
@@ -272,7 +272,9 @@ void		close_other_pipes(t_command	*command, t_pipe *list_pipes);
 void		add_to_env(char	*key, char	*value, t_env_list	**env_list);
 int			check_every_arg(char *arg);
 int			count_array_str(char **array);
-
+void		error_handler(int *exit_stt, char *key, char *value, int procss);
+int			is_in_list(char *key, t_env_list *env_list);
+int			count_array_str(char **array);
 
 
 

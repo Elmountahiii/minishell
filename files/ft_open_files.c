@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 16:20:14 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/17 22:53:16 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/18 17:57:55 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ void	ft_open_files(t_command_files *files)
 			tmp->fd = open(tmp->file_name, O_CREAT | O_WRONLY | O_APPEND, 0644);
 		if (tmp->fd < 0)
 		{
+			ft_putstr_fd("minishell: ", 2);
+			perror(tmp->file_name);
 			ft_skip_to_next_command(&tmp);
 			continue ;
 		}

@@ -6,15 +6,15 @@
 /*   By: aet-tale <aet-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 18:28:32 by aet-tale          #+#    #+#             */
-/*   Updated: 2024/08/13 16:22:46 by aet-tale         ###   ########.fr       */
+/*   Updated: 2024/08/15 12:49:44 by aet-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	ft_export_env(t_env_list	*env_list, int procss)
+void	ft_export_env(t_env_list *env_list, int procss)
 {
-	int exit_stts;
+	int	exit_stts;
 
 	exit_stts = 0;
 	while (env_list)
