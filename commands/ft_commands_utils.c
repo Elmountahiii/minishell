@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 17:55:03 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/17 20:45:11 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/18 15:20:49 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,55 +27,43 @@ char	*ft_strjoin_free(char *s1, char *s2)
 	return (str);
 }
 
-int	ft_check_when_to_stop(t_tokens_list *tokens)
+void	ft_command_value(char **value, char **expand, char **tmp)
 {
-	if (tokens->type == PIPE || tokens->type == SPACE_TOKEN )
-		return (1);
-	return (0);
+	*value = ft_strdup("");
+	*expand = NULL;
+	*tmp = NULL;
 }
 
-char	*ft_join_token_value(t_tokens_list **tokens,t_env_list *env_list)
+char	*ft_free_command_value(char *value, char *expand, char *tmp)
+{
+	free(value);
+	free(expand);
+	free(tmp);
+	return (NULL);
+}
+
+char	*ft_join_token_value(t_tokens_list **tokens, t_env_list *env_list)
 {
 	char	*value;
 	char	*tmp;
 	char	*expand;
-	
+
 	if (!tokens || !*tokens)
 		return (NULL);
-	value = ft_strdup("");
-	expand = NULL;
-	tmp = NULL;
+	ft_command_value(&value, &expand, &tmp);
 	while (*tokens)
 	{
 		if (ft_check_word_valid((*tokens)->type))
 		{
-			if ((*tokens)->type == SINGLE_QUOTE_WORD || (*tokens)->type == DOUBLE_QUOTE_WORD)
-			{
-				tmp = ft_remove_quotes((*tokens)->value);		
-			}
-			else
-				tmp = ft_strdup((*tokens)->value);
-			if ((*tokens)->type == SINGLE_QUOTE_WORD)
-				value = ft_strjoin_free(value, tmp);
-			else
-			{
-				expand = ft_expand(tmp, env_list);
-				
-				if (ft_strlen(expand) == 0 && (*tokens)->type != DOUBLE_QUOTE_WORD)
-				{
-					free(expand);
-					free(tmp);
-					free(value);
-					return (NULL);
-				}
-				value = ft_strjoin_free(value, expand);
-				free(expand);
-			}
-			free(tmp);
-		}else
-			break;
+			tmp = ft_get_command_tmp(tokens);
+			expand = ft_expand(tmp, env_list);
+			if (ft_get_command_value(&value, &expand, &tmp, tokens))
+				return (NULL);
+		}
+		else
+			break ;
 		if (*tokens)
 			*tokens = (*tokens)->next;
 	}
-	return (value);	
+	return (value);
 }

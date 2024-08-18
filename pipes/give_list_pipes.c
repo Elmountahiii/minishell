@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/26 17:39:02 by aet-tale          #+#    #+#             */
-/*   Updated: 2024/08/17 16:09:39 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/18 14:11:39 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	add_new_node(t_pipe	**list)
 	return (0);
 }
 
-void free_pipe_list(t_pipe *pipes_list)
+void	free_pipe_list(t_pipe *pipes_list)
 {
 	t_pipe	*tmp;
 

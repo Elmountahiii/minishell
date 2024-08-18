@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 09:30:52 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/18 13:27:07 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/18 15:45:52 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -220,6 +220,10 @@ t_command	*ft_add_command(t_command **command_list, t_tokens_list *tokens, t_env
 char		*ft_join_token_value(t_tokens_list **tokens, t_env_list *env_list);
 void		ft_command_assign_fds(t_command *cmd,t_command_files *f_list, t_heredoc *h_list);
 char		*ft_strjoin_free(char *s1, char *s2);
+char		*ft_free_command_value(char *value, char *expand, char *tmp);
+char 		*ft_get_command_tmp(t_tokens_list **tokens);
+int			ft_get_command_value(char **value, char **expand, char **tmp, t_tokens_list **tokens);
+char		**ft_expand_value(char *value);
 
 // clean functions
 void	ft_clean_tokens(t_tokens_list **tokens_list);

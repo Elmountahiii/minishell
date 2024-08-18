@@ -6,31 +6,17 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 16:45:29 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/17 20:26:15 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/18 16:15:48 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	ft_check_redirection_valid(t_token_type type)
+void	ft_add_to_array(char **old, char **buffer, char **new)
 {
-	if (type == REDIRECTION_IN || type == REDIRECTION_OUT || type == APPEND || type == HEREDOC)
-		return (1);
-	return (0);
-}
+	int	i;
+	int	j;
 
-int	ft_check_word_valid(t_token_type type)
-{
-	if (type == WORD || type == SINGLE_QUOTE_WORD || type == DOUBLE_QUOTE_WORD || type == ENV)
-		return (1);
-	return (0);
-}
-
-void	ft_add_to_array(char **old, char **buffer ,char **new)
-{
-	int i;
-	int j;
-	
 	i = 0;
 	j = 0;
 	while (old && old[i])
@@ -46,55 +32,35 @@ void	ft_add_to_array(char **old, char **buffer ,char **new)
 	buffer[i + j] = NULL;
 }
 
-
-void	ft_add_args(t_command *command,t_tokens_list **token, t_env_list *env_list)
+void	ft_add_args(t_command *command, t_tokens_list **token,
+	t_env_list *env_list)
 {
 	char	**expanded;
 	char	**tmp;
 	char	*value;
-	
+
 	if (!command || !token)
 		return ;
 	tmp = NULL;
-	
 	if (!command->command_args)
-	 command->command_args = ft_calloc(1, sizeof(char *));
+		command->command_args = ft_calloc(1, sizeof(char *));
 	else
-	 tmp = command->command_args;
+		tmp = command->command_args;
 	value = ft_join_token_value(token, env_list);
-	if (ft_strchr(value, ' ') )
-	{
-		expanded = ft_calloc(2, sizeof(char *));
-		expanded[0] = ft_strdup(value);
-		expanded[1] = NULL;
-	}
-	else if (value == NULL)
-	{
-		expanded = ft_calloc(2, sizeof(char *));
-		expanded[0] = NULL;
-		expanded[1] = NULL;
-	}
-	else if (ft_strlen(value) == 0)
-	{
-		expanded = ft_calloc(2, sizeof(char *));
-		expanded[0] = ft_strdup("");
-		expanded[1] = NULL;
-	}
-	else
-		expanded = ft_split_dil(value, ' ');
-	free(value);
-	command->command_args = ft_calloc((ft_array_len(tmp) + ft_array_len(expanded) + 1), sizeof(char *));
+	expanded = ft_expand_value(value);
+	command->command_args
+		= ft_calloc((ft_array_len(tmp) + ft_array_len(expanded) + 1),
+			sizeof(char *));
 	if (!command->command_args)
-		return (ft_clean_array(tmp) , ft_clean_array(expanded));
+		return (ft_clean_array(tmp), ft_clean_array(expanded));
 	ft_add_to_array(tmp, command->command_args, expanded);
 	ft_clean_array(tmp);
 	ft_clean_array(expanded);
-	
 }
 
 void	ft_change_input_type(t_command *command, t_tokens_list **tokens)
 {
-	t_token_type type;
+	t_token_type	type;
 
 	if (!command || !tokens || !*tokens)
 		return ;
@@ -119,16 +85,26 @@ void	ft_change_input_type(t_command *command, t_tokens_list **tokens)
 	}
 }
 
-t_command *ft_create_command(t_tokens_list **tokens, t_env_list *env_list)
+void	ft_skip_that_token(t_tokens_list **tokens)
 {
-	t_command 	*command;
+	if (*tokens)
+		(*tokens) = (*tokens)->next;
+	if (*tokens && (*tokens)->type == SPACE_TOKEN)
+		(*tokens) = (*tokens)->next;
+	if (*tokens && ft_check_word_valid((*tokens)->type))
+		(*tokens) = (*tokens)->next;
+}
+
+t_command	*ft_create_command(t_tokens_list **tokens, t_env_list *env_list)
+{
+	t_command	*command;
 
 	command = ft_calloc(1, sizeof(t_command));
 	if (!command)
 		return (NULL);
 	command->out_type = STDOUT_IO;
 	command->command_args = ft_calloc(1, sizeof(char *));
-	while (command && *tokens && (*tokens)->type != PIPE)
+	while (*tokens && (*tokens)->type != PIPE)
 	{
 		if (ft_check_word_valid((*tokens)->type))
 		{
@@ -139,12 +115,7 @@ t_command *ft_create_command(t_tokens_list **tokens, t_env_list *env_list)
 		if (*tokens && ft_check_redirection_valid((*tokens)->type))
 		{
 			ft_change_input_type(command, tokens);
-			if (*tokens)
-				(*tokens) = (*tokens)->next;
-			if (*tokens && (*tokens)->type == SPACE_TOKEN)
-				(*tokens) = (*tokens)->next;
-			if (*tokens && ft_check_word_valid((*tokens)->type))
-			 	(*tokens) = (*tokens)->next;
+			ft_skip_that_token(tokens);
 			continue ;
 		}
 		if (*tokens)

@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 21:20:04 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/15 14:44:41 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/18 14:34:08 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 void	ft_assign_fds(t_command *command, t_tokens_list *list, int index)
 {
-	t_tokens_list *tmp;
+	t_tokens_list	*tmp;
+
 	if (!command)
 		return ;
 	tmp = list;
@@ -34,11 +35,12 @@ void	ft_assign_fds(t_command *command, t_tokens_list *list, int index)
 		command->fd_out = STDOUT_FILENO;
 }
 
-t_command *ft_add_command(t_command **command_list, t_tokens_list *tokens, t_env_list *env_list)
+t_command	*ft_add_command(t_command **command_list,
+	t_tokens_list *tokens, t_env_list *env_list)
 {
-	int			index;
-	t_command 	*command;
-	t_tokens_list *tmp;
+	int				index;
+	t_command		*command;
+	t_tokens_list	*tmp;
 
 	if (!tokens)
 		return (NULL);
@@ -52,6 +54,6 @@ t_command *ft_add_command(t_command **command_list, t_tokens_list *tokens, t_env
 		index++;
 		if (tmp)
 			tmp = tmp->next;
-	}	
+	}
 	return (*command_list);
 }
