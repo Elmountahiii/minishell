@@ -41,6 +41,7 @@ void	add_to_env(char	*key, char	*value, t_env_list	**env_list)
 		{
 			in_list = 1;
 			free(tmp->value);
+			free(key);
 			// free(key);
 			tmp->value = value;
 		}
@@ -91,8 +92,6 @@ void	add_var(char *key_value, t_env_list **env, int *exit_stt, int procss)
 		free(key);
 		return ;
 	}
-	if (is_in_list(key, *env))
-		free(key);
 	if (!check_every_arg(key))
 		add_to_env(key, value, env);
 	else

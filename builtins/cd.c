@@ -39,14 +39,25 @@ int	no_home(char *path, int procss)
 	}
 	return (0);
 }
-
 int	check_pa(char *path, t_be_executed *to_execute, int procss)
 {
+	char	*old;
+	char	*old_value;
+	char	*pwd_value;
+	char	*pwd;
+
+	old = NULL;
+	old_value = NULL;
+	pwd = NULL;
+	pwd_value = NULL;
 	if (chdir(path) != -1)
 	{
-		add_to_env("OLDPWD", get_key_value(*to_execute->env_list, "PWD"),
-			to_execute->env_list);
-		add_to_env("PWD", getcwd(NULL, 0), to_execute->env_list);
+		old = ft_strdup("OLDPWD");
+		old_value = ft_strdup(get_key_value(*to_execute->env_list, "PWD"));
+		pwd = ft_strdup("PWD");
+		pwd_value = getcwd(NULL, 0);
+		add_to_env(old, old_value, to_execute->env_list);
+		add_to_env(pwd, pwd_value, to_execute->env_list);
 		if (procss)
 			exit(0);
 		else

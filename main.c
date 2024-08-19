@@ -101,7 +101,7 @@ int	main(int argc, char *argv[], char *envp[])
 		ft_command_assign_fds(be_executed->commands_list, be_executed->files_list, be_executed->heredoc_list);
 		// system("leaks minishell");
 		// break ;
-		//system("leaks minishell");
+		// system("leaks minishell");
 		fill_command_paths(be_executed->commands_list, env_list);
 		be_executed->list_pipes = give_list_pipes(be_executed->tokens_list);
 		if (!be_executed->list_pipes && count_list(be_executed->commands_list) > 1)
