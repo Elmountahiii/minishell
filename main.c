@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 09:30:38 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/19 11:49:55 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/19 13:12:33 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ int	main(int argc, char *argv[], char *envp[])
 		ft_clean(be_executed, tokens);
 	//	system("leaks minishell");
 	}
-	ft_clean_env(env_list);
+	//ft_clean_env(env_list);
 	be_executed->env_list = NULL;
 	free(be_executed);
 	return (exit_status);

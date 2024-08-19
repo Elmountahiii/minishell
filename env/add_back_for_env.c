@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 14:55:55 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/17 20:29:03 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/19 14:39:54 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,7 @@ t_env_list	*creat_env_node(char *str)
 	equal_index = ft_str_chr_index(str, '=');
 	tmp = NULL;
 	if (equal_index < 0)
-	{
-		//write(1, "no equal sign\n", 14);
 		return (NULL);
-	}
 	node->key = ft_substr_orig(str, 0, equal_index);
 	if (!ft_strncmp(str, "OLDPWD=", 7))
 		node->value = NULL;

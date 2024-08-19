@@ -1,29 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf_heredoc.c                                :+:      :+:    :+:   */
+/*   ft_heredoc_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/14 13:50:23 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/19 14:37:54 by yel-moun         ###   ########.fr       */
+/*   Created: 2024/08/19 13:17:46 by yel-moun          #+#    #+#             */
+/*   Updated: 2024/08/19 14:35:38 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	ft_print_heredoc(t_heredoc *heredoc)
+void	ft_re_open(t_heredoc **tmp)
 {
-	t_heredoc	*tmp;
-
-	if (!heredoc)
+	if (!tmp || !(*tmp))
 		return ;
-	tmp = heredoc;
-	while (tmp)
-	{
-		printf("id:'%d' , fd:'%d' , file:'%s' , dil: '%s' , expand: '%s'\n",
-			tmp->index, tmp->fd, tmp->file_name, tmp->dil,
-			get_is_true(tmp->expand_line));
-		tmp = tmp->next;
-	}
+	close((*tmp)->fd);
+	(*tmp)->fd = open((*tmp)->file_name, O_RDONLY);
+	if ((*tmp))
+		(*tmp) = (*tmp)->next;
 }
