@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aet-tale <aet-tale@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 14:53:57 by aet-tale          #+#    #+#             */
-/*   Updated: 2024/08/15 12:49:08 by aet-tale         ###   ########.fr       */
+/*   Updated: 2024/08/19 14:46:50 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	our_exit(t_command *command, t_be_executed	*to_execute, int procss)
 {
 	(void )to_execute;
 	if (count_array_str(command->command_args) == 1)
-		exit(exit_status);
+		exit(g_exit_status);
 	else if (!check_if_number(command->command_args[1]))
 	{
 		write(2, "minishell: exit: ", 17);
@@ -52,7 +52,7 @@ void	our_exit(t_command *command, t_be_executed	*to_execute, int procss)
 		write(2, "minishell: exit: too many arguments\n", 36);
 		if (procss)
 			exit(1);
-		exit_status = 1;
+		g_exit_status = 1;
 	}
 	else
 		exit(ft_atoi(command->command_args[1]));

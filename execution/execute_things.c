@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 11:35:05 by aet-tale          #+#    #+#             */
-/*   Updated: 2024/08/19 11:26:35 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/19 14:46:50 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	execute_built_in(t_command	*command, t_be_executed	*to_execute, int procss)
 		close_pipes(to_execute->list_pipes);
 		if (procss)
 			exit(1);
-		exit_status = 1;
+		g_exit_status = 1;
 		return ;
 	}
 	assign_input(command, to_execute);
@@ -69,7 +69,7 @@ void	execute_built_in(t_command	*command, t_be_executed	*to_execute, int procss)
 	close(std_out);
 	close(std_int);
 	if (procss)
-		exit(exit_status);
+		exit(g_exit_status);
 	// optimize export and exit conditions
 }
 
@@ -107,9 +107,9 @@ void	execute_things(t_be_executed	*to_execute)
 	{
 		waitpid(pid[i], &status, 0);
 		if (WIFEXITED(status))
-			exit_status = WEXITSTATUS(status);
+			g_exit_status = WEXITSTATUS(status);
 		else if (WIFSIGNALED(status))
-			exit_status = WTERMSIG(status);
+			g_exit_status = WTERMSIG(status);
 		i++;
 	}
 	free(pid);

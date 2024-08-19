@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 21:18:53 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/18 16:21:25 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/19 16:04:36 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ char	*ft_get_token_typee(t_token_type type)
 	return ("UNKNOWN");
 }
 
-char	*ft_get_file_type(IOType type)
+char	*ft_get_file_type(t_ttype type)
 {
 	if (type == STDIN_IO)
 		return ("STDIN_IO");

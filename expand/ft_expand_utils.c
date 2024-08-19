@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/18 11:45:58 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/18 13:32:39 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/19 14:46:50 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_handle_expand_1(char *buffer, int *i, int *j, int *index)
 {
-	*j = ft_join_key(buffer, ft_itoa(exit_status), *j);
+	*j = ft_join_key(buffer, ft_itoa(g_exit_status), *j);
 	(*i)++;
 	(*index)++;
 }
@@ -23,7 +23,7 @@ void	ft_count_1(int *len, int *index)
 {
 	char	*tmp;
 
-	tmp = ft_itoa(exit_status);
+	tmp = ft_itoa(g_exit_status);
 	*len += ft_strlen(tmp);
 	(*index)++;
 	free(tmp);

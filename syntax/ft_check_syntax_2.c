@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 11:33:07 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/17 16:52:00 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/19 14:46:50 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	syntax_error(char token)
 {
 	(void)token;
 	ft_putstr_fd("minishell: syntax error\n", STDERR_FILENO);
-	exit_status = 258;
+	g_exit_status = 258;
 	return (1);
 }
 

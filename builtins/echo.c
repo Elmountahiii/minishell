@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 10:45:41 by aet-tale          #+#    #+#             */
-/*   Updated: 2024/08/19 11:36:44 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/19 14:46:50 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,5 +62,5 @@ void	our_echo(t_command *command, int procss)
 	if (procss)
 		exit(exit_sts);
 	else
-		exit_status = 0;
+		g_exit_status = 0;
 }

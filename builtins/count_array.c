@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   count_array.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aet-tale <aet-tale@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 12:25:32 by aet-tale          #+#    #+#             */
-/*   Updated: 2024/08/18 13:13:08 by aet-tale         ###   ########.fr       */
+/*   Updated: 2024/08/19 14:46:50 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	error_handler(int *exit_stt, char *key, char *value, int procss)
 	}
 	else
 	{
-		if (exit_status == 0)
-			exit_status = 1;
+		if (g_exit_status == 0)
+			g_exit_status = 1;
 	}
 }

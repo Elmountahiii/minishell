@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aet-tale <aet-tale@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 11:49:55 by aet-tale          #+#    #+#             */
-/*   Updated: 2024/08/15 12:44:38 by aet-tale         ###   ########.fr       */
+/*   Updated: 2024/08/19 14:46:50 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,8 @@ void	hand_er(char *arg, int procss, int *exit_stts)
 	}
 	else
 	{
-		if (exit_status == 0)
-			exit_status = 1;
+		if (g_exit_status == 0)
+			g_exit_status = 1;
 	}
 }
 
@@ -65,7 +65,7 @@ void	check_first(t_command *command, int procss)
 		if (procss)
 			exit(0);
 		else
-			exit_status = 0;
+			g_exit_status = 0;
 	}
 }
 

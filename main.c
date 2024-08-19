@@ -6,13 +6,13 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 09:30:38 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/19 13:12:33 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/19 16:25:58 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int exit_status = 0;
+int g_exit_status = 0;
 
 void	ft_check_leaks(void)
 {
@@ -41,7 +41,7 @@ void	sig_handler(int sig)
 		rl_on_new_line();
 		// rl_replace_line("", 0);
 		rl_redisplay();
-		exit_status = 1;
+		g_exit_status = 1;
 	}
 }
 
@@ -85,14 +85,14 @@ int	main(int argc, char *argv[], char *envp[])
 		{
 			free(line);
 			ft_clean(be_executed, tokens);
-			exit_status = 258;
+			g_exit_status = 258;
 			continue ;
 		}
 		be_executed->heredoc_list = ft_add_heredoc(&be_executed->heredoc_list, be_executed->tokens_list);
 		if (ft_open_heredoc(be_executed->heredoc_list, env_list))
 		{
 			ft_clean(be_executed, tokens);
-			exit_status = 1;
+			g_exit_status = 1;
 			continue ;
 		}
 		be_executed->files_list = ft_add_files(&be_executed->files_list, be_executed->tokens_list, env_list);
@@ -108,7 +108,7 @@ int	main(int argc, char *argv[], char *envp[])
 		{
 			free(line);
 			ft_clean(be_executed, tokens);
-			exit_status = 1;
+			g_exit_status = 1;
 			continue ;
 		}
 		be_executed->list_size = count_list(be_executed->commands_list);
@@ -120,7 +120,7 @@ int	main(int argc, char *argv[], char *envp[])
 	//ft_clean_env(env_list);
 	be_executed->env_list = NULL;
 	free(be_executed);
-	return (exit_status);
+	return (g_exit_status);
 }
 
 

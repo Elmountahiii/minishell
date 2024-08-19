@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 16:22:32 by aet-tale          #+#    #+#             */
-/*   Updated: 2024/08/19 12:00:08 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/19 14:46:50 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ void	ft_export(t_command *command, t_be_executed	*to_execute, int procss)
 		if (procss)
 			exit(0);
 		else
-			exit_status = 0;
+			g_exit_status = 0;
 	}
 	while (args[i])
 	{

@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 15:09:06 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/18 13:35:37 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/19 14:46:50 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ char	*ft_get_value(char *key, t_env_list *env)
 	if (!key)
 		return (ft_strdup("$"));
 	if (key[0] == '?')
-		return (ft_itoa(exit_status));
+		return (ft_itoa(g_exit_status));
 	if (key[0] == '$' && ft_strlen(key) == 1)
 		return (ft_strdup("$"));
 	if (key[0] == '@' || ft_isdigit(key[0]))

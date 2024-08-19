@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aet-tale <aet-tale@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 17:50:52 by aet-tale          #+#    #+#             */
-/*   Updated: 2024/08/15 13:01:34 by aet-tale         ###   ########.fr       */
+/*   Updated: 2024/08/19 14:46:50 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	no_home(char *path, int procss)
 		if (procss)
 			exit(1);
 		else
-			exit_status = 1;
+			g_exit_status = 1;
 		return (1);
 	}
 	return (0);
@@ -50,7 +50,7 @@ int	check_pa(char *path, t_be_executed *to_execute, int procss)
 		if (procss)
 			exit(0);
 		else
-			exit_status = 0;
+			g_exit_status = 0;
 		return (1);
 	}
 	else
@@ -74,7 +74,7 @@ void	basic_cd(char *path, t_be_executed *to_execute, int procss)
 		if (procss)
 			exit(1);
 		else
-			exit_status = 1;
+			g_exit_status = 1;
 	}
 }
 
