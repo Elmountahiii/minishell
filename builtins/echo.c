@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aet-tale <aet-tale@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 10:45:41 by aet-tale          #+#    #+#             */
-/*   Updated: 2024/08/15 12:48:00 by aet-tale         ###   ########.fr       */
+/*   Updated: 2024/08/19 11:36:44 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ void	our_echo(t_command *command, int procss)
 	}
 	if (new_line)
 		printf("\n");
+	//system("leaks minishell");
 	if (procss)
 		exit(exit_sts);
 	else

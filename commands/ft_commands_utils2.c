@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/18 14:37:36 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/18 16:17:53 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/19 11:14:20 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,10 @@ char	**ft_expand_value(char *value)
 		expanded[1] = NULL;
 	}
 	else
+	{
+		ft_clean_array(expanded);
 		expanded = ft_split_dil(value, ' ');
+	}
 	free(value);
 	return (expanded);
 }

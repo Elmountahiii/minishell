@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 12:42:46 by aet-tale          #+#    #+#             */
-/*   Updated: 2024/08/17 20:46:27 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/19 11:26:56 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,19 +77,14 @@ char	**append_to_array(char **array, char *str) {
 
     // Set the last element to NULL
     new_array[len + 1] = NULL;
-
-    //Free the old array
-    if (array) {
-        free(array);
-    }
-
     return new_array;
 }
 
 char	**give_array_str(t_env_list *env_list)
 {
-	char **env;
-	char *line;
+	char	**env;
+	char	**tmp;
+	char	*line;
 
 	env = NULL;
 	line = NULL;
@@ -97,8 +92,10 @@ char	**give_array_str(t_env_list *env_list)
 	{
 		line = ft_join_three(env_list->key, "=", env_list->value);
 		// printf("%s\n", line);
+		tmp = env;
 		env = append_to_array(env, line);
-		// don't forget to free the array
+		free(line);
+		ft_clean_array(tmp);
 		env_list = env_list->next;
 	}
 	return (env);

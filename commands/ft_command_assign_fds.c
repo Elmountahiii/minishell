@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 18:17:01 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/18 16:27:00 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/19 11:10:55 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,4 +112,5 @@ void	ft_command_assign_fds(t_command *command,
 		}
 		c_tmp = c_tmp->next;
 	}
+	
 }

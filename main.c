@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 09:30:38 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/18 17:08:46 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/19 11:49:55 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,10 +99,14 @@ int	main(int argc, char *argv[], char *envp[])
 		ft_open_files(be_executed->files_list);
 		be_executed->commands_list = ft_add_command(&be_executed->commands_list, be_executed->tokens_list, env_list);
 		ft_command_assign_fds(be_executed->commands_list, be_executed->files_list, be_executed->heredoc_list);
+		// system("leaks minishell");
+		// break ;
+		//system("leaks minishell");
 		fill_command_paths(be_executed->commands_list, env_list);
 		be_executed->list_pipes = give_list_pipes(be_executed->tokens_list);
 		if (!be_executed->list_pipes && count_list(be_executed->commands_list) > 1)
 		{
+			free(line);
 			ft_clean(be_executed, tokens);
 			exit_status = 1;
 			continue ;
@@ -113,7 +117,7 @@ int	main(int argc, char *argv[], char *envp[])
 		ft_clean(be_executed, tokens);
 	//	system("leaks minishell");
 	}
-	//ft_clean_env(env_list);	
+	ft_clean_env(env_list);
 	be_executed->env_list = NULL;
 	free(be_executed);
 	return (exit_status);

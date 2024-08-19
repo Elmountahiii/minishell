@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_things.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aet-tale <aet-tale@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 11:35:05 by aet-tale          #+#    #+#             */
-/*   Updated: 2024/08/18 15:08:46 by aet-tale         ###   ########.fr       */
+/*   Updated: 2024/08/19 11:26:35 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,4 +112,5 @@ void	execute_things(t_be_executed	*to_execute)
 			exit_status = WTERMSIG(status);
 		i++;
 	}
+	free(pid);
 }

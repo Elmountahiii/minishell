@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aet-tale <aet-tale@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 16:22:32 by aet-tale          #+#    #+#             */
-/*   Updated: 2024/08/15 12:26:42 by aet-tale         ###   ########.fr       */
+/*   Updated: 2024/08/19 12:00:08 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ void	add_to_env(char	*key, char	*value, t_env_list	**env_list)
 		if (!ft_strcmp(key, tmp->key))
 		{
 			in_list = 1;
+			free(tmp->value);
+			// free(key);
 			tmp->value = value;
 		}
 		if (!(tmp->next))
@@ -89,6 +91,8 @@ void	add_var(char *key_value, t_env_list **env, int *exit_stt, int procss)
 		free(key);
 		return ;
 	}
+	if (is_in_list(key, *env))
+		free(key);
 	if (!check_every_arg(key))
 		add_to_env(key, value, env);
 	else
