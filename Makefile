@@ -14,9 +14,6 @@ READLINE = -lreadline -lncurses
 # expand_files = ft_tokens_expand.c ft_extract_key.c ft_link_key_value.c ft_expand_utils2.c
 # # heredoc_files = ft_fill_heredoc.c ft_open_heredoc.c ft_init_heredoc.c
 # pipes_files = give_list_pipes.c
-
-
-
 # new
 spiting_files = ft_count_line_tokens.c ft_is_token.c ft_line_split.c ft_split_quotes_utils.c ft_split_space_utils.c ft_split_word_utils.c ft_split_redirection_utils.c \
 ft_print_array.c ft_split_env_utils.c 

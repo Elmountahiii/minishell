@@ -2,12 +2,11 @@
 #include <stdlib.h>
 #include <unistd.h>
 
+#include <minishell.h>
 
-int main()
+int main(int argc, char **argv, char **env)
 {
-    char *cwd;
+    t_env_list		*env_list;
 
-    // Get the current working directory
-    cwd = getcwd(NULL, 0);
-    free(cwd);
+    env_list = get_env_list(env);
 }

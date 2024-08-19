@@ -61,7 +61,7 @@ int	main(int argc, char *argv[], char *envp[])
 	(void) argv;
 	(void) envp;
 	t_be_executed	*be_executed;
-	t_env_list		*env_list = NULL;
+	t_env_list		*env_list;
 	char **tokens;
 	char * line;
 
@@ -71,7 +71,7 @@ int	main(int argc, char *argv[], char *envp[])
 	signal(SIGQUIT, SIG_IGN);
 	be_executed = give_executed();
 	be_executed->env_list = &env_list;
-	// atexit(ft_check_leaks);
+	atexit(ft_check_leaks);
 	while (1)
 	{
 		line = readline("minishell$ ");
@@ -117,7 +117,7 @@ int	main(int argc, char *argv[], char *envp[])
 		ft_clean(be_executed, tokens);
 	//	system("leaks minishell");
 	}
-	//ft_clean_env(env_list);
+	ft_clean_env(env_list);
 	be_executed->env_list = NULL;
 	free(be_executed);
 	return (g_exit_status);

@@ -34,6 +34,7 @@ void	our_unset(char *key, t_be_executed	*to_execute)
 				*to_execute->env_list = (*to_execute->env_list)->next;
 			else
 				previous->next = tmp->next;
+			free_env_node(tmp);
 			break ;
 		}
 		previous = tmp;
