@@ -42,7 +42,6 @@ void	add_to_env(char	*key, char	*value, t_env_list	**env_list)
 			in_list = 1;
 			free(tmp->value);
 			free(key);
-			// free(key);
 			tmp->value = value;
 		}
 		if (!(tmp->next))

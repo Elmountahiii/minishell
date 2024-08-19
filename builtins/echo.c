@@ -58,7 +58,6 @@ void	our_echo(t_command *command, int procss)
 	}
 	if (new_line)
 		printf("\n");
-	//system("leaks minishell");
 	if (procss)
 		exit(exit_sts);
 	else

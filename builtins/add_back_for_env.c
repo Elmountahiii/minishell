@@ -66,7 +66,7 @@ void	add_back_for_env(t_env_list	**list, char	*str)
 		*list = creat_env_node(str);
 		return ;
 	}
-	while (tmp->next) 
+	while (tmp->next)
 		tmp = tmp->next;
 	tmp->next = creat_env_node(str);
 }

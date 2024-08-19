@@ -39,6 +39,7 @@ int	no_home(char *path, int procss)
 	}
 	return (0);
 }
+
 int	check_pa(char *path, t_be_executed *to_execute, int procss)
 {
 	char	*old;
