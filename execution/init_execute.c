@@ -22,5 +22,3 @@ t_be_executed	*give_executed()
 	
 	return (to_execute);
 }
-
-// count the len

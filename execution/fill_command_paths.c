@@ -50,9 +50,10 @@ char	*search_for_path(char *command, t_env_list *env)
 	char	**path_list;
 	int		i;
 	char	*path;
-	// char	*env_path;
 
 	i = 0;
+	path_list = NULL;
+	path = NULL;
 	if (ft_check_path(env) == NULL)
 		return (ft_search_in_current_dir(command));
 	if (ft_strlen(command) == 0)
