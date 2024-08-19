@@ -25,5 +25,6 @@ void	our_pwd(t_command *command, t_be_executed	*to_execute, int procss)
 		exit(0);
 	else
 		g_exit_status = 0;
+	free(pwd);
 	return ;
 }
