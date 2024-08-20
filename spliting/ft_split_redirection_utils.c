@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 11:42:20 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/17 22:34:26 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/20 16:26:27 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ char	*ft_create_redirection(char **line)
 	int		len;
 
 	len = 0;
-	while ((*line)[len] == '>' || (*line)[len] == '<')
+	while (((*line)[len] == '>' || (*line)[len] == '<' )&& (len < 2))
 		len++;
 	redirection = ft_substrl(*line, 0, len);
 	*line += len;
