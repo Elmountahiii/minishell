@@ -6,17 +6,17 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 12:48:32 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/17 20:45:48 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/20 10:41:43 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-char	*ft_substrl(char  *s, int start, int len)
+char	*ft_substrl(char *s, int start, int len)
 {
 	char			*sub_str;
 	int				s_len;
-	int	i;
+	int				i;
 
 	s_len = ft_strlen(s);
 	if (start >= s_len)

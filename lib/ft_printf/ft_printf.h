@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 18:23:13 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/07 15:25:57 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/20 11:29:18 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 # include <stdarg.h>
 # include <unistd.h>
 # include "../lib.h"
-
 
 int		ft_printf(const char *format, ...);
 int		put_str(char *str);

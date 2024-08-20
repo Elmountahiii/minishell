@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 09:30:52 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/19 16:37:17 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/20 12:14:22 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -228,7 +228,7 @@ int				ft_get_command_value(char **value,
 char			**ft_expand_value(char *value);
 // clean functions
 void			ft_clean_tokens(t_tokens_list **tokens_list);
-void			ft_clean(t_be_executed *to_execute, char **array);
+void			ft_clean(t_be_executed *to_execute, char **array, char *line);
 void			ft_clean_array(char **array);
 void			ft_clean_commands(t_command **command_list);
 void			ft_clean_files(t_command_files **files);
@@ -279,5 +279,7 @@ void			error_handler(int *exit_stt,
 					char *key, char *value, int procss);
 int				is_in_list(char *key, t_env_list *env_list);
 int				count_array_str(char **array);
+// setup
+int				ft_setup(t_be_executed **exec, char **tokens);
 
 #endif

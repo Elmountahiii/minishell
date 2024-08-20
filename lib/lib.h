@@ -48,18 +48,17 @@ int		ft_strcmp(char *s1, char *s2);
 void	*ft_calloc(size_t count, size_t size);
 void	ft_bzero(void *s, size_t n);
 int		ft_is_all_space(char *str);
-int     ft_atoi(const char *str);
+int		ft_atoi(const char *str);
 char	*ft_itoa(int n);
-int     is_alpha(char c);
+int		is_alpha(char c);
 void	ft_putchar_fd(char c, int fd);
 void	ft_putstr_fd(char *s, int fd);
 int		ft_isdigit(int d);
 int		ft_isalpha(int c);
 int		ft_isalnum(int c);
-char	*ft_substrl(char  *s, int start, int len);
+char	*ft_substrl(char *s, int start, int len);
 char	*ft_strncpy(char *dest, const char *src, size_t n);
 char	*ft_strncat(char *dest, const char *src, size_t n);
-
 // v2
 char	**ft_super_split(char *str);
 int		ft_count_words_v2(char *str);
@@ -75,6 +74,6 @@ int		ft_count_metachar(char *str);
 int		ft_count_quotes(char *str);
 char	*ft_substr_orig(char *s, unsigned int start, size_t len);
 int		ft_strcpy(char *dst, char *src);
-int     is_alnum(char c);
+int		is_alnum(char c);
 
 #endif

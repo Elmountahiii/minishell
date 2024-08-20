@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 13:36:57 by aet-tale          #+#    #+#             */
-/*   Updated: 2024/08/08 14:22:22 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/20 13:07:11 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	get_file_fd(t_command	*command, char i_o)
 			if (fd == -1)
 			{
 				perror(ft_strjoin("minishell: ", command->in_file));
-				exit(1);
+				// exit(1);
 			}
 		}else
 		{
@@ -33,7 +33,7 @@ int	get_file_fd(t_command	*command, char i_o)
 			if (fd == -1)
 			{
 				perror(ft_strjoin("minishell: ", command->in_file));
-				exit(1);
+				// exit(1);
 			}
 		}
 	}

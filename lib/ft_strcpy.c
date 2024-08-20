@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 14:30:31 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/07/29 14:31:06 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/20 10:40:41 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	ft_strcpy(char *dst, char *src)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (src[i])
