@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 11:20:38 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/20 16:22:54 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/21 10:48:21 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,10 @@ void	ft_handle_redirection(t_command_files *file,
 		return ;
 	tmp = *tokens;
 	value = ft_get_token_name(&tmp);
-	file->file_name = ft_join_token_value(tokens, env_list);
+	file->file_name = ft_get_file_name(tokens, env_list);
+	// printf("file_name: %s\n", file->file_name);
+	// printf("value: %s\n", value);
+	
 	if (ft_check_ambig(file))
 	{
 		file->ambiguous_name = ft_strdup(value);

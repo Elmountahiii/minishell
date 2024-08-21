@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 16:20:14 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/18 17:57:55 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/21 11:23:43 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,12 @@ void	ft_open_files(t_command_files *files)
 	tmp = files;
 	while (tmp)
 	{
+		if (tmp->is_ambiguous)
+		{
+			ft_putstr_fd("minishell: ambiguous redirect\n", STDERR_FILENO);
+			ft_skip_to_next_command(&tmp);
+			continue ;
+		}
 		if (tmp->type == REDIRECTION_IN)
 			tmp->fd = open(tmp->file_name, O_RDONLY);
 		else if (tmp->type == REDIRECTION_OUT)
