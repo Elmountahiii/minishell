@@ -29,8 +29,8 @@ clean_files = ft_clean_tokens.c ft_clean_array.c ft_clean.c ft_clean_commands.c 
 
 builtins_files = cd.c echo.c env.c exit.c export.c ft_export_env.c pwd.c unset.c count_array.c close_other_pipes.c
 pipes_files = give_list_pipes.c
-execution_files = assign_in_out.c count_list.c execute_commmand.c execute_things.c fill_command_paths.c ft_is_executed.c ft_is_path.c init_execute.c is_built_in.c
-
+execution_files = assign_in_out.c count_list.c execute_commmand.c execute_things.c fill_command_paths.c ft_is_executed.c \
+ft_is_path.c init_execute.c is_built_in.c give_array_fromenv.c close_pipes.c append_or_herdoc.c increament_elems.c
 utils_pre = $(addprefix utils/, $(utils_files))
 tokens_pre = $(addprefix tokens/, $(tokens_files))
 spliting_pre = $(addprefix spliting/, $(spiting_files))

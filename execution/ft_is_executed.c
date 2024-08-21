@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_is_executed.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aet-tale <aet-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 12:52:17 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/18 17:51:59 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/20 12:11:08 by aet-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,16 +23,10 @@ int	ft_is_executed(t_command *command)
 	}
 	if (command->fd_in == -1)
 	{
-		// write(2, "minishell: ", 11);
-		// write(2, command->in_file, ft_strlen(command->in_file));
-		// write(2, ": No such file or directory\n", 28);
 		return (0);
 	}
 	if (command->fd_out == -1)
 	{
-		// write(2, "minishell: ", 11);
-		// write(2, command->out_file, ft_strlen(command->out_file));
-		// write(2, ": No such file or directory\n", 28);
 		return (0);
 	}
 	return (1);

@@ -3,66 +3,44 @@
 /*                                                        :::      ::::::::   */
 /*   assign_in_out.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aet-tale <aet-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 13:36:57 by aet-tale          #+#    #+#             */
-/*   Updated: 2024/08/08 14:22:22 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/20 12:19:41 by aet-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	get_file_fd(t_command	*command, char i_o)
+void	prror_exit(char *str, char *file)
 {
-	int fd;
+	char	*message;
+
+	message = ft_strjoin(str, file);
+	perror(message);
+	free(message);
+	g_exit_status = 1;
+}
+
+int	get_file_fd(t_command *command, char i_o)
+{
+	int	fd;
 
 	fd = 1;
 	if (i_o == 'i')
 	{
-		if (command->is_heredoc)
-		{
-			fd = open(command->in_file, O_RDONLY | O_APPEND, 0644);
-			if (fd == -1)
-			{
-				perror(ft_strjoin("minishell: ", command->in_file));
-				exit(1);
-			}
-		}else
-		{
-			fd = open(command->in_file, O_RDONLY, 0644);
-			if (fd == -1)
-			{
-				perror(ft_strjoin("minishell: ", command->in_file));
-				exit(1);
-			}
-		}
+		assign_fd_heredc(&fd, command);
 	}
 	else if (i_o == 'o')
 	{
-		if (command->is_append)
-		{
-			fd = open(command->out_file, O_WRONLY | O_CREAT | O_APPEND, 0644);
-			if (fd == -1)
-			{
-				perror(ft_strjoin("minishell: ", command->out_file));
-				exit(1);
-			}
-		}else
-		{
-			fd = open(command->out_file, O_WRONLY | O_CREAT | O_TRUNC, 0644);
-			if (fd == -1)
-			{
-				perror(ft_strjoin("minishell: ", command->out_file));
-				exit(1);
-			}
-		}
+		assign_fd_append(&fd, command);
 	}
 	return (fd);
 }
 
 int	get_pipe_fd(t_pipe *list_pipes, int index, char c)
 {
-	int 	i;
+	int		i;
 	t_pipe	*previous;
 
 	previous = NULL;
@@ -76,9 +54,7 @@ int	get_pipe_fd(t_pipe *list_pipes, int index, char c)
 			else if (c == 'o')
 				return (list_pipes->fd[1]);
 		}
-		previous = list_pipes;
-		list_pipes = list_pipes->next;
-		i++;
+		increament_elems(&list_pipes, &i, &previous);
 		if (i == index)
 		{
 			if (list_pipes == NULL)
@@ -91,9 +67,8 @@ int	get_pipe_fd(t_pipe *list_pipes, int index, char c)
 	return (1000);
 }
 
-void	assign_input(t_command	*command, t_be_executed	*to_execute)
+void	assign_input(t_command *command, t_be_executed *to_execute)
 {
-
 	if (command->in_type == FILE_IO && command->is_heredoc)
 	{
 		return ;
@@ -108,11 +83,12 @@ void	assign_input(t_command	*command, t_be_executed	*to_execute)
 	}
 	else if (command->in_type == PIPE_IO)
 	{
-		command->fd_in = get_pipe_fd(to_execute->list_pipes, command->index, 'i');
+		command->fd_in = get_pipe_fd(to_execute->list_pipes, command->index,
+				'i');
 	}
 }
 
-void	assign_output(t_command	*command, t_be_executed	*to_execute)
+void	assign_output(t_command *command, t_be_executed *to_execute)
 {
 	if (command->out_type == FILE_IO)
 	{
@@ -124,6 +100,7 @@ void	assign_output(t_command	*command, t_be_executed	*to_execute)
 	}
 	else if (command->out_type == PIPE_IO)
 	{
-		command->fd_out = get_pipe_fd(to_execute->list_pipes, command->index, 'o');
+		command->fd_out = get_pipe_fd(to_execute->list_pipes, command->index,
+				'o');
 	}
 }

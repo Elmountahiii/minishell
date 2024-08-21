@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aet-tale <aet-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 09:30:38 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/19 16:25:58 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/20 11:14:37 by aet-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int	main(int argc, char *argv[], char *envp[])
 	signal(SIGQUIT, SIG_IGN);
 	be_executed = give_executed();
 	be_executed->env_list = &env_list;
-	atexit(ft_check_leaks);
+	// atexit(ft_check_leaks);
 	while (1)
 	{
 		line = readline("minishell$ ");

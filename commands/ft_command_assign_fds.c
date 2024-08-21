@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_command_assign_fds.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aet-tale <aet-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 18:17:01 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/19 11:10:55 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/20 12:24:25 by aet-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ void	ft_assign_from_heredoc(t_command *command, t_heredoc *heredoc_list)
 	selected_heredoc = NULL;
 	while (h_tmp)
 	{
-		
 		if (h_tmp->index == command->index)
 			selected_heredoc = h_tmp;
 		h_tmp = h_tmp->next;
@@ -59,8 +58,8 @@ void	ft_assign_from_heredoc(t_command *command, t_heredoc *heredoc_list)
 	}
 }
 
-void	ft_assign_from_files(t_command *command,
-	t_command_files *files, t_token_type type)
+void	ft_assign_from_files(t_command *command, t_command_files *files,
+		t_token_type type)
 {
 	t_command_files	*f_tmp;
 	t_command_files	*selected_file;
@@ -86,8 +85,8 @@ void	ft_assign_from_files(t_command *command,
 		ft_add_out_files(command, selected_file);
 }
 
-void	ft_command_assign_fds(t_command *command,
-	t_command_files *files_list, t_heredoc *heredoc_list)
+void	ft_command_assign_fds(t_command *command, t_command_files *files_list,
+		t_heredoc *heredoc_list)
 {
 	t_command	*c_tmp;
 
@@ -112,5 +111,4 @@ void	ft_command_assign_fds(t_command *command,
 		}
 		c_tmp = c_tmp->next;
 	}
-	
 }

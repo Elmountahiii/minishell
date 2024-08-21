@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   give_list_pipes.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aet-tale <aet-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/26 17:39:02 by aet-tale          #+#    #+#             */
-/*   Updated: 2024/08/18 14:11:39 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/20 12:23:33 by aet-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ t_pipe	*give_node_pipe(void)
 	return (node);
 }
 
-int	add_new_node(t_pipe	**list)
+int	add_new_node(t_pipe **list)
 {
 	t_pipe	*tmp;
 	t_pipe	*node;
@@ -65,7 +65,7 @@ void	free_pipe_list(t_pipe *pipes_list)
 	}
 }
 
-t_pipe	*give_list_pipes(t_tokens_list	*tokens_list)
+t_pipe	*give_list_pipes(t_tokens_list *tokens_list)
 {
 	t_pipe	*pipes_list;
 

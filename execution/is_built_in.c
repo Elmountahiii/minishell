@@ -6,13 +6,13 @@
 /*   By: aet-tale <aet-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 12:14:07 by aet-tale          #+#    #+#             */
-/*   Updated: 2024/08/03 12:14:20 by aet-tale         ###   ########.fr       */
+/*   Updated: 2024/08/20 12:12:20 by aet-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	is_built_in(char	*command)
+int	is_built_in(char *command)
 {
 	if (ft_strcmp(command, "echo") == 0)
 		return (1);

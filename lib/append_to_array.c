@@ -1,41 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_substrl.c                                       :+:      :+:    :+:   */
+/*   append_to_array.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aet-tale <aet-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/15 12:48:32 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/20 12:28:39 by aet-tale         ###   ########.fr       */
+/*   Created: 2024/08/20 15:10:50 by aet-tale          #+#    #+#             */
+/*   Updated: 2024/08/20 15:10:58 by aet-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-char	*ft_substrl(char *s, int start, int len)
+char	**append_to_array(char **array, char *str)
 {
-	char	*sub_str;
-	int		s_len;
+	int		len;
+	char	**new_array;
 	int		i;
 
-	s_len = ft_strlen(s);
-	if (start >= s_len)
-	{
-		return (ft_strdup(""));
-	}
-	if (len >= ft_strlen(s + start))
-	{
-		return (ft_strdup(s + start));
-	}
 	i = 0;
-	sub_str = malloc(sizeof(char) * len + 1);
-	if (!sub_str)
+	len = 0;
+	new_array = NULL;
+	while (array && array[len])
+		len++;
+	new_array = ft_calloc(len + 2, sizeof(char *));
+	if (!new_array)
 		return (NULL);
-	while (s[start + i] && i < len)
+	while (i < len)
 	{
-		sub_str[i] = s[start + i];
+		new_array[i] = ft_strdup(array[i]);
 		i++;
 	}
-	sub_str[i] = '\0';
-	return (sub_str);
+	new_array[len] = ft_strdup(str);
+	new_array[len + 1] = NULL;
+	return (new_array);
 }

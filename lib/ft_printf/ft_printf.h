@@ -3,20 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aet-tale <aet-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 18:23:13 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/07 15:25:57 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/20 12:27:17 by aet-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 
+# include "../lib.h"
 # include <stdarg.h>
 # include <unistd.h>
-# include "../lib.h"
-
 
 int		ft_printf(const char *format, ...);
 int		put_str(char *str);

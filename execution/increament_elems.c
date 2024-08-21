@@ -1,41 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_substrl.c                                       :+:      :+:    :+:   */
+/*   increament_elems.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aet-tale <aet-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/15 12:48:32 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/20 12:28:39 by aet-tale         ###   ########.fr       */
+/*   Created: 2024/08/20 12:04:16 by aet-tale          #+#    #+#             */
+/*   Updated: 2024/08/20 12:19:16 by aet-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-char	*ft_substrl(char *s, int start, int len)
+void	increament_elems(t_pipe **list_pipes, int *i, t_pipe **previous)
 {
-	char	*sub_str;
-	int		s_len;
-	int		i;
-
-	s_len = ft_strlen(s);
-	if (start >= s_len)
-	{
-		return (ft_strdup(""));
-	}
-	if (len >= ft_strlen(s + start))
-	{
-		return (ft_strdup(s + start));
-	}
-	i = 0;
-	sub_str = malloc(sizeof(char) * len + 1);
-	if (!sub_str)
-		return (NULL);
-	while (s[start + i] && i < len)
-	{
-		sub_str[i] = s[start + i];
-		i++;
-	}
-	sub_str[i] = '\0';
-	return (sub_str);
+	*previous = *list_pipes;
+	*list_pipes = (*list_pipes)->next;
+	(*i)++;
 }

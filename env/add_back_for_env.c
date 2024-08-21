@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   add_back_for_env.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aet-tale <aet-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 14:55:55 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/19 14:39:54 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/20 12:22:03 by aet-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ t_env_list	*creat_env_node(char *str)
 	return (node);
 }
 
-void	add_back_for_env(t_env_list	**list, char	*str)
+void	add_back_for_env(t_env_list **list, char *str)
 {
 	t_env_list	*tmp;
 
@@ -68,7 +68,7 @@ void	add_back_for_env(t_env_list	**list, char	*str)
 		*list = creat_env_node(str);
 		return ;
 	}
-	while (tmp->next) 
+	while (tmp->next)
 		tmp = tmp->next;
 	tmp->next = creat_env_node(str);
 }

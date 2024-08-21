@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fill_command_paths.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aet-tale <aet-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 12:50:49 by aet-tale          #+#    #+#             */
-/*   Updated: 2024/08/16 16:10:17 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/20 12:20:08 by aet-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,15 @@ char	*ft_check_path(t_env_list *env_list)
 
 char	*ft_search_in_current_dir(char *command)
 {
-	struct stat	fileStat;
+	struct stat	filestat;
 	char		*path;
 
 	if (is_built_in(command))
 		return (NULL);
 	path = ft_strjoin("./", command);
-	if (stat(path, &fileStat) == 0)
+	if (stat(path, &filestat) == 0)
 	{
-		if (S_ISDIR(fileStat.st_mode))
+		if (S_ISDIR(filestat.st_mode))
 		{
 			free(path);
 			return (NULL);
@@ -76,16 +76,16 @@ char	*search_for_path(char *command, t_env_list *env)
 
 void	fill_command_paths(t_command *command_list, t_env_list *env)
 {
-	char *cmd;
+	char	*cmd;
 
-    while (command_list && command_list->command_args)
-    {
+	while (command_list && command_list->command_args)
+	{
 		cmd = command_list->command_args[0];
-		if (ft_strncmp(cmd, "./", 2) == 0 || ft_strncmp(cmd, "../", 3) == 0 || ft_strncmp(cmd, "/", 1) == 0)
+		if (ft_strncmp(cmd, "./", 2) == 0 || ft_strncmp(cmd, "../", 3) == 0
+			|| ft_strncmp(cmd, "/", 1) == 0)
 			command_list->path = ft_strdup(cmd);
 		else
 			command_list->path = search_for_path(cmd, env);
-        command_list = command_list->next;   
-    }
+		command_list = command_list->next;
+	}
 }
-

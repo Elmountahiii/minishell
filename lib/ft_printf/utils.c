@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aet-tale <aet-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 17:23:46 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/07 15:27:26 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/20 12:27:48 by aet-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,6 @@ int	ft_atoiv1(const char *str, int *c)
 	return (result * sign);
 }
 
-
-
 int	hex_len(unsigned long number)
 {
 	int	len;
@@ -56,7 +54,7 @@ int	hex_len(unsigned long number)
 	while (number != 0)
 	{
 		number /= 16;
-		len ++;
+		len++;
 	}
 	return (len);
 }
@@ -67,8 +65,7 @@ void	get_sign(int *i, const char *format, int *len, char *sign)
 	{
 		if (is_bouns(format[*i]))
 		{
-			if (*sign == '#' && format[*i] != '#'
-				&& !is_number(format[*i]))
+			if (*sign == '#' && format[*i] != '#' && !is_number(format[*i]))
 				(*i)++;
 			else if (*sign == '+' && format[*i] != '+'
 				&& !is_number(format[*i]))

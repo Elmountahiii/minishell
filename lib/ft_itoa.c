@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aet-tale <aet-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 18:57:57 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/06 10:33:44 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/20 12:29:08 by aet-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@ size_t	count_len(int nb)
 	i = 0;
 	if (nb < 0)
 	{
-		i ++;
+		i++;
 		nb *= -1;
 	}
 	while (nb > 0)
 	{
-		i ++;
+		i++;
 		nb = nb / 10;
 	}
 	return (i);
@@ -32,8 +32,8 @@ size_t	count_len(int nb)
 
 char	*ft_itoa(int n)
 {
-	char		*str;
-	int			len;
+	char	*str;
+	int		len;
 
 	len = count_len(n);
 	if (n == 0)

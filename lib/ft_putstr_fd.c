@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aet-tale <aet-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 18:47:29 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/08 18:26:55 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/20 12:29:43 by aet-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,6 @@ void	ft_putstr_fd(char *s, int fd)
 	while (s[i])
 	{
 		ft_putchar_fd(s[i], fd);
-		i ++;
+		i++;
 	}
 }
