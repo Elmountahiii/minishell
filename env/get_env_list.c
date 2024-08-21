@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 14:53:46 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/15 13:49:57 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/21 15:00:53 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ t_env_list	*get_env_list(char	**env)
 
 	list = NULL;
 	while (*env)
-    {
+	{
 		add_back_for_env(&list, *env);
 		env++;
 	}
-	return list;
+	return (list);
 }

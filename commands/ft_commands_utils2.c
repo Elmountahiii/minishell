@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/18 14:37:36 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/19 11:14:20 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/21 14:48:20 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ char	**ft_expand_value(char *value)
 	char	**expanded;
 
 	expanded = ft_calloc(2, sizeof(char *));
-	if (ft_strchr(value, ' '))
+	if (ft_strchr(value, '='))
 	{
 		expanded[0] = ft_strdup(value);
 		expanded[1] = NULL;

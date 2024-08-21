@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 16:36:00 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/21 10:47:08 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/21 15:04:02 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,10 @@ char	*ft_get_tmp(t_tokens_list *token, t_env_list *env_list)
 }
 
 char	*ft_get_value_name(t_tokens_list **tokens, t_env_list *env_list)
-{	
+{
 	char	*value;
 	char	*tmp;
-	
+
 	if (!tokens || !*tokens)
 		return (NULL);
 	value = ft_strdup("");

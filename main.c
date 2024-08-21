@@ -6,18 +6,13 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 09:30:38 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/20 15:49:36 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/21 15:22:08 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 int	g_exit_status = 0;
-
-void	ft_check_leaks(void)
-{
-	system("leaks minishell");
-}
 
 void	sig_handler(int sig)
 {
@@ -52,6 +47,17 @@ void	final_clean(t_be_executed *exec)
 	free(exec);
 }
 
+char	*read_the_line(void)
+{
+	char	*line;
+
+	line = readline("minishell$ ");
+	if (!line)
+		return (NULL);
+	add_history(line);
+	return (line);
+}
+
 int	main(int argc, char *argv[], char *envp[])
 {
 	t_be_executed	*be_executed;
@@ -66,10 +72,9 @@ int	main(int argc, char *argv[], char *envp[])
 	be_executed->env_list = &env_list;
 	while (1)
 	{
-		line = readline("minishell$ ");
+		line = read_the_line();
 		if (!line)
 			break ;
-		add_history(line);
 		tokens = ft_split_line(line);
 		if (ft_setup(&be_executed, tokens))
 		{

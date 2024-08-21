@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 21:20:04 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/20 16:00:51 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/21 13:15:43 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,9 @@ t_command	*ft_add_command(t_command **command_list,
 	while (tmp)
 	{
 		command = ft_create_command(&tmp, env_list);
+		g_exit_status = 0;
 		ft_assign_fds(command, tmp, index);
 		ft_command_addback(command_list, command);
-		//g_exit_status = 0;
 		index++;
 		if (tmp)
 			tmp = tmp->next;

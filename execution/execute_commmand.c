@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 12:42:46 by aet-tale          #+#    #+#             */
-/*   Updated: 2024/08/19 11:26:56 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/21 12:09:43 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,6 +138,13 @@ void	execute_command(t_command *command,	t_be_executed	*to_execute)
 	args = command->command_args;
 	if (args == NULL || args[0] == NULL)
 		exit(0);
+	else if (command->no_path)
+	{
+		ft_putstr_fd("minishell: ", 2);
+		ft_putstr_fd(args[0], 2);
+		ft_putstr_fd(": No such file or directory\n", 2);
+		exit(127);
+	}
 	else if(command->path == NULL)
 	{
 		write(2, "minishell: ", 11);

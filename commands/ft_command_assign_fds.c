@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 18:17:01 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/19 11:10:55 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/21 14:55:05 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ void	ft_assign_from_heredoc(t_command *command, t_heredoc *heredoc_list)
 	selected_heredoc = NULL;
 	while (h_tmp)
 	{
-		
 		if (h_tmp->index == command->index)
 			selected_heredoc = h_tmp;
 		h_tmp = h_tmp->next;
@@ -112,5 +111,4 @@ void	ft_command_assign_fds(t_command *command,
 		}
 		c_tmp = c_tmp->next;
 	}
-	
 }

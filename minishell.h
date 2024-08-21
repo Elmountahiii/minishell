@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 09:30:52 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/21 10:44:15 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/21 13:03:41 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ typedef struct s_command_files
 typedef struct s_command {
 	char				**command_args;
 	char				*path;
+	bool				no_path;
 	t_ttype				in_type;
 	t_ttype				out_type;
 	char				*in_file;

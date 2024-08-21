@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 16:20:14 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/21 11:23:43 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/21 15:06:14 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,19 @@ void	ft_skip_to_next_command(t_command_files **files)
 		*files = (*files)->next;
 }
 
+void	ft_print_ambiguous(t_command_files **files)
+{
+	ft_putstr_fd("minishell: ambiguous redirect\n", STDERR_FILENO);
+	ft_skip_to_next_command(files);
+}
+
+void	ft_print_file_error(t_command_files **files)
+{
+	ft_putstr_fd("minishell: ", STDERR_FILENO);
+	perror((*files)->file_name);
+	ft_skip_to_next_command(files);
+}
+
 void	ft_open_files(t_command_files *files)
 {
 	t_command_files	*tmp;
@@ -34,8 +47,7 @@ void	ft_open_files(t_command_files *files)
 	{
 		if (tmp->is_ambiguous)
 		{
-			ft_putstr_fd("minishell: ambiguous redirect\n", STDERR_FILENO);
-			ft_skip_to_next_command(&tmp);
+			ft_print_ambiguous(&tmp);
 			continue ;
 		}
 		if (tmp->type == REDIRECTION_IN)
@@ -46,9 +58,7 @@ void	ft_open_files(t_command_files *files)
 			tmp->fd = open(tmp->file_name, O_CREAT | O_WRONLY | O_APPEND, 0644);
 		if (tmp->fd < 0)
 		{
-			ft_putstr_fd("minishell: ", 2);
-			perror(tmp->file_name);
-			ft_skip_to_next_command(&tmp);
+			ft_print_file_error(&tmp);
 			continue ;
 		}
 		tmp = tmp->next;

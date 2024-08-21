@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 11:34:32 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/21 11:58:20 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/21 14:53:11 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,6 @@ int	ft_setup(t_be_executed **exec, char **tokens)
 	fill_command_paths((*exec)->commands_list, *(*exec)->env_list);
 	if (ft_setup_pipes(exec))
 		return (1);
-	(*exec)->list_size = count_list((*exec)->commands_list);	
-	// ft_printf_files((*exec)->files_list);
-	// ft_print_commands((*exec)->commands_list);
+	(*exec)->list_size = count_list((*exec)->commands_list);
 	return (0);
 }
