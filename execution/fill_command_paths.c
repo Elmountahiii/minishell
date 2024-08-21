@@ -6,7 +6,7 @@
 /*   By: aet-tale <aet-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 12:50:49 by aet-tale          #+#    #+#             */
-/*   Updated: 2024/08/21 18:38:33 by aet-tale         ###   ########.fr       */
+/*   Updated: 2024/08/21 18:49:22 by aet-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ char	*ft_search_in_current_dir(char *command, t_command *cmd)
 	return (NULL);
 }
 
-char	*search_for_path(char *command, t_env_list *env,t_command *cmd)
+char	*search_for_path(char *command, t_env_list *env, t_command *cmd)
 {
 	char	**path_list;
 	int		i;
@@ -87,6 +87,6 @@ void	fill_command_paths(t_command *command_list, t_env_list *env)
 			command_list->path = ft_strdup(cmd);
 		else
 			command_list->path = search_for_path(cmd, env, command_list);
-        command_list = command_list->next;   
-    }
+		command_list = command_list->next;
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: aet-tale <aet-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 12:42:46 by aet-tale          #+#    #+#             */
-/*   Updated: 2024/08/21 18:36:20 by aet-tale         ###   ########.fr       */
+/*   Updated: 2024/08/21 18:50:09 by aet-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	before_execution(t_command *command, t_be_executed *to_execute)
 	args = command->command_args;
 	if (args == NULL || args[0] == NULL)
 		exit(0);
-	else if(command->path == NULL)
+	else if (command->path == NULL)
 	{
 		write(2, "minishell: ", 11);
 		write(2, args[0], ft_strlen(args[0]));

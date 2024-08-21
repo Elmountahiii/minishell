@@ -6,7 +6,7 @@
 /*   By: aet-tale <aet-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 12:52:17 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/21 18:38:49 by aet-tale         ###   ########.fr       */
+/*   Updated: 2024/08/21 18:51:18 by aet-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,8 @@ int	ft_is_executed(t_command *command)
 	if ((command->in_type == FILE_IO && command->in_file == NULL)
 		|| (command->out_type == FILE_IO && command->out_file == NULL))
 		return (0);
-	
 	if (command->is_ambiguous)
-	{
-		// write(2, "minishell: ", 11);
-		// write(2, command->ambiguous_name, ft_strlen(command->ambiguous_name));
-		// write(2, ": ambiguous redirect\n", 22);
 		return (0);
-	}
 	if (command->fd_in == -1 || command->fd_out == -1)
 		return (0);
 	return (1);
