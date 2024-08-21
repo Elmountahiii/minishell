@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 11:17:11 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/17 22:45:15 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/20 14:49:26 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ t_command_files	*ft_add_files(t_command_files **files_list,
 			if (files)
 				files->index = index;
 			ft_files_addback(files_list, files);
+			continue ;
 		}
 		if (tmp && tmp->type == PIPE)
 			index++;

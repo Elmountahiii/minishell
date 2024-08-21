@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 16:45:29 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/19 11:13:42 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/21 13:15:48 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ void	ft_skip_that_token(t_tokens_list **tokens)
 		(*tokens) = (*tokens)->next;
 	if (*tokens && (*tokens)->type == SPACE_TOKEN)
 		(*tokens) = (*tokens)->next;
-	if (*tokens && ft_check_word_valid((*tokens)->type))
+	while (*tokens && ft_check_word_valid((*tokens)->type))
 		(*tokens) = (*tokens)->next;
 }
 

@@ -6,7 +6,7 @@
 /*   By: aet-tale <aet-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 12:50:49 by aet-tale          #+#    #+#             */
-/*   Updated: 2024/08/20 12:20:08 by aet-tale         ###   ########.fr       */
+/*   Updated: 2024/08/21 18:38:33 by aet-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	*ft_check_path(t_env_list *env_list)
 	return (NULL);
 }
 
-char	*ft_search_in_current_dir(char *command)
+char	*ft_search_in_current_dir(char *command, t_command *cmd)
 {
 	struct stat	filestat;
 	char		*path;
@@ -42,10 +42,11 @@ char	*ft_search_in_current_dir(char *command)
 			return (path);
 	}
 	free(path);
+	cmd->no_path = 1;
 	return (NULL);
 }
 
-char	*search_for_path(char *command, t_env_list *env)
+char	*search_for_path(char *command, t_env_list *env,t_command *cmd)
 {
 	char	**path_list;
 	int		i;
@@ -55,7 +56,7 @@ char	*search_for_path(char *command, t_env_list *env)
 	path_list = NULL;
 	path = NULL;
 	if (ft_check_path(env) == NULL)
-		return (ft_search_in_current_dir(command));
+		return (ft_search_in_current_dir(command, cmd));
 	if (ft_strlen(command) == 0)
 		return (NULL);
 	path_list = ft_split_dil(ft_check_path(env), ':');
@@ -85,7 +86,7 @@ void	fill_command_paths(t_command *command_list, t_env_list *env)
 			|| ft_strncmp(cmd, "/", 1) == 0)
 			command_list->path = ft_strdup(cmd);
 		else
-			command_list->path = search_for_path(cmd, env);
-		command_list = command_list->next;
-	}
+			command_list->path = search_for_path(cmd, env, command_list);
+        command_list = command_list->next;   
+    }
 }

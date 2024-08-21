@@ -6,32 +6,13 @@
 /*   By: aet-tale <aet-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 09:30:38 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/20 11:14:37 by aet-tale         ###   ########.fr       */
+/*   Updated: 2024/08/21 18:41:37 by aet-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int g_exit_status = 0;
-
-void	ft_check_leaks(void)
-{
-	system("leaks minishell");
-}
-
-void close_files(t_list_files	*list_of_files)
-{
-	t_list_files	*tmp;
-
-	while (list_of_files)
-	{
-		tmp = list_of_files;
-		list_of_files = list_of_files->next;
-		close(tmp->fd);
-		// free(tmp->file_name);
-		free(tmp);
-	}
-}
+int	g_exit_status = 0;
 
 void	sig_handler(int sig)
 {
@@ -39,88 +20,69 @@ void	sig_handler(int sig)
 	{
 		write(1, "\n", 1);
 		rl_on_new_line();
-		// rl_replace_line("", 0);
+		//rl_replace_line("", 0);
 		rl_redisplay();
 		g_exit_status = 1;
 	}
 }
 
-void	close_heredocs(t_heredoc	*tmp)
+t_be_executed	*init(int argc, char *argv[])
 {
-	while (tmp)
-	{
-		close(tmp->fd);
-		unlink(tmp->file_name);
-		tmp = tmp->next;
-	}
+	t_be_executed	*be_executed;
+
+	(void) argc;
+	(void) argv;
+	be_executed = give_executed();
+	if (!be_executed)
+		return (NULL);
+	signal(SIGINT, sig_handler);
+	signal(SIGQUIT, SIG_IGN);
+	return (be_executed);
+}
+
+void	final_clean(t_be_executed *exec)
+{
+	ft_clean_env(*exec->env_list);
+	exec->env_list = NULL;
+	free(exec);
+}
+
+char	*read_the_line(void)
+{
+	char	*line;
+
+	line = readline("minishell$ ");
+	if (!line)
+		return (NULL);
+	add_history(line);
+	return (line);
 }
 
 int	main(int argc, char *argv[], char *envp[])
 {
-	(void) argc;
-	(void) argv;
-	(void) envp;
 	t_be_executed	*be_executed;
 	t_env_list		*env_list;
-	char **tokens;
-	char * line;
+	char			**tokens;
+	char			*line;
 
-	tokens = NULL;
+	be_executed = init(argc, argv);
+	if (!be_executed)
+		return (1);
 	env_list = get_env_list(envp);
-	signal(SIGINT,	sig_handler);
-	signal(SIGQUIT, SIG_IGN);
-	be_executed = give_executed();
 	be_executed->env_list = &env_list;
-	// atexit(ft_check_leaks);
 	while (1)
 	{
-		line = readline("minishell$ ");
-		// printf("line = %s\n", line);
+		line = read_the_line();
 		if (!line)
 			break ;
-		add_history(line);
 		tokens = ft_split_line(line);
-		be_executed->tokens_list = ft_add_tokens(tokens);
-		if (ft_check_syntax(be_executed->tokens_list))
+		if (ft_setup(&be_executed, tokens))
 		{
-			free(line);
-			ft_clean(be_executed, tokens);
-			g_exit_status = 258;
+			ft_clean(be_executed, tokens, line);
 			continue ;
 		}
-		be_executed->heredoc_list = ft_add_heredoc(&be_executed->heredoc_list, be_executed->tokens_list);
-		if (ft_open_heredoc(be_executed->heredoc_list, env_list))
-		{
-			ft_clean(be_executed, tokens);
-			g_exit_status = 1;
-			continue ;
-		}
-		be_executed->files_list = ft_add_files(&be_executed->files_list, be_executed->tokens_list, env_list);
-		ft_open_files(be_executed->files_list);
-		be_executed->commands_list = ft_add_command(&be_executed->commands_list, be_executed->tokens_list, env_list);
-		ft_command_assign_fds(be_executed->commands_list, be_executed->files_list, be_executed->heredoc_list);
-		// system("leaks minishell");
-		// break ;
-		// system("leaks minishell");
-		fill_command_paths(be_executed->commands_list, env_list);
-		be_executed->list_pipes = give_list_pipes(be_executed->tokens_list);
-		if (!be_executed->list_pipes && count_list(be_executed->commands_list) > 1)
-		{
-			free(line);
-			ft_clean(be_executed, tokens);
-			g_exit_status = 1;
-			continue ;
-		}
-		be_executed->list_size = count_list(be_executed->commands_list);
 		execute_things(be_executed);
-		free(line);
-		ft_clean(be_executed, tokens);
-	//	system("leaks minishell");
+		ft_clean(be_executed, tokens, line);
 	}
-	ft_clean_env(env_list);
-	be_executed->env_list = NULL;
-	free(be_executed);
-	return (g_exit_status);
+	return (final_clean(be_executed), g_exit_status);
 }
-
-

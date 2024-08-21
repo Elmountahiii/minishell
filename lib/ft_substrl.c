@@ -6,7 +6,7 @@
 /*   By: aet-tale <aet-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 12:48:32 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/20 12:28:39 by aet-tale         ###   ########.fr       */
+/*   Updated: 2024/08/21 18:41:11 by aet-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,3 +39,4 @@ char	*ft_substrl(char *s, int start, int len)
 	sub_str[i] = '\0';
 	return (sub_str);
 }
+

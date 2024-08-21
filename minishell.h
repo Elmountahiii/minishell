@@ -6,7 +6,7 @@
 /*   By: aet-tale <aet-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 09:30:52 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/20 16:47:36 by aet-tale         ###   ########.fr       */
+/*   Updated: 2024/08/21 18:43:15 by aet-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ typedef struct s_command_files
 typedef struct s_command {
 	char				**command_args;
 	char				*path;
+	bool				no_path;
 	t_ttype				in_type;
 	t_ttype				out_type;
 	char				*in_file;
@@ -206,6 +207,7 @@ void			ft_open_files(t_command_files *files);
 int				ft_is_valid_redirection(t_token_type type);
 int				ft_check_ambig(t_command_files *files);
 char			*get_is_true(bool is_true);
+char			*ft_get_file_name(t_tokens_list **tokens, t_env_list *env_list);
 // commands functions
 t_command		*ft_create_command(t_tokens_list **tokens,
 					t_env_list *env_list);
@@ -228,7 +230,7 @@ int				ft_get_command_value(char **value,
 char			**ft_expand_value(char *value);
 // clean functions
 void			ft_clean_tokens(t_tokens_list **tokens_list);
-void			ft_clean(t_be_executed *to_execute, char **array);
+void			ft_clean(t_be_executed *to_execute, char **array, char *line);
 void			ft_clean_array(char **array);
 void			ft_clean_commands(t_command **command_list);
 void			ft_clean_files(t_command_files **files);
@@ -285,5 +287,7 @@ void			error_handler(int *exit_stt,
 					char *key, char *value, int procss);
 int				is_in_list(char *key, t_env_list *env_list);
 int				count_array_str(char **array);
+// setup
+int				ft_setup(t_be_executed **exec, char **tokens);
 
 #endif
