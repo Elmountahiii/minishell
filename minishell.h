@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 18:51:57 by aet-tale          #+#    #+#             */
-/*   Updated: 2024/08/22 18:21:05 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/22 22:40:53 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # include <string.h>
 # include <sys/stat.h>
 # include <sys/wait.h>
+# include <dirent.h>
 
 extern int					g_exit_status;
 
@@ -313,5 +314,13 @@ int							is_in_list(char *key, t_env_list *env_list);
 int							count_array_str(char **array);
 // setup
 int							ft_setup(t_be_executed **exec, char **tokens);
+// wildcards
+char						**print_current_directory_files(char *pattern);
+char						*skip_star_dill(char *str, char *pattern);
+int							ft_strnstr_from_start(char *str, char *pattern,
+								int len);
+char						*get_uniltill_star(char *pattern);
+char						*skip_string(char *str, char *pattern);
+int							one_part(char *pattern);
 
 #endif

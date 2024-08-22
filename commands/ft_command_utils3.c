@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/18 14:39:36 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/22 21:42:32 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/22 22:47:15 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,25 @@ char	**ft_expand_value_without_quotes_or_equal(char *value)
 
 char	**ft_expand_value(char *value)
 {
+	char	**wild;
+
 	if (ft_has_quotes(value) || ft_strchr(value, '='))
 		return (ft_expand_value_with_quotes_or_equal(value));
 	else
-		return (ft_expand_value_without_quotes_or_equal(value));
+	{
+		if (ft_strchr(value, '*'))
+		{
+			wild = print_current_directory_files(value);
+			
+			if (!wild)
+				return (ft_expand_value_without_quotes_or_equal(value));
+			else
+			{
+				free(value);
+				return (wild);
+			}
+		}
+		else
+			return (ft_expand_value_without_quotes_or_equal(value));
+	}
 }

@@ -6,9 +6,10 @@ CC = cc
 READ_LIB= #-L/goinfre/$(USER)/homebrew/opt/readline/lib
 READ_INCL= #-I/goinfre/$(USER)/homebrew/opt/readline/include
 
-CFLAGS = -Wall -Wextra -Werror  -g -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror # -g -fsanitize=address
 READLINE = -lreadline -lncurses
 
+wildcard_files = wild.c wild_utils.c
 spiting_files = ft_count_line_tokens.c ft_is_token.c ft_line_split.c ft_split_quotes_utils.c ft_split_space_utils.c ft_split_word_utils.c ft_split_redirection_utils.c \
 ft_print_array.c ft_split_env_utils.c 
 tokens_files = ft_create_token.c ft_tokens_addback.c  ft_add_tokens.c ft_print_tokens.c ft_token_skip.c
@@ -39,10 +40,11 @@ pipes_pre = $(addprefix pipes/, $(pipes_files))
 execution_pre = $(addprefix execution/, $(execution_files))
 builtins_pre = $(addprefix builtins/, $(builtins_files))
 setup_pre = $(addprefix setup/, $(setup_files))
+wildcard_pre = $(addprefix wildcards/, $(wildcard_files))
 
 
 SRC = main.c  $(execution_pre) $(tokens_pre) $(spliting_pre) $(syntax_pre)  $(heredoc_pre) $(utils_pre)  $(expand_pre) $(env_pre) $(files_pre) $(commands_pre) $(clean_pre) \
-$(pipes_pre) $(builtins_pre)  $(setup_pre)
+$(pipes_pre) $(builtins_pre)  $(setup_pre) $(wildcard_pre)
 OBJ = $(SRC:.c=.o)
 HEADR = minishell.h
 
