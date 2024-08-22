@@ -6,7 +6,7 @@ CC = cc
 READ_LIB= #-L/goinfre/$(USER)/homebrew/opt/readline/lib
 READ_INCL= #-I/goinfre/$(USER)/homebrew/opt/readline/include
 
-CFLAGS = -Wall -Wextra -Werror # -g -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror  -g -fsanitize=address
 READLINE = -lreadline -lncurses
 
 spiting_files = ft_count_line_tokens.c ft_is_token.c ft_line_split.c ft_split_quotes_utils.c ft_split_space_utils.c ft_split_word_utils.c ft_split_redirection_utils.c \
@@ -15,10 +15,10 @@ tokens_files = ft_create_token.c ft_tokens_addback.c  ft_add_tokens.c ft_print_t
 syntax_files = ft_check_syntax.c ft_check_syntax_2.c 
 heredoc_files = ft_add_heredoc.c ft_create_heredoc.c ft_heredoc_len.c ft_heredoc_addback.c ft_printf_heredoc.c ft_open_heredoc.c ft_heredoc_done.c ft_heredoc_utils.c
 expand_files = ft_expand.c ft_extract_key.c ft_get_expand_keys.c ft_expand_utils.c 
-utils_files = ft_array_len.c ft_remove_quotes.c ft_get_expand_split.c
+utils_files = ft_array_len.c ft_remove_quotes.c ft_get_expand_split.c ft_has_quotes.c
 env_files = get_env_list.c add_back_for_env.c ft_print_env_list.c
 files_files = ft_add_files.c ft_create_file.c ft_files_addback.c ft_print_files.c ft_open_files.c ft_check_ambig.c ft_files_uils.c
-commands_files = ft_command_addback.c ft_create_command.c ft_print_command_args.c ft_add_commands.c ft_print_commands.c ft_commands_utils.c ft_command_assign_fds.c ft_commands_utils2.c
+commands_files = ft_command_addback.c ft_create_command.c ft_print_command_args.c ft_add_commands.c ft_print_commands.c ft_commands_utils.c ft_command_assign_fds.c ft_commands_utils2.c ft_command_utils3.c
 clean_files = ft_clean_tokens.c ft_clean_array.c ft_clean.c ft_clean_commands.c ft_clean_files.c  ft_clean_heredoc.c ft_clean_pipes.c ft_clean_env.c
 setup_files = ft_setup.c
 builtins_files = cd.c echo.c env.c exit.c export.c ft_export_env.c pwd.c unset.c count_array.c close_other_pipes.c

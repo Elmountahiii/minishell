@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 18:51:57 by aet-tale          #+#    #+#             */
-/*   Updated: 2024/08/22 15:06:54 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/22 18:21:05 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -199,6 +199,9 @@ int							ft_array_len(char **array);
 char						*ft_remove_quotes(char *str);
 char						**ft_get_expand_split(char *value,
 								t_env_list *env_list);
+int							ft_has_quotes(char *str);
+char						*ft_remove_all_quotes(char *str);
+int							ft_has_any_quotes(char *str);
 // env functions
 t_env_list					*get_env_list(char **env);
 void						add_back_for_env(t_env_list **list, char *str);

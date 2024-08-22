@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 12:42:46 by aet-tale          #+#    #+#             */
-/*   Updated: 2024/08/22 15:09:05 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/22 19:49:36 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,8 @@ void	execute_command(t_command *command, t_be_executed *to_execute)
 		close_pipes(to_execute->list_pipes);
 		exit(1);
 	}
+	signal(SIGINT, SIG_DFL);
+	signal(SIGQUIT, SIG_DFL);
 	before_execution(command, to_execute);
 	env = give_array_str(*to_execute->env_list);
 	execve(command->path, command->command_args, env);
