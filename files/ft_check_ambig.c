@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 19:44:33 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/19 10:55:02 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/22 13:16:42 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,9 @@ int	ft_has_spaces(char *str)
 int	ft_check_ambig(t_command_files *files)
 {
 	if (!files)
-		return (0);
+		return (1);
+	if (ft_strlen(files->file_name) == 0)
+		return (1);
 	if (files->file_name && ft_has_space_between_words(files->file_name))
 		return (1);
 	return (0);

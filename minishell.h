@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aet-tale <aet-tale@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 18:51:57 by aet-tale          #+#    #+#             */
-/*   Updated: 2024/08/21 18:52:06 by aet-tale         ###   ########.fr       */
+/*   Updated: 2024/08/22 15:06:54 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -277,6 +277,7 @@ void						increament_elems(t_pipe **list_pipes, int *i,
 void						assign_fd_heredc(int *fd, t_command *command);
 void						assign_fd_append(int *fd, t_command *command);
 void						prror_exit(char *str, char *file);
+void						print_no_file(char *command);
 // builtins functions
 void						our_pwd(t_command *command,
 								t_be_executed *to_execute, int procss);

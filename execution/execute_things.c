@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_things.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aet-tale <aet-tale@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 11:35:05 by aet-tale          #+#    #+#             */
-/*   Updated: 2024/08/20 16:48:21 by aet-tale         ###   ########.fr       */
+/*   Updated: 2024/08/22 13:03:38 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ void	close_then_wait(t_be_executed *to_execute, pid_t *pid)
 		if (WIFEXITED(status))
 			g_exit_status = WEXITSTATUS(status);
 		else if (WIFSIGNALED(status))
-			g_exit_status = WTERMSIG(status);
+			g_exit_status = WTERMSIG(status) + 128;
 		i++;
 	}
 	free(pid);
