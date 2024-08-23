@@ -1,9 +1,9 @@
 NAME = minishell
 CC = cc 
-READ_LIB= #-L/goinfre/$(USER)/homebrew/opt/readline/lib
-READ_INCL= #-I/goinfre/$(USER)/homebrew/opt/readline/include
+READ_LIB= -L/goinfre/$(USER)/homebrew/opt/readline/lib
+READ_INCL= -I/goinfre/$(USER)/homebrew/opt/readline/include
 
-CFLAGS = -Wall -Wextra -Werror -g -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror
 READLINE = -lreadline -lncurses
 
 wildcard_files = wild.c wild_utils.c

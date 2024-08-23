@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 11:35:05 by aet-tale          #+#    #+#             */
-/*   Updated: 2024/08/22 21:08:08 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/23 17:59:52 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,4 +120,5 @@ void	execute_things(t_be_executed	*to_execute)
 	signal(SIGINT, SIG_IGN);
 	create_commands(to_execute, pid);
 	close_then_wait(to_execute, pid);
+	signal(SIGINT, sig_handler);
 }
