@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_commmand.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aet-tale <aet-tale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 12:42:46 by aet-tale          #+#    #+#             */
-/*   Updated: 2024/08/22 19:49:36 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/23 17:51:54 by aet-tale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	print_error(char *prefix, char *command)
 {
 	write(2, prefix, ft_strlen(prefix));
 	write(2, command, ft_strlen(command));
-	write(2, ": ", 2);
+	write(2, "\n", 1);
 }
 
 int	is_directory(const char *path)
