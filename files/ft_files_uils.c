@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 16:36:00 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/21 15:04:02 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/23 11:36:54 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,24 @@ char	*ft_get_tmp(t_tokens_list *token, t_env_list *env_list)
 		return (ft_expand(token->value, env_list));
 }
 
+char	*ft_handle_file(char *pattern)
+{
+	char	**files;
+	char	*file;
+
+	files = print_current_directory_files(pattern);
+	if (!files)
+		return (pattern);
+	if (ft_array_len(files) == 1)
+	{
+		file = ft_strdup(files[0]);
+		ft_clean_array(files);
+		return (file);
+	}
+	ft_clean_array(files);
+	return (pattern);
+}
+
 char	*ft_get_value_name(t_tokens_list **tokens, t_env_list *env_list)
 {
 	char	*value;
@@ -62,6 +80,8 @@ char	*ft_get_value_name(t_tokens_list **tokens, t_env_list *env_list)
 			break ;
 		*tokens = (*tokens)->next;
 	}
+	if (ft_strchr(value, '*'))
+		return (ft_handle_file(value));
 	return (value);
 }
 

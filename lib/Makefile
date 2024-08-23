@@ -14,12 +14,12 @@ RM = rm -rf
 AR = ar rcs
 
 %.o : %.c HEADER
-	@$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@
 
 all : $(NAME)
 
 $(NAME) : $(OBJ)
-	@$(AR)  $(NAME) $(OBJ)
+	$(AR)  $(NAME) $(OBJ)
 
 clean :
 	@$(RM) $(OBJ)

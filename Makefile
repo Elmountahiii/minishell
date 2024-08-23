@@ -1,12 +1,9 @@
 NAME = minishell
-minibuiltins = miniBuiltIns
 CC = cc 
-# -g -fsanitize=address
-# -g -fsanitize=address
 READ_LIB= #-L/goinfre/$(USER)/homebrew/opt/readline/lib
 READ_INCL= #-I/goinfre/$(USER)/homebrew/opt/readline/include
 
-CFLAGS = -Wall -Wextra -Werror # -g -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -g -fsanitize=address
 READLINE = -lreadline -lncurses
 
 wildcard_files = wild.c wild_utils.c
@@ -41,7 +38,7 @@ execution_pre = $(addprefix execution/, $(execution_files))
 builtins_pre = $(addprefix builtins/, $(builtins_files))
 setup_pre = $(addprefix setup/, $(setup_files))
 wildcard_pre = $(addprefix wildcards/, $(wildcard_files))
-
+AR = ./lib/lib.a
 
 SRC = main.c  $(execution_pre) $(tokens_pre) $(spliting_pre) $(syntax_pre)  $(heredoc_pre) $(utils_pre)  $(expand_pre) $(env_pre) $(files_pre) $(commands_pre) $(clean_pre) \
 $(pipes_pre) $(builtins_pre)  $(setup_pre) $(wildcard_pre)
@@ -53,15 +50,10 @@ all: $(NAME)
 %.o: %.c $(HEADR)
 	$(CC) $(CFLAGS) $(READ_INCL) -c $< -o $@
 
-mc : all clean
-	clear
-	./minishell
+$(AR):
+	make -C lib
 
-$(minibuiltins): $(bSRC)
-	$(CC) $(CFLAGS) lib/lib.a $(READ_LIB) $(bSRC) -o $(minibuiltins)
-
-$(NAME): $(OBJ)
-	@cd lib && make
+$(NAME): $(AR) $(OBJ)
 	$(CC) $(CFLAGS)  $(OBJ) $(READ_LIB) lib/lib.a $(READLINE) -o $(NAME)
 
 clean:

@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 09:30:38 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/22 22:42:30 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/23 12:14:40 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,6 @@ int	main(int argc, char *argv[], char *envp[])
 		}
 		execute_things(be_executed);
 		ft_clean(be_executed, tokens, line);
-		system("leaks minishell");
 	}
 	return (final_clean(be_executed), g_exit_status);
 }

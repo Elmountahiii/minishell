@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 11:17:11 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/22 22:45:27 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/23 13:09:02 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,6 @@ char	**print_current_directory_files(char *pattern)
 	entry = readdir(dir);
 	while (entry != NULL)
 	{
-		
 		if (check_pattern(pattern, entry->d_name) && entry->d_name[0] != '.')
 			strs = append_to_array(strs, entry->d_name);
 		entry = readdir(dir);

@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/18 14:37:36 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/22 21:43:08 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/23 12:11:14 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ int	ft_get_command_value(char **value, char **expand,
 		*value = ft_strjoin_free(*value, *tmp);
 	else
 	{
-		if (ft_strlen(*expand) == 0 && (*tokens)->type != DOUBLE_QUOTE_WORD)
+		if (ft_strlen(*expand) == 0 && (*tokens)->type != DOUBLE_QUOTE_WORD 
+			&& ft_strlen(*value) == 0)
 		{
 			ft_free_command_value(*value, *expand, *tmp);
 			return (1);
