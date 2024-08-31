@@ -6,7 +6,7 @@
 /*   By: yel-moun <yel-moun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 11:17:11 by yel-moun          #+#    #+#             */
-/*   Updated: 2024/08/23 13:09:02 by yel-moun         ###   ########.fr       */
+/*   Updated: 2024/08/31 20:44:26 by yel-moun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,10 +66,8 @@ char	*skip_a_part_pattern(char *pattern)
 int	check_pattern(char *pattern, char *str)
 {
 	int		re_val;
-	char	*hold_str;
 
 	str = ft_strdup(str);
-	hold_str = NULL;
 	re_val = 0;
 	if (pattern[0] == '*' && pattern[1] == '\0')
 		return (1);
