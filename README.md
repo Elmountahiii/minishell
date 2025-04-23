@@ -48,7 +48,7 @@ Our shell provides a command prompt and waits for user input, then parses and ex
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/minishell.git
+git clone https://github.com/Elmountahiii/minishell
 
 # Navigate to the project directory
 cd minishell
