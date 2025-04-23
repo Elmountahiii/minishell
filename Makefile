@@ -1,7 +1,17 @@
 NAME = minishell
 CC = cc 
-READ_LIB= -L/goinfre/$(USER)/homebrew/opt/readline/lib
-READ_INCL= -I/goinfre/$(USER)/homebrew/opt/readline/include
+
+UNAME_S := $(shell uname -s)
+ifeq ($(UNAME_S),Darwin)
+    READ_LIB = -L$(shell brew --prefix readline)/lib
+    READ_INCL = -I$(shell brew --prefix readline)/include
+else ifeq ($(UNAME_S),Linux)
+    READ_LIB = -L/usr/lib/x86_64-linux-gnu
+    READ_INCL = -I/usr/include
+else
+    READ_LIB = -L/usr/local/lib
+    READ_INCL = -I/usr/local/include
+endif
 
 CFLAGS = -Wall -Wextra -Werror
 READLINE = -lreadline -lncurses
